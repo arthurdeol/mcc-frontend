@@ -4,19 +4,20 @@ import { FaRegEnvelope } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
 import { useState, useEffect} from "react";
 
+interface Louvor {
+  songBookMapId: number;
+  englishSongBookNumber: string;
+  englishTitle: string;
+  portugueseSongBookNumber: string;
+  portugueseTitle: string;
+}
+
 
 export default function Home() {
 
-  const [louvores, setLouvores] = useState([]);
+  const [louvores, setLouvores] = useState<Louvor[]>([]);
   const url = "https://mccapi.up.railway.app/SongBookMap";
-  const [filteredLouvores, setFilteredLouvores] = useState([]);
-  const louvor = {
-    songBookMapId: 1,
-    englishSongBookNumber: "1",
-    englishTitle: "Blessed Be Your Name",
-    portugueseSongBookNumber: "1",
-    portugueseTitle: "Bendito Seja o Teu Nome",
-  }
+  const [filteredLouvores, setFilteredLouvores] = useState<Louvor[]>([]);
 
   const handleFilter = (event: any) => {
     const value = event.target.value;
