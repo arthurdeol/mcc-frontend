@@ -103,10 +103,10 @@ export default function Home() {
                     <div>
                       {louvor.englishTitle && (
                         <div className="flex items-center gap-x-3">
-                          <h6 className="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                          <h6 className="font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
                             {louvor.englishSongBookNumber
                               ? louvor.englishSongBookNumber + " - "
-                              : " "}{" "}
+                              : " "}
                             {louvor.englishTitle ? louvor.englishTitle : ""}
                           </h6>
                           <div className="bg-red-500 text-white text-xs font-bold uppercase px-2 py-1 rounded-full inline-block">
@@ -116,10 +116,10 @@ export default function Home() {
                         </div>
                       )}
                       {louvor.portugueseTitle && (
-                        <p className="block font-sans text-sm font-light leading-normal text-gray-700 antialiased text-align-left">
+                        <p className="flex font-sans text-sm font-light leading-normal text-gray-700 antialiased text-align-left">
                           {louvor.portugueseSongBookNumber
                             ? louvor.portugueseSongBookNumber + " - "
-                            : "Avulso - "}{" "}
+                            : "Avulso - "}
                           {louvor.portugueseTitle ? louvor.portugueseTitle : ""}
                         </p>
                       )}
