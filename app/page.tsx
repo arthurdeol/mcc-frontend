@@ -1,10 +1,8 @@
 "use client";
-import Image from "next/image";
-import { FaRegEnvelope } from "react-icons/fa";
-import { MdLockOutline } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { Praise } from "../src/interfaces/Praise";
-import Link from "next/link";
+import NavBar from "./components/NavBar";
+import { Praise } from "./interfaces/Praise";
+import IconButton from "./components/IconButton";
 
 function naturalCompare(a: any, b: any) {
   var ax: any = [],
@@ -78,7 +76,8 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <main className="flex flex-col items-center justify-center w-full flex-l px-20 text-center">
+      <NavBar></NavBar>
+      <main className="flex flex-col items-center justify-center w-full flex-l px-20 text-center mt-4">
         <div className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
           <div className="p-6">
             <div className="mb-4 flex items-center justify-between">
@@ -90,7 +89,7 @@ export default function Home() {
               type="text"
               id="filter"
               onChange={handleFilter}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="mb-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
             />
             <div className="divide-y divide-gray-200">
@@ -109,7 +108,7 @@ export default function Home() {
                               : " "}
                             {louvor.englishTitle ? louvor.englishTitle : ""}
                           </h6>
-                          <div className="bg-red-500 text-white text-xs font-bold uppercase px-2 py-1 rounded-full inline-block">
+                          <div className="bg-red-500 text-white text-xs uppercase px-2 py-1 rounded-full inline-block">
                             {" "}
                             {louvor.theme}
                           </div>
@@ -125,12 +124,46 @@ export default function Home() {
                       )}
                     </div>
                   </div>
-                  <button
-                    className="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/10 active:bg-gray-900/20"
-                    type="button"
-                  >
-                    <Link href={`/song`}>Edit</Link>
-                  </button>
+                  <div className="flex items-center cursor-pointer">
+                    <IconButton
+                      hasFile={louvor.linkPdfLyrics}
+                      iconName={"LuType"}
+                      size={16}
+                      href={"/song"}
+                    ></IconButton>
+                    <IconButton
+                      hasFile={louvor.linkChords}
+                      iconName={"LuListMusic"}
+                      size={17}
+                      href={"/song"}
+                    ></IconButton>
+                    <IconButton
+                      hasFile={louvor.linkSheetMusic}
+                      iconName={"LuMusic"}
+                      size={16}
+                      href={"/song"}
+                    ></IconButton>
+                    <IconButton
+                      hasFile={louvor.linkAudioFile}
+                      iconName={"LuVolume1"}
+                      size={18}
+                      href={"/song"}
+                    ></IconButton>
+
+                    {/* PARA USAR QUANDO DER PRA SALVAR NA LISTA DE FAVORITOS 
+                     <IconButton
+                      hasFile={louvor.linkAudioFile}
+                      iconName={"LuList"}
+                      size={17}
+                      href={"/song"}
+                    ></IconButton>
+                     <IconButton
+                      hasFile={louvor.linkAudioFile}
+                      iconName={"LuStar"}
+                      size={16}
+                      href={"/song"}
+                    ></IconButton>*/}
+                  </div>
                 </div>
               ))}
             </div>
