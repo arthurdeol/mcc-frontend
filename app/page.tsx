@@ -130,24 +130,28 @@ export default function Home() {
                       iconName={"LuType"}
                       size={16}
                       href={"/song"}
+                      id={louvor.songBookMapId}
                     ></IconButton>
                     <IconButton
                       hasFile={louvor.linkChords}
                       iconName={"LuListMusic"}
                       size={17}
                       href={"/song"}
+                      id={louvor.songBookMapId}
                     ></IconButton>
                     <IconButton
                       hasFile={louvor.linkSheetMusic}
                       iconName={"LuMusic"}
                       size={16}
                       href={"/song"}
+                      id={louvor.songBookMapId}
                     ></IconButton>
                     <IconButton
                       hasFile={louvor.linkAudioFile}
                       iconName={"LuVolume1"}
                       size={18}
                       href={"/song"}
+                      id={louvor.songBookMapId}
                     ></IconButton>
 
                     {/* PARA USAR QUANDO DER PRA SALVAR NA LISTA DE FAVORITOS 

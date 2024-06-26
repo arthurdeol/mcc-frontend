@@ -6,6 +6,7 @@ interface IconButtonProps {
   iconName: any;
   size: number;
   href: string;
+  id: string;
 }
 
 export default function IconButton({
@@ -13,10 +14,11 @@ export default function IconButton({
   iconName,
   size = 16,
   href,
+  id,
 }: IconButtonProps) {
   return (
     <button onClick={() => console.log("clicou" + iconName)} className="ml-1">
-      <Link href={href}>
+      <Link href={{ pathname: href, query: { id: id, activeTab: iconName } }}>
         <div className="ml-1">
           <DynamicIcon
             name={iconName}
