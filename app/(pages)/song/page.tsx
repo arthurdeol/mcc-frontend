@@ -1,15 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import NavBar from "../../components/NavBar";
 import { Praise } from "../../interfaces/Praise";
 
-export default function Song() {
+interface SongProps {
+  searchParams: {
+    id: string;
+    activeTab: string;
+  };
+}
+
+export default function Song({ searchParams }: SongProps) {
   const [louvor, setLouvor] = useState<Praise>();
   let [iframeUrl, setIframeUrl] = useState("");
-  const id = useSearchParams().get("id");
+  const id = searchParams.id;
   const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
-  const activeTab = useSearchParams().get("activeTab");
+  const activeTab = searchParams.activeTab;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
