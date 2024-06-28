@@ -23,8 +23,6 @@ export default function Song({ searchParams }: SongProps) {
       .then((res) => res.json())
       .then((data) => {
         setLouvor(data);
-        console.log(activeTab);
-        console.log(data);
         if (activeTab === "LuType") {
           setIframeUrl(data.linkPdfLyrics);
         } else if (activeTab === "LuListMusic") {
@@ -39,7 +37,7 @@ export default function Song({ searchParams }: SongProps) {
   }, []);
   return (
     <div className="w-screen h-screen">
-      <NavBar louvor={null} urlCheck={true}></NavBar>
+      <NavBar louvor={null}></NavBar>
       <iframe
         src={iframeUrl}
         width="100%"

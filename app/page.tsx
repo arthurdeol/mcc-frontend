@@ -26,15 +26,12 @@ function naturalCompare(a: any, b: any) {
 }
 
 export default function Home() {
-  const urlCheck = window.location.href.toString().indexOf("/song") != -1;
-  console.log(urlCheck);
   const [louvores, setLouvores] = useState<Praise[]>([]);
   const url = "https://mccapi.up.railway.app/SongBookMap";
   const [filteredLouvores, setFilteredLouvores] = useState<Praise[]>([]);
 
   const handleFilter = (event: any) => {
     const value = event.target.value;
-    console.log(value);
     const filtered = louvores.filter(
       (louvor) =>
         louvor.englishSongBookNumber
@@ -55,7 +52,6 @@ export default function Home() {
           .toLowerCase()
           .includes(value.toString().toLowerCase())
     );
-    console.log(filtered);
 
     if (value === "") setFilteredLouvores(louvores);
     else setFilteredLouvores(filtered);
@@ -78,7 +74,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <NavBar louvor={null} urlCheck={urlCheck}></NavBar>
+      <NavBar louvor={null}></NavBar>
       <main className="flex flex-col items-center justify-center w-full flex-l px-20 text-center mt-4">
         <div className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
           <div className="p-6">
