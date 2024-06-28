@@ -26,6 +26,8 @@ function naturalCompare(a: any, b: any) {
 }
 
 export default function Home() {
+  const urlCheck = window.location.href.toString().indexOf("/song") != -1;
+  console.log(urlCheck);
   const [louvores, setLouvores] = useState<Praise[]>([]);
   const url = "https://mccapi.up.railway.app/SongBookMap";
   const [filteredLouvores, setFilteredLouvores] = useState<Praise[]>([]);
@@ -76,7 +78,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar louvor={null} urlCheck={urlCheck}></NavBar>
       <main className="flex flex-col items-center justify-center w-full flex-l px-20 text-center mt-4">
         <div className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
           <div className="p-6">

@@ -1,7 +1,9 @@
 "use client";
+import React from "react";
 import { useState, useEffect } from "react";
-import NavBar from "../../components/NavBar";
+import IconButton from "../../components/IconButton";
 import { Praise } from "../../interfaces/Praise";
+import NavBar from "../../components/NavBar";
 
 interface SongProps {
   searchParams: {
@@ -22,6 +24,7 @@ export default function Song({ searchParams }: SongProps) {
       .then((data) => {
         setLouvor(data);
         console.log(activeTab);
+        console.log(data);
         if (activeTab === "LuType") {
           setIframeUrl(data.linkPdfLyrics);
         } else if (activeTab === "LuListMusic") {
@@ -36,7 +39,7 @@ export default function Song({ searchParams }: SongProps) {
   }, []);
   return (
     <div className="w-screen h-screen">
-      <NavBar></NavBar>
+      <NavBar louvor={null} urlCheck={true}></NavBar>
       <iframe
         src={iframeUrl}
         width="100%"
