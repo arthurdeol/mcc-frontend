@@ -13,8 +13,12 @@ interface SongProps {
 }
 
 export default function Song({ searchParams }: SongProps) {
-  const [louvor, setLouvor] = useState<Praise>();
+  let [louvor, setLouvor] = useState({});
   let [iframeUrl, setIframeUrl] = useState("");
+  let [urlChord, setUrlChord] = useState("");
+  let [urlLyrics, setUrlLyrics] = useState("");
+  let [urlAudio, setUrlAudio] = useState("");
+  let [urlSheetMusic, setUrlSheetMusic] = useState("");
   const id = searchParams.id;
   const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
   const activeTab = searchParams.activeTab;
@@ -22,22 +26,35 @@ export default function Song({ searchParams }: SongProps) {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setLouvor(data);
         if (activeTab === "LuType") {
           setIframeUrl(data.linkPdfLyrics);
+          setLouvor(data);
         } else if (activeTab === "LuListMusic") {
           setIframeUrl(data.linkChords);
+          setLouvor(data);
         } else if (activeTab === "LuMusic") {
           setIframeUrl(data.linkSheetMusic);
+          setLouvor(data);
         } else if (activeTab === "LuVolume1") {
           setIframeUrl(data.linkAudioFile);
+          setLouvor(data);
         }
+        setUrlAudio(data.linkAudioFile);
+        setUrlSheetMusic(data.linkSheetMusic);
+        setUrlChord(data.linkChords);
+        setUrlLyrics(data.linkPdfLyrics);
       })
       .catch((err) => console.error(err));
   }, []);
   return (
     <div className="w-screen h-screen">
-      <NavBar louvor={null}></NavBar>
+      <NavBar
+        urlChord={urlChord}
+        urlLyrics={urlLyrics}
+        urlAudio={urlAudio}
+        urlSheetMusic={urlSheetMusic}
+        id={id}
+      ></NavBar>
       <iframe
         src={iframeUrl}
         width="100%"

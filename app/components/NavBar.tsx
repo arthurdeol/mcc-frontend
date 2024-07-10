@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
 import IconButton from "./IconButton";
 
-export default function NavBar(louvor: any) {
+interface propsNavbar {
+  urlChord?: any;
+  urlLyrics?: any;
+  urlAudio?: any;
+  urlSheetMusic?: any;
+  id?: any;
+}
+
+export default function NavBar({
+  urlChord,
+  urlLyrics,
+  urlAudio,
+  urlSheetMusic,
+  id,
+}: propsNavbar) {
   let [isHome, setUrlCheckIsHome] = useState(true);
   useEffect(() => {
     const isHomecheck = window.location.href.toString().indexOf("/song") != -1;
@@ -24,32 +38,32 @@ export default function NavBar(louvor: any) {
       {isHome && (
         <div className="flex items-center cursor-pointer">
           <IconButton
-            hasFile={louvor.linkPdfLyrics}
+            hasFile={urlLyrics}
             iconName={"LuType"}
             size={16}
             href={"/song"}
-            id={louvor.songBookMapId}
+            id={id}
           ></IconButton>
           <IconButton
-            hasFile={louvor.linkChords}
+            hasFile={urlChord}
             iconName={"LuListMusic"}
             size={17}
             href={"/song"}
-            id={louvor.songBookMapId}
+            id={id}
           ></IconButton>
           <IconButton
-            hasFile={louvor.linkSheetMusic}
+            hasFile={urlSheetMusic}
             iconName={"LuMusic"}
             size={16}
             href={"/song"}
-            id={louvor.songBookMapId}
+            id={id}
           ></IconButton>
           <IconButton
-            hasFile={louvor.linkAudioFile}
+            hasFile={urlAudio}
             iconName={"LuVolume1"}
             size={18}
             href={"/song"}
-            id={louvor.songBookMapId}
+            id={id}
           ></IconButton>
         </div>
       )}

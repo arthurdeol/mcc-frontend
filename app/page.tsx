@@ -74,7 +74,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <NavBar louvor={null}></NavBar>
+      <NavBar></NavBar>
       <main className="flex flex-col items-center justify-center w-full flex-l px-20 text-center mt-4">
         <div className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
           <div className="p-6">
