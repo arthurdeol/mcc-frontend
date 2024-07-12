@@ -96,16 +96,69 @@ export const Container = styled.div`
   .icon-container {
     padding: 10px;
   }
+
+  @media (min-width: 768px) and (max-width: 979px) {
+    background: red;
+  }
+
+  @media only screen and (max-width: 767px) {
+    // background: blue;
+
+    .main-container {
+      margin: 0;
+      height: 100vh;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .search-container {
+      padding: 2rem 0;
+    }
+
+    .praises-container {
+      width: 90%;
+    }
+
+    .praise-container {
+      padding: 20px 0;
+    }
+
+    .praise-title {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .theme-tag {
+      margin: 1rem 0 5px;
+    }
+
+    .icons-container {
+      margin-left: 5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    // background: purple;
+
+    .praise-container {
+      flex-direction: column;
+      padding: 20px 0 0 0;
+    }
+
+    .icons-container {
+      margin-left: 0;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+  @media (max-width: 280px) {
+    background: green;
+  }
 `;
 
-// h3 {
-//     font-size: 22px;
-//   }
-
-//   p {
-//     font-size: 20px;
-//     line-height: 145%;
-//   }
 //   @media (min-width: 768px) and (max-width: 979px) {
 //     h3 {
 //       font-size: 20px;
