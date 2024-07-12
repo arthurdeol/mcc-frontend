@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    color: #fff;
+}
+
+body,
+input,
+button,
+textarea {
+    /*input, button, textarea não usam a fonte definida e sim a default por isso definimos a fonte assim*/
+    font: 600 18px Nunito, sans-serif;
+    /*sans-serif de reserva se ñ carregar nunito, definimos weigth e size junto*/
+}
+
+button, a{
+    cursor: pointer;
+}
