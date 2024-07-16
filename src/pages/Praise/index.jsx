@@ -7,10 +7,11 @@ import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Praise() {
-  let [louvor, setLouvor] = useState("");
+  const [louvor, setLouvor] = useState("");
   const [iframeUrl, setIframeUrl] = useState("");
   const location = useLocation();
-  const { id, iconName } = location.state;
+  const [iconName, setIconName] = useState(location.state.iconName);
+  const { id } = location.state;
   const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
 
   const activeTab = iconName;
@@ -19,52 +20,44 @@ export default function Praise() {
     async function fetchData() {
       const response = await fetch(url);
       const louvor = await response.json();
-      setLouvor(response.data);
-      if (louvor) {
-        setActiveTab(iconName, louvor);
-      } else {
-        console.log("praise not found");
-      }
+      setLouvor(louvor);
+      louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
     fetchData();
   }, [iconName]);
 
   function setActiveTab(activeTab, louvor) {
     if (activeTab === "LuType") {
-      setIframeUrl(
-        "data:" +
-          louvor.lyricsPdf.contentType +
-          ";base64," +
-          louvor.lyricsPdf.file
-      );
+      setIframeUrl(setActiveUrl(louvor.lyricsPdf));
     } else if (activeTab === "LuListMusic") {
-      setIframeUrl(
-        "data:" +
-          louvor.chordsPdf.contentType +
-          ";base64," +
-          louvor.chordsPdf.file
-      );
+      setIframeUrl(setActiveUrl(louvor.chordsPdf));
     } else if (activeTab === "LuMusic") {
-      setIframeUrl(
-        "data:" +
-          louvor.sheetMusicPdf.contentType +
-          ";base64," +
-          louvor.sheetMusicPdf.file
-      );
+      setIframeUrl(setActiveUrl(louvor.sheetMusicPdf));
     } else if (activeTab === "LuVolume1") {
-      setIframeUrl(
-        "data:" +
-          louvor.audioFile.contentType +
-          ";base64," +
-          louvor.audioFile.file
-      );
+      setIframeUrl(setActiveUrl(louvor.audioFile));
     }
+  }
+
+  const setActiveUrl = (file) =>
+    "data:" + file.contentType + ";base64," + file.file;
+
+  function setTab(iconName) {
+    setIconName(iconName);
   }
 
   return (
     <Container>
-      <Header />
-      <embed src={iframeUrl} className="display" />
+      <Header louvor={louvor} setActiveTab={setActiveTab} />
+
+      {louvor ? (
+        <embed src={iframeUrl} className="display" />
+      ) : (
+        <div className="progress-container">
+          <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
+            <CircularProgress color="inherit" />
+          </Stack>
+        </div>
+      )}
     </Container>
   );
 }

@@ -9,4 +9,12 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  .progress-container {
+    display: flex;
+    padding-top: 15%;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+  }
 `;

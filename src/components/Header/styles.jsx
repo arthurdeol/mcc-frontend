@@ -25,7 +25,14 @@ export const Container = styled.div`
   }
 
   .icon-container {
+    display: flex;
     padding: 10px;
+    margin-right: 5px;
+    background: #fff;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    color: red;
+    font-size: 1rem;
   }
 
   .login-button {

@@ -98,7 +98,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) and (max-width: 979px) {
-    background: red;
+    // background: red;
   }
 
   @media only screen and (max-width: 767px) {
@@ -155,7 +155,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 280px) {
-    background: green;
+    // background: green;
   }
 `;
 

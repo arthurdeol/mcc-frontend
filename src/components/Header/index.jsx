@@ -2,14 +2,10 @@ import { Container } from "./styles";
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { LuType, LuListMusic, LuMusic, LuVolume1 } from "react-icons/lu";
-import { useLocation } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ louvor = {}, setActiveTab = "" }) => {
   const navigate = useNavigate();
   let [isHome, setUrlCheckIsHome] = useState(true);
-  const location = useLocation();
-  //const { id, iconName } = location.state;
-  //const activeTab = iconName;
 
   useEffect(() => {
     const isHomecheck =
@@ -34,37 +30,53 @@ const Header = () => {
 
       {isHome && (
         <div className="icons-container">
-          <Link
-            to={"/praise"}
-            className="icon-container"
-            // state={{ id: id, iconName: "LuType" }}
-          >
-            <LuType color="black" size={17} />
-          </Link>
+          <div className="icon-container">
+            {louvor.linkPdfLyrics ? (
+              <LuType
+                color={"black"}
+                size={17}
+                onClick={() => setActiveTab("LuType", louvor)}
+              />
+            ) : (
+              <LuType color={"#9ca3af"} size={17} />
+            )}
+          </div>
 
-          <Link
-            to={"/praise"}
-            className="icon-container"
-            // state={{ id: id, iconName: "LuListMusic" }}
-          >
-            <LuListMusic color="black" size={17} />
-          </Link>
+          <div className="icon-container">
+            {louvor.linkChords ? (
+              <LuListMusic
+                color={"black"}
+                size={19}
+                onClick={() => setActiveTab("LuListMusic", louvor)}
+              />
+            ) : (
+              <LuListMusic color={"#9ca3af"} size={19} />
+            )}
+          </div>
 
-          <Link
-            to={"/praise"}
-            className="icon-container"
-            // state={{ id: id, iconName: "LuMusic" }}
-          >
-            <LuMusic color="black" size={16} />
-          </Link>
+          <div className="icon-container">
+            {louvor.linkSheetMusic ? (
+              <LuMusic
+                color={"black"}
+                size={17}
+                onClick={() => setActiveTab("LuMusic", louvor)}
+              />
+            ) : (
+              <LuMusic color={"#9ca3af"} size={17} />
+            )}
+          </div>
 
-          <Link
-            to={"/praise"}
-            className="icon-container"
-            // state={{ id: id, iconName: "LuVolume1" }}
-          >
-            <LuVolume1 color="black" size={18} />
-          </Link>
+          <div className="icon-container">
+            {louvor.linkAudioFile ? (
+              <LuVolume1
+                color={"black"}
+                size={20}
+                onClick={() => setActiveTab("LuVolume1", louvor)}
+              />
+            ) : (
+              <LuVolume1 color={"#9ca3af"} size={20} />
+            )}
+          </div>
         </div>
       )}
     </Container>
