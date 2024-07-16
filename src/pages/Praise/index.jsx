@@ -5,6 +5,12 @@ import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import { pdfjs } from "react-pdf";
+import PdfReader from "../../components/PdfReader";
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 export default function Praise() {
   const [louvor, setLouvor] = useState("");
@@ -50,8 +56,11 @@ export default function Praise() {
       <Header louvor={louvor} setActiveTab={setActiveTab} />
 
       {louvor ? (
-        <embed src={iframeUrl} className="display" />
+        <div className="pdf-reader-container">
+          <PdfReader fileLink={iframeUrl} />
+        </div>
       ) : (
+        // <embed src={iframeUrl} className="display" />
         <div className="progress-container">
           <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
             <CircularProgress color="inherit" />

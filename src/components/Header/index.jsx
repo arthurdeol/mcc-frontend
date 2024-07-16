@@ -30,53 +30,57 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
 
       {isHome && (
         <div className="icons-container">
-          <div className="icon-container">
-            {louvor.linkPdfLyrics ? (
-              <LuType
-                color={"black"}
-                size={17}
-                onClick={() => setActiveTab("LuType", louvor)}
-              />
-            ) : (
+          {louvor.linkPdfLyrics ? (
+            <div
+              className="icon-container"
+              onClick={() => setActiveTab("LuType", louvor)}
+            >
+              <LuType color={"black"} size={17} />
+            </div>
+          ) : (
+            <div className="icon-container">
               <LuType color={"#9ca3af"} size={17} />
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="icon-container">
-            {louvor.linkChords ? (
-              <LuListMusic
-                color={"black"}
-                size={19}
-                onClick={() => setActiveTab("LuListMusic", louvor)}
-              />
-            ) : (
+          {louvor.linkChords ? (
+            <div
+              className="icon-container"
+              onClick={() => setActiveTab("LuListMusic", louvor)}
+            >
+              <LuListMusic color={"black"} size={19} />
+            </div>
+          ) : (
+            <div className="icon-container">
               <LuListMusic color={"#9ca3af"} size={19} />
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="icon-container">
-            {louvor.linkSheetMusic ? (
-              <LuMusic
-                color={"black"}
-                size={17}
-                onClick={() => setActiveTab("LuMusic", louvor)}
-              />
-            ) : (
+          {louvor.linkSheetMusic ? (
+            <div
+              className="icon-container"
+              onClick={() => setActiveTab("LuMusic", louvor)}
+            >
+              <LuMusic color={"black"} size={17} />
+            </div>
+          ) : (
+            <div className="icon-container">
               <LuMusic color={"#9ca3af"} size={17} />
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="icon-container">
-            {louvor.linkAudioFile ? (
-              <LuVolume1
-                color={"black"}
-                size={20}
-                onClick={() => setActiveTab("LuVolume1", louvor)}
-              />
-            ) : (
+          {louvor.linkAudioFile ? (
+            <div
+              className="icon-container"
+              onClick={() => setActiveTab("LuVolume1", louvor)}
+            >
+              <LuVolume1 color={"black"} size={20} />
+            </div>
+          ) : (
+            <div className="icon-container">
               <LuVolume1 color={"#9ca3af"} size={20} />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </Container>
