@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.defaultWebAppToDeploy": "/subscriptions/224ad7cf-91d5-425d-81ac-1776bac8aa36/resourceGroups/MCC/providers/Microsoft.Web/sites/mcc-canada",
+  "appService.deploySubpath": "."
+}

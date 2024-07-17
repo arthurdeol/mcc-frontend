@@ -26,11 +26,54 @@ export default function Praise() {
     async function fetchData() {
       const response = await fetch(url);
       const louvor = await response.json();
+      if (louvor.linkPdfLyrics)
+        louvor.lyricsPdf.file = await convertPdfToImages(louvor.lyricsPdf.file);
+      if (louvor.linkChords)
+        louvor.chordsPdf.file = await convertPdfToImages(louvor.chordsPdf.file);
+      if (louvor.linkChords)
+        louvor.sheetMusicPdf.file = await convertPdfToImages(
+          louvor.sheetMusicPdf.file
+        );
       setLouvor(louvor);
+
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
     fetchData();
   }, [iconName]);
+
+  const PDFJS = require("pdfjs-dist/webpack");
+
+  const readFileData = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        resolve(e.target.result);
+      };
+      reader.onerror = (err) => {
+        reject(err);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
+  const convertPdfToImages = async (file) => {
+    const base64Response = await fetch(`data:application/pdf;base64,${file}`);
+    const blob = await base64Response.blob();
+    const images = [];
+    const data = await readFileData(blob);
+    const pdf = await PDFJS.getDocument(data).promise;
+    const canvas = document.createElement("canvas");
+    for (let i = 0; i < pdf.numPages; i++) {
+      const page = await pdf.getPage(i + 1);
+      const viewport = page.getViewport({ scale: 1 });
+      const context = canvas.getContext("2d");
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      await page.render({ canvasContext: context, viewport: viewport }).promise;
+      images.push(canvas.toDataURL());
+    }
+    return images;
+  };
 
   function setActiveTab(activeTab, louvor) {
     if (activeTab === "LuType") {
@@ -44,8 +87,7 @@ export default function Praise() {
     }
   }
 
-  const setActiveUrl = (file) =>
-    "data:" + file.contentType + ";base64," + file.file;
+  const setActiveUrl = (file) => file.file[0];
 
   function setTab(iconName) {
     setIconName(iconName);
@@ -57,7 +99,7 @@ export default function Praise() {
 
       {louvor ? (
         <div className="pdf-reader-container">
-          <PdfReader fileLink={iframeUrl} />
+          <img src={iframeUrl} />
         </div>
       ) : (
         // <embed src={iframeUrl} className="display" />
