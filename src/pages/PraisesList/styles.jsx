@@ -14,7 +14,7 @@ export const Container = styled.div`
 
   .search-container {
     width: 90%;
-    padding: 2rem 20px;
+    padding: 3rem 20px 2rem;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -55,15 +55,16 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     align-self: center;
-    padding: 20px;
+    padding: 20px 20px 10px;
     border-bottom: 1px solid #ededed;
   }
 
-  .praise-title {
-    display: flex;
-    align-items: center;
-  }
+  // .praise-title {
+  //   display: flex;
+  //   align-items: center;
+  // }
 
   .praise-title-en {
     color: black;
@@ -79,12 +80,18 @@ export const Container = styled.div`
   .theme-tag {
     display: flex;
     align-items: center;
-    background: red;
-    border-radius: 20px;
+    width: fit-content;
+    //background: #ffcbd1;
+    background: #ededed;
+    //border-radius: 20px;
+    border-radius: 5px;
     font-size: 0.5rem;
+    //color: red;
+    color: gray;
     text-align: center;
     height: auto;
-    padding: 1px 6px;
+    padding: 4px 6px;
+    // margin-top: 10px;
   }
 
   .icons-container {
@@ -95,6 +102,13 @@ export const Container = styled.div`
 
   .icon-container {
     padding: 10px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
   }
 
   @media (min-width: 768px) and (max-width: 979px) {
@@ -130,11 +144,21 @@ export const Container = styled.div`
     }
 
     .theme-tag {
-      margin: 1rem 0 5px;
+      //margin: 1rem 0 5px;
+      // background: #ffcbd1;
+      // color: red;
+      font-size: 0.5rem;
+      text-align: center;
+      height: fit-content;
+      padding: 2px 5px;
     }
 
     .icons-container {
       margin-left: 5%;
+    }
+
+    .footer {
+      margin-top: 8px;
     }
   }
 
@@ -148,7 +172,7 @@ export const Container = styled.div`
 
     .icons-container {
       margin-left: 0;
-      margin-top: 1rem;
+      //margin-top: 1rem;
       display: flex;
       justify-content: end;
     }

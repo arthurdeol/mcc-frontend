@@ -60,6 +60,20 @@ export default function Praise() {
           <PdfReader fileLink={iframeUrl} />
         </div>
       ) : (
+        // <object
+        //   data={iframeUrl}
+        //   type="application/pdf"
+        //   frameBorder="0"
+        //   width="100%"
+        //   height="100%"
+        // >
+        //   <embed src={iframeUrl} className="display" />
+        //   {/* <embed
+        //     src="https://drive.google.com/file/d/1CRFdbp6uBDE-YKJFaqRm4uy9Z4wgMS7H/preview?usp=sharing"
+        //     width="100%"
+        //     height="600px"
+        //   /> */}
+        // </object>
         // <embed src={iframeUrl} className="display" />
         <div className="progress-container">
           <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
