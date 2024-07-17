@@ -13,7 +13,7 @@ export const Container = styled.div`
 
   img {
     width: 150px;
-    margin-left: 30px;
+    margin-left: 10px;
     margin-top: 2px;
     cursor: pointer;
   }
@@ -42,6 +42,20 @@ export const Container = styled.div`
     padding: 5px 1rem;
     color: red;
     font-size: 1rem;
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding: 10px;
+    img {
+      margin-left: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 5px;
+    img {
+      margin-left: 0;
+    }
   }
 `;
 

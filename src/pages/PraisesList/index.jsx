@@ -81,7 +81,6 @@ const PraisesList = () => {
       <Header />
       <div className="main-container">
         <div className="search-container">
-          <h5 className="title">Praise songs</h5>
           <input
             type="text"
             id="filter"
@@ -103,15 +102,14 @@ const PraisesList = () => {
               <div className="praise-container" key={index}>
                 <div>
                   {louvor.englishTitle && (
-                    <div className="praise-title">
-                      <h6 className="praise-title-en">
-                        {louvor.englishSongBookNumber
-                          ? louvor.englishSongBookNumber + " - "
-                          : " "}
-                        {louvor.englishTitle ? louvor.englishTitle : ""}
-                      </h6>
-                      <div className="theme-tag">{louvor.theme}</div>
-                    </div>
+                    // <div className="praise-title">
+                    <h6 className="praise-title-en">
+                      {louvor.englishSongBookNumber
+                        ? louvor.englishSongBookNumber + " - "
+                        : " "}
+                      {louvor.englishTitle ? louvor.englishTitle : ""}
+                    </h6>
+                    // </div>
                   )}
                   {louvor.portugueseTitle && (
                     <p className="praise-title-pt">
@@ -123,53 +121,60 @@ const PraisesList = () => {
                   )}
                 </div>
 
-                <div className="icons-container">
-                  <Link
-                    to={louvor.linkPdfLyrics ? "/praise" : null}
-                    className="icon-container"
-                    state={{ id: louvor.songBookMapId, iconName: "LuType" }}
-                  >
-                    <LuType
-                      color={louvor.linkPdfLyrics ? "black" : "#9ca3af"}
-                      size={17}
-                    />
-                  </Link>
+                <div className="footer">
+                  <div className="theme-tag">{louvor.theme}</div>
 
-                  <Link
-                    to={louvor.linkChords ? "/praise" : null}
-                    className="icon-container"
-                    state={{
-                      id: louvor.songBookMapId,
-                      iconName: "LuListMusic",
-                    }}
-                  >
-                    <LuListMusic
-                      color={louvor.linkChords ? "black" : "#9ca3af"}
-                      size={19}
-                    />
-                  </Link>
+                  <div className="icons-container">
+                    <Link
+                      to={louvor.linkPdfLyrics ? "/praise" : null}
+                      className="icon-container"
+                      state={{ id: louvor.songBookMapId, iconName: "LuType" }}
+                    >
+                      <LuType
+                        color={louvor.linkPdfLyrics ? "black" : "#9ca3af"}
+                        size={17}
+                      />
+                    </Link>
 
-                  <Link
-                    to={louvor.linkSheetMusic ? "/praise" : null}
-                    className="icon-container"
-                    state={{ id: louvor.songBookMapId, iconName: "LuMusic" }}
-                  >
-                    <LuMusic
-                      color={louvor.linkSheetMusic ? "black" : "#9ca3af"}
-                      size={18}
-                    />
-                  </Link>
+                    <Link
+                      to={louvor.linkChords ? "/praise" : null}
+                      className="icon-container"
+                      state={{
+                        id: louvor.songBookMapId,
+                        iconName: "LuListMusic",
+                      }}
+                    >
+                      <LuListMusic
+                        color={louvor.linkChords ? "black" : "#9ca3af"}
+                        size={19}
+                      />
+                    </Link>
 
-                  <Link
-                    to={louvor.linkAudioFile ? "/praise" : null}
-                    className="icon-container"
-                    state={{ id: louvor.songBookMapId, iconName: "LuVolume1" }}
-                  >
-                    <LuVolume1
-                      color={louvor.linkAudioFile ? "black" : "#9ca3af"}
-                      size={22}
-                    />
-                  </Link>
+                    <Link
+                      to={louvor.linkSheetMusic ? "/praise" : null}
+                      className="icon-container"
+                      state={{ id: louvor.songBookMapId, iconName: "LuMusic" }}
+                    >
+                      <LuMusic
+                        color={louvor.linkSheetMusic ? "black" : "#9ca3af"}
+                        size={18}
+                      />
+                    </Link>
+
+                    <Link
+                      to={louvor.linkAudioFile ? "/praise" : null}
+                      className="icon-container"
+                      state={{
+                        id: louvor.songBookMapId,
+                        iconName: "LuVolume1",
+                      }}
+                    >
+                      <LuVolume1
+                        color={louvor.linkAudioFile ? "black" : "#9ca3af"}
+                        size={22}
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
