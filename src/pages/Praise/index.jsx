@@ -15,7 +15,7 @@ export default function Praise() {
   const [louvor, setLouvor] = useState("");
   const [iframeUrl, setIframeUrl] = useState("");
   const location = useLocation();
-  const [iconName, setIconName] = useState(location.state.iconName);
+  // const [iconName, setIconName] = useState(location.state.iconName);
   const { id } = location.state;
   const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
 
@@ -90,7 +90,7 @@ export default function Praise() {
 
       {louvor ? (
         <div className="pdf-reader-container">
-          <img src={iframeUrl} />
+          <img src={iframeUrl} alt="img-pdf" />
         </div>
       ) : (
         // <object
