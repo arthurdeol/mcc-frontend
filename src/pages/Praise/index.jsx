@@ -15,11 +15,33 @@ export default function Praise() {
   const [louvor, setLouvor] = useState("");
   const [iframeUrl, setIframeUrl] = useState("");
   const location = useLocation();
-  const [iconName, setIconName] = useState(location.state.iconName);
+  const iconName = useState(location.state.iconName);
+  // eslint-disable-next-line
   const { id } = location.state;
-  const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
 
   useEffect(() => {
+    const PDFJS = require("pdfjs-dist/webpack");
+    const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
+    const convertPdfToImages = async (file) => {
+      const base64Response = await fetch(`data:application/pdf;base64,${file}`);
+      const blob = await base64Response.blob();
+      const images = [];
+      const data = await readFileData(blob);
+      const pdf = await PDFJS.getDocument(data).promise;
+      const canvas = document.createElement("canvas");
+      for (let i = 0; i < pdf.numPages; i++) {
+        const page = await pdf.getPage(i + 1);
+        const viewport = page.getViewport({ scale: 1 });
+        const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        await page.render({ canvasContext: context, viewport: viewport })
+          .promise;
+        images.push(canvas.toDataURL());
+      }
+      return images;
+    };
+
     async function fetchData() {
       const response = await fetch(url);
       const louvor = await response.json();
@@ -36,9 +58,20 @@ export default function Praise() {
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
     fetchData();
+    // eslint-disable-next-line
   }, [iconName]);
 
-  const PDFJS = require("pdfjs-dist/webpack");
+  function setActiveTab(activeTab, louvor) {
+    if (activeTab === "LuType") {
+      setIframeUrl(setActiveUrl(louvor.lyricsPdf));
+    } else if (activeTab === "LuListMusic") {
+      setIframeUrl(setActiveUrl(louvor.chordsPdf));
+    } else if (activeTab === "LuMusic") {
+      setIframeUrl(setActiveUrl(louvor.sheetMusicPdf));
+    } else if (activeTab === "LuVolume1") {
+      setIframeUrl(setActiveUrl(louvor.audioFile));
+    }
+  }
 
   const readFileData = (file) => {
     return new Promise((resolve, reject) => {
@@ -53,36 +86,6 @@ export default function Praise() {
     });
   };
 
-  const convertPdfToImages = async (file) => {
-    const base64Response = await fetch(`data:application/pdf;base64,${file}`);
-    const blob = await base64Response.blob();
-    const images = [];
-    const data = await readFileData(blob);
-    const pdf = await PDFJS.getDocument(data).promise;
-    const canvas = document.createElement("canvas");
-    for (let i = 0; i < pdf.numPages; i++) {
-      const page = await pdf.getPage(i + 1);
-      const viewport = page.getViewport({ scale: 1 });
-      const context = canvas.getContext("2d");
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      await page.render({ canvasContext: context, viewport: viewport }).promise;
-      images.push(canvas.toDataURL());
-    }
-    return images;
-  };
-
-  function setActiveTab(activeTab, louvor) {
-    if (activeTab === "LuType") {
-      setIframeUrl(setActiveUrl(louvor.lyricsPdf));
-    } else if (activeTab === "LuListMusic") {
-      setIframeUrl(setActiveUrl(louvor.chordsPdf));
-    } else if (activeTab === "LuMusic") {
-      setIframeUrl(setActiveUrl(louvor.sheetMusicPdf));
-    } else if (activeTab === "LuVolume1") {
-      setIframeUrl(setActiveUrl(louvor.audioFile));
-    }
-  }
   const setActiveUrl = (file) => file.file[0];
   return (
     <Container>
