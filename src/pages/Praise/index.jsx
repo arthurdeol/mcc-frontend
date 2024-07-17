@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { pdfjs } from "react-pdf";
-import PdfReader from "../../components/PdfReader";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url
@@ -19,8 +18,6 @@ export default function Praise() {
   const [iconName, setIconName] = useState(location.state.iconName);
   const { id } = location.state;
   const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
-
-  const activeTab = iconName;
 
   useEffect(() => {
     async function fetchData() {
@@ -86,13 +83,7 @@ export default function Praise() {
       setIframeUrl(setActiveUrl(louvor.audioFile));
     }
   }
-
   const setActiveUrl = (file) => file.file[0];
-
-  function setTab(iconName) {
-    setIconName(iconName);
-  }
-
   return (
     <Container>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
