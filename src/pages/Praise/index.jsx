@@ -5,8 +5,8 @@ import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+// eslint-disable-next-line
 import { pdfjs } from "react-pdf";
-import PdfReader from "../../components/PdfReader";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url
@@ -19,7 +19,7 @@ export default function Praise() {
   const [iconName, setIconName] = useState(location.state.iconName);
   const { id } = location.state;
   const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
-
+  // eslint-disable-next-line
   const activeTab = iconName;
 
   useEffect(() => {
@@ -38,6 +38,7 @@ export default function Praise() {
 
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
+    // eslint-disable-next-line
     fetchData();
   }, [iconName]);
 
@@ -86,9 +87,9 @@ export default function Praise() {
       setIframeUrl(setActiveUrl(louvor.audioFile));
     }
   }
-
+  // eslint-disable-next-line
   const setActiveUrl = (file) => file.file[0];
-
+  // eslint-disable-next-line
   function setTab(iconName) {
     setIconName(iconName);
   }
@@ -96,10 +97,10 @@ export default function Praise() {
   return (
     <Container>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
-
+      {/* // eslint-disable-next-line */}
       {louvor ? (
         <div className="pdf-reader-container">
-          <img src={iframeUrl} />
+          <img src={iframeUrl} alt="praiseImg" />
         </div>
       ) : (
         // <embed src={iframeUrl} className="display" />
