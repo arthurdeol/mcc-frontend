@@ -18,12 +18,13 @@ export default function Praise() {
   const location = useLocation();
   const [iconName, setIconName] = useState(location.state.iconName);
   const { id } = location.state;
-  const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
+
   // eslint-disable-next-line
   const activeTab = iconName;
-
+  // eslint-disable-next-line
   useEffect(() => {
     async function fetchData() {
+      const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
       const response = await fetch(url);
       const louvor = await response.json();
       if (louvor.linkPdfLyrics)
@@ -38,11 +39,31 @@ export default function Praise() {
 
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
+
+    const convertPdfToImages = async (file) => {
+      const base64Response = await fetch(`data:application/pdf;base64,${file}`);
+      const blob = await base64Response.blob();
+      const images = [];
+      const data = await readFileData(blob);
+      const pdf = await PDFJS.getDocument(data).promise;
+      const canvas = document.createElement("canvas");
+      for (let i = 0; i < pdf.numPages; i++) {
+        const page = await pdf.getPage(i + 1);
+        const viewport = page.getViewport({ scale: 1 });
+        const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        await page.render({ canvasContext: context, viewport: viewport })
+          .promise;
+        images.push(canvas.toDataURL());
+      }
+      return images;
+    };
+
+    const PDFJS = require("pdfjs-dist/webpack");
     // eslint-disable-next-line
     fetchData();
-  }, [iconName]);
-
-  const PDFJS = require("pdfjs-dist/webpack");
+  }, [iconName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const readFileData = (file) => {
     return new Promise((resolve, reject) => {
@@ -55,25 +76,6 @@ export default function Praise() {
       };
       reader.readAsArrayBuffer(file);
     });
-  };
-
-  const convertPdfToImages = async (file) => {
-    const base64Response = await fetch(`data:application/pdf;base64,${file}`);
-    const blob = await base64Response.blob();
-    const images = [];
-    const data = await readFileData(blob);
-    const pdf = await PDFJS.getDocument(data).promise;
-    const canvas = document.createElement("canvas");
-    for (let i = 0; i < pdf.numPages; i++) {
-      const page = await pdf.getPage(i + 1);
-      const viewport = page.getViewport({ scale: 1 });
-      const context = canvas.getContext("2d");
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      await page.render({ canvasContext: context, viewport: viewport }).promise;
-      images.push(canvas.toDataURL());
-    }
-    return images;
   };
 
   function setActiveTab(activeTab, louvor) {
