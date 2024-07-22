@@ -5,12 +5,6 @@ import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-// eslint-disable-next-line
-import { pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
 
 export default function Praise() {
   const [louvor, setLouvor] = useState("");
@@ -27,56 +21,12 @@ export default function Praise() {
       const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
       const response = await fetch(url);
       const louvor = await response.json();
-      if (louvor.linkPdfLyrics)
-        louvor.lyricsPdf.file = await convertPdfToImages(louvor.lyricsPdf.file);
-      if (louvor.linkChords)
-        louvor.chordsPdf.file = await convertPdfToImages(louvor.chordsPdf.file);
-      if (louvor.linkChords)
-        louvor.sheetMusicPdf.file = await convertPdfToImages(
-          louvor.sheetMusicPdf.file
-        );
       setLouvor(louvor);
-
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
 
-    const convertPdfToImages = async (file) => {
-      const base64Response = await fetch(`data:application/pdf;base64,${file}`);
-      const blob = await base64Response.blob();
-      const images = [];
-      const data = await readFileData(blob);
-      const pdf = await PDFJS.getDocument(data).promise;
-      const canvas = document.createElement("canvas");
-      for (let i = 0; i < pdf.numPages; i++) {
-        const page = await pdf.getPage(i + 1);
-        const viewport = page.getViewport({ scale: 1 });
-        const context = canvas.getContext("2d");
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        await page.render({ canvasContext: context, viewport: viewport })
-          .promise;
-        images.push(canvas.toDataURL());
-      }
-      return images;
-    };
-
-    const PDFJS = require("pdfjs-dist/webpack");
-    // eslint-disable-next-line
     fetchData();
   }, [iconName]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const readFileData = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        resolve(e.target.result);
-      };
-      reader.onerror = (err) => {
-        reject(err);
-      };
-      reader.readAsArrayBuffer(file);
-    });
-  };
 
   function setActiveTab(activeTab, louvor) {
     if (activeTab === "LuType") {
@@ -90,7 +40,8 @@ export default function Praise() {
     }
   }
   // eslint-disable-next-line
-  const setActiveUrl = (file) => file.file[0];
+  const setActiveUrl = (file) =>
+    "data:" + file.contentType + ";base64," + file.file;
   // eslint-disable-next-line
   function setTab(iconName) {
     setIconName(iconName);
