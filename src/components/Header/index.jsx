@@ -69,7 +69,7 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
             </div>
           )}
 
-          {louvor.linkAudioFile ? (
+          {/* {louvor.linkAudioFile ? (
             <div
               className="icon-container"
               onClick={() => setActiveTab("LuVolume1", louvor)}
@@ -80,7 +80,7 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
             <div className="icon-container">
               <LuVolume1 color={"#9ca3af"} size={20} />
             </div>
-          )}
+          )} */}
         </div>
       )}
     </Container>
