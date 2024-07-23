@@ -102,14 +102,12 @@ const PraisesList = () => {
               <div className="praise-container" key={index}>
                 <div>
                   {louvor.englishTitle && (
-                    // <div className="praise-title">
                     <h6 className="praise-title-en">
                       {louvor.englishSongBookNumber
                         ? louvor.englishSongBookNumber + " - "
                         : " "}
                       {louvor.englishTitle ? louvor.englishTitle : ""}
                     </h6>
-                    // </div>
                   )}
                   {louvor.portugueseTitle && (
                     <p className="praise-title-pt">
@@ -161,7 +159,7 @@ const PraisesList = () => {
                       />
                     </Link>
 
-                    <Link
+                    {/* <Link
                       to={louvor.linkAudioFile ? "/praise" : null}
                       className="icon-container"
                       state={{
@@ -173,7 +171,7 @@ const PraisesList = () => {
                         color={louvor.linkAudioFile ? "black" : "#9ca3af"}
                         size={22}
                       />
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>

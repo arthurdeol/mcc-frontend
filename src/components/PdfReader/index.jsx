@@ -15,9 +15,10 @@ function PdfReader({ fileLink }) {
       <Document file={fileLink} onLoadSuccess={onDocumentLoadSuccess}>
         {Array.apply(null, Array(numPages))
           .map((x, i) => i + 1)
-          .map((page) => {
+          .map((page, i) => {
             return (
               <Page
+                key={i}
                 pageNumber={page}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}

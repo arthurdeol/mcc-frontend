@@ -12,10 +12,8 @@ export default function Praise() {
   const location = useLocation();
   const [iconName, setIconName] = useState(location.state.iconName);
   const { id } = location.state;
-
-  // eslint-disable-next-line
   const activeTab = iconName;
-  // eslint-disable-next-line
+
   useEffect(() => {
     async function fetchData() {
       const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
@@ -39,10 +37,8 @@ export default function Praise() {
       setIframeUrl(setActiveUrl(louvor.audioFile));
     }
   }
-  // eslint-disable-next-line
   const setActiveUrl = (file) =>
     "data:" + file.contentType + ";base64," + file.file;
-  // eslint-disable-next-line
   function setTab(iconName) {
     setIconName(iconName);
   }
@@ -50,13 +46,11 @@ export default function Praise() {
   return (
     <Container>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
-      {/* // eslint-disable-next-line */}
       {louvor ? (
-        <div className="pdf-reader-container">
-          <img src={iframeUrl} alt="praiseImg" />
+        <div className="file-container">
+          <img src={iframeUrl} alt="praiseImg" className="file" />
         </div>
       ) : (
-        // <embed src={iframeUrl} className="display" />
         <div className="progress-container">
           <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
             <CircularProgress color="inherit" />
