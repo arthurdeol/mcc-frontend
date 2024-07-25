@@ -10,9 +10,10 @@ export default function Praise() {
   const [louvor, setLouvor] = useState("");
   const [iframeUrl, setIframeUrl] = useState("");
   const location = useLocation();
-  const [iconName, setIconName] = useState(location.state.iconName);
+  const [iconName] = useState(location.state.iconName);
+  // const [iconName, setIconName] = useState(location.state.iconName);
   const { id } = location.state;
-  const activeTab = iconName;
+  //const activeTab = iconName;
 
   useEffect(() => {
     async function fetchData() {
@@ -39,9 +40,9 @@ export default function Praise() {
   }
   const setActiveUrl = (file) =>
     "data:" + file.contentType + ";base64," + file.file;
-  function setTab(iconName) {
-    setIconName(iconName);
-  }
+  // function setTab(iconName) {
+  //   setIconName(iconName);
+  // }
 
   return (
     <Container>

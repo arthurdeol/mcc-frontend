@@ -1,7 +1,7 @@
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { LuType, LuListMusic, LuMusic, LuVolume1 } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic, LuUser2 } from "react-icons/lu";
 
 const Header = ({ louvor = {}, setActiveTab = "" }) => {
   const navigate = useNavigate();
@@ -26,7 +26,11 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
         onClick={() => navigate("/")}
       />
 
-      {!isHome && <button className="login-button">Login</button>}
+      {!isHome && (
+        <button className="login-button">
+          <LuUser2 size={22} />
+        </button>
+      )}
 
       {isHome && (
         <div className="icons-container">

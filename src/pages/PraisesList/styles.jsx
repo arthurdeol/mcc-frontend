@@ -3,27 +3,29 @@ import styled from "styled-components";
 export const Container = styled.div`
   .main-container {
     display: flex;
+    justify-content: center;
+    height: 90vh;
+    width: 100vw;
+  }
+
+  .box {
+    display: flex;
     align-items: center;
     flex-direction: column;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    margin: 1% 5% 0 5%;
     border-radius: 20px;
-    height: 85vh;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
+    margin: 1% 5% 0 5%;
+    width: 70%;
   }
 
   .search-container {
-    width: 90%;
+    width: 82%;
     padding: 3rem 20px 2rem;
     display: flex;
     flex-direction: column;
     align-items: start;
-  }
-
-  .title {
-    color: black;
-    font-size: 1.5rem;
-    margin: 15px 0;
+    font-size: 1rem;
   }
 
   .filter {
@@ -44,7 +46,7 @@ export const Container = styled.div`
   }
 
   .praises-container {
-    width: 90%;
+    width: 80%;
     overflow-y: auto;
     height: 100%;
     display: flex;
@@ -57,22 +59,21 @@ export const Container = styled.div`
     justify-content: space-between;
     flex-direction: column;
     align-self: center;
-    padding: 20px 20px 10px;
+    padding: 20px 10px;
     border-bottom: 1px solid #ededed;
   }
 
-  // .praise-title {
-  //   display: flex;
-  //   align-items: center;
-  // }
+  .titles {
+    margin-bottom: 10px;
+  }
 
   .praise-title-en {
     color: black;
     font-size: 1rem;
-    margin-right: 1rem;
   }
 
   .praise-title-pt {
+    margin-top: 2px;
     font-size: 0.9rem;
     color: gray;
   }
@@ -81,17 +82,13 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     width: fit-content;
-    //background: #ffcbd1;
     background: #ededed;
-    //border-radius: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 0.5rem;
-    //color: red;
     color: gray;
     text-align: center;
     height: auto;
-    padding: 4px 6px;
-    // margin-top: 10px;
+    padding: 2px 8px;
   }
 
   .icons-container {
@@ -101,23 +98,31 @@ export const Container = styled.div`
   }
 
   .icon-container {
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    background: #fff;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    color: red;
+    font-size: 1rem;
+  }
+
+  .icon-container:hover {
+    background: #eeeeee;
+    color: white !important;
   }
 
   .footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 5px;
+    align-items: start;
   }
 
-  @media (min-width: 768px) and (max-width: 979px) {
-    // background: red;
-  }
-
-  @media only screen and (max-width: 767px) {
-    // background: blue;
-
+  @media only screen and (max-width: 768px) {
     .main-container {
       margin: 0;
       height: 100vh;
@@ -125,16 +130,18 @@ export const Container = styled.div`
       border-radius: 0;
     }
 
+    .box {
+      margin: 1%;
+      width: 90%;
+    }
+
     .search-container {
+      width: 90%;
       padding: 2rem 0;
     }
 
     .praises-container {
       width: 90%;
-    }
-
-    .praise-container {
-      padding: 20px 0;
     }
 
     .praise-title {
@@ -144,9 +151,6 @@ export const Container = styled.div`
     }
 
     .theme-tag {
-      //margin: 1rem 0 5px;
-      // background: #ffcbd1;
-      // color: red;
       font-size: 0.5rem;
       text-align: center;
       height: fit-content;
@@ -156,30 +160,104 @@ export const Container = styled.div`
     .icons-container {
       margin-left: 5%;
     }
-
-    .footer {
-      margin-top: 8px;
-    }
   }
 
   @media (max-width: 480px) {
-    // background: purple;
+    .box {
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .search-container > input {
+      font-size: 0.9rem;
+    }
 
     .praise-container {
       flex-direction: column;
-      padding: 20px 0 0 0;
+      padding: 15px 0;
     }
 
     .icons-container {
       margin-left: 0;
-      //margin-top: 1rem;
       display: flex;
       justify-content: end;
     }
   }
 
-  @media (max-width: 280px) {
-    // background: green;
+  @media (max-width: 425px) {
+    .praise-title-en {
+      font-size: 0.9rem;
+    }
+
+    .praise-title-pt {
+      font-size: 0.8rem;
+    }
+
+    .theme-tag {
+      font-size: 0.45rem;
+    }
+
+    .icon-container {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+  }
+`;
+
+export const ErrorPage = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 15%;
+
+  .musical-note-error-page {
+    width: 120px;
+    height: 120px;
+    margin-right: 50px;
+  }
+
+  .text-error-page {
+    width: 80%;
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: black;
+  }
+
+  .img-praise-not-found {
+    width: 100px;
+    height: 100px;
+    margin-right: 50px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 8%;
+    margin-top: 20%;
+
+    .musical-note-error-page {
+      margin-right: 25px;
+      width: 100px;
+      height: 100px;
+    }
+    .text-error-page {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .text-error-page {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .musical-note-error-page {
+      width: 80px;
+      height: 80px;
+    }
+    .text-error-page {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -192,19 +270,5 @@ export const Container = styled.div`
 //   @media only screen and (max-width: 767px) {
 //     h2 {
 //       font-size: 30px;
-//     }
-//   }
-
-//   @media (max-width: 480px) {
-//     h2 {
-//       font-size: 26px;
-//       margin: 0 5px;
-//       text-align: center;
-//     }
-//   }
-
-//   @media (max-width: 280px) {
-//     h2 {
-//       font-size: 28px;
 //     }
 //   }

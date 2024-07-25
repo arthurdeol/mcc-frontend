@@ -26,7 +26,10 @@ export const Container = styled.div`
 
   .icon-container {
     display: flex;
-    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
     margin-right: 5px;
     background: #fff;
     border: 1px solid #ededed;
@@ -36,12 +39,17 @@ export const Container = styled.div`
   }
 
   .login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #fff;
-    border: 1px solid red;
-    border-radius: 10px;
-    padding: 5px 1rem;
-    color: red;
+    border: 1px solid #ededed;
+    border-radius: 100px;
+    padding: 5px;
+    color: gray;
     font-size: 1rem;
+    width: 40px;
+    height: 40px;
   }
 
   @media only screen and (max-width: 767px) {
@@ -52,9 +60,15 @@ export const Container = styled.div`
   }
 
   @media (max-width: 480px) {
-    padding: 10px 5px;
+    padding: 10px 8px;
     img {
-      margin-left: 0;
+      margin-left: 5px;
+    }
+
+    .login-button {
+      width: 35px;
+      height: 35px;
+      margin-right: 6px;
     }
   }
 `;
