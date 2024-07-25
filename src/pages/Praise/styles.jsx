@@ -6,11 +6,6 @@ export const Container = styled.div`
   height: 100vh;
   background: #ededed;
 
-  .display {
-    width: 100%;
-    height: 100%;
-  }
-
   .file-container {
     display: flex;
     justify-content: center;
