@@ -52,7 +52,7 @@ export const Container = styled.div`
     height: 40px;
   }
 
-  @media only screen and (max-width: 767px) {
+  @media (max-width: 767px) {
     padding: 10px;
     img {
       margin-left: 10px;
@@ -69,6 +69,12 @@ export const Container = styled.div`
       width: 35px;
       height: 35px;
       margin-right: 6px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    img {
+      width: 120px;
     }
   }
 `;

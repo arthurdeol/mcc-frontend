@@ -2,9 +2,10 @@ import { Container, ErrorPage } from "./styles";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import BasicModal from "../../components/Modal";
 // import api from "../../services/api";
 
 const PraisesList = () => {
@@ -13,6 +14,10 @@ const PraisesList = () => {
   const [displayError, setDisplayError] = useState(false);
   const [praiseNotFound, setPraiseNotFound] = useState(false);
   const url = "https://mccapi.up.railway.app/SongBookMap";
+
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -97,7 +102,11 @@ const PraisesList = () => {
               className="filter"
               placeholder="Which praise song are you looking for?"
             />
+            {/* <div className="filter-button" onClick={handleOpen}>
+              <LuSettings2 color={"black"} size={17} />
+            </div> */}
           </div>
+          <BasicModal openModal={openModal} onCloseModal={handleClose} />
 
           {displayError && (
             <ErrorPage>
