@@ -16,15 +16,14 @@ export const Container = styled.div`
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
     margin: 1% 5% 0 5%;
-    width: 70%;
+    width: 50%;
   }
 
   .search-container {
-    width: 82%;
-    padding: 3rem 20px 2rem;
     display: flex;
-    flex-direction: column;
-    align-items: start;
+    align-items: center;
+    width: 94%;
+    padding: 3rem 20px 2rem;
     font-size: 1rem;
   }
 
@@ -37,6 +36,12 @@ export const Container = styled.div`
     font-size: 1rem;
   }
 
+  .filter-button {
+    width: 45px;
+    height: 100%;
+    margin-left: 5px;
+  }
+
   .progress-container {
     display: flex;
     padding-top: 15%;
@@ -46,7 +51,7 @@ export const Container = styled.div`
   }
 
   .praises-container {
-    width: 80%;
+    width: 92%;
     overflow-y: auto;
     height: 100%;
     display: flex;
@@ -97,21 +102,24 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
+  .filter-button,
   .icon-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35px;
-    height: 35px;
-    margin-right: 5px;
     background: #fff;
     border: 1px solid #ededed;
     border-radius: 10px;
-    color: red;
-    font-size: 1rem;
   }
 
-  .icon-container:hover {
+  .icon-container {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+  }
+
+  .icon-container:hover,
+  .filter-button:hover {
     background: #eeeeee;
     color: white !important;
   }
@@ -122,7 +130,33 @@ export const Container = styled.div`
     align-items: start;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 1024px) {
+    .box {
+      width: 96%;
+      height: 93vh;
+    }
+
+    .praises-container {
+      width: 95%;
+    }
+  }
+
+  @media (max-width: 933px) {
+    .box {
+      margin: 1%;
+    }
+
+    .praises-container {
+      width: 93%;
+    }
+
+    .search-container {
+      width: 92%;
+      padding: 2rem 0;
+    }
+  }
+
+  @media (max-width: 768px) {
     .main-container {
       margin: 0;
       height: 100vh;
@@ -132,15 +166,6 @@ export const Container = styled.div`
 
     .box {
       margin: 1%;
-      width: 90%;
-    }
-
-    .search-container {
-      width: 90%;
-      padding: 2rem 0;
-    }
-
-    .praises-container {
       width: 90%;
     }
 
@@ -184,6 +209,11 @@ export const Container = styled.div`
       justify-content: end;
     }
   }
+  @media (max-width: 430px) {
+    .box {
+      box-shadow: none;
+    }
+  }
 
   @media (max-width: 425px) {
     .praise-title-en {
@@ -209,7 +239,9 @@ export const Container = styled.div`
 export const ErrorPage = styled.div`
   display: flex;
   align-items: center;
-  padding: 15%;
+  align-self: center;
+  // margin-top: 10%;
+  padding: 10%;
 
   .musical-note-error-page {
     width: 120px;
@@ -219,7 +251,7 @@ export const ErrorPage = styled.div`
 
   .text-error-page {
     width: 80%;
-    margin: 10px 0;
+    // margin: 10px 0;
     font-size: 1.5rem;
     color: black;
   }
@@ -230,9 +262,14 @@ export const ErrorPage = styled.div`
     margin-right: 50px;
   }
 
-  @media only screen and (max-width: 768px) {
-    padding: 8%;
-    margin-top: 20%;
+  @media (max-width: 1024px) {
+    // margin-top: 0;
+    padding: 6% 8%;
+  }
+
+  @media (max-width: 768px) {
+    // padding: 8%;
+    // margin-top: 20%;
 
     .musical-note-error-page {
       margin-right: 25px;
@@ -244,9 +281,13 @@ export const ErrorPage = styled.div`
     }
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: 435px) {
+    .musical-note-error-page {
+      width: 90px;
+      height: 90px;
+    }
     .text-error-page {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
   }
 
@@ -256,7 +297,7 @@ export const ErrorPage = styled.div`
       height: 80px;
     }
     .text-error-page {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 `;

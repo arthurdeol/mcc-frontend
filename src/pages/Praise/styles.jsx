@@ -13,6 +13,7 @@ export const Container = styled.div`
 
   .file {
     margin: 15px 0;
+    width: 60%;
   }
 
   .progress-container {
@@ -23,17 +24,10 @@ export const Container = styled.div`
     height: 100vh;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 1024px) {
     .file {
       width: 98%;
       margin: 5px 0;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .file {
-      width: 99%;
-      margin: 15px 0;
     }
   }
 `;
