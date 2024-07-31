@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Praise() {
   const [louvor, setLouvor] = useState("");
-  const [iframeUrl, setIframeUrl] = useState("");
+  const [fileArray, setFileArray] = useState([]);
   const location = useLocation();
   const [iconName] = useState(location.state.iconName);
   // const [iconName, setIconName] = useState(location.state.iconName);
@@ -20,6 +20,8 @@ export default function Praise() {
       const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
       const response = await fetch(url);
       const louvor = await response.json();
+      // console.log("louvor", louvor);
+
       setLouvor(louvor);
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
     }
@@ -28,28 +30,52 @@ export default function Praise() {
   }, [iconName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function setActiveTab(activeTab, louvor) {
+    let arrayOfFile = [];
+
     if (activeTab === "LuType") {
-      setIframeUrl(setActiveUrl(louvor.lyricsPdf));
+      louvor.lyricsPdf.map(
+        (item, i) => arrayOfFile.unshift(setUrl(item)),
+        setFileArray(arrayOfFile)
+      );
+      console.log("file array", fileArray);
     } else if (activeTab === "LuListMusic") {
-      setIframeUrl(setActiveUrl(louvor.chordsPdf));
+      louvor.chordsPdf.map(
+        (item, i) => arrayOfFile.unshift(setUrl(item)),
+        setFileArray(arrayOfFile)
+      );
+      console.log("file array", fileArray);
     } else if (activeTab === "LuMusic") {
-      setIframeUrl(setActiveUrl(louvor.sheetMusicPdf));
+      louvor.sheetMusicPdf.map(
+        (item, i) => arrayOfFile.unshift(setUrl(item)),
+        setFileArray(arrayOfFile)
+      );
+      console.log("file array", fileArray);
     } else if (activeTab === "LuVolume1") {
-      setIframeUrl(setActiveUrl(louvor.audioFile));
+      louvor.audioFile.map(
+        (item, i) => arrayOfFile.unshift(setUrl(item)),
+        setFileArray(arrayOfFile)
+      );
+      console.log("file array", fileArray);
     }
   }
-  const setActiveUrl = (file) =>
-    "data:" + file.contentType + ";base64," + file.file;
+  const setUrl = (file) =>
+    "data:" + file.document.contentType + ";base64," + file.document.file;
   // function setTab(iconName) {
   //   setIconName(iconName);
   // }
+
+  // console.log(louvor.sheetMusicPdf[0].document.file);
 
   return (
     <Container>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
       {louvor ? (
         <div className="file-container">
-          <img src={iframeUrl} alt="praiseImg" className="file" />
+          <div className="file-content">
+            {fileArray.map((url, i) => (
+              <img key={i} src={url} alt="praiseImg" className="file" />
+            ))}
+          </div>
         </div>
       ) : (
         <div className="progress-container">

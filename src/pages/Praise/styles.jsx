@@ -11,9 +11,15 @@ export const Container = styled.div`
     justify-content: center;
   }
 
+  .file-content {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 0 15px;
+  }
+
   .file {
-    margin: 15px 0;
-    width: 60%;
+    margin-top: 15px;
   }
 
   .progress-container {
@@ -25,9 +31,12 @@ export const Container = styled.div`
   }
 
   @media (max-width: 1024px) {
+    .file-content {
+      width: 99%;
+    }
+
     .file {
-      width: 98%;
-      margin: 5px 0;
+      margin-top: 6px;
     }
   }
 `;

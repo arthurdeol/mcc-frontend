@@ -10,7 +10,15 @@ import BasicModal from "../../components/Modal";
 
 const PraisesList = () => {
   const [louvores, setLouvores] = useState([]);
+  // const [filteredLouvores, setFilteredLouvores] = useState(() => {
+  //   const filteredLocalStorage = localStorage.getItem("filteredPraises");
+  //   if (filteredLocalStorage) {
+  //     return JSON.parse(filteredLocalStorage);
+  //   }
+  //   return [];
+  // });
   const [filteredLouvores, setFilteredLouvores] = useState([]);
+
   const [displayError, setDisplayError] = useState(false);
   const [praiseNotFound, setPraiseNotFound] = useState(false);
   const url = "https://mccapi.up.railway.app/SongBookMap";
@@ -45,7 +53,16 @@ const PraisesList = () => {
   }
 
   const handleFilter = (event) => {
+    // const searchLocalStorage = localStorage.getItem("searchPraise");
+    // const filteredLocalStorage = localStorage.getItem("filteredPraises");
     let value = especialCharMask(event.target.value);
+
+    // if (searchLocalStorage) {
+    //   value = JSON.parse(searchLocalStorage);
+    // }
+    // console.log("localstorage", searchLocalStorage);
+    // console.log("localstorage", filteredLocalStorage);
+
     const filtered = louvores.filter(
       (louvor) =>
         especialCharMask(louvor.englishSongBookNumber)
@@ -71,6 +88,11 @@ const PraisesList = () => {
 
     if (value === "") setFilteredLouvores(louvores);
     else setFilteredLouvores(filtered);
+
+    // console.log(filtered);
+
+    // localStorage.setItem("searchPraise", JSON.stringify(value));
+    // localStorage.setItem("filteredPraises", JSON.stringify(filtered));
   };
 
   useEffect(() => {
@@ -85,6 +107,12 @@ const PraisesList = () => {
         });
         setLouvores(data);
         setFilteredLouvores(data);
+        // const filteredLocalStorage = localStorage.getItem("filteredPraises");
+        // if (filteredLocalStorage) {
+        //   setFilteredLouvores(JSON.parse(filteredLocalStorage));
+        // } else {
+        //   setFilteredLouvores(data);
+        // }
       })
       .catch((err) => setDisplayError(true));
   }, []);
@@ -99,6 +127,7 @@ const PraisesList = () => {
               type="text"
               id="filter"
               onChange={handleFilter}
+              // value={JSON.parse(localStorage.getItem("searchPraise"))}
               className="filter"
               placeholder="Which praise song are you looking for?"
             />

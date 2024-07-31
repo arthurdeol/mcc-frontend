@@ -16,7 +16,7 @@ export const Container = styled.div`
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
     margin: 1% 5% 0 5%;
-    width: 50%;
+    width: 80%;
   }
 
   .search-container {
