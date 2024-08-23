@@ -18,6 +18,7 @@ const PraisesList = () => {
   //   return [];
   // });
   const [filteredLouvores, setFilteredLouvores] = useState([]);
+  const [complexFilterApplied, setComplexFilterApplied] = useState(false);
 
   const [displayError, setDisplayError] = useState(false);
   const [praiseNotFound, setPraiseNotFound] = useState(false);
@@ -60,8 +61,6 @@ const PraisesList = () => {
     // if (searchLocalStorage) {
     //   value = JSON.parse(searchLocalStorage);
     // }
-    // console.log("localstorage", searchLocalStorage);
-    // console.log("localstorage", filteredLocalStorage);
 
     const filtered = louvores.filter(
       (louvor) =>
@@ -88,34 +87,69 @@ const PraisesList = () => {
 
     if (value === "") setFilteredLouvores(louvores);
     else setFilteredLouvores(filtered);
-
-    // console.log(filtered);
-
     // localStorage.setItem("searchPraise", JSON.stringify(value));
     // localStorage.setItem("filteredPraises", JSON.stringify(filtered));
   };
 
+  function setComplexFilter(formValue, themesApplied) {
+    let filteredPraises = [];
+
+    if (formValue.containsInCiasSongBook) {
+      if (formValue.containsInCiasSongBook && themesApplied.length > 0) {
+        for (let i = 0; i < louvores.length; i++) {
+          for (let j = 0; j < themesApplied.length; j++) {
+            if (
+              louvores[i].theme === themesApplied[j] &&
+              louvores[i].containsInCiasSongBook
+            ) {
+              filteredPraises.push(louvores[i]);
+            }
+          }
+        }
+      } else {
+        filteredPraises = louvores.filter(
+          (louvor) => louvor.containsInCiasSongBook
+        );
+      }
+    } else {
+      for (let i = 0; i < louvores.length; i++) {
+        for (let j = 0; j < themesApplied.length; j++) {
+          if (louvores[i].theme === themesApplied[j]) {
+            filteredPraises.push(louvores[i]);
+          }
+        }
+      }
+    }
+    if (filteredPraises.length < 1) {
+      filteredPraises = louvores;
+    }
+    setComplexFilterApplied(true);
+    setFilteredLouvores(filteredPraises);
+  }
+
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        data.sort((a, b) => {
-          return naturalCompare(
-            a.portugueseSongBookNumber,
-            b.portugueseSongBookNumber
-          );
-        });
-        setLouvores(data);
-        setFilteredLouvores(data);
-        // const filteredLocalStorage = localStorage.getItem("filteredPraises");
-        // if (filteredLocalStorage) {
-        //   setFilteredLouvores(JSON.parse(filteredLocalStorage));
-        // } else {
-        //   setFilteredLouvores(data);
-        // }
-      })
-      .catch((err) => setDisplayError(true));
-  }, []);
+    if (!complexFilterApplied) {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          data.sort((a, b) => {
+            return naturalCompare(
+              a.portugueseSongBookNumber,
+              b.portugueseSongBookNumber
+            );
+          });
+          setLouvores(data);
+          setFilteredLouvores(data);
+          // const filteredLocalStorage = localStorage.getItem("filteredPraises");
+          // if (filteredLocalStorage) {
+          //   setFilteredLouvores(JSON.parse(filteredLocalStorage));
+          // } else {
+          //   setFilteredLouvores(data);
+          // }
+        })
+        .catch((err) => setDisplayError(true));
+    }
+  }, [complexFilterApplied]);
 
   return (
     <Container>
@@ -131,11 +165,16 @@ const PraisesList = () => {
               className="filter"
               placeholder="Which praise song are you looking for?"
             />
-            {/* <div className="filter-button" onClick={handleOpen}>
+            <div className="filter-button" onClick={handleOpen}>
               <LuSettings2 color={"black"} size={17} />
-            </div> */}
+            </div>
           </div>
-          <BasicModal openModal={openModal} onCloseModal={handleClose} />
+
+          <BasicModal
+            openModal={openModal}
+            onCloseModal={handleClose}
+            setComplexFilter={setComplexFilter}
+          />
 
           {displayError && (
             <ErrorPage>
@@ -204,7 +243,12 @@ const PraisesList = () => {
                       </div>
 
                       <div className="footer">
-                        <div className="theme-tag">{louvor.theme}</div>
+                        <div className="theme-tag-container">
+                          {louvor.containsInCiasSongBook && (
+                            <div className="theme-tag">CIA</div>
+                          )}
+                          <div className="theme-tag">{louvor.theme}</div>
+                        </div>
 
                         {louvor.englishTitle && (
                           <div className="icons-container">

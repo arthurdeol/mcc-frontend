@@ -83,6 +83,11 @@ export const Container = styled.div`
     color: gray;
   }
 
+  .theme-tag-container {
+    display: flex;
+    align-items: center;
+  }
+
   .theme-tag {
     display: flex;
     align-items: center;
@@ -94,6 +99,7 @@ export const Container = styled.div`
     text-align: center;
     height: auto;
     padding: 2px 8px;
+    margin-right: 2px;
   }
 
   .icons-container {

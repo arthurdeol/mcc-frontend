@@ -20,7 +20,6 @@ export default function Praise() {
       const url = "https://mccapi.up.railway.app/SongBookMap/" + id + "/Get";
       const response = await fetch(url);
       const louvor = await response.json();
-      // console.log("louvor", louvor);
 
       setLouvor(louvor);
       louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
@@ -37,34 +36,25 @@ export default function Praise() {
         (item, i) => arrayOfFile.unshift(setUrl(item)),
         setFileArray(arrayOfFile)
       );
-      console.log("file array", fileArray);
     } else if (activeTab === "LuListMusic") {
       louvor.chordsPdf.map(
         (item, i) => arrayOfFile.unshift(setUrl(item)),
         setFileArray(arrayOfFile)
       );
-      console.log("file array", fileArray);
     } else if (activeTab === "LuMusic") {
       louvor.sheetMusicPdf.map(
         (item, i) => arrayOfFile.unshift(setUrl(item)),
         setFileArray(arrayOfFile)
       );
-      console.log("file array", fileArray);
     } else if (activeTab === "LuVolume1") {
       louvor.audioFile.map(
         (item, i) => arrayOfFile.unshift(setUrl(item)),
         setFileArray(arrayOfFile)
       );
-      console.log("file array", fileArray);
     }
   }
   const setUrl = (file) =>
     "data:" + file.document.contentType + ";base64," + file.document.file;
-  // function setTab(iconName) {
-  //   setIconName(iconName);
-  // }
-
-  // console.log(louvor.sheetMusicPdf[0].document.file);
 
   return (
     <Container>
