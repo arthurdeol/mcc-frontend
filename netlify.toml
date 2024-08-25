@@ -4,8 +4,8 @@
   status = 200
 
 [build]	
+    command = "npm build"
     build = "build"
-    publish = "build"
 
 [build.environment]	
     NODE_ENV = "development"	
