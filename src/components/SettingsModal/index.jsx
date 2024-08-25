@@ -143,8 +143,20 @@ export default function SettingsModal({
       file: files[0],
     };
 
-    console.log(data);
-    await api.post("/orphanages", data);
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("songBookMapId", praiseId);
+    formData.append("fileType", typeOfFile);
+    formData.append("order", order);
+
+    console.log(formData, "formData");
+
+    try {
+      const response = await api.post("/SongBookMapFiles", formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
