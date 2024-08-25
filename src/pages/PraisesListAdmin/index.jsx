@@ -2,12 +2,19 @@ import { Container, ErrorPage } from "./styles";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
+import {
+  LuType,
+  LuListMusic,
+  LuMusic,
+  LuSettings2,
+  LuSettings,
+} from "react-icons/lu";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import BasicModal from "../../components/Modal";
+import SettingsModal from "../../components/SettingsModal";
 
-const PraisesList = () => {
+const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
@@ -19,6 +26,14 @@ const PraisesList = () => {
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
+
+  const [praiseId, setPraiseId] = useState("");
+  const [openModalSettings, setOpenModalSettings] = useState(false);
+  function handleOpenSettignsModal(clickedPraiseId) {
+    setPraiseId(clickedPraiseId);
+    setOpenModalSettings(true);
+  }
+  const handleCloseSettignsModal = () => setOpenModalSettings(false);
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -134,6 +149,7 @@ const PraisesList = () => {
       <Header />
       <div className="main-container">
         <div className="box">
+          <h1 className="adminTitle">Admin - Praises</h1>
           <div className="search-container">
             <input
               type="text"
@@ -151,6 +167,12 @@ const PraisesList = () => {
             openModal={openModal}
             onCloseModal={handleClose}
             setComplexFilter={setComplexFilter}
+          />
+
+          <SettingsModal
+            openModalSettings={openModalSettings}
+            onCloseModalSettings={handleCloseSettignsModal}
+            praiseId={praiseId}
           />
 
           {displayError && (
@@ -199,23 +221,35 @@ const PraisesList = () => {
                   {filteredLouvores.map((louvor, i) => (
                     <div className="praise-container" key={i}>
                       <div className="titles">
+                        <div>
+                          {louvor.englishTitle && (
+                            <h6 className="praise-title-en">
+                              {louvor.englishSongBookNumber
+                                ? louvor.englishSongBookNumber + " - "
+                                : " "}
+                              {louvor.englishTitle ? louvor.englishTitle : ""}
+                            </h6>
+                          )}
+                          {louvor.portugueseTitle && (
+                            <p className="praise-title-pt">
+                              {louvor.portugueseSongBookNumber
+                                ? louvor.portugueseSongBookNumber + " - "
+                                : "Avulso - "}
+                              {louvor.portugueseTitle
+                                ? louvor.portugueseTitle
+                                : ""}
+                            </p>
+                          )}
+                        </div>
+
                         {louvor.englishTitle && (
-                          <h6 className="praise-title-en">
-                            {louvor.englishSongBookNumber
-                              ? louvor.englishSongBookNumber + " - "
-                              : " "}
-                            {louvor.englishTitle ? louvor.englishTitle : ""}
-                          </h6>
-                        )}
-                        {louvor.portugueseTitle && (
-                          <p className="praise-title-pt">
-                            {louvor.portugueseSongBookNumber
-                              ? louvor.portugueseSongBookNumber + " - "
-                              : "Avulso - "}
-                            {louvor.portugueseTitle
-                              ? louvor.portugueseTitle
-                              : ""}
-                          </p>
+                          <div
+                            onClick={() =>
+                              handleOpenSettignsModal(louvor.songBookMapId)
+                            }
+                          >
+                            <LuSettings color={"black"} size={20} />
+                          </div>
                         )}
                       </div>
 
@@ -289,4 +323,4 @@ const PraisesList = () => {
   );
 };
 
-export default PraisesList;
+export default PraisesListAdmin;

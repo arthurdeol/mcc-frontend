@@ -1,21 +1,10 @@
 import { Container } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { LuType, LuListMusic, LuMusic, LuUser2 } from "react-icons/lu";
 
 const Header = ({ louvor = {}, setActiveTab = "" }) => {
   const navigate = useNavigate();
-  let [isHome, setUrlCheckIsHome] = useState(true);
-
-  useEffect(() => {
-    const isHomecheck =
-      window.location.href.toString().indexOf("/praise") !== -1;
-    if (isHomecheck) {
-      setUrlCheckIsHome(true);
-    } else {
-      setUrlCheckIsHome(false);
-    }
-  }, []);
 
   return (
     <Container>
@@ -26,13 +15,15 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
         onClick={() => navigate("/")}
       />
 
-      {!isHome && (
+      {window.location.pathname?.toString() === "/" && (
         <button className="login-button">
-          <LuUser2 size={22} />
+          <Link to={"/login-admin"}>
+            <LuUser2 size={22} />
+          </Link>
         </button>
       )}
 
-      {isHome && (
+      {window.location.pathname?.toString() === "/praise" && (
         <div className="icons-container">
           {louvor.linkPdfLyrics ? (
             <div
