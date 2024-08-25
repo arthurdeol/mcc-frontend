@@ -168,14 +168,6 @@ export default function SettingsModal({
             Settings
           </Typography>
 
-          <Typography sx={title} id="modal-modal-title" component="h2">
-            Praise Id:
-            <br></br>
-            {praiseId}
-          </Typography>
-
-          <br></br>
-
           {/* <TextField
             value={cloudUrl}
             id="outlined-basic"
