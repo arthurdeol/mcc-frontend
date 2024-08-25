@@ -100,7 +100,6 @@ export default function SettingsModal({
   onCloseModalSettings,
   praiseId,
 }) {
-  // const [cloudUrl, setCloudUrl] = useState("");
   const [typeOfFile, setTypeOfFile] = useState("");
   const [order, setOrder] = useState(0);
   const [files, setFiles] = useState(null);
@@ -110,10 +109,6 @@ export default function SettingsModal({
     setTypeOfFile(event.target.value);
     console.log(typeOfFile);
   };
-
-  // const handleChangeCloudUrl = (event) => {
-  //   setCloudUrl(event.target.value);
-  // };
 
   const handleChangeOrder = (event) => {
     setOrder(event.target.value);
@@ -135,25 +130,14 @@ export default function SettingsModal({
   async function handleSubmit(event) {
     event.preventDefault();
 
-    let data = {
-      songBookMapId: praiseId,
-      fileType: typeOfFile,
-      // fileUrl: cloudUrl,
-      order: Number(order),
-      file: files[0],
-    };
-
     const formData = new FormData();
     formData.append("file", files[0]);
     formData.append("songBookMapId", praiseId);
     formData.append("fileType", typeOfFile);
     formData.append("order", order);
 
-    console.log(formData, "formData");
-
     try {
       const response = await api.post("/SongBookMapFiles", formData);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -179,15 +163,6 @@ export default function SettingsModal({
           >
             Settings
           </Typography>
-
-          {/* <TextField
-            value={cloudUrl}
-            id="outlined-basic"
-            label="Cloud Url"
-            variant="outlined"
-            onChange={handleChangeCloudUrl}
-          /> */}
-
           <br></br>
 
           <TextField
@@ -198,7 +173,6 @@ export default function SettingsModal({
             type="number"
             onChange={handleChangeOrder}
           />
-
           <br></br>
 
           <Box sx={{ minWidth: 120 }}>
@@ -217,8 +191,8 @@ export default function SettingsModal({
               </Select>
             </FormControl>
           </Box>
-
           <br></br>
+
           <div className="images-container">
             {previewImages.map((image) => (
               <img
