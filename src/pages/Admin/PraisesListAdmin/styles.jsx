@@ -71,13 +71,12 @@ export const Container = styled.div`
   .titles {
     display: flex;
     margin-bottom: 10px;
-    margin-right: 10px;
     justify-content: space-between;
   }
 
   .adminTitle {
     color: black;
-    margin-top: 25px;
+    margin-top: 50px;
   }
 
   .praise-title-en {

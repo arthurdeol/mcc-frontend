@@ -1,5 +1,5 @@
 import { Container, ErrorPage } from "./styles";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -11,8 +11,7 @@ import {
 } from "react-icons/lu";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import BasicModal from "../../components/Modal";
-import SettingsModal from "../../components/SettingsModal";
+import BasicModal from "../../../components/Modal";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
@@ -26,14 +25,6 @@ const PraisesListAdmin = () => {
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
-
-  const [praiseId, setPraiseId] = useState("");
-  const [openModalSettings, setOpenModalSettings] = useState(false);
-  function handleOpenSettignsModal(clickedPraiseId) {
-    setPraiseId(clickedPraiseId);
-    setOpenModalSettings(true);
-  }
-  const handleCloseSettignsModal = () => setOpenModalSettings(false);
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -169,12 +160,6 @@ const PraisesListAdmin = () => {
             setComplexFilter={setComplexFilter}
           />
 
-          <SettingsModal
-            openModalSettings={openModalSettings}
-            onCloseModalSettings={handleCloseSettignsModal}
-            praiseId={praiseId}
-          />
-
           {displayError && (
             <ErrorPage>
               <img
@@ -243,13 +228,15 @@ const PraisesListAdmin = () => {
                         </div>
 
                         {louvor.englishTitle && (
-                          <div
-                            onClick={() =>
-                              handleOpenSettignsModal(louvor.songBookMapId)
-                            }
+                          <Link
+                            to={"/praise-settings"}
+                            className="icon-container"
+                            state={{
+                              praiseId: louvor.songBookMapId,
+                            }}
                           >
                             <LuSettings color={"black"} size={20} />
-                          </div>
+                          </Link>
                         )}
                       </div>
 
