@@ -1,13 +1,19 @@
 import { Container, ErrorPage } from "./styles";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
+import {
+  LuType,
+  LuListMusic,
+  LuMusic,
+  LuSettings2,
+  LuSettings,
+} from "react-icons/lu";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import BasicModal from "../../components/Modal";
+import BasicModal from "../../../components/Modal";
 
-const PraisesList = () => {
+const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
@@ -134,6 +140,7 @@ const PraisesList = () => {
       <Header />
       <div className="main-container">
         <div className="box">
+          <h1 className="adminTitle">Admin - Praises</h1>
           <div className="search-container">
             <input
               type="text"
@@ -199,23 +206,37 @@ const PraisesList = () => {
                   {filteredLouvores.map((louvor, i) => (
                     <div className="praise-container" key={i}>
                       <div className="titles">
+                        <div>
+                          {louvor.englishTitle && (
+                            <h6 className="praise-title-en">
+                              {louvor.englishSongBookNumber
+                                ? louvor.englishSongBookNumber + " - "
+                                : " "}
+                              {louvor.englishTitle ? louvor.englishTitle : ""}
+                            </h6>
+                          )}
+                          {louvor.portugueseTitle && (
+                            <p className="praise-title-pt">
+                              {louvor.portugueseSongBookNumber
+                                ? louvor.portugueseSongBookNumber + " - "
+                                : "Avulso - "}
+                              {louvor.portugueseTitle
+                                ? louvor.portugueseTitle
+                                : ""}
+                            </p>
+                          )}
+                        </div>
+
                         {louvor.englishTitle && (
-                          <h6 className="praise-title-en">
-                            {louvor.englishSongBookNumber
-                              ? louvor.englishSongBookNumber + " - "
-                              : " "}
-                            {louvor.englishTitle ? louvor.englishTitle : ""}
-                          </h6>
-                        )}
-                        {louvor.portugueseTitle && (
-                          <p className="praise-title-pt">
-                            {louvor.portugueseSongBookNumber
-                              ? louvor.portugueseSongBookNumber + " - "
-                              : "Avulso - "}
-                            {louvor.portugueseTitle
-                              ? louvor.portugueseTitle
-                              : ""}
-                          </p>
+                          <Link
+                            to={"/praise-settings"}
+                            className="icon-container"
+                            state={{
+                              praiseId: louvor.songBookMapId,
+                            }}
+                          >
+                            <LuSettings color={"black"} size={20} />
+                          </Link>
                         )}
                       </div>
 
@@ -289,4 +310,4 @@ const PraisesList = () => {
   );
 };
 
-export default PraisesList;
+export default PraisesListAdmin;
