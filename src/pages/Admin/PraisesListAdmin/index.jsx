@@ -233,6 +233,7 @@ const PraisesListAdmin = () => {
                             className="icon-container"
                             state={{
                               praiseId: louvor.songBookMapId,
+                              praiseData: louvor,
                             }}
                           >
                             <LuSettings color={"black"} size={20} />

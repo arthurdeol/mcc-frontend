@@ -105,23 +105,32 @@ const button = {
 export default function PraiseSettings() {
   const location = useLocation();
   const [praiseId] = useState(location.state.praiseId);
-  const [praiseTheme, setPraiseTheme] = useState("");
-  const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState("");
-  const [portugueseTitle, setPortugueseTitle] = useState("");
-  const [englishSongBookNumber, setEnglishSongBookNumber] = useState("");
-  const [englishTitle, setEnglishTitle] = useState("");
-  const [filesLyrics, setFilesLyrics] = useState([]);
-  const [filesChords, setFilesChords] = useState([]);
-  const [filesMusicSheet, setFilesMusicSheet] = useState([]);
+
+  const { praiseData } = location.state;
+  // console.log("praise", praiseData);
+
+  const [praiseTheme, setPraiseTheme] = useState(praiseData.theme.trim());
+  const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState(
+    praiseData.portugueseSongBookNumber
+  );
+  const [portugueseTitle, setPortugueseTitle] = useState(
+    praiseData.portugueseTitle
+  );
+  const [englishSongBookNumber, setEnglishSongBookNumber] = useState(
+    praiseData.englishSongBookNumber
+  );
+  const [englishTitle, setEnglishTitle] = useState(praiseData.englishTitle);
+  const [checkeds, setCheckeds] = useState({
+    containsInPortugueseSongBook: praiseData.containsInPortugueseSongBook,
+    containsInCiasSongBook: praiseData.containsInCiasSongBook,
+    containsInSuplementareASongBook: praiseData.containsInSuplementareASongBook,
+    containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
+  });
+
+  const [allFiles, setAllFiles] = useState([]);
   const [previewLyricsImages, setPreviewLyricsImages] = useState([]);
   const [previewChordsImages, setPreviewChordsImages] = useState([]);
   const [previewMusicSheetImages, setPreviewMusicSheetImages] = useState([]);
-  const [checkeds, setCheckeds] = useState({
-    containsInPortugueseSongBook: false,
-    containsInCiasSongBook: false,
-    containsInSuplementareASongBook: false,
-    containsInSuplementareBSongBook: false,
-  });
 
   const {
     containsInPortugueseSongBook,
@@ -177,7 +186,7 @@ export default function PraiseSettings() {
       selectedImages,
       event.target.id
     );
-    setFilesLyrics(treatedSelectedImages);
+    setAllFiles([...allFiles, ...treatedSelectedImages]);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -193,7 +202,7 @@ export default function PraiseSettings() {
       selectedImages,
       event.target.id
     );
-    setFilesChords(treatedSelectedImages);
+    setAllFiles([...allFiles, ...treatedSelectedImages]);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -209,7 +218,7 @@ export default function PraiseSettings() {
       selectedImages,
       event.target.id
     );
-    setFilesMusicSheet(treatedSelectedImages);
+    setAllFiles([...allFiles, ...treatedSelectedImages]);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -219,11 +228,6 @@ export default function PraiseSettings() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    let allFiles = [];
-    if (filesLyrics) allFiles.push(...filesLyrics);
-    if (filesChords) allFiles.push(...filesChords);
-    if (filesMusicSheet) allFiles.push(...filesMusicSheet);
 
     const formData = new FormData();
     formData.append("songBookMapId", praiseId);
@@ -245,27 +249,33 @@ export default function PraiseSettings() {
     formData.append("portugueseTitle", portugueseTitle);
     formData.append("englishSongBookNumber", englishSongBookNumber);
     formData.append("englishTile", englishTitle);
-    formData.append("files", allFiles);
 
-    let form = {
-      songBookMapId: praiseId,
-      containsInPortugueseSongBook: checkeds.containsInPortugueseSongBook,
-      containsInCiasSongBook: checkeds.containsInCiasSongBook,
-      containsInSuplementareASongBook: checkeds.containsInSuplementareASongBook,
-      containsInSuplementareBSongBook: checkeds.containsInSuplementareBSongBook,
-      theme: praiseTheme,
-      portugueseSongBookNumber: portugueseSongBookNumber,
-      portugueseTitle: portugueseTitle,
-      englishSongBookNumber: englishSongBookNumber,
-      englishTile: englishTitle,
-      files: allFiles,
-    };
-    console.log(form);
+    allFiles.forEach((file, index) => {
+      formData.append(`files[${index}].fileType`, file.fileType);
+      formData.append(`files[${index}].order`, file.order);
+      formData.append(`files[${index}].file`, file.file);
+    });
+
+    // let form = {
+    //   songBookMapId: praiseId,
+    //   containsInPortugueseSongBook: checkeds.containsInPortugueseSongBook,
+    //   containsInCiasSongBook: checkeds.containsInCiasSongBook,
+    //   containsInSuplementareASongBook: checkeds.containsInSuplementareASongBook,
+    //   containsInSuplementareBSongBook: checkeds.containsInSuplementareBSongBook,
+    //   theme: praiseTheme,
+    //   portugueseSongBookNumber: portugueseSongBookNumber,
+    //   portugueseTitle: portugueseTitle,
+    //   englishSongBookNumber: englishSongBookNumber,
+    //   englishTile: englishTitle,
+    //   files: allFiles,
+    // };
+    // console.log("form", form);
 
     try {
       const response = await api.put("/SongBookMap", formData);
-      console.log(response);
+      alert("Settings applied with Success");
     } catch (error) {
+      alert("Something went wrong! Please, try again later!");
       console.log(error);
     }
   }
