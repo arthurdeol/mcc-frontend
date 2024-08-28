@@ -1,10 +1,10 @@
 import { Container } from "./styles";
 import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { LuType, LuListMusic, LuMusic, LuUser2 } from "react-icons/lu";
 
 const Header = ({ louvor = {}, setActiveTab = "" }) => {
   const navigate = useNavigate();
+  const navPath = window.location.pathname?.toString();
 
   return (
     <Container>
@@ -12,10 +12,14 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
         className="logo"
         src="/images/logomcc.jpeg"
         alt="mcc logo"
-        onClick={() => navigate("/")}
+        onClick={() =>
+          navPath === "/praise-settings" || navPath === "/praises-admin"
+            ? navigate("/praises-admin")
+            : navigate("/")
+        }
       />
 
-      {window.location.pathname?.toString() === "/" && (
+      {navPath === "/" && (
         <button className="login-button">
           <Link to={"/login-admin"}>
             <LuUser2 size={22} />
@@ -23,7 +27,7 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
         </button>
       )}
 
-      {window.location.pathname?.toString() === "/praise" && (
+      {navPath === "/praise" && (
         <div className="icons-container">
           {louvor.linkPdfLyrics ? (
             <div

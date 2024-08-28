@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -32,12 +32,12 @@ import Header from "../../../components/Header";
 const style = {
   display: "flex",
   flexDirection: "column",
-  width: "70%",
   height: "auto",
   bgcolor: "background.paper",
   borderRadius: "10px",
   color: "black",
   p: 4,
+  width: { xs: "100%", sm: "90%", lg: "70%" },
 };
 
 const themeStyled = createTheme({
@@ -103,6 +103,7 @@ const button = {
 };
 
 export default function PraiseSettings() {
+  const navigate = useNavigate();
   const location = useLocation();
   const [praiseId] = useState(location.state.praiseId);
 
@@ -126,6 +127,10 @@ export default function PraiseSettings() {
     containsInSuplementareASongBook: praiseData.containsInSuplementareASongBook,
     containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
   });
+
+  const [lyricsFiles, setLyricsFiles] = useState([]);
+  const [chordsFiles, setChordsFiles] = useState([]);
+  const [musicSheetFiles, setMusicSheetFiles] = useState([]);
 
   const [allFiles, setAllFiles] = useState([]);
   const [previewLyricsImages, setPreviewLyricsImages] = useState([]);
@@ -187,6 +192,7 @@ export default function PraiseSettings() {
       event.target.id
     );
     setAllFiles([...allFiles, ...treatedSelectedImages]);
+    setLyricsFiles(selectedImages);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -203,6 +209,7 @@ export default function PraiseSettings() {
       event.target.id
     );
     setAllFiles([...allFiles, ...treatedSelectedImages]);
+    setChordsFiles(selectedImages);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -219,6 +226,7 @@ export default function PraiseSettings() {
       event.target.id
     );
     setAllFiles([...allFiles, ...treatedSelectedImages]);
+    setMusicSheetFiles(selectedImages);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -248,13 +256,17 @@ export default function PraiseSettings() {
     formData.append("portugueseSongBookNumber", portugueseSongBookNumber);
     formData.append("portugueseTitle", portugueseTitle);
     formData.append("englishSongBookNumber", englishSongBookNumber);
-    formData.append("englishTile", englishTitle);
+    formData.append("englishTitle", englishTitle);
 
-    allFiles.forEach((file, index) => {
-      formData.append(`files[${index}].fileType`, file.fileType);
-      formData.append(`files[${index}].order`, file.order);
-      formData.append(`files[${index}].file`, file.file);
-    });
+    if (allFiles.length > 0) {
+      allFiles.forEach((file, index) => {
+        formData.append(`files[${index}].fileType`, file.fileType);
+        formData.append(`files[${index}].order`, file.order);
+        formData.append(`files[${index}].file`, file.file);
+      });
+    } else {
+      formData.append("files", null);
+    }
 
     // let form = {
     //   songBookMapId: praiseId,
@@ -266,7 +278,7 @@ export default function PraiseSettings() {
     //   portugueseSongBookNumber: portugueseSongBookNumber,
     //   portugueseTitle: portugueseTitle,
     //   englishSongBookNumber: englishSongBookNumber,
-    //   englishTile: englishTitle,
+    //   englishTitle: englishTitle,
     //   files: allFiles,
     // };
     // console.log("form", form);
@@ -274,6 +286,8 @@ export default function PraiseSettings() {
     try {
       const response = await api.put("/SongBookMap", formData);
       alert("Settings applied with Success");
+      navigate("/praises-admin");
+      console.log(response);
     } catch (error) {
       alert("Something went wrong! Please, try again later!");
       console.log(error);
@@ -437,7 +451,7 @@ export default function PraiseSettings() {
 
           <div className="file-container">
             <div className="file-input">
-              <label>Lyrics Files: </label>
+              <label for="Lyrics">Lyrics Files: </label>
               <input
                 type="file"
                 id="Lyrics"
@@ -446,6 +460,9 @@ export default function PraiseSettings() {
                 multiple
                 onChange={handleChangeLyricsFiles}
               />
+              {lyricsFiles.map((image) => (
+                <span className="file-name">{image.name}</span>
+              ))}
             </div>
             <div className="images-container">
               {previewLyricsImages.map((image, i) => (
@@ -462,7 +479,7 @@ export default function PraiseSettings() {
 
           <div className="file-container">
             <div className="file-input">
-              <label>Chords Files: </label>
+              <label for="Chords">Chords Files: </label>
               <input
                 label="Chords"
                 type="file"
@@ -472,6 +489,9 @@ export default function PraiseSettings() {
                 multiple
                 onChange={handleChangeChordsFiles}
               />
+              {chordsFiles.map((image) => (
+                <span className="file-name">{image.name}</span>
+              ))}
             </div>
             <div className="images-container">
               {previewChordsImages.map((image, i) => (
@@ -488,7 +508,7 @@ export default function PraiseSettings() {
 
           <div className="file-container">
             <div className="file-input">
-              <label>Music Sheets Files: </label>
+              <label for="SheetMusic">Music Sheets Files: </label>
               <input
                 type="file"
                 id="SheetMusic"
@@ -497,6 +517,9 @@ export default function PraiseSettings() {
                 multiple
                 onChange={handleChangeMusicSheetFiles}
               />
+              {musicSheetFiles.map((image) => (
+                <span className="file-name">{image.name}</span>
+              ))}
             </div>
             <div className="images-container">
               {previewMusicSheetImages.map((image, i) => (
@@ -577,4 +600,4 @@ onChange={handleChangeOrder}
 // "portugueseSongBookNumber": "string",
 // "portugueseTitle": "string",
 // "englishSongBookNumber": "string",
-// "englishTile": "string"
+// "englishTitle": "string"
