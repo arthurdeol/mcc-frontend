@@ -19,6 +19,7 @@ export const Container = styled.div`
   }
 
   .file {
+    background: white;
     margin-top: 15px;
   }
 

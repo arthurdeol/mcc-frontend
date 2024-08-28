@@ -18,12 +18,35 @@ export const Container = styled.div`
     padding: 15px;
   }
 
+  .file-name {
+    color: black;
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
   .file-input {
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .file-input > input {
+    margin-right: 10px;
   }
   .file-input > label {
-    margin-right: 30px;
-    color: gray;
+    display: flex;
+    align-items: center;
+    background-color: #b71c1c;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+    padding: 6px 20px;
+    font-size: 16px;
   }
 
   .images-container {
@@ -36,5 +59,25 @@ export const Container = styled.div`
     width: 300px;
     border: 1px solid #eeeeee;
     margin: 1px;
+  }
+
+  .data-container {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 30px;
+  }
+  @media (max-width: 1024px) {
+    .image-file {
+      width: 48%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .image-file {
+      width: 100%;
+    }
+    .file-input > label {
+      margin-right: 5px;
+    }
   }
 `;

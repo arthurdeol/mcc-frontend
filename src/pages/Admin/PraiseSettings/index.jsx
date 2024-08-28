@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -13,31 +13,20 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { SlCloudUpload } from "react-icons/sl";
 import api from "../../../services/api";
 import Header from "../../../components/Header";
-// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-// import { styled } from "@mui/material/styles";
-// const VisuallyHiddenInput = styled("input")({
-//   clip: "rect(0 0 0 0)",
-//   clipPath: "inset(50%)",
-//   height: 1,
-//   overflow: "hidden",
-//   position: "absolute",
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: "nowrap",
-//   width: 1,
-// });
 
 const style = {
   display: "flex",
   flexDirection: "column",
-  width: "70%",
   height: "auto",
   bgcolor: "background.paper",
   borderRadius: "10px",
   color: "black",
   p: 4,
+  marginTop: "20px",
+  width: { xs: "100%", sm: "90%", lg: "70%" },
 };
 
 const themeStyled = createTheme({
@@ -103,6 +92,7 @@ const button = {
 };
 
 export default function PraiseSettings() {
+  const navigate = useNavigate();
   const location = useLocation();
   const [praiseId] = useState(location.state.praiseId);
 
@@ -126,6 +116,10 @@ export default function PraiseSettings() {
     containsInSuplementareASongBook: praiseData.containsInSuplementareASongBook,
     containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
   });
+
+  const [lyricsFiles, setLyricsFiles] = useState([]);
+  const [chordsFiles, setChordsFiles] = useState([]);
+  const [musicSheetFiles, setMusicSheetFiles] = useState([]);
 
   const [allFiles, setAllFiles] = useState([]);
   const [previewLyricsImages, setPreviewLyricsImages] = useState([]);
@@ -187,6 +181,7 @@ export default function PraiseSettings() {
       event.target.id
     );
     setAllFiles([...allFiles, ...treatedSelectedImages]);
+    setLyricsFiles(selectedImages);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -203,6 +198,7 @@ export default function PraiseSettings() {
       event.target.id
     );
     setAllFiles([...allFiles, ...treatedSelectedImages]);
+    setChordsFiles(selectedImages);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -219,6 +215,7 @@ export default function PraiseSettings() {
       event.target.id
     );
     setAllFiles([...allFiles, ...treatedSelectedImages]);
+    setMusicSheetFiles(selectedImages);
 
     const selectedImagesPreview = selectedImages.map((image) => {
       return URL.createObjectURL(image);
@@ -248,13 +245,17 @@ export default function PraiseSettings() {
     formData.append("portugueseSongBookNumber", portugueseSongBookNumber);
     formData.append("portugueseTitle", portugueseTitle);
     formData.append("englishSongBookNumber", englishSongBookNumber);
-    formData.append("englishTile", englishTitle);
+    formData.append("englishTitle", englishTitle);
 
-    allFiles.forEach((file, index) => {
-      formData.append(`files[${index}].fileType`, file.fileType);
-      formData.append(`files[${index}].order`, file.order);
-      formData.append(`files[${index}].file`, file.file);
-    });
+    if (allFiles.length > 0) {
+      allFiles.forEach((file, index) => {
+        formData.append(`files[${index}].fileType`, file.fileType);
+        formData.append(`files[${index}].order`, file.order);
+        formData.append(`files[${index}].file`, file.file);
+      });
+    } else {
+      formData.append("files", null);
+    }
 
     // let form = {
     //   songBookMapId: praiseId,
@@ -266,7 +267,7 @@ export default function PraiseSettings() {
     //   portugueseSongBookNumber: portugueseSongBookNumber,
     //   portugueseTitle: portugueseTitle,
     //   englishSongBookNumber: englishSongBookNumber,
-    //   englishTile: englishTitle,
+    //   englishTitle: englishTitle,
     //   files: allFiles,
     // };
     // console.log("form", form);
@@ -274,6 +275,8 @@ export default function PraiseSettings() {
     try {
       const response = await api.put("/SongBookMap", formData);
       alert("Settings applied with Success");
+      navigate("/praises-admin");
+      console.log(response);
     } catch (error) {
       alert("Something went wrong! Please, try again later!");
       console.log(error);
@@ -288,8 +291,8 @@ export default function PraiseSettings() {
           <Typography
             sx={title}
             id="modal-modal-title"
-            variant="h5"
-            component="h2"
+            variant="h4"
+            component="h1"
           >
             Praise Settings
           </Typography>
@@ -377,67 +380,64 @@ export default function PraiseSettings() {
           </Box>
           <br></br>
 
-          <Typography
-            sx={title}
-            id="modal-modal-title"
-            variant="h5"
-            component="h2"
-          >
-            English Data:
-          </Typography>
-          <Box sx={fieldsContainer}>
-            <TextField
-              sx={nameField}
-              fullWidth
-              value={englishTitle}
-              id="outlined-basic"
-              label="English Name"
-              variant="outlined"
-              onChange={handleChangeEnglishTitle}
-            />
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              English Data:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={englishTitle}
+                id="outlined-basic"
+                label="English Name"
+                variant="outlined"
+                onChange={handleChangeEnglishTitle}
+              />
 
-            <TextField
-              value={englishSongBookNumber}
-              id="outlined-basic"
-              label="Number"
-              variant="outlined"
-              onChange={handleChangeEnglishSongBookNumber}
-            />
-          </Box>
+              <TextField
+                value={englishSongBookNumber}
+                id="outlined-basic"
+                label="Number"
+                variant="outlined"
+                onChange={handleChangeEnglishSongBookNumber}
+              />
+            </Box>
+          </div>
           <br></br>
 
-          <Typography
-            sx={title}
-            id="modal-modal-title"
-            variant="h5"
-            component="h2"
-          >
-            Portuguese Data:
-          </Typography>
-          <Box sx={fieldsContainer}>
-            <TextField
-              sx={nameField}
-              fullWidth
-              value={portugueseTitle}
-              id="outlined-basic"
-              label="Portuguese Name"
-              variant="outlined"
-              onChange={handleChangePortugueseTitle}
-            />
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Portuguese Data:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={portugueseTitle}
+                id="outlined-basic"
+                label="Portuguese Name"
+                variant="outlined"
+                onChange={handleChangePortugueseTitle}
+              />
 
-            <TextField
-              value={portugueseSongBookNumber}
-              id="outlined-basic"
-              label="Number"
-              variant="outlined"
-              onChange={handleChangePortugueseSongBookNumber}
-            />
-          </Box>
+              <TextField
+                value={portugueseSongBookNumber}
+                id="outlined-basic"
+                label="Number"
+                variant="outlined"
+                onChange={handleChangePortugueseSongBookNumber}
+              />
+            </Box>
+          </div>
           <br></br>
 
           <div className="file-container">
             <div className="file-input">
-              <label>Lyrics Files: </label>
+              <label for="Lyrics">
+                <SlCloudUpload />
+                &nbsp;&nbsp;Lyrics Files:
+              </label>
               <input
                 type="file"
                 id="Lyrics"
@@ -446,23 +446,31 @@ export default function PraiseSettings() {
                 multiple
                 onChange={handleChangeLyricsFiles}
               />
-            </div>
-            <div className="images-container">
-              {previewLyricsImages.map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  className="image-file"
-                  alt={"praise"}
-                />
+              {lyricsFiles.map((image) => (
+                <span className="file-name">{image.name}</span>
               ))}
             </div>
+            {previewLyricsImages.length > 0 && (
+              <div className="images-container">
+                {previewLyricsImages.map((image, i) => (
+                  <img
+                    key={i}
+                    src={image}
+                    className="image-file"
+                    alt={"praise"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
           <br></br>
 
           <div className="file-container">
             <div className="file-input">
-              <label>Chords Files: </label>
+              <label for="Chords">
+                <SlCloudUpload />
+                &nbsp;&nbsp;Chords Files:
+              </label>
               <input
                 label="Chords"
                 type="file"
@@ -472,23 +480,31 @@ export default function PraiseSettings() {
                 multiple
                 onChange={handleChangeChordsFiles}
               />
-            </div>
-            <div className="images-container">
-              {previewChordsImages.map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  className="image-file"
-                  alt={"praise"}
-                />
+              {chordsFiles.map((image) => (
+                <span className="file-name">{image.name}</span>
               ))}
             </div>
+            {previewChordsImages.length > 0 && (
+              <div className="images-container">
+                {previewChordsImages.map((image, i) => (
+                  <img
+                    key={i}
+                    src={image}
+                    className="image-file"
+                    alt={"praise"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
           <br></br>
 
           <div className="file-container">
             <div className="file-input">
-              <label>Music Sheets Files: </label>
+              <label for="SheetMusic">
+                <SlCloudUpload />
+                &nbsp;&nbsp;Music Sheets Files:
+              </label>
               <input
                 type="file"
                 id="SheetMusic"
@@ -497,17 +513,22 @@ export default function PraiseSettings() {
                 multiple
                 onChange={handleChangeMusicSheetFiles}
               />
-            </div>
-            <div className="images-container">
-              {previewMusicSheetImages.map((image, i) => (
-                <img
-                  className="image-file"
-                  key={i}
-                  src={image}
-                  alt={"praise"}
-                />
+              {musicSheetFiles.map((image) => (
+                <span className="file-name">{image.name}</span>
               ))}
             </div>
+            {previewMusicSheetImages.length > 0 && (
+              <div className="images-container">
+                {previewMusicSheetImages.map((image, i) => (
+                  <img
+                    className="image-file"
+                    key={i}
+                    src={image}
+                    alt={"praise"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <Box sx={footerFilter}>
@@ -555,19 +576,6 @@ onChange={handleChangeOrder}
 </FormControl>
 </Box> */
 
-// <Button
-//           component="label"
-//           role={undefined}
-//           variant="contained"
-//           tabIndex={-1}
-//           onChange={handleChangeFiles}
-//           multiple
-//           startIcon={<CloudUploadIcon />}
-//         >
-//           Lyrics Files (SVG only)
-//           <VisuallyHiddenInput type="file" />
-//         </Button>
-
 // "songBookMapId": "string",
 // "containsInPortugueseSongBook": true,
 // "containsInCiasSongBook": true,
@@ -577,4 +585,4 @@ onChange={handleChangeOrder}
 // "portugueseSongBookNumber": "string",
 // "portugueseTitle": "string",
 // "englishSongBookNumber": "string",
-// "englishTile": "string"
+// "englishTitle": "string"
