@@ -38,12 +38,15 @@ export const Container = styled.div`
     margin-right: 10px;
   }
   .file-input > label {
-    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    background-color: #b71c1c;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
     margin: 10px;
     padding: 6px 20px;
+    font-size: 16px;
   }
 
   .images-container {
@@ -58,11 +61,21 @@ export const Container = styled.div`
     margin: 1px;
   }
 
+  .data-container {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 30px;
+  }
+  @media (max-width: 1024px) {
+    .image-file {
+      width: 48%;
+    }
+  }
+
   @media (max-width: 480px) {
     .image-file {
-      width: 100px;
+      width: 100%;
     }
-
     .file-input > label {
       margin-right: 5px;
     }

@@ -13,21 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { SlCloudUpload } from "react-icons/sl";
 import api from "../../../services/api";
 import Header from "../../../components/Header";
-// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-// import { styled } from "@mui/material/styles";
-// const VisuallyHiddenInput = styled("input")({
-//   clip: "rect(0 0 0 0)",
-//   clipPath: "inset(50%)",
-//   height: 1,
-//   overflow: "hidden",
-//   position: "absolute",
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: "nowrap",
-//   width: 1,
-// });
 
 const style = {
   display: "flex",
@@ -37,6 +25,7 @@ const style = {
   borderRadius: "10px",
   color: "black",
   p: 4,
+  marginTop: "20px",
   width: { xs: "100%", sm: "90%", lg: "70%" },
 };
 
@@ -302,8 +291,8 @@ export default function PraiseSettings() {
           <Typography
             sx={title}
             id="modal-modal-title"
-            variant="h5"
-            component="h2"
+            variant="h4"
+            component="h1"
           >
             Praise Settings
           </Typography>
@@ -391,67 +380,64 @@ export default function PraiseSettings() {
           </Box>
           <br></br>
 
-          <Typography
-            sx={title}
-            id="modal-modal-title"
-            variant="h5"
-            component="h2"
-          >
-            English Data:
-          </Typography>
-          <Box sx={fieldsContainer}>
-            <TextField
-              sx={nameField}
-              fullWidth
-              value={englishTitle}
-              id="outlined-basic"
-              label="English Name"
-              variant="outlined"
-              onChange={handleChangeEnglishTitle}
-            />
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              English Data:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={englishTitle}
+                id="outlined-basic"
+                label="English Name"
+                variant="outlined"
+                onChange={handleChangeEnglishTitle}
+              />
 
-            <TextField
-              value={englishSongBookNumber}
-              id="outlined-basic"
-              label="Number"
-              variant="outlined"
-              onChange={handleChangeEnglishSongBookNumber}
-            />
-          </Box>
+              <TextField
+                value={englishSongBookNumber}
+                id="outlined-basic"
+                label="Number"
+                variant="outlined"
+                onChange={handleChangeEnglishSongBookNumber}
+              />
+            </Box>
+          </div>
           <br></br>
 
-          <Typography
-            sx={title}
-            id="modal-modal-title"
-            variant="h5"
-            component="h2"
-          >
-            Portuguese Data:
-          </Typography>
-          <Box sx={fieldsContainer}>
-            <TextField
-              sx={nameField}
-              fullWidth
-              value={portugueseTitle}
-              id="outlined-basic"
-              label="Portuguese Name"
-              variant="outlined"
-              onChange={handleChangePortugueseTitle}
-            />
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Portuguese Data:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={portugueseTitle}
+                id="outlined-basic"
+                label="Portuguese Name"
+                variant="outlined"
+                onChange={handleChangePortugueseTitle}
+              />
 
-            <TextField
-              value={portugueseSongBookNumber}
-              id="outlined-basic"
-              label="Number"
-              variant="outlined"
-              onChange={handleChangePortugueseSongBookNumber}
-            />
-          </Box>
+              <TextField
+                value={portugueseSongBookNumber}
+                id="outlined-basic"
+                label="Number"
+                variant="outlined"
+                onChange={handleChangePortugueseSongBookNumber}
+              />
+            </Box>
+          </div>
           <br></br>
 
           <div className="file-container">
             <div className="file-input">
-              <label for="Lyrics">Lyrics Files: </label>
+              <label for="Lyrics">
+                <SlCloudUpload />
+                &nbsp;&nbsp;Lyrics Files:
+              </label>
               <input
                 type="file"
                 id="Lyrics"
@@ -464,22 +450,27 @@ export default function PraiseSettings() {
                 <span className="file-name">{image.name}</span>
               ))}
             </div>
-            <div className="images-container">
-              {previewLyricsImages.map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  className="image-file"
-                  alt={"praise"}
-                />
-              ))}
-            </div>
+            {previewLyricsImages.length > 0 && (
+              <div className="images-container">
+                {previewLyricsImages.map((image, i) => (
+                  <img
+                    key={i}
+                    src={image}
+                    className="image-file"
+                    alt={"praise"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
           <br></br>
 
           <div className="file-container">
             <div className="file-input">
-              <label for="Chords">Chords Files: </label>
+              <label for="Chords">
+                <SlCloudUpload />
+                &nbsp;&nbsp;Chords Files:
+              </label>
               <input
                 label="Chords"
                 type="file"
@@ -493,22 +484,27 @@ export default function PraiseSettings() {
                 <span className="file-name">{image.name}</span>
               ))}
             </div>
-            <div className="images-container">
-              {previewChordsImages.map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  className="image-file"
-                  alt={"praise"}
-                />
-              ))}
-            </div>
+            {previewChordsImages.length > 0 && (
+              <div className="images-container">
+                {previewChordsImages.map((image, i) => (
+                  <img
+                    key={i}
+                    src={image}
+                    className="image-file"
+                    alt={"praise"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
           <br></br>
 
           <div className="file-container">
             <div className="file-input">
-              <label for="SheetMusic">Music Sheets Files: </label>
+              <label for="SheetMusic">
+                <SlCloudUpload />
+                &nbsp;&nbsp;Music Sheets Files:
+              </label>
               <input
                 type="file"
                 id="SheetMusic"
@@ -521,16 +517,18 @@ export default function PraiseSettings() {
                 <span className="file-name">{image.name}</span>
               ))}
             </div>
-            <div className="images-container">
-              {previewMusicSheetImages.map((image, i) => (
-                <img
-                  className="image-file"
-                  key={i}
-                  src={image}
-                  alt={"praise"}
-                />
-              ))}
-            </div>
+            {previewMusicSheetImages.length > 0 && (
+              <div className="images-container">
+                {previewMusicSheetImages.map((image, i) => (
+                  <img
+                    className="image-file"
+                    key={i}
+                    src={image}
+                    alt={"praise"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <Box sx={footerFilter}>
@@ -577,19 +575,6 @@ onChange={handleChangeOrder}
   </Select>
 </FormControl>
 </Box> */
-
-// <Button
-//           component="label"
-//           role={undefined}
-//           variant="contained"
-//           tabIndex={-1}
-//           onChange={handleChangeFiles}
-//           multiple
-//           startIcon={<CloudUploadIcon />}
-//         >
-//           Lyrics Files (SVG only)
-//           <VisuallyHiddenInput type="file" />
-//         </Button>
 
 // "songBookMapId": "string",
 // "containsInPortugueseSongBook": true,
