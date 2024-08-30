@@ -46,24 +46,27 @@ const PraisesList = () => {
   }
   /*---------------------------------------------------- Filter -------------------------------------------------- */
   const handleFilter = (event) => {
-    let value = especialCharMask(event.target.value);
+    const value = especialCharMask(event.target.value);
+    const checkIfValueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
+    let filtered = [];
 
-    const filtered = louvores.filter(
-      (louvor) =>
-        especialCharMask(louvor.englishSongBookNumber)
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        especialCharMask(louvor.englishTitle)
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        louvor.portugueseSongBookNumber
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        especialCharMask(louvor.portugueseTitle)
-          .toLowerCase()
-          .includes(value.toString().toLowerCase())
-    );
+    if (checkIfValueIsNumber) {
+      filtered = louvores.filter(
+        (louvor) =>
+          especialCharMask(louvor.englishSongBookNumber) === value ||
+          especialCharMask(louvor.portugueseSongBookNumber) === value
+      );
+    } else {
+      filtered = louvores.filter(
+        (louvor) =>
+          especialCharMask(louvor.englishTitle)
+            .toLowerCase()
+            .includes(value.toString().toLowerCase()) ||
+          especialCharMask(louvor.portugueseTitle)
+            .toLowerCase()
+            .includes(value.toString().toLowerCase())
+      );
+    }
 
     if (!filtered.length) {
       setPraiseNotFound(true);
