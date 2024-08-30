@@ -1,10 +1,12 @@
-import { Container } from "./styles";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { SlCloudUpload } from "react-icons/sl";
+import { LuPlus } from "react-icons/lu";
+import api from "../../../services/api";
+import Header from "../../../components/Header";
+import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { red, grey } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -13,83 +15,17 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { SlCloudUpload } from "react-icons/sl";
-import api from "../../../services/api";
-import Header from "../../../components/Header";
-
-const style = {
-  display: "flex",
-  flexDirection: "column",
-  height: "auto",
-  bgcolor: "background.paper",
-  borderRadius: "10px",
-  color: "black",
-  p: 4,
-  marginTop: "20px",
-  width: { xs: "100%", sm: "90%", lg: "70%" },
-};
-
-const themeStyled = createTheme({
-  typography: {
-    fontFamily: [
-      "Nunito",
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-    ].join(","),
-  },
-
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 500,
-      md: 768,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
-
-const fieldsContainer = {
-  display: "flex",
-  justifyContent: "space-between",
-};
-
-const nameField = {
-  marginRight: "10px",
-};
-
-const checked = {
-  color: grey[600],
-  "&.Mui-checked": {
-    color: red[700],
-  },
-};
-
-const footerFilter = {
-  display: "flex",
-  justifyContent: "end",
-  marginTop: "30px",
-};
-
-const title = {
-  margin: "0 0 20px",
-  color: "grey.700",
-};
-
-const button = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "#fff",
-  borderRadius: "10px",
-  borderColor: "grey.800",
-  color: "grey.800",
-  textTransform: "none",
-  fontSize: "16px",
-  marginRight: "5px",
-};
+import {
+  Container,
+  themeStyled,
+  button,
+  style,
+  fieldsContainer,
+  title,
+  nameField,
+  checked,
+  footerFilter,
+} from "./styles";
 
 export default function PraiseSettings() {
   const navigate = useNavigate();
@@ -97,7 +33,6 @@ export default function PraiseSettings() {
   const [praiseId] = useState(location.state.praiseId);
 
   const { praiseData } = location.state;
-  // console.log("praise", praiseData);
 
   const [praiseTheme, setPraiseTheme] = useState(praiseData.theme.trim());
   const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState(
@@ -117,14 +52,11 @@ export default function PraiseSettings() {
     containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
   });
 
-  const [lyricsFiles, setLyricsFiles] = useState([]);
-  const [chordsFiles, setChordsFiles] = useState([]);
-  const [musicSheetFiles, setMusicSheetFiles] = useState([]);
-
-  const [allFiles, setAllFiles] = useState([]);
-  const [previewLyricsImages, setPreviewLyricsImages] = useState([]);
-  const [previewChordsImages, setPreviewChordsImages] = useState([]);
-  const [previewMusicSheetImages, setPreviewMusicSheetImages] = useState([]);
+  const [orderFile, setOrderFile] = useState(1);
+  const [typeFile, setTypeFile] = useState("");
+  const [fileData, setfileData] = useState([]);
+  const [filesSelected, setFilesSelected] = useState([]);
+  const [errorMessageFile, setErrorMessageFile] = useState("");
 
   const {
     containsInPortugueseSongBook,
@@ -139,6 +71,40 @@ export default function PraiseSettings() {
       [event.target.name]: event.target.checked,
     });
   };
+
+  const handleChangeOrderFileNumber = (event) => {
+    setOrderFile(event.target.value);
+  };
+
+  const handleChangeTypeFile = (event) => {
+    setTypeFile(event.target.value);
+  };
+
+  const handleChangeFileData = (event) => {
+    if (!event.target.files) return;
+    const selectedImages = Array.from(event.target.files);
+    setfileData(selectedImages);
+  };
+  {
+    /* ----------------------------------------------- ADD file ----------------------------------------------------- */
+  }
+  function addFile() {
+    if (fileData.length > 0 && typeFile && orderFile) {
+      let objFile = {
+        fileType: typeFile,
+        order: Number(orderFile),
+        file: fileData[0],
+        filePreview: URL.createObjectURL(fileData[0]),
+      };
+      setFilesSelected([...filesSelected, objFile]);
+      setErrorMessageFile("");
+      setTypeFile("");
+      setOrderFile(1);
+      setfileData([]);
+    } else {
+      setErrorMessageFile(`Please fill all information about the file!`);
+    }
+  }
 
   const handleChangePraiseTheme = (event) => {
     setPraiseTheme(event.target.value);
@@ -158,69 +124,6 @@ export default function PraiseSettings() {
 
   const handleChangeEnglishTitle = (event) => {
     setEnglishTitle(event.target.value);
-  };
-
-  function treatSelectedImages(selectedImages, id) {
-    let treatedSelectedImages = [];
-    for (let i = 0; i < selectedImages.length; i++) {
-      treatedSelectedImages.push({
-        fileType: id,
-        order: i,
-        file: selectedImages[i],
-      });
-    }
-    return treatedSelectedImages;
-  }
-
-  const handleChangeLyricsFiles = (event) => {
-    if (!event.target.files) return;
-
-    const selectedImages = Array.from(event.target.files);
-    const treatedSelectedImages = treatSelectedImages(
-      selectedImages,
-      event.target.id
-    );
-    setAllFiles([...allFiles, ...treatedSelectedImages]);
-    setLyricsFiles(selectedImages);
-
-    const selectedImagesPreview = selectedImages.map((image) => {
-      return URL.createObjectURL(image);
-    });
-    setPreviewLyricsImages(selectedImagesPreview);
-  };
-
-  const handleChangeChordsFiles = (event) => {
-    if (!event.target.files) return;
-
-    const selectedImages = Array.from(event.target.files);
-    const treatedSelectedImages = treatSelectedImages(
-      selectedImages,
-      event.target.id
-    );
-    setAllFiles([...allFiles, ...treatedSelectedImages]);
-    setChordsFiles(selectedImages);
-
-    const selectedImagesPreview = selectedImages.map((image) => {
-      return URL.createObjectURL(image);
-    });
-    setPreviewChordsImages(selectedImagesPreview);
-  };
-
-  const handleChangeMusicSheetFiles = (event) => {
-    if (!event.target.files) return;
-
-    const selectedImages = Array.from(event.target.files);
-    const treatedSelectedImages = treatSelectedImages(
-      selectedImages,
-      event.target.id
-    );
-    setAllFiles([...allFiles, ...treatedSelectedImages]);
-    setMusicSheetFiles(selectedImages);
-
-    const selectedImagesPreview = selectedImages.map((image) => {
-      return URL.createObjectURL(image);
-    });
-    setPreviewMusicSheetImages(selectedImagesPreview);
   };
 
   async function handleSubmit(event) {
@@ -247,8 +150,8 @@ export default function PraiseSettings() {
     formData.append("englishSongBookNumber", englishSongBookNumber);
     formData.append("englishTitle", englishTitle);
 
-    if (allFiles.length > 0) {
-      allFiles.forEach((file, index) => {
+    if (filesSelected.length > 0) {
+      filesSelected.forEach((file, index) => {
         formData.append(`files[${index}].fileType`, file.fileType);
         formData.append(`files[${index}].order`, file.order);
         formData.append(`files[${index}].file`, file.file);
@@ -256,21 +159,6 @@ export default function PraiseSettings() {
     } else {
       formData.append("files", null);
     }
-
-    // let form = {
-    //   songBookMapId: praiseId,
-    //   containsInPortugueseSongBook: checkeds.containsInPortugueseSongBook,
-    //   containsInCiasSongBook: checkeds.containsInCiasSongBook,
-    //   containsInSuplementareASongBook: checkeds.containsInSuplementareASongBook,
-    //   containsInSuplementareBSongBook: checkeds.containsInSuplementareBSongBook,
-    //   theme: praiseTheme,
-    //   portugueseSongBookNumber: portugueseSongBookNumber,
-    //   portugueseTitle: portugueseTitle,
-    //   englishSongBookNumber: englishSongBookNumber,
-    //   englishTitle: englishTitle,
-    //   files: allFiles,
-    // };
-    // console.log("form", form);
 
     try {
       const response = await api.put("/SongBookMap", formData);
@@ -432,109 +320,107 @@ export default function PraiseSettings() {
           </div>
           <br></br>
 
-          <div className="file-container">
-            <div className="file-input">
-              <label for="Lyrics">
-                <SlCloudUpload />
-                &nbsp;&nbsp;Lyrics Files:
-              </label>
-              <input
-                type="file"
-                id="Lyrics"
-                name="lyricsFiles"
-                accept="image/svg"
-                multiple
-                onChange={handleChangeLyricsFiles}
-              />
-              {lyricsFiles.map((image) => (
-                <span className="file-name">{image.name}</span>
-              ))}
-            </div>
-            {previewLyricsImages.length > 0 && (
-              <div className="images-container">
-                {previewLyricsImages.map((image, i) => (
-                  <img
-                    key={i}
-                    src={image}
-                    className="image-file"
-                    alt={"praise"}
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Files:
+            </Typography>
+            <div className="file-container">
+              <div className="file-inputs-content">
+                <div className="type-input">
+                  <Box sx={{ minWidth: 130 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Type
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={typeFile}
+                        label="Type"
+                        onChange={handleChangeTypeFile}
+                      >
+                        <MenuItem value={"Lyrics"}>Lyrics</MenuItem>
+                        <MenuItem value={"Chords"}>Chords</MenuItem>
+                        <MenuItem value={"SheetMusic"}>Music Sheet</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+
+                <div className="order-input">
+                  <TextField
+                    sx={{ minWidth: 165 }}
+                    value={orderFile}
+                    id="outlined-basic"
+                    label="Order to display the file"
+                    variant="outlined"
+                    type="number"
+                    InputProps={{ inputProps: { min: 1, max: 10 } }}
+                    onChange={handleChangeOrderFileNumber}
                   />
-                ))}
+                </div>
+
+                <div className="file-data-input">
+                  <label htmlFor="fileData">
+                    <SlCloudUpload />
+                    &nbsp;&nbsp;File:
+                  </label>
+                  <input
+                    type="file"
+                    id="fileData"
+                    name="fileData"
+                    accept="image/svg"
+                    onChange={handleChangeFileData}
+                  />
+                  {fileData.length > 0 && (
+                    <span className="file-name">{fileData[0].name}</span>
+                  )}
+                </div>
               </div>
+
+              <div onClick={addFile} className="plus-button">
+                <LuPlus size={30} color={"#fff"} />
+              </div>
+            </div>
+            {errorMessageFile !== "" && (
+              <p className="text-error">{errorMessageFile}</p>
             )}
           </div>
           <br></br>
-
-          <div className="file-container">
-            <div className="file-input">
-              <label for="Chords">
-                <SlCloudUpload />
-                &nbsp;&nbsp;Chords Files:
-              </label>
-              <input
-                label="Chords"
-                type="file"
-                id="Chords"
-                name="chordsFiles"
-                accept="image/svg"
-                multiple
-                onChange={handleChangeChordsFiles}
-              />
-              {chordsFiles.map((image) => (
-                <span className="file-name">{image.name}</span>
-              ))}
-            </div>
-            {previewChordsImages.length > 0 && (
-              <div className="images-container">
-                {previewChordsImages.map((image, i) => (
-                  <img
-                    key={i}
-                    src={image}
-                    className="image-file"
-                    alt={"praise"}
-                  />
+          {/* ----------------------------------------------- TABLE ---------------------------------------------- */}
+          {filesSelected.length > 0 && (
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Order</th>
+                  <th>File Name</th>
+                  <th>Image Preview</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filesSelected.map((file, i) => (
+                  <tr key={i}>
+                    <td>{file.fileType}</td>
+                    <td>{file.order}</td>
+                    <td>{file.file.name}</td>
+                    <td>
+                      <img
+                        src={file.filePreview}
+                        className="image-file"
+                        alt={"praise"}
+                      />
+                    </td>
+                  </tr>
                 ))}
-              </div>
-            )}
-          </div>
-          <br></br>
-
-          <div className="file-container">
-            <div className="file-input">
-              <label for="SheetMusic">
-                <SlCloudUpload />
-                &nbsp;&nbsp;Music Sheets Files:
-              </label>
-              <input
-                type="file"
-                id="SheetMusic"
-                name="sheetMusicFiles"
-                accept="image/svg"
-                multiple
-                onChange={handleChangeMusicSheetFiles}
-              />
-              {musicSheetFiles.map((image) => (
-                <span className="file-name">{image.name}</span>
-              ))}
-            </div>
-            {previewMusicSheetImages.length > 0 && (
-              <div className="images-container">
-                {previewMusicSheetImages.map((image, i) => (
-                  <img
-                    className="image-file"
-                    key={i}
-                    src={image}
-                    alt={"praise"}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+              </tbody>
+            </table>
+          )}
 
           <Box sx={footerFilter}>
             <Button
               variant="outlined"
-              size="small"
+              size="medium"
               type="submit"
               color="error"
               onClick={handleSubmit}
@@ -548,41 +434,3 @@ export default function PraiseSettings() {
     </Container>
   );
 }
-
-/* <TextField
-value={order}
-id="outlined-basic"
-label="Order"
-variant="outlined"
-type="number"
-onChange={handleChangeOrder}
-/>
-<br></br>
-
-<Box sx={{ minWidth: 120 }}>
-<FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Type</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={typeOfFile}
-    label="Type"
-    onChange={handleChangeTypeOfFile}
-  >
-    <MenuItem value={"Lyrics"}>Lyrics</MenuItem>
-    <MenuItem value={"Chords"}>Chords</MenuItem>
-    <MenuItem value={"SheetMusic"}>Music Sheet</MenuItem>
-  </Select>
-</FormControl>
-</Box> */
-
-// "songBookMapId": "string",
-// "containsInPortugueseSongBook": true,
-// "containsInCiasSongBook": true,
-// "containsInSuplementareASongBook": true,
-// "containsInSuplementareBSongBook": true,
-// "theme": "string",
-// "portugueseSongBookNumber": "string",
-// "portugueseTitle": "string",
-// "englishSongBookNumber": "string",
-// "englishTitle": "string"
