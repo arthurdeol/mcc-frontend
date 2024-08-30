@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
 import { LuPlus } from "react-icons/lu";
@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import TableFiles from "../../../components/TableFiles";
 import {
   Container,
   themeStyled,
@@ -388,34 +389,10 @@ export default function PraiseSettings() {
           </div>
           <br></br>
           {/* ----------------------------------------------- TABLE ---------------------------------------------- */}
-          {filesSelected.length > 0 && (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Order</th>
-                  <th>File Name</th>
-                  <th>Image Preview</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filesSelected.map((file, i) => (
-                  <tr key={i}>
-                    <td>{file.fileType}</td>
-                    <td>{file.order}</td>
-                    <td>{file.file.name}</td>
-                    <td>
-                      <img
-                        src={file.filePreview}
-                        className="image-file"
-                        alt={"praise"}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <TableFiles
+            filesSelected={filesSelected}
+            setFilesSelected={setFilesSelected}
+          />
 
           <Box sx={footerFilter}>
             <Button

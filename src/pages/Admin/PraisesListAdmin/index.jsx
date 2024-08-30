@@ -11,7 +11,7 @@ import {
 } from "react-icons/lu";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import BasicModal from "../../../components/Modal";
+import FilterModal from "../../../components/FilterModal";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
@@ -154,7 +154,7 @@ const PraisesListAdmin = () => {
             </div>
           </div>
 
-          <BasicModal
+          <FilterModal
             openModal={openModal}
             onCloseModal={handleClose}
             setComplexFilter={setComplexFilter}
