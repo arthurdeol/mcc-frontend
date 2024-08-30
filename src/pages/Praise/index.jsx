@@ -32,25 +32,17 @@ export default function Praise() {
     let arrayOfFile = [];
 
     if (activeTab === "LuType") {
-      louvor.lyricsPdf.map(
-        (item, i) => arrayOfFile.unshift(setUrl(item)),
-        setFileArray(arrayOfFile)
-      );
+      louvor.lyricsPdf.map((item) => arrayOfFile.push(setUrl(item)));
+      setFileArray(arrayOfFile);
     } else if (activeTab === "LuListMusic") {
-      louvor.chordsPdf.map(
-        (item, i) => arrayOfFile.unshift(setUrl(item)),
-        setFileArray(arrayOfFile)
-      );
+      louvor.chordsPdf.map((item) => arrayOfFile.push(setUrl(item)));
+      setFileArray(arrayOfFile);
     } else if (activeTab === "LuMusic") {
-      louvor.sheetMusicPdf.map(
-        (item, i) => arrayOfFile.unshift(setUrl(item)),
-        setFileArray(arrayOfFile)
-      );
+      louvor.sheetMusicPdf.map((item) => arrayOfFile.push(setUrl(item)));
+      setFileArray(arrayOfFile);
     } else if (activeTab === "LuVolume1") {
-      louvor.audioFile.map(
-        (item, i) => arrayOfFile.unshift(setUrl(item)),
-        setFileArray(arrayOfFile)
-      );
+      louvor.audioFile.map((item) => arrayOfFile.push(setUrl(item)));
+      setFileArray(arrayOfFile);
     }
   }
   const setUrl = (file) =>
