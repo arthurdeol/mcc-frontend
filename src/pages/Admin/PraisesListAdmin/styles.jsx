@@ -8,13 +8,20 @@ export const Container = styled.div`
     width: 100vw;
   }
 
+  h1 {
+    margin-top: 50px;
+    width: 90%;
+    text-align: left;
+    color: #808080;
+    font-weight: 600;
+  }
+
   .box {
     display: flex;
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    font-size: 1rem;
     margin: 1% 5% 0 5%;
     width: 80%;
   }
@@ -72,11 +79,6 @@ export const Container = styled.div`
     display: flex;
     margin-bottom: 10px;
     justify-content: space-between;
-  }
-
-  .adminTitle {
-    color: black;
-    margin-top: 50px;
   }
 
   .praise-title-en {

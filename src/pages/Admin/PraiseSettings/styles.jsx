@@ -7,8 +7,9 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  .text {
-    color: black;
+  h1 {
+    color: #808080;
+    font-weight: 600;
   }
 
   .text-error {
@@ -94,19 +95,6 @@ export const Container = styled.div`
     padding: 30px;
   }
 
-  .plus-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #b71c1c;
-    min-width: 50px;
-    height: 50px;
-    border: 1px solid #eeeeee;
-    border-radius: 100%;
-    padding: 5px;
-    cursor: pointer;
-  }
-
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;
@@ -155,6 +143,41 @@ export const Container = styled.div`
   }
 `;
 
+export const ButtonStyled = styled.button`
+  border: 1px solid #acacac;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 10px;
+
+  &:hover {
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+  }
+`;
+
+export const FooterFilter = styled.div`
+  display: flex;
+  justify-content: end;
+  margin: 30px 0;
+`;
+
+export const PlusButton = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b71c1c;
+    min-width: 50px;
+    height: 50px;
+    border: 1px solid #eeeeee;
+    border-radius: 100%;
+    padding: 5px;
+    cursor: pointer;
+  }
+`;
+
 export const themeStyled = createTheme({
   typography: {
     fontFamily: [
@@ -189,19 +212,6 @@ export const style = {
   width: { xs: "100%", sm: "90%", lg: "70%" },
 };
 
-export const button = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "#fff",
-  borderRadius: "10px",
-  borderColor: "grey.800",
-  color: "grey.800",
-  textTransform: "none",
-  fontSize: "16px",
-  marginRight: "5px",
-};
-
 export const fieldsContainer = {
   display: "flex",
   justifyContent: "space-between",
@@ -216,12 +226,6 @@ export const checked = {
   "&.Mui-checked": {
     color: red[700],
   },
-};
-
-export const footerFilter = {
-  display: "flex",
-  justifyContent: "end",
-  marginTop: "30px",
 };
 
 export const title = {

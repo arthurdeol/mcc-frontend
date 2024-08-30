@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
 import { LuPlus } from "react-icons/lu";
@@ -7,7 +7,6 @@ import Header from "../../../components/Header";
 import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -19,13 +18,14 @@ import TableFiles from "../../../components/TableFiles";
 import {
   Container,
   themeStyled,
-  button,
   style,
   fieldsContainer,
   title,
   nameField,
   checked,
-  footerFilter,
+  ButtonStyled,
+  PlusButton,
+  FooterFilter,
 } from "./styles";
 
 export default function PraiseSettings() {
@@ -86,9 +86,7 @@ export default function PraiseSettings() {
     const selectedImages = Array.from(event.target.files);
     setfileData(selectedImages);
   };
-  {
-    /* ----------------------------------------------- ADD file ----------------------------------------------------- */
-  }
+
   function addFile() {
     if (fileData.length > 0 && typeFile && orderFile) {
       let objFile = {
@@ -177,14 +175,7 @@ export default function PraiseSettings() {
       <Header />
       <ThemeProvider theme={themeStyled}>
         <Box sx={style}>
-          <Typography
-            sx={title}
-            id="modal-modal-title"
-            variant="h4"
-            component="h1"
-          >
-            Praise Settings
-          </Typography>
+          <h1> Praise Settings</h1>
           <br></br>
 
           <FormControlLabel
@@ -234,10 +225,10 @@ export default function PraiseSettings() {
           <br></br>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Theme</InputLabel>
+              <InputLabel id="simple-select-label">Theme</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="simple-select-label"
+                id="simple-select"
                 value={praiseTheme}
                 label="Theme"
                 onChange={handleChangePraiseTheme}
@@ -379,33 +370,26 @@ export default function PraiseSettings() {
                 </div>
               </div>
 
-              <div onClick={addFile} className="plus-button">
+              <PlusButton onClick={addFile}>
                 <LuPlus size={30} color={"#fff"} />
-              </div>
+              </PlusButton>
             </div>
             {errorMessageFile !== "" && (
               <p className="text-error">{errorMessageFile}</p>
             )}
           </div>
           <br></br>
-          {/* ----------------------------------------------- TABLE ---------------------------------------------- */}
+
           <TableFiles
             filesSelected={filesSelected}
             setFilesSelected={setFilesSelected}
           />
 
-          <Box sx={footerFilter}>
-            <Button
-              variant="outlined"
-              size="medium"
-              type="submit"
-              color="error"
-              onClick={handleSubmit}
-              sx={button}
-            >
+          <FooterFilter>
+            <ButtonStyled type="submit" onClick={handleSubmit}>
               Apply Settings
-            </Button>
-          </Box>
+            </ButtonStyled>
+          </FooterFilter>
         </Box>
       </ThemeProvider>
     </Container>

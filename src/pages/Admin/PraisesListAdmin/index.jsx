@@ -2,13 +2,8 @@ import { Container, ErrorPage } from "./styles";
 import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  LuType,
-  LuListMusic,
-  LuMusic,
-  LuSettings2,
-  LuSettings,
-} from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
+import { BiEditAlt } from "react-icons/bi";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import FilterModal from "../../../components/FilterModal";
@@ -140,7 +135,7 @@ const PraisesListAdmin = () => {
       <Header />
       <div className="main-container">
         <div className="box">
-          <h1 className="adminTitle">Admin - Praises</h1>
+          <h1>Admin - Praises</h1>
           <div className="search-container">
             <input
               type="text"
@@ -227,18 +222,16 @@ const PraisesListAdmin = () => {
                           )}
                         </div>
 
-                        {louvor.englishTitle && (
-                          <Link
-                            to={"/praise-settings"}
-                            className="icon-container"
-                            state={{
-                              praiseId: louvor.songBookMapId,
-                              praiseData: louvor,
-                            }}
-                          >
-                            <LuSettings color={"black"} size={20} />
-                          </Link>
-                        )}
+                        <Link
+                          to={"/praise-settings"}
+                          className="icon-container"
+                          state={{
+                            praiseId: louvor.songBookMapId,
+                            praiseData: louvor,
+                          }}
+                        >
+                          <BiEditAlt color={"black"} size={22} />
+                        </Link>
                       </div>
 
                       <div className="footer">
