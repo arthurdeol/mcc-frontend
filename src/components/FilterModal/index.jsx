@@ -4,93 +4,21 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
-import { red, grey } from "@mui/material/colors";
 import { useState } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import {
+  style,
+  title,
+  checked,
+  themeTitle,
+  theme,
+  footerFilter,
+  ButtonStyled,
+  XClose,
+} from "./styles";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  height: "auto",
-  bgcolor: "background.paper",
-  border: "1px solid #ededed",
-  borderRadius: "10px",
-  boxShadow: 24,
-  color: "black",
-  p: 4,
-  width: { xs: "90%", sm: "70%", md: "50%", lg: "auto" },
-};
-
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      "Nunito",
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-    ].join(","),
-  },
-
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 500,
-      md: 768,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
-
-const xClose = {
-  position: "absolute",
-  top: 25,
-  right: 20,
-};
-
-const footerFilter = {
-  display: "flex",
-  justifyContent: "end",
-  marginTop: "10px",
-};
-
-const checked = {
-  color: grey[600],
-  "&.Mui-checked": {
-    color: red[700],
-  },
-};
-
-const themeTitle = {
-  margin: "10px 0 8px",
-  color: "grey.700",
-  fontSize: "16px",
-};
-
-const title = {
-  margin: "0 0 20px",
-  color: "grey.700",
-};
-
-const button = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "#fff",
-  borderRadius: "10px",
-  borderColor: "grey.800",
-  color: "grey.800",
-  textTransform: "none",
-  fontSize: "16px",
-  marginRight: "5px",
-};
-
-export default function BasicModal({
+export default function FilterModal({
   openModal,
   onCloseModal,
   setComplexFilter,
@@ -186,15 +114,11 @@ export default function BasicModal({
 
   return (
     <ThemeProvider theme={theme}>
-      <Modal
-        open={openModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={openModal}>
         <Box sx={style}>
-          <Box sx={xClose} onClick={onCloseModal}>
+          <XClose onClick={onCloseModal}>
             <LuX />
-          </Box>
+          </XClose>
 
           <Typography
             sx={title}
@@ -333,26 +257,8 @@ export default function BasicModal({
               label="Choruses"
             />
             <Box sx={footerFilter}>
-              <Button
-                variant="outlined"
-                type="button"
-                size="small"
-                color="error"
-                onClick={cleanFilter}
-                sx={button}
-              >
-                Unselect
-              </Button>
-              <Button
-                variant="outlined"
-                size="small"
-                type="submit"
-                color="error"
-                onClick={applyFilter}
-                sx={button}
-              >
-                Apply filter
-              </Button>
+              <ButtonStyled onClick={cleanFilter}>Unselect</ButtonStyled>
+              <ButtonStyled onClick={applyFilter}>Apply filter</ButtonStyled>
             </Box>
           </FormGroup>
         </Box>

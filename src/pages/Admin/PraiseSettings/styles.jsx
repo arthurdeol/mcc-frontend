@@ -107,23 +107,6 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
-  .table {
-    border: 1px solid #c4c4c4;
-    border-radius: 5px;
-  }
-
-  thead {
-    border-bottom: 1px solid rgb(160 160 160);
-    text-align: center;
-    background-color: #b71c1c;
-    color: #fff;
-  }
-
-  tbody {
-    text-align: center;
-    background-color: #f2f2f2;
-  }
-
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;

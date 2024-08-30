@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import BasicModal from "../../components/Modal";
+import FilterModal from "../../components/FilterModal";
 
 const PraisesList = () => {
   const [louvores, setLouvores] = useState([]);
@@ -147,7 +147,7 @@ const PraisesList = () => {
             </div>
           </div>
 
-          <BasicModal
+          <FilterModal
             openModal={openModal}
             onCloseModal={handleClose}
             setComplexFilter={setComplexFilter}
