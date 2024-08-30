@@ -42,9 +42,9 @@ const PraisesList = () => {
   }
 
   function especialCharMask(especialChar) {
-    return especialChar.normalize("NFD").replace(/[^a-zA-Z1-9\s]/g, "");
+    return especialChar.normalize("NFD").replace(/[^a-zA-Z0-9\s]/g, "");
   }
-
+  /*---------------------------------------------------- Filter -------------------------------------------------- */
   const handleFilter = (event) => {
     let value = especialCharMask(event.target.value);
 
