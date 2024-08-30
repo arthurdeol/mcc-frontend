@@ -8,7 +8,6 @@ export const Container = styled.div`
   }
 
   .title {
-    color: black;
     margin-bottom: 30px;
   }
 `;

@@ -35,7 +35,6 @@ export const Container = styled.div`
   }
 
   .file-name {
-    color: black;
     font-size: 14px;
     margin-right: 20px;
   }
