@@ -1,4 +1,4 @@
-import { Container, ErrorPage } from "./styles";
+import { Container } from "./styles";
 import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -6,7 +6,9 @@ import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
 import { BiEditAlt } from "react-icons/bi";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import FilterModal from "../../../components/FilterModal";
+import MainFilter from "../../../components/MainFilter";
+import PraiseNotFound from "../../../components/PraiseNotFound";
+import ErrorDisplay from "../../../components/ErrorDisplay";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
@@ -16,10 +18,6 @@ const PraisesListAdmin = () => {
   const [displayError, setDisplayError] = useState(false);
   const [praiseNotFound, setPraiseNotFound] = useState(false);
   const url = "https://mccapi.up.railway.app/SongBookMap";
-
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -40,76 +38,6 @@ const PraisesListAdmin = () => {
     }
 
     return ax.length - bx.length;
-  }
-
-  function especialCharMask(especialChar) {
-    return especialChar.normalize("NFD").replace(/[^a-zA-Z1-9\s]/g, "");
-  }
-
-  const handleFilter = (event) => {
-    let value = especialCharMask(event.target.value);
-
-    const filtered = louvores.filter(
-      (louvor) =>
-        especialCharMask(louvor.englishSongBookNumber)
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        especialCharMask(louvor.englishTitle)
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        louvor.portugueseSongBookNumber
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        especialCharMask(louvor.portugueseTitle)
-          .toLowerCase()
-          .includes(value.toString().toLowerCase())
-    );
-
-    if (!filtered.length) {
-      setPraiseNotFound(true);
-    } else {
-      setPraiseNotFound(false);
-    }
-
-    if (value === "") setFilteredLouvores(louvores);
-    else setFilteredLouvores(filtered);
-  };
-
-  function setComplexFilter(formValue, themesApplied) {
-    let filteredPraises = [];
-
-    if (formValue.containsInCiasSongBook) {
-      if (formValue.containsInCiasSongBook && themesApplied.length > 0) {
-        for (let i = 0; i < louvores.length; i++) {
-          for (let j = 0; j < themesApplied.length; j++) {
-            if (
-              louvores[i].theme === themesApplied[j] &&
-              louvores[i].containsInCiasSongBook
-            ) {
-              filteredPraises.push(louvores[i]);
-            }
-          }
-        }
-      } else {
-        filteredPraises = louvores.filter(
-          (louvor) => louvor.containsInCiasSongBook
-        );
-      }
-    } else {
-      for (let i = 0; i < louvores.length; i++) {
-        for (let j = 0; j < themesApplied.length; j++) {
-          if (louvores[i].theme === themesApplied[j]) {
-            filteredPraises.push(louvores[i]);
-          }
-        }
-      }
-    }
-    if (filteredPraises.length < 1) {
-      filteredPraises = louvores;
-    }
-    setComplexFilterApplied(true);
-    setFilteredLouvores(filteredPraises);
   }
 
   useEffect(() => {
@@ -136,57 +64,18 @@ const PraisesListAdmin = () => {
       <div className="main-container">
         <div className="box">
           <h1>Admin - Praises</h1>
-          <div className="search-container">
-            <input
-              type="text"
-              id="filter"
-              onChange={handleFilter}
-              className="filter"
-              placeholder="Which praise song are you looking for?"
-            />
-            <div className="filter-button" onClick={handleOpen}>
-              <LuSettings2 color={"black"} size={17} />
-            </div>
-          </div>
-
-          <FilterModal
-            openModal={openModal}
-            onCloseModal={handleClose}
-            setComplexFilter={setComplexFilter}
+          <MainFilter
+            louvores={louvores}
+            setPraiseNotFound={setPraiseNotFound}
+            setFilteredLouvores={setFilteredLouvores}
+            setComplexFilterApplied={setComplexFilterApplied}
           />
 
-          {displayError && (
-            <ErrorPage>
-              <img
-                className="musical-note-error-page"
-                src="/images/music-not-found.png"
-                alt="musical note error"
-              />
-              <p className="text-error-page">
-                Sorry,
-                <br /> we had a problem to show this content.
-                <br /> Please try again later!
-              </p>
-            </ErrorPage>
-          )}
+          {displayError && <ErrorDisplay />}
 
           {!displayError && (
             <>
-              {praiseNotFound && (
-                <ErrorPage>
-                  <img
-                    className="img-praise-not-found"
-                    src="/images/music-not-found.png"
-                    alt="musical note error"
-                  />
-                  <p className="text-error-page">
-                    Sorry...
-                    <br />
-                    The praise song that you are looking for does not exists in
-                    our data base!
-                  </p>
-                </ErrorPage>
-              )}
+              {praiseNotFound && <PraiseNotFound />}
 
               {filteredLouvores.length < 1 &&
               displayError === false &&
