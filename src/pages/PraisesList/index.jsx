@@ -46,12 +46,21 @@ const PraisesList = () => {
         .then((data) => {
           data.sort((a, b) => {
             return naturalCompare(
-              a.portugueseSongBookNumber,
-              b.portugueseSongBookNumber
+              a.englishSongBookNumber,
+              b.englishSongBookNumber
             );
           });
           setLouvores(data);
-          setFilteredLouvores(data);
+          let filteredEnSongWithNumber = data.filter(
+            (praise) => praise.englishTitle && praise.englishSongBookNumber
+          );
+          let filteredEnSongWithoutNumber = data.filter(
+            (praise) => praise.englishTitle && !praise.englishSongBookNumber
+          );
+          setFilteredLouvores([
+            ...filteredEnSongWithNumber,
+            ...filteredEnSongWithoutNumber,
+          ]);
         })
         .catch((err) => setDisplayError(true));
     }
