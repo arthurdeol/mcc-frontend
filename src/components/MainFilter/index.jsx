@@ -18,7 +18,8 @@ export default function MainFilter({
   }
 
   const handleFilter = (event) => {
-    const value = especialCharMask(event.target.value);
+    let eventValue = event.target.value;
+    const value = especialCharMask(eventValue);
     const checkIfValueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
     let filtered = [];
 
@@ -29,15 +30,57 @@ export default function MainFilter({
           especialCharMask(louvor.portugueseSongBookNumber) === value
       );
     } else {
-      filtered = louvores.filter(
-        (louvor) =>
-          especialCharMask(louvor.englishTitle)
-            .toLowerCase()
-            .includes(value.toString().toLowerCase()) ||
-          especialCharMask(louvor.portugueseTitle)
-            .toLowerCase()
-            .includes(value.toString().toLowerCase())
+      const valueSubstring = eventValue.toString().substring(2, 0);
+      const valueMaskSubstring = especialCharMask(
+        value.toString().toLowerCase().substring(2, 0)
       );
+      if (
+        valueSubstring === "A-" ||
+        valueSubstring === "a-" ||
+        valueSubstring === "B-" ||
+        valueSubstring === "b-"
+      ) {
+        filtered = louvores.filter((louvor) =>
+          louvor.englishSongBookNumber
+            .toLowerCase()
+            .includes(eventValue.toString().toLowerCase())
+        );
+      } else if (
+        valueMaskSubstring === "a1" ||
+        valueMaskSubstring === "a2" ||
+        valueMaskSubstring === "a3" ||
+        valueMaskSubstring === "a4" ||
+        valueMaskSubstring === "a5" ||
+        valueMaskSubstring === "a6" ||
+        valueMaskSubstring === "a7" ||
+        valueMaskSubstring === "a8" ||
+        valueMaskSubstring === "a9" ||
+        valueMaskSubstring === "b1" ||
+        valueMaskSubstring === "b2" ||
+        valueMaskSubstring === "b3" ||
+        valueMaskSubstring === "b4" ||
+        valueMaskSubstring === "b5" ||
+        valueMaskSubstring === "b6" ||
+        valueMaskSubstring === "b7" ||
+        valueMaskSubstring === "b8" ||
+        valueMaskSubstring === "b9"
+      ) {
+        filtered = louvores.filter((louvor) =>
+          especialCharMask(louvor.englishSongBookNumber)
+            .toLowerCase()
+            .includes(eventValue.toString().toLowerCase())
+        );
+      } else {
+        filtered = louvores.filter(
+          (louvor) =>
+            especialCharMask(louvor.englishTitle)
+              .toLowerCase()
+              .includes(value.toString().toLowerCase()) ||
+            especialCharMask(louvor.portugueseTitle)
+              .toLowerCase()
+              .includes(value.toString().toLowerCase())
+        );
+      }
     }
 
     if (!filtered.length) {
@@ -46,8 +89,18 @@ export default function MainFilter({
       setPraiseNotFound(false);
     }
 
-    if (value === "") setFilteredLouvores(louvores);
-    else setFilteredLouvores(filtered);
+    if (value === "") {
+      let filteredEnSongWithNumber = louvores.filter(
+        (praise) => praise.englishTitle && praise.englishSongBookNumber
+      );
+      let filteredEnSongWithoutNumber = louvores.filter(
+        (praise) => praise.englishTitle && !praise.englishSongBookNumber
+      );
+      setFilteredLouvores([
+        ...filteredEnSongWithNumber,
+        ...filteredEnSongWithoutNumber,
+      ]);
+    } else setFilteredLouvores(filtered);
   };
 
   function setComplexFilter(formValue, themesApplied) {
