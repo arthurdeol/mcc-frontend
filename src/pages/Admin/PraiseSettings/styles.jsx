@@ -83,7 +83,7 @@ export const Container = styled.div`
   }
 
   .image-file {
-    width: 300px;
+    width: 350px;
     border: 1px solid #eeeeee;
     margin: 1px;
   }
@@ -150,6 +150,7 @@ export const ButtonStyled = styled.button`
   font-size: 1rem;
   cursor: pointer;
   margin-right: 10px;
+  color: #000;
 
   &:hover {
     border: 1px solid #b71c1c;
