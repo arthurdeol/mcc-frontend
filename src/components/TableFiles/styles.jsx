@@ -21,6 +21,8 @@ export const Container = styled.div`
   }
 
   .table {
+    font-size: 1rem;
+    width: 100%;
     border: 1px solid #c4c4c4;
     border-radius: 5px;
   }
@@ -32,6 +34,11 @@ export const Container = styled.div`
     color: #fff;
   }
 
+  th,
+  td {
+    padding: 0 10px;
+  }
+
   tbody {
     text-align: center;
     background-color: #f2f2f2;
@@ -39,5 +46,12 @@ export const Container = styled.div`
 
   tr {
     position: relative;
+  }
+
+  @media (max-width: 480px) {
+    th,
+    td {
+      padding: 0 4px;
+    }
   }
 `;
