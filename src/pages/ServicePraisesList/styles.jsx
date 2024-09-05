@@ -17,14 +17,7 @@ export const Container = styled.div`
     font-size: 1rem;
     margin: 1% 5% 0 5%;
     width: 80%;
-  }
-
-  .progress-container {
-    display: flex;
-    padding-top: 15%;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
+    padding: 20px;
   }
 
   .praises-container {
@@ -207,9 +200,20 @@ export const Container = styled.div`
   }
 `;
 
-export const HeartButton = styled.div`
+export const XClose = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #eeeeee;
   top: 10px;
   right: 15px;
   cursor: pointer;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px;
+
+  &:hover {
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+  }
 `;
