@@ -20,26 +20,26 @@ export default function MainFilter({
   const handleFilter = (event) => {
     let eventValue = event.target.value;
     const value = especialCharMask(eventValue);
-    const checkIfValueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
+    const valueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
     let filtered = [];
 
-    if (checkIfValueIsNumber) {
+    if (valueIsNumber) {
       filtered = louvores.filter(
         (louvor) =>
           especialCharMask(louvor.englishSongBookNumber) === value ||
+          louvor.englishSongBookNumber === "B-" + value ||
+          louvor.englishSongBookNumber === "A-" + value ||
           especialCharMask(louvor.portugueseSongBookNumber) === value
       );
     } else {
-      const valueSubstring = eventValue.toString().substring(2, 0);
+      const valueSubstring = eventValue
+        .toString()
+        .toLowerCase()
+        .substring(2, 0);
       const valueMaskSubstring = especialCharMask(
         value.toString().toLowerCase().substring(2, 0)
       );
-      if (
-        valueSubstring === "A-" ||
-        valueSubstring === "a-" ||
-        valueSubstring === "B-" ||
-        valueSubstring === "b-"
-      ) {
+      if (valueSubstring === "a-" || valueSubstring === "b-") {
         filtered = louvores.filter((louvor) =>
           louvor.englishSongBookNumber
             .toLowerCase()
@@ -65,10 +65,10 @@ export default function MainFilter({
         valueMaskSubstring === "b8" ||
         valueMaskSubstring === "b9"
       ) {
-        filtered = louvores.filter((louvor) =>
-          especialCharMask(louvor.englishSongBookNumber)
-            .toLowerCase()
-            .includes(eventValue.toString().toLowerCase())
+        filtered = louvores.filter(
+          (louvor) =>
+            especialCharMask(louvor.englishSongBookNumber).toLowerCase() ===
+            eventValue.toString().toLowerCase()
         );
       } else {
         filtered = louvores.filter(
@@ -100,11 +100,26 @@ export default function MainFilter({
         ...filteredEnSongWithNumber,
         ...filteredEnSongWithoutNumber,
       ]);
-    } else setFilteredLouvores(filtered);
+    } else {
+      let filteredEnPraisesWithNumber = filtered.filter(
+        (praise) => praise.englishTitle && praise.englishSongBookNumber
+      );
+      let filteredEnSongWithoutNumber = filtered.filter(
+        (praise) => praise.englishTitle && !praise.englishSongBookNumber
+      );
+      let filteredPtPraises = filtered.filter((praise) => !praise.englishTitle);
+      setFilteredLouvores([
+        ...filteredEnPraisesWithNumber,
+        ...filteredEnSongWithoutNumber,
+        ...filteredPtPraises,
+      ]);
+    }
   };
 
   function setComplexFilter(formValue, themesApplied) {
     let filteredPraises = [];
+    let order1 = [];
+    let order2 = [];
 
     if (formValue.containsInCiasSongBook) {
       if (formValue.containsInCiasSongBook && themesApplied.length > 0) {
@@ -112,31 +127,48 @@ export default function MainFilter({
           for (let j = 0; j < themesApplied.length; j++) {
             if (
               louvores[i].theme === themesApplied[j] &&
-              louvores[i].containsInCiasSongBook
+              louvores[i].containsInCiasSongBook &&
+              louvores[i].englishTitle
             ) {
-              filteredPraises.push(louvores[i]);
+              louvores[i].englishSongBookNumber
+                ? order1.push(louvores[i])
+                : order2.push(louvores[i]);
             }
           }
         }
+        filteredPraises = [...order1, ...order2];
       } else {
-        filteredPraises = louvores.filter(
-          (louvor) => louvor.containsInCiasSongBook
-        );
+        for (let i = 0; i < louvores.length; i++) {
+          if (louvores[i].containsInCiasSongBook && louvores[i].englishTitle) {
+            louvores[i].englishSongBookNumber
+              ? order1.push(louvores[i])
+              : order2.push(louvores[i]);
+          }
+        }
+        filteredPraises = [...order1, ...order2];
       }
     } else {
       for (let i = 0; i < louvores.length; i++) {
         for (let j = 0; j < themesApplied.length; j++) {
-          if (louvores[i].theme === themesApplied[j]) {
-            filteredPraises.push(louvores[i]);
+          if (
+            louvores[i].theme === themesApplied[j] &&
+            !louvores[i].containsInCiasSongBook &&
+            louvores[i].englishTitle
+          ) {
+            louvores[i].englishSongBookNumber
+              ? order1.push(louvores[i])
+              : order2.push(louvores[i]);
           }
         }
       }
+      filteredPraises = [...order1, ...order2];
     }
-    if (filteredPraises.length < 1) {
-      filteredPraises = louvores;
+    if (filteredPraises.length > 0) {
+      setComplexFilterApplied(true);
+      setFilteredLouvores(filteredPraises);
+    } else {
+      setComplexFilterApplied(false);
     }
-    setComplexFilterApplied(true);
-    setFilteredLouvores(filteredPraises);
   }
 
   return (
