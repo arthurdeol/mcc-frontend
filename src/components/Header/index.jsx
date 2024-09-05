@@ -1,5 +1,5 @@
-import { Container, linkStyle } from "./styles";
-import { useNavigate, Link } from "react-router-dom";
+import { Container } from "./styles";
+import { useNavigate } from "react-router-dom";
 import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
 import { PiListHeart } from "react-icons/pi";
 
