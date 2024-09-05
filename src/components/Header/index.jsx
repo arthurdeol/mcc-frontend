@@ -1,6 +1,7 @@
-import { Container } from "./styles";
+import { Container, linkStyle } from "./styles";
 import { useNavigate, Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic, LuUser2 } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
+import { PiListHeart } from "react-icons/pi";
 
 const Header = ({ louvor = {}, setActiveTab = "" }) => {
   const navigate = useNavigate();
@@ -20,10 +21,11 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
       />
 
       {navPath === "/" && (
-        <button className="login-button">
-          <Link to={"/login-admin"}>
-            <LuUser2 size={22} />
-          </Link>
+        <button
+          className="list-button"
+          onClick={() => navigate("/service-praises-list")}
+        >
+          <PiListHeart size={24} />
         </button>
       )}
 

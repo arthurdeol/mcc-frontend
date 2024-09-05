@@ -2,7 +2,7 @@ import { Container } from "./styles";
 import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic, LuSettings2 } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
 import { BiEditAlt } from "react-icons/bi";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -134,6 +134,22 @@ const PraisesListAdmin = () => {
                         {louvor.englishTitle && (
                           <div className="icons-container">
                             <Link
+                              to={louvor.linkSheetMusic ? "/praise" : null}
+                              className="icon-container"
+                              state={{
+                                id: louvor.songBookMapId,
+                                iconName: "LuMusic",
+                              }}
+                            >
+                              <LuMusic
+                                color={
+                                  louvor.linkSheetMusic ? "black" : "#9ca3af"
+                                }
+                                size={17}
+                              />
+                            </Link>
+
+                            <Link
                               to={louvor.linkPdfLyrics ? "/praise" : null}
                               className="icon-container"
                               state={{
@@ -160,22 +176,6 @@ const PraisesListAdmin = () => {
                               <LuListMusic
                                 color={louvor.linkChords ? "black" : "#9ca3af"}
                                 size={19}
-                              />
-                            </Link>
-
-                            <Link
-                              to={louvor.linkSheetMusic ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuMusic",
-                              }}
-                            >
-                              <LuMusic
-                                color={
-                                  louvor.linkSheetMusic ? "black" : "#9ca3af"
-                                }
-                                size={18}
                               />
                             </Link>
                           </div>

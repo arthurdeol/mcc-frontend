@@ -5,6 +5,7 @@ import Praise from "./pages/Praise";
 import PraisesListAdmin from "./pages/Admin/PraisesListAdmin";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import PraiseSettings from "./pages/Admin/PraiseSettings";
+import ServicePraisesList from "./pages/ServicePraisesList";
 
 function RoutesApp() {
   return (
@@ -15,13 +16,11 @@ function RoutesApp() {
         <Route exact path="/login-admin" element={<LoginAdmin />} />
         <Route exact path="/praises-admin" element={<PraisesListAdmin />} />
         <Route exact path="/praise-settings" element={<PraiseSettings />} />
-        {/* <Route path="/app" component={OrphanagesMap} />
-        <Route path="/orphanages/create" component={CreateOrphanage} />
-        <Route path="/orphanages/:id" component={Orphanage} /> */}
-        {/* <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/login" element={<Login/>}/>
-          <Route exact path="/recovery-password" element={<RecoveryPassword/>}/>
-          <Route path="*" element={<NotFound/>}/> */}
+        <Route
+          exact
+          path="/service-praises-list"
+          element={<ServicePraisesList />}
+        />
       </Routes>
     </BrowserRouter>
   );
