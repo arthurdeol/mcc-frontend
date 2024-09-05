@@ -132,6 +132,10 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
+    .titles {
+      width: 80%;
+    }
+
     .main-container {
       margin: 0;
       height: 100vh;
@@ -212,4 +216,8 @@ export const HeartButton = styled.div`
   top: 10px;
   right: 15px;
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    right: 5px;
+  }
 `;

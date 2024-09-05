@@ -25,7 +25,7 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
           className="list-button"
           onClick={() => navigate("/service-praises-list")}
         >
-          <PiListHeart size={24} />
+          <PiListHeart size={24} color="black" />
         </button>
       )}
 
