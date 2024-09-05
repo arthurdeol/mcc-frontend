@@ -125,6 +125,10 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
+    .titles {
+      width: 80%;
+    }
+
     .main-container {
       margin: 0;
       height: 100vh;
@@ -215,5 +219,9 @@ export const XClose = styled.div`
   &:hover {
     border: 1px solid #b71c1c;
     color: #b71c1c;
+  }
+
+  @media (max-width: 480px) {
+    right: 5px;
   }
 `;

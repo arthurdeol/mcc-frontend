@@ -154,7 +154,7 @@ const PraisesList = () => {
                             />
                           ) : (
                             <IoHeartOutline
-                              color={"black"}
+                              color={"gray"}
                               size={19}
                               onClick={() => selectPraise(louvor)}
                             />
