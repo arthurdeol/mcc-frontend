@@ -19,6 +19,10 @@ export const Container = styled.div`
     width: 80%;
   }
 
+  hr {
+    border: 0.02rem solid #ededed;
+  }
+
   .progress-container {
     display: flex;
     padding-top: 15%;

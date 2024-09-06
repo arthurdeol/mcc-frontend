@@ -25,82 +25,25 @@ export const Container = styled.div`
   }
 
   .praise-container {
-    position: relative;
-    width: 100%;
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-self: center;
-    padding: 20px;
-    background-color: #fff;
+    padding: 0 20px 0 0;
     box-shadow: rgba(149, 157, 165, 0.1) 0px 4px 4px;
     border: 1px solid #ededed;
     border-radius: 10px;
     margin-bottom: 5px;
+    background-color: #fff;
   }
 
-  .titles {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: space-between;
-  }
-
-  .praise-title-en {
-    font-size: 1rem;
-  }
-
-  .praise-title-pt {
-    margin-top: 2px;
-    font-size: 0.9rem;
-    color: gray;
-  }
-
-  .theme-tag-container {
+  .praise-sequence {
     display: flex;
     align-items: center;
-  }
-
-  .theme-tag {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    background: #ededed;
-    border-radius: 10px;
-    font-size: 0.5rem;
-    color: gray;
-    text-align: center;
-    height: auto;
-    padding: 2px 8px;
-    margin-right: 2px;
-  }
-
-  .icons-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .icon-container {
-    width: 35px;
-    height: 35px;
-    margin-right: 5px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    background: #fff;
-    border: 1px solid #ededed;
-    border-radius: 10px;
-  }
-
-  .icon-container:hover {
-    background: #eeeeee;
-    color: white !important;
-  }
-
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+    background-color: #b71c1c;
+    border-radius: 10px 0 0 10px;
+    width: 50px;
+    font-size: 2rem;
+    margin-right: 20px;
+    color: #fff;
   }
 
   @media (max-width: 1024px) {
@@ -125,10 +68,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    .titles {
-      width: 80%;
-    }
-
     .service-container {
       margin: 0;
       height: 100vh;
@@ -140,23 +79,6 @@ export const Container = styled.div`
       margin: 1%;
       width: 90%;
     }
-
-    .praise-title {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-    }
-
-    .theme-tag {
-      font-size: 0.5rem;
-      text-align: center;
-      height: fit-content;
-      padding: 2px 5px;
-    }
-
-    .icons-container {
-      margin-left: 5%;
-    }
   }
 
   @media (max-width: 480px) {
@@ -165,63 +87,10 @@ export const Container = styled.div`
       margin: 0;
       border-radius: 0;
     }
-
-    .praise-container {
-      flex-direction: column;
-      padding: 15px 0;
-    }
-
-    .icons-container {
-      margin-left: 0;
-      display: flex;
-      justify-content: end;
-    }
   }
   @media (max-width: 430px) {
     .box {
       box-shadow: none;
     }
-  }
-
-  @media (max-width: 425px) {
-    .praise-title-en {
-      font-size: 0.9rem;
-    }
-
-    .praise-title-pt {
-      font-size: 0.8rem;
-    }
-
-    .theme-tag {
-      font-size: 0.45rem;
-    }
-
-    .icon-container {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-    }
-  }
-`;
-
-export const XClose = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  border: 1px solid #eeeeee;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 2px;
-
-  &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
-  }
-
-  @media (max-width: 480px) {
-    right: 5px;
   }
 `;

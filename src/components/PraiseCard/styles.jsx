@@ -8,10 +8,10 @@ export const Card = styled.div`
   height: 128px;
   display: flex;
   padding: 20px 10px;
-  border-bottom: 1px solid #ededed;
 
   .text-container {
     margin-bottom: 20px;
+    padding-right: 50px;
   }
 
   .praise-title-en {
@@ -44,12 +44,16 @@ export const Card = styled.div`
   .buttons-container {
     display: flex;
     align-items: end;
+
+    right: 20;
   }
 
   .icons-container {
+    position: absolute;
     display: flex;
     align-items: center;
     cursor: pointer;
+    right: 5px;
   }
 
   .icon-container {
@@ -122,6 +126,28 @@ export const HeartButton = styled.div`
   top: 10px;
   right: 15px;
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    right: 5px;
+  }
+`;
+
+export const XClose = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #eeeeee;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px;
+
+  &:hover {
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+  }
 
   @media (max-width: 480px) {
     right: 5px;

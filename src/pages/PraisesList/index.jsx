@@ -115,12 +115,17 @@ const PraisesList = () => {
               ) : (
                 <div className="praises-container">
                   {filteredLouvores.map((louvor, i) => (
-                    <PraiseCard
-                      praise={louvor}
-                      servicePraises={servicePraises}
-                      unSelectPraise={unSelectPraise}
-                      selectPraise={selectPraise}
-                    />
+                    <>
+                      <PraiseCard
+                        praise={louvor}
+                        servicePraises={servicePraises}
+                        unSelectPraise={unSelectPraise}
+                        selectPraise={selectPraise}
+                        hasCloseButton={false}
+                        hasHeartButton={true}
+                      />
+                      <hr />
+                    </>
                   ))}
                 </div>
               )}
