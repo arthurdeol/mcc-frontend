@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  .main-container {
+  .service-container {
     display: flex;
     justify-content: center;
     height: 90vh;
-    width: 100vw;
   }
 
   .box {
@@ -17,15 +16,12 @@ export const Container = styled.div`
     font-size: 1rem;
     margin: 1% 5% 0 5%;
     width: 80%;
-    padding: 20px;
+    padding: 20px 0;
   }
 
   .praises-container {
     width: 92%;
     overflow-y: auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
   }
 
   .praise-container {
@@ -35,8 +31,12 @@ export const Container = styled.div`
     justify-content: space-between;
     flex-direction: column;
     align-self: center;
-    padding: 20px 10px;
-    border-bottom: 1px solid #ededed;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.1) 0px 4px 4px;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    margin-bottom: 5px;
   }
 
   .titles {
@@ -129,7 +129,7 @@ export const Container = styled.div`
       width: 80%;
     }
 
-    .main-container {
+    .service-container {
       margin: 0;
       height: 100vh;
       box-shadow: none;
@@ -210,7 +210,7 @@ export const XClose = styled.div`
   justify-content: center;
   border: 1px solid #eeeeee;
   top: 10px;
-  right: 15px;
+  right: 10px;
   cursor: pointer;
   background-color: #fff;
   border-radius: 5px;
