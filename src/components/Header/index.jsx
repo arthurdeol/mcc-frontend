@@ -31,6 +31,19 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
 
       {navPath === "/praise" && (
         <div className="icons-container">
+          {louvor.linkSheetMusic ? (
+            <div
+              className="icon-container"
+              onClick={() => setActiveTab("LuMusic", louvor)}
+            >
+              <LuMusic color={"black"} size={17} />
+            </div>
+          ) : (
+            <div className="icon-container">
+              <LuMusic color={"#9ca3af"} size={17} />
+            </div>
+          )}
+
           {louvor.linkPdfLyrics ? (
             <div
               className="icon-container"
@@ -54,19 +67,6 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
           ) : (
             <div className="icon-container">
               <LuListMusic color={"#9ca3af"} size={19} />
-            </div>
-          )}
-
-          {louvor.linkSheetMusic ? (
-            <div
-              className="icon-container"
-              onClick={() => setActiveTab("LuMusic", louvor)}
-            >
-              <LuMusic color={"black"} size={17} />
-            </div>
-          ) : (
-            <div className="icon-container">
-              <LuMusic color={"#9ca3af"} size={17} />
             </div>
           )}
 

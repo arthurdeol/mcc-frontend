@@ -1,15 +1,12 @@
-import { Container, HeartButton } from "./styles";
+import { Container } from "./styles";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
-import { IoHeartOutline } from "react-icons/io5";
-import { IoHeartSharp } from "react-icons/io5";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import MainFilter from "../../components/MainFilter";
 import PraiseNotFound from "../../components/PraiseNotFound";
 import ErrorDisplay from "../../components/ErrorDisplay";
+import PraiseCard from "../../components/PraiseCard";
 
 const PraisesList = () => {
   const [louvores, setLouvores] = useState([]);
@@ -87,7 +84,6 @@ const PraisesList = () => {
       (item) => item.songBookMapId !== praise.songBookMapId
     );
     setServicePraises(praises);
-    console.log(servicePraises);
   }
 
   return (
@@ -119,108 +115,17 @@ const PraisesList = () => {
               ) : (
                 <div className="praises-container">
                   {filteredLouvores.map((louvor, i) => (
-                    <div className="praise-container" key={i}>
-                      <div className="titles">
-                        <div>
-                          {louvor.englishTitle && (
-                            <h6 className="praise-title-en">
-                              {louvor.englishSongBookNumber
-                                ? louvor.englishSongBookNumber + " - "
-                                : " "}
-                              {louvor.englishTitle ? louvor.englishTitle : ""}
-                            </h6>
-                          )}
-                          {louvor.portugueseTitle && (
-                            <p className="praise-title-pt">
-                              {louvor.portugueseSongBookNumber
-                                ? louvor.portugueseSongBookNumber + " - "
-                                : "Avulso - "}
-                              {louvor.portugueseTitle
-                                ? louvor.portugueseTitle
-                                : ""}
-                            </p>
-                          )}
-                        </div>
-
-                        <HeartButton>
-                          {servicePraises.find(
-                            (item) =>
-                              item.songBookMapId === louvor.songBookMapId
-                          ) ? (
-                            <IoHeartSharp
-                              color={"#b71c1c"}
-                              size={19}
-                              onClick={() => unSelectPraise(louvor)}
-                            />
-                          ) : (
-                            <IoHeartOutline
-                              color={"gray"}
-                              size={19}
-                              onClick={() => selectPraise(louvor)}
-                            />
-                          )}
-                        </HeartButton>
-                      </div>
-
-                      <div className="footer">
-                        <div className="theme-tag-container">
-                          {louvor.containsInCiasSongBook && (
-                            <div className="theme-tag">CIA</div>
-                          )}
-                          <div className="theme-tag">{louvor.theme}</div>
-                        </div>
-
-                        {louvor.englishTitle && (
-                          <div className="icons-container">
-                            <Link
-                              to={louvor.linkSheetMusic ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuMusic",
-                              }}
-                            >
-                              <LuMusic
-                                color={
-                                  louvor.linkSheetMusic ? "black" : "#9ca3af"
-                                }
-                                size={17}
-                              />
-                            </Link>
-
-                            <Link
-                              to={louvor.linkPdfLyrics ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuType",
-                              }}
-                            >
-                              <LuType
-                                color={
-                                  louvor.linkPdfLyrics ? "black" : "#9ca3af"
-                                }
-                                size={17}
-                              />
-                            </Link>
-
-                            <Link
-                              to={louvor.linkChords ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuListMusic",
-                              }}
-                            >
-                              <LuListMusic
-                                color={louvor.linkChords ? "black" : "#9ca3af"}
-                                size={19}
-                              />
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                    <>
+                      <PraiseCard
+                        praise={louvor}
+                        servicePraises={servicePraises}
+                        unSelectPraise={unSelectPraise}
+                        selectPraise={selectPraise}
+                        hasCloseButton={false}
+                        hasHeartButton={true}
+                      />
+                      <hr />
+                    </>
                   ))}
                 </div>
               )}
