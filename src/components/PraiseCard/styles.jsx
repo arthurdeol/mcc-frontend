@@ -89,6 +89,9 @@ export const Card = styled.div`
       margin-left: 5%;
     }
   }
+  @media (max-width: 628px) {
+    height: 138px;
+  }
 
   @media (max-width: 480px) {
     padding: 15px 0;

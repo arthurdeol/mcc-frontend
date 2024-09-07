@@ -26,7 +26,7 @@ export const Container = styled.div`
 
   .praise-container {
     display: flex;
-    padding: 0 20px 0 0;
+    // padding: 0 20px 0 0;
     box-shadow: rgba(149, 157, 165, 0.1) 0px 4px 4px;
     border: 1px solid #ededed;
     border-radius: 10px;
@@ -78,6 +78,13 @@ export const Container = styled.div`
     .box {
       margin: 1%;
       width: 90%;
+    }
+
+    .praise-sequence {
+      width: 30px;
+      font-size: 1.2rem;
+      margin-right: 10px;
+      color: #fff;
     }
   }
 
