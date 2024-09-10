@@ -44,7 +44,6 @@ export const Card = styled.div`
   .buttons-container {
     display: flex;
     align-items: end;
-
     right: 20;
   }
 
@@ -131,7 +130,8 @@ export const HeartButton = styled.div`
   cursor: pointer;
 
   @media (max-width: 480px) {
-    right: 5px;
+    right: 10px;
+    top: 15px;
   }
 `;
 

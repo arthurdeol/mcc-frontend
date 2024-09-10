@@ -7,9 +7,12 @@ export default function MainFilter({
   louvores,
   setPraiseNotFound,
   setFilteredLouvores,
+  complexFilterApplied,
   setComplexFilterApplied,
+  setMainFilterApplied,
 }) {
   const [openModal, setOpenModal] = useState(false);
+  const [eventValue, setEventValue] = useState("");
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
 
@@ -18,7 +21,8 @@ export default function MainFilter({
   }
 
   const handleFilter = (event) => {
-    let eventValue = event.target.value;
+    setEventValue(event.target.value);
+    setComplexFilterApplied(false);
     const value = especialCharMask(eventValue);
     const valueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
     let filtered = [];
@@ -113,10 +117,12 @@ export default function MainFilter({
         ...filteredEnSongWithoutNumber,
         ...filteredPtPraises,
       ]);
+      setMainFilterApplied(true);
     }
   };
 
   function setComplexFilter(formValue, themesApplied) {
+    setEventValue("");
     let filteredPraises = [];
     let order1 = [];
     let order2 = [];
@@ -169,6 +175,7 @@ export default function MainFilter({
     } else {
       setComplexFilterApplied(false);
     }
+    setPraiseNotFound(false);
   }
 
   return (
@@ -177,6 +184,7 @@ export default function MainFilter({
         <input
           type="text"
           id="filter"
+          value={eventValue}
           onChange={handleFilter}
           className="filter"
           placeholder="Which praise song are you looking for?"
@@ -190,6 +198,7 @@ export default function MainFilter({
         openModal={openModal}
         onCloseModal={handleClose}
         setComplexFilter={setComplexFilter}
+        complexFilterApplied={complexFilterApplied}
       />
     </Container>
   );

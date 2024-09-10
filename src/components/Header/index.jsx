@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
 import { PiListHeart } from "react-icons/pi";
 
-const Header = ({ louvor = {}, setActiveTab = "" }) => {
+const Header = ({ louvor = {}, setActiveTab = "", servicePraises = [] }) => {
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
 
@@ -21,12 +21,15 @@ const Header = ({ louvor = {}, setActiveTab = "" }) => {
       />
 
       {navPath === "/" && (
-        <button
+        <div
           className="list-button"
           onClick={() => navigate("/service-praises-list")}
         >
           <PiListHeart size={24} color="black" />
-        </button>
+          {servicePraises.length > 0 && (
+            <div className="list-length">{servicePraises.length}</div>
+          )}
+        </div>
       )}
 
       {navPath === "/praise" && (

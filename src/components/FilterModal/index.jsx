@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import {
   style,
@@ -22,6 +22,7 @@ export default function FilterModal({
   openModal,
   onCloseModal,
   setComplexFilter,
+  complexFilterApplied,
 }) {
   const [formValue, setFormValue] = useState({
     containsInCiasSongBook: false,
@@ -50,6 +51,12 @@ export default function FilterModal({
     praiseGroupTheme,
     praiseTheme,
   } = formValue;
+
+  useEffect(() => {
+    if (!complexFilterApplied) {
+      cleanFilter();
+    }
+  }, [complexFilterApplied]);
 
   const handleChange = (event) => {
     setFormValue({

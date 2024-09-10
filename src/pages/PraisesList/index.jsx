@@ -12,6 +12,7 @@ const PraisesList = () => {
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
+  const [mainFilterApplied, setMainFilterApplied] = useState(false);
 
   const [servicePraises, setServicePraises] = useState(() => {
     const praisesSelected = localStorage.getItem("servicePraisesList");
@@ -47,7 +48,7 @@ const PraisesList = () => {
   }
 
   useEffect(() => {
-    if (!complexFilterApplied) {
+    if (!complexFilterApplied && !mainFilterApplied) {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -73,7 +74,7 @@ const PraisesList = () => {
     }
 
     localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
-  }, [complexFilterApplied, servicePraises]);
+  }, [complexFilterApplied, mainFilterApplied, servicePraises]);
 
   function selectPraise(praise) {
     setServicePraises([...servicePraises, praise]);
@@ -88,14 +89,16 @@ const PraisesList = () => {
 
   return (
     <Container>
-      <Header />
+      <Header servicePraises={servicePraises} />
       <div className="main-container">
         <div className="box">
           <MainFilter
             louvores={louvores}
             setPraiseNotFound={setPraiseNotFound}
             setFilteredLouvores={setFilteredLouvores}
+            complexFilterApplied={complexFilterApplied}
             setComplexFilterApplied={setComplexFilterApplied}
+            setMainFilterApplied={setMainFilterApplied}
           />
 
           {displayError && <ErrorDisplay />}
@@ -115,7 +118,7 @@ const PraisesList = () => {
               ) : (
                 <div className="praises-container">
                   {filteredLouvores.map((louvor, i) => (
-                    <>
+                    <div key={i}>
                       <PraiseCard
                         praise={louvor}
                         servicePraises={servicePraises}
@@ -125,7 +128,7 @@ const PraisesList = () => {
                         hasHeartButton={true}
                       />
                       <hr />
-                    </>
+                    </div>
                   ))}
                 </div>
               )}
