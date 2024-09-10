@@ -13,7 +13,7 @@ export const ErrorPage = styled.div`
   }
 
   .text-error-page {
-    width: 80%;
+    width: 85%;
     font-size: 1.5rem;
   }
 
@@ -39,6 +39,9 @@ export const ErrorPage = styled.div`
   }
 
   @media (max-width: 435px) {
+    .img-praise-not-found {
+      margin-right: 20px;
+    }
     .musical-note-error-page {
       width: 90px;
       height: 90px;

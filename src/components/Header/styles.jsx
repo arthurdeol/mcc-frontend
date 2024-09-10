@@ -44,6 +44,7 @@ export const Container = styled.div`
   }
 
   .list-button {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,6 +58,21 @@ export const Container = styled.div`
 
   .list-button:hover {
     background: #eeeeee;
+  }
+
+  .list-length {
+    position: absolute;
+    left: -24%;
+    bottom: -13%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eeeeee;
+    border: 1px solid #ededed;
+    font-size: 0.5rem;
+    border-radius: 100%;
+    height: 17px;
+    width: 17px;
   }
 
   @media (max-width: 767px) {
