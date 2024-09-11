@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
 import { LuSettings2 } from "react-icons/lu";
 import FilterModal from "../../components/FilterModal";
@@ -20,8 +20,13 @@ export default function MainFilter({
     return especialChar.normalize("NFD").replace(/[^a-zA-Z0-9\s]/g, "");
   }
 
-  const handleFilter = (event) => {
-    setEventValue(event.target.value);
+  useEffect(() => {
+    if (!complexFilterApplied || eventValue !== "") {
+      handleFilter(eventValue);
+    }
+  }, [eventValue]); // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  function handleFilter(eventValue) {
     setComplexFilterApplied(false);
     const value = especialCharMask(eventValue);
     const valueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
@@ -87,7 +92,7 @@ export default function MainFilter({
       }
     }
 
-    if (!filtered.length) {
+    if (!filtered.length && eventValue !== "") {
       setPraiseNotFound(true);
     } else {
       setPraiseNotFound(false);
@@ -119,7 +124,7 @@ export default function MainFilter({
       ]);
       setMainFilterApplied(true);
     }
-  };
+  }
 
   function setComplexFilter(formValue, themesApplied) {
     setEventValue("");
@@ -185,7 +190,7 @@ export default function MainFilter({
           type="text"
           id="filter"
           value={eventValue}
-          onChange={handleFilter}
+          onChange={(e) => setEventValue(e.target.value)}
           className="filter"
           placeholder="Which praise song are you looking for?"
         />
