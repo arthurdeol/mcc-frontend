@@ -46,7 +46,7 @@ export default function ServicePraisesList() {
 
   return (
     <Container>
-      <Header />
+      <Header servicePraises={servicePraises} />
       <DragDropContext onDragEnd={handleDragDrop}>
         <div className="service-container">
           <Droppable droppableId="ROOT" type="group">

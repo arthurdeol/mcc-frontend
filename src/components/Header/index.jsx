@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic, LuShare2 } from "react-icons/lu";
 import { PiListHeart } from "react-icons/pi";
+import SendListModal from "../../components/SendListModal";
 
 const Header = ({ louvor = {}, setActiveTab = "", servicePraises = [] }) => {
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
+
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
 
   return (
     <Container>
@@ -30,6 +36,20 @@ const Header = ({ louvor = {}, setActiveTab = "", servicePraises = [] }) => {
             <div className="list-length">{servicePraises.length}</div>
           )}
         </div>
+      )}
+
+      {navPath === "/service-praises-list" && (
+        <>
+          <div className="share-button" onClick={handleOpen}>
+            <LuShare2 size={22} color="black" />
+          </div>
+
+          <SendListModal
+            openModal={openModal}
+            onCloseModal={handleClose}
+            servicePraises={servicePraises}
+          />
+        </>
       )}
 
       {navPath === "/praise" && (
