@@ -24,7 +24,8 @@ export default function MainFilter({
     if (!complexFilterApplied || eventValue !== "") {
       handleFilter(eventValue);
     }
-  }, [eventValue]); // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eventValue]);
 
   function handleFilter(eventValue) {
     setComplexFilterApplied(false);

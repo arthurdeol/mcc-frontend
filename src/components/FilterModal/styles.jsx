@@ -17,6 +17,22 @@ export const ButtonStyled = styled.button`
   }
 `;
 
+export const ButtonStyledRed = styled.button`
+  border: 1px solid #b71c1c;
+  background-color: #b71c1c;
+  color: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+    background-color: #fff;
+  }
+`;
+
 export const XClose = styled.div`
   position: absolute;
   display: flex;

@@ -1,19 +1,26 @@
 import { Container } from "./styles";
 import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
-import { BiEditAlt } from "react-icons/bi";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import MainFilter from "../../../components/MainFilter";
 import PraiseNotFound from "../../../components/PraiseNotFound";
 import ErrorDisplay from "../../../components/ErrorDisplay";
+import PraiseCard from "../../../components/PraiseCard";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
+  const [mainFilterApplied, setMainFilterApplied] = useState(false);
+
+  const [servicePraises] = useState(() => {
+    const praisesSelected = localStorage.getItem("servicePraisesList");
+    if (praisesSelected) {
+      return JSON.parse(praisesSelected);
+    }
+    return [];
+  });
 
   const [displayError, setDisplayError] = useState(false);
   const [praiseNotFound, setPraiseNotFound] = useState(false);
@@ -41,22 +48,33 @@ const PraisesListAdmin = () => {
   }
 
   useEffect(() => {
-    if (!complexFilterApplied) {
+    if (!complexFilterApplied && !mainFilterApplied) {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
           data.sort((a, b) => {
             return naturalCompare(
-              a.portugueseSongBookNumber,
-              b.portugueseSongBookNumber
+              a.englishSongBookNumber,
+              b.englishSongBookNumber
             );
           });
           setLouvores(data);
-          setFilteredLouvores(data);
+          let filteredEnSongWithNumber = data.filter(
+            (praise) => praise.englishTitle && praise.englishSongBookNumber
+          );
+          let filteredEnSongWithoutNumber = data.filter(
+            (praise) => praise.englishTitle && !praise.englishSongBookNumber
+          );
+          setFilteredLouvores([
+            ...filteredEnSongWithNumber,
+            ...filteredEnSongWithoutNumber,
+          ]);
         })
         .catch((err) => setDisplayError(true));
     }
-  }, [complexFilterApplied]);
+
+    localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
+  }, [complexFilterApplied, mainFilterApplied, servicePraises]);
 
   return (
     <Container>
@@ -69,6 +87,7 @@ const PraisesListAdmin = () => {
             setPraiseNotFound={setPraiseNotFound}
             setFilteredLouvores={setFilteredLouvores}
             setComplexFilterApplied={setComplexFilterApplied}
+            setMainFilterApplied={setMainFilterApplied}
           />
 
           {displayError && <ErrorDisplay />}
@@ -88,99 +107,13 @@ const PraisesListAdmin = () => {
               ) : (
                 <div className="praises-container">
                   {filteredLouvores.map((louvor, i) => (
-                    <div className="praise-container" key={i}>
-                      <div className="titles">
-                        <div>
-                          {louvor.englishTitle && (
-                            <h6 className="praise-title-en">
-                              {louvor.englishSongBookNumber
-                                ? louvor.englishSongBookNumber + " - "
-                                : " "}
-                              {louvor.englishTitle ? louvor.englishTitle : ""}
-                            </h6>
-                          )}
-                          {louvor.portugueseTitle && (
-                            <p className="praise-title-pt">
-                              {louvor.portugueseSongBookNumber
-                                ? louvor.portugueseSongBookNumber + " - "
-                                : "Avulso - "}
-                              {louvor.portugueseTitle
-                                ? louvor.portugueseTitle
-                                : ""}
-                            </p>
-                          )}
-                        </div>
-
-                        <Link
-                          to={"/praise-settings"}
-                          className="icon-container"
-                          state={{
-                            praiseId: louvor.songBookMapId,
-                            praiseData: louvor,
-                          }}
-                        >
-                          <BiEditAlt color={"black"} size={22} />
-                        </Link>
-                      </div>
-
-                      <div className="footer">
-                        <div className="theme-tag-container">
-                          {louvor.containsInCiasSongBook && (
-                            <div className="theme-tag">CIA</div>
-                          )}
-                          <div className="theme-tag">{louvor.theme}</div>
-                        </div>
-
-                        {louvor.englishTitle && (
-                          <div className="icons-container">
-                            <Link
-                              to={louvor.linkSheetMusic ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuMusic",
-                              }}
-                            >
-                              <LuMusic
-                                color={
-                                  louvor.linkSheetMusic ? "black" : "#9ca3af"
-                                }
-                                size={17}
-                              />
-                            </Link>
-
-                            <Link
-                              to={louvor.linkPdfLyrics ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuType",
-                              }}
-                            >
-                              <LuType
-                                color={
-                                  louvor.linkPdfLyrics ? "black" : "#9ca3af"
-                                }
-                                size={17}
-                              />
-                            </Link>
-
-                            <Link
-                              to={louvor.linkChords ? "/praise" : null}
-                              className="icon-container"
-                              state={{
-                                id: louvor.songBookMapId,
-                                iconName: "LuListMusic",
-                              }}
-                            >
-                              <LuListMusic
-                                color={louvor.linkChords ? "black" : "#9ca3af"}
-                                size={19}
-                              />
-                            </Link>
-                          </div>
-                        )}
-                      </div>
+                    <div key={i}>
+                      <PraiseCard
+                        praise={louvor}
+                        servicePraises={servicePraises}
+                        hasEditButton={true}
+                      />
+                      <hr />
                     </div>
                   ))}
                 </div>

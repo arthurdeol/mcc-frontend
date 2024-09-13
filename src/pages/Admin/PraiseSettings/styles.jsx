@@ -10,6 +10,7 @@ export const Container = styled.div`
   h1 {
     color: #808080;
     font-weight: 600;
+    font-size: 1.4rem;
   }
 
   .text-error {
@@ -208,7 +209,7 @@ export const style = {
   borderRadius: "10px",
   color: "black",
   p: { xs: 2, sm: 1, lg: 4 },
-  marginTop: "20px",
+  marginTop: "5rem",
   width: { xs: "100%", sm: "90%", lg: "70%" },
 };
 

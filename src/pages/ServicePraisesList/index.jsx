@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PraiseCard from "../../components/PraiseCard";
+import SendList from "../../components/SendList";
 
 export default function ServicePraisesList() {
+  const [showShareList, setShowShareList] = useState(false);
   const [servicePraises, setServicePraises] = useState(() => {
     const praisesSelected = localStorage.getItem("servicePraisesList");
     if (praisesSelected) {
@@ -46,7 +48,11 @@ export default function ServicePraisesList() {
 
   return (
     <Container>
-      <Header servicePraises={servicePraises} />
+      <Header
+        servicePraises={servicePraises}
+        setShowShareList={setShowShareList}
+      />
+
       <DragDropContext onDragEnd={handleDragDrop}>
         <div className="service-container">
           <Droppable droppableId="ROOT" type="group">
@@ -56,6 +62,14 @@ export default function ServicePraisesList() {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
+                {showShareList && (
+                  <SendList
+                    servicePraises={servicePraises}
+                    setShowShareList={setShowShareList}
+                    showShareList={showShareList}
+                  />
+                )}
+
                 <div className="praises-container">
                   {servicePraises.map((praise, i) => (
                     <Draggable

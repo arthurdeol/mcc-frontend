@@ -6,6 +6,7 @@ export const linkStyle = {
 };
 
 export const Container = styled.div`
+  position: fixed;
   width: 100%;
   background-color: #fff;
   height: 4rem;

@@ -15,6 +15,7 @@ import {
   theme,
   footerFilter,
   ButtonStyled,
+  ButtonStyledRed,
   XClose,
 } from "./styles";
 
@@ -265,7 +266,9 @@ export default function FilterModal({
             />
             <Box sx={footerFilter}>
               <ButtonStyled onClick={cleanFilter}>Unselect</ButtonStyled>
-              <ButtonStyled onClick={applyFilter}>Apply filter</ButtonStyled>
+              <ButtonStyledRed onClick={applyFilter}>
+                Apply filter
+              </ButtonStyledRed>
             </Box>
           </FormGroup>
         </Box>

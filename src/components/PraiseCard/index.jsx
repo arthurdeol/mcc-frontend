@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
 import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
+import { BiEditAlt } from "react-icons/bi";
 import { LuX } from "react-icons/lu";
 
 export default function PraiseCard({
@@ -10,6 +11,7 @@ export default function PraiseCard({
   selectPraise,
   hasCloseButton = false,
   hasHeartButton = false,
+  hasEditButton = false,
   servicePraises = null,
   unSelectPraise = null,
   deletePraiseFromServiceList = null,
@@ -67,6 +69,19 @@ export default function PraiseCard({
           >
             <LuX />
           </XClose>
+        )}
+
+        {hasEditButton && (
+          <Link
+            className="edit-button"
+            to={"/praise-settings"}
+            state={{
+              praiseId: praise.songBookMapId,
+              praiseData: praise,
+            }}
+          >
+            <BiEditAlt color={"black"} size={22} />
+          </Link>
         )}
 
         {praise.englishTitle && (

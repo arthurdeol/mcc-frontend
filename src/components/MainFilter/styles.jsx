@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  // padding-top: 5rem;
 
   .search-container {
     display: flex;
