@@ -6,6 +6,7 @@ export const linkStyle = {
 };
 
 export const Container = styled.div`
+  position: fixed;
   width: 100%;
   background-color: #fff;
   height: 4rem;
@@ -43,7 +44,8 @@ export const Container = styled.div`
     font-size: 1rem;
   }
 
-  .list-button {
+  .list-button,
+  .share-button {
     position: relative;
     display: flex;
     justify-content: center;
@@ -56,7 +58,8 @@ export const Container = styled.div`
     margin-left: 5px;
   }
 
-  .list-button:hover {
+  .list-button:hover,
+  .share-button:hover {
     background: #eeeeee;
   }
 

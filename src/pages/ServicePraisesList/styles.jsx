@@ -4,7 +4,7 @@ export const Container = styled.div`
   .service-container {
     display: flex;
     justify-content: center;
-    height: 90vh;
+    height: 91vh;
   }
 
   .box {
@@ -16,17 +16,18 @@ export const Container = styled.div`
     font-size: 1rem;
     margin: 1% 5% 0 5%;
     width: 80%;
-    padding: 20px 0;
+    height: 100%;
+    margin-top: 5rem;
   }
 
   .praises-container {
     width: 92%;
     overflow-y: auto;
+    margin: 20px 0;
   }
 
   .praise-container {
     display: flex;
-    // padding: 0 20px 0 0;
     box-shadow: rgba(149, 157, 165, 0.1) 0px 4px 4px;
     border: 1px solid #ededed;
     border-radius: 10px;
@@ -49,7 +50,6 @@ export const Container = styled.div`
   @media (max-width: 1024px) {
     .box {
       width: 96%;
-      height: 93vh;
     }
 
     .praises-container {
@@ -70,13 +70,12 @@ export const Container = styled.div`
   @media (max-width: 768px) {
     .service-container {
       margin: 0;
-      height: 100vh;
       box-shadow: none;
       border-radius: 0;
     }
 
     .box {
-      margin: 1%;
+      margin: 5rem 1% 1%;
       width: 90%;
     }
 
@@ -91,13 +90,42 @@ export const Container = styled.div`
   @media (max-width: 480px) {
     .box {
       width: 100%;
-      margin: 0;
+      margin: 4rem 0;
       border-radius: 0;
+    }
+
+    .praises-container {
+      margin: 20px 0 0;
     }
   }
   @media (max-width: 430px) {
     .box {
       box-shadow: none;
     }
+  }
+`;
+
+export const footerSendList = {
+  width: "92%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+};
+
+export const ButtonStyledSendList = styled.button`
+  border: 1px solid #acacac;
+  background-color: #b71c1c;
+  color: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 10px;
+  height: 40px;
+  width: 130px;
+
+  &:hover {
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
   }
 `;

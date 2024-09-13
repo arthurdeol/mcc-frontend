@@ -1,9 +1,14 @@
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic, LuShare2 } from "react-icons/lu";
 import { PiListHeart } from "react-icons/pi";
 
-const Header = ({ louvor = {}, setActiveTab = "", servicePraises = [] }) => {
+const Header = ({
+  louvor = {},
+  setActiveTab = "",
+  servicePraises = [],
+  setShowShareList = false,
+}) => {
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
 
@@ -19,7 +24,6 @@ const Header = ({ louvor = {}, setActiveTab = "", servicePraises = [] }) => {
             : navigate("/")
         }
       />
-
       {navPath === "/" && (
         <div
           className="list-button"
@@ -31,7 +35,14 @@ const Header = ({ louvor = {}, setActiveTab = "", servicePraises = [] }) => {
           )}
         </div>
       )}
-
+      {/* TODO: change path to = /service-praises-list */}
+      {navPath === "TODO" && (
+        <>
+          <div className="share-button" onClick={() => setShowShareList(true)}>
+            <LuShare2 size={20} color="black" />
+          </div>
+        </>
+      )}
       {navPath === "/praise" && (
         <div className="icons-container">
           {louvor.linkSheetMusic ? (

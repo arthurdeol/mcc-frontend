@@ -4,7 +4,7 @@ export const Container = styled.div`
   .main-container {
     display: flex;
     justify-content: center;
-    height: 90vh;
+    height: 91vh;
     width: 100vw;
   }
 
@@ -15,8 +15,9 @@ export const Container = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
-    margin: 1% 5% 0 5%;
+    margin: 5rem 5% 0 5%;
     width: 80%;
+    height: 100%;
   }
 
   hr {
@@ -39,7 +40,6 @@ export const Container = styled.div`
   @media (max-width: 1024px) {
     .box {
       width: 96%;
-      height: 93vh;
     }
 
     .praises-container {
@@ -48,10 +48,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 933px) {
-    .box {
-      margin: 1%;
-    }
-
     .praises-container {
       width: 93%;
     }
@@ -60,13 +56,12 @@ export const Container = styled.div`
   @media (max-width: 768px) {
     .main-container {
       margin: 0;
-      height: 100vh;
       box-shadow: none;
       border-radius: 0;
     }
 
     .box {
-      margin: 1%;
+      margin: 5rem 1% 1%;
       width: 90%;
     }
   }
@@ -74,7 +69,7 @@ export const Container = styled.div`
   @media (max-width: 480px) {
     .box {
       width: 100%;
-      margin: 0;
+      margin: 4rem 0;
       border-radius: 0;
     }
   }

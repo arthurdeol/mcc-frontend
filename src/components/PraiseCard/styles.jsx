@@ -72,6 +72,22 @@ export const Card = styled.div`
     color: white !important;
   }
 
+  .edit-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eeeeee;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2px;
+    width: 35px;
+    height: 35px;
+  }
+
   @media (max-width: 768px) {
     .titles {
       width: 80%;
@@ -99,6 +115,10 @@ export const Card = styled.div`
       margin-left: 0;
       display: flex;
       justify-content: end;
+    }
+
+    .edit-button {
+      right: 5px;
     }
   }
 
