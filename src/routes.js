@@ -6,6 +6,7 @@ import PraisesListAdmin from "./pages/Admin/PraisesListAdmin";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import PraiseSettings from "./pages/Admin/PraiseSettings";
 import ServicePraisesList from "./pages/ServicePraisesList";
+import DisplaySentServiceList from "./pages/DisplaySentServiceList";
 
 function RoutesApp() {
   return (
@@ -20,6 +21,11 @@ function RoutesApp() {
           exact
           path="/service-praises-list"
           element={<ServicePraisesList />}
+        />
+        <Route
+          exact
+          path="/shared-praises-list/:id"
+          element={<DisplaySentServiceList />}
         />
       </Routes>
     </BrowserRouter>

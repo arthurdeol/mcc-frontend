@@ -11,6 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import ShareListLinkModal from "../ShareListLinkModal";
 import api from "../../services/api";
 import {
   Container,
@@ -30,10 +31,16 @@ export default function SendList({
   showShareList,
   setShowShareList,
 }) {
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+
   const [comment, setComment] = useState("");
   const [church, setChurch] = useState("");
   const [userName, setUserName] = useState("");
   const [date, setDate] = useState(dayjs(new Date()));
+  const [listIdToShare, setListIdToShare] = useState("");
+  const [diplayError, setDisplayError] = useState(false);
 
   const handleChangeComment = (event) => {
     setComment(event.target.value);
@@ -47,13 +54,14 @@ export default function SendList({
     setUserName(event.target.value);
   };
 
-  async function sendList(event) {
+  async function sendListEvent(event) {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append("comment", comment);
     formData.append("listDate", date.toJSON());
     formData.append("church", church);
+    formData.append("userName", userName);
 
     if (servicePraises.length > 0) {
       servicePraises.forEach((file, index) => {
@@ -64,13 +72,16 @@ export default function SendList({
       formData.append("songs", null);
     }
 
-    try {
-      const response = await api.post("/SongBookMapList", formData);
-      alert("Service list sent");
-      console.log(response);
-    } catch (error) {
-      alert("Something went wrong! Please, try again later!");
-      console.log(error);
+    if (servicePraises.length > 0) {
+      try {
+        const response = await api.post("/SongBookMapList", formData);
+        setListIdToShare(response.data);
+        handleOpen();
+        console.log(listIdToShare);
+      } catch (error) {
+        setDisplayError(true);
+        console.log(error);
+      }
     }
   }
 
@@ -80,6 +91,13 @@ export default function SendList({
 
   return (
     <Container>
+      <ShareListLinkModal
+        openModal={openModal}
+        onCloseModal={handleClose}
+        listIdToShare={listIdToShare}
+        diplayError={diplayError}
+      />
+
       <div className="main">
         <XClose onClick={toggleList}>
           <LuX />
@@ -148,7 +166,7 @@ export default function SendList({
         </Box>
 
         <Box sx={footerSendList}>
-          <ButtonStyledSendList type="submit" onClick={sendList}>
+          <ButtonStyledSendList type="button" onClick={sendListEvent}>
             Share List
           </ButtonStyledSendList>
         </Box>
