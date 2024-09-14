@@ -2,6 +2,7 @@ import { Container } from "./styles";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { IoHeartSharp } from "react-icons/io5";
 import PraiseCard from "../../components/PraiseCard";
 import SendList from "../../components/SendList";
 
@@ -62,6 +63,18 @@ export default function ServicePraisesList() {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
+                {servicePraises.length === 0 && (
+                  <div className="praises-not-selected">
+                    <div>
+                      <IoHeartSharp color={"#b71c1c"} size={37} />
+                      <p>
+                        You have no praises songs selected yet! <br /> You can
+                        add praises songs clicking in the little hearts...
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 {showShareList && (
                   <SendList
                     servicePraises={servicePraises}

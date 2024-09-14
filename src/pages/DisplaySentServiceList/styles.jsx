@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ContainerSentList = styled.div`
   .list-container {
     display: flex;
     justify-content: center;
@@ -14,10 +14,9 @@ export const Container = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
-    margin: 4rem 5% 0 5%;
+    margin: 5rem 5% 0 5%;
     width: 80%;
     height: 100%;
-    margin-top: 5rem;
   }
 
   h1 {
@@ -38,7 +37,13 @@ export const Container = styled.div`
   }
 
   .title-container {
-    margin: 15px 0;
+    margin: 20px 0 5px;
+    width: 100%;
+    padding: 0 25px;
+  }
+
+  .date-container {
+    display: flex;
   }
 
   .praises-container {
@@ -89,12 +94,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    .service-container {
-      margin: 0;
-      box-shadow: none;
-      border-radius: 0;
-    }
-
     .box-list {
       margin: 5rem 1% 1%;
       width: 90%;

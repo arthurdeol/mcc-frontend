@@ -59,6 +59,12 @@ export const Container = styled.div`
       font-size: 1.2rem;
     }
   }
+
+  @media (max-width: 480px) {
+    .title-list-container {
+      margin: 15px 0;
+    }
+  }
 `;
 
 export const dateCalendar = {
@@ -104,6 +110,13 @@ export const XClose = styled.div`
     border: 1px solid #b71c1c;
     color: #b71c1c;
   }
+
+  @media (max-width: 480px) {
+    &:hover {
+      border: 1px solid #acacac;
+      color: #000;
+    }
+  }
 `;
 
 export const inputsContainer = {
@@ -143,7 +156,7 @@ export const title = {
 };
 
 export const footerSendList = {
-  margin: { xs: "0 0 10px", sm: "0", md: "0 0 20px", lg: "0 0 20px" },
+  margin: { xs: "0", sm: "0", md: "0 0 20px", lg: "0 0 20px" },
   width: "100%",
   display: "flex",
   alignItems: "center",
@@ -165,5 +178,13 @@ export const ButtonStyledSendList = styled.button`
     border: 1px solid #b71c1c;
     color: #b71c1c;
     background-color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    &:hover {
+      border: 1px solid #b71c1c;
+      color: #fff;
+      background-color: #b71c1c;
+    }
   }
 `;

@@ -13,7 +13,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 9999;
+  // z-index: 9999;
   padding: 10px 30px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 
@@ -70,8 +70,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #eeeeee;
-    border: 1px solid #ededed;
+    background: #f9f9f9;
+    border: 1px solid #a5a5a5;
     font-size: 0.5rem;
     border-radius: 100%;
     height: 17px;
@@ -91,8 +91,14 @@ export const Container = styled.div`
       margin-left: 5px;
     }
 
-    .list-button {
+    .list-button,
+    .share-button {
       margin-right: 6px;
+    }
+
+    .list-button:hover,
+    .share-button:hover {
+      background: #fff;
     }
   }
 

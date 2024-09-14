@@ -15,6 +15,14 @@ export const ButtonStyled = styled.button`
     border: 1px solid #b71c1c;
     color: #b71c1c;
   }
+
+  @media (max-width: 480px) {
+    &:hover {
+      border: 1px solid #acacac;
+      background-color: #fff;
+      color: #000;
+    }
+  }
 `;
 
 export const ButtonStyledRed = styled.button`
@@ -30,6 +38,14 @@ export const ButtonStyledRed = styled.button`
     border: 1px solid #b71c1c;
     color: #b71c1c;
     background-color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    &:hover {
+      border: 1px solid #b71c1c;
+      background-color: #b71c1c;
+      color: #fff;
+    }
   }
 `;
 

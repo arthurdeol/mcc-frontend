@@ -26,10 +26,10 @@ export const Container = styled.div`
 
   .progress-container {
     display: flex;
-    padding-top: 15%;
+    padding-top: 50%;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    height: 100%;
   }
 
   @media (max-width: 1024px) {

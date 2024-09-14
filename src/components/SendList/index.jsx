@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuX } from "react-icons/lu";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -35,6 +35,7 @@ export default function SendList({
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
 
+  const [fillError, setFillError] = useState(false);
   const [comment, setComment] = useState("");
   const [church, setChurch] = useState("");
   const [userName, setUserName] = useState("");
@@ -52,6 +53,7 @@ export default function SendList({
 
   const handleChangeUserName = (event) => {
     setUserName(event.target.value);
+    setFillError(false);
   };
 
   async function sendListEvent(event) {
@@ -72,7 +74,7 @@ export default function SendList({
       formData.append("songs", null);
     }
 
-    if (servicePraises.length > 0) {
+    if (userName !== "") {
       try {
         const response = await api.post("/SongBookMapList", formData);
         setListIdToShare(response.data);
@@ -82,6 +84,8 @@ export default function SendList({
         setDisplayError(true);
         console.log(error);
       }
+    } else {
+      setFillError(true);
     }
   }
 
@@ -146,10 +150,12 @@ export default function SendList({
 
           <Box sx={userNameInput}>
             <TextField
+              error={fillError}
               sx={{ width: "100%" }}
               value={userName}
               label="Your Name"
               variant="outlined"
+              required
               onChange={handleChangeUserName}
             />
           </Box>

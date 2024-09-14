@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container } from "./styles";
+import { ContainerSentList } from "./styles";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import Header from "../../components/Header";
@@ -44,7 +44,7 @@ export default function DisplaySentServiceList() {
   };
 
   return (
-    <Container>
+    <ContainerSentList>
       <Header />
       <DragDropContext onDragEnd={handleDragDrop}>
         <div className="list-container">
@@ -55,11 +55,12 @@ export default function DisplaySentServiceList() {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                <div className="praises-container">
+                <>
                   <div className="title-container">
-                    <h1>
-                      {list.church} - {newListDate}
-                    </h1>
+                    <div className="date-container">
+                      {list.church && <h1>{list.church + " -"}&nbsp;</h1>}
+                      <h1>{newListDate}</h1>
+                    </div>
                     {list.comment && (
                       <p className="comment">"{list.comment}"</p>
                     )}
@@ -67,34 +68,35 @@ export default function DisplaySentServiceList() {
                       <p className="sent-by">Sent by: {list.userName}</p>
                     )}
                   </div>
-
-                  {praises.map((praise, i) => (
-                    <Draggable
-                      draggableId={praise.song.songBookMapId}
-                      key={praise.song.songBookMapId}
-                      index={i}
-                    >
-                      {(provided) => (
-                        <div
-                          className="praise-container"
-                          {...provided.dragHandleProps}
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                        >
-                          <div className="praise-sequence">{i + 1}</div>
-                          <PraiseCard praise={praise.song} />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
+                  <div className="praises-container">
+                    {praises.map((praise, i) => (
+                      <Draggable
+                        draggableId={praise.song.songBookMapId}
+                        key={praise.song.songBookMapId}
+                        index={i}
+                      >
+                        {(provided) => (
+                          <div
+                            className="praise-container"
+                            {...provided.dragHandleProps}
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                          >
+                            <div className="praise-sequence">{i + 1}</div>
+                            <PraiseCard praise={praise.song} />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                </>
               </div>
             )}
           </Droppable>
         </div>
       </DragDropContext>
-    </Container>
+    </ContainerSentList>
   );
 }
 

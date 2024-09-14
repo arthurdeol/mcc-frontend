@@ -47,6 +47,24 @@ export const Container = styled.div`
     color: #fff;
   }
 
+  .praises-not-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color: #000;
+    padding: 0 20%;
+
+    div {
+      display: flex;
+    }
+
+    p {
+      margin-left: 20px;
+    }
+  }
+
   @media (max-width: 1024px) {
     .box {
       width: 96%;
@@ -79,6 +97,10 @@ export const Container = styled.div`
       width: 90%;
     }
 
+    .praises-not-selected {
+      padding: 0 5%;
+    }
+
     .praise-sequence {
       width: 30px;
       font-size: 1.2rem;
@@ -101,6 +123,25 @@ export const Container = styled.div`
   @media (max-width: 430px) {
     .box {
       box-shadow: none;
+    }
+
+    .praises-not-selected {
+      padding: 0 8%;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .praises-not-selected {
+      padding: 0 15%;
+      div {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      p {
+        margin-top: 10px;
+        text-align: center;
+      }
     }
   }
 `;
