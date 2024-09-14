@@ -36,7 +36,7 @@ const Header = ({
         </div>
       )}
       {/* TODO: change path to = /service-praises-list */}
-      {navPath === "/service-praises-list" && (
+      {navPath === "TODO" && (
         <>
           <div className="share-button" onClick={() => setShowShareList(true)}>
             <LuShare2 size={20} color="black" />
