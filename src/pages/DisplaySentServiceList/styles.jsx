@@ -69,7 +69,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 1024px) {
-    .box {
+    .box-list {
       width: 96%;
     }
 
@@ -79,7 +79,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 933px) {
-    .box {
+    .box-list {
       margin: 1%;
     }
 
@@ -95,7 +95,7 @@ export const Container = styled.div`
       border-radius: 0;
     }
 
-    .box {
+    .box-list {
       margin: 5rem 1% 1%;
       width: 90%;
     }
@@ -109,7 +109,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 480px) {
-    .box {
+    .box-list {
       width: 100%;
       margin: 4rem 0;
       border-radius: 0;
@@ -120,7 +120,7 @@ export const Container = styled.div`
     }
   }
   @media (max-width: 430px) {
-    .box {
+    .box-list {
       box-shadow: none;
     }
   }
