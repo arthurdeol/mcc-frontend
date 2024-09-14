@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { red, grey } from "@mui/material/colors";
 import styled from "styled-components";
-import { LuFileX } from "react-icons/lu";
 
 export const ButtonStyled = styled.button`
   border: 1px solid #acacac;

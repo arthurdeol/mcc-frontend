@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LuX } from "react-icons/lu";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";

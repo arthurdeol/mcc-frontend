@@ -18,6 +18,7 @@ export default function DisplaySentServiceList() {
       setList(listData);
       setPraises(listData.songs);
     });
+    // eslint-disable-next-line
   }, []);
 
   const newListDate = list.listDate?.substring(0, 10).replaceAll("-", "/");
