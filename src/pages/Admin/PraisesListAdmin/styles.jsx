@@ -123,6 +123,9 @@ export const Container = styled.div`
   }
 
   @media (max-width: 1024px) {
+    .main-container {
+      height: 90vh;
+    }
     .box {
       width: 96%;
     }

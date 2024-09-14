@@ -74,6 +74,10 @@ export const ContainerSentList = styled.div`
   }
 
   @media (max-width: 1024px) {
+    .list-container {
+      height: 90vh;
+    }
+
     .box-list {
       width: 96%;
     }
