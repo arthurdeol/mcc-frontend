@@ -76,7 +76,7 @@ export const ContainerServicePraiseList = styled.div`
 
   @media (max-width: 933px) {
     .box {
-      margin: 1%;
+      margin: 5rem 1%;
     }
 
     .praises-container {

@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { ContainerPraisesList } from "./styles";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
@@ -88,7 +88,7 @@ const PraisesList = () => {
   }
 
   return (
-    <Container>
+    <ContainerPraisesList>
       <Header servicePraises={servicePraises} />
       <div className="main-container">
         <div className="box">
@@ -136,7 +136,7 @@ const PraisesList = () => {
           )}
         </div>
       </div>
-    </Container>
+    </ContainerPraisesList>
   );
 };
 
