@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ContainerServicePraiseList = styled.div`
   .service-container {
     display: flex;
     justify-content: center;
@@ -14,10 +14,9 @@ export const Container = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
-    margin: 1% 5% 0 5%;
+    margin: 5rem 5% 0 5%;
     width: 80%;
     height: 100%;
-    margin-top: 5rem;
   }
 
   .praises-container {

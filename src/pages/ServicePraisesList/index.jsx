@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { ContainerServicePraiseList } from "./styles";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -48,7 +48,7 @@ export default function ServicePraisesList() {
   };
 
   return (
-    <Container>
+    <ContainerServicePraiseList>
       <Header
         servicePraises={servicePraises}
         setShowShareList={setShowShareList}
@@ -118,6 +118,6 @@ export default function ServicePraisesList() {
           </Droppable>
         </div>
       </DragDropContext>
-    </Container>
+    </ContainerServicePraiseList>
   );
 }

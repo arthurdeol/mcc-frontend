@@ -13,7 +13,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // z-index: 9999;
   padding: 10px 30px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 
