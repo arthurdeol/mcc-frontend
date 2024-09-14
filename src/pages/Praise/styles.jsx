@@ -9,6 +9,7 @@ export const Container = styled.div`
   .file-container {
     display: flex;
     justify-content: center;
+    margin-top: 4rem;
   }
 
   .file-content {

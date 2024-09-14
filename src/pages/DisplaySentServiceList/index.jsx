@@ -51,7 +51,7 @@ export default function DisplaySentServiceList() {
           <Droppable droppableId="ROOT" type="group">
             {(provided) => (
               <div
-                className="box"
+                className="box-list"
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >

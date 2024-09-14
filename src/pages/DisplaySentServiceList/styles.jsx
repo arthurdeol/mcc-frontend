@@ -7,14 +7,14 @@ export const Container = styled.div`
     height: 91vh;
   }
 
-  .box {
+  .box-list {
     display: flex;
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
-    margin: 1% 5% 0 5%;
+    margin: 4rem 5% 0 5%;
     width: 80%;
     height: 100%;
     margin-top: 5rem;
