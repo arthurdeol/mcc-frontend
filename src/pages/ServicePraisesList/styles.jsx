@@ -50,7 +50,7 @@ export const ContainerServicePraiseList = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 80%;
     width: 100%;
     color: #000;
     padding: 0 20%;

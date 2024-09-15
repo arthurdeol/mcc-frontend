@@ -4,7 +4,7 @@ export const ContainerSentList = styled.div`
   .list-container {
     display: flex;
     justify-content: center;
-    height: 91vh;
+    height: 89vh;
   }
 
   .box-list {
@@ -75,7 +75,7 @@ export const ContainerSentList = styled.div`
 
   @media (max-width: 1024px) {
     .list-container {
-      height: 90vh;
+      height: 88vh;
     }
 
     .box-list {
@@ -98,6 +98,10 @@ export const ContainerSentList = styled.div`
   }
 
   @media (max-width: 768px) {
+    .list-container {
+      height: 88vh;
+    }
+
     .box-list {
       margin: 5rem 1% 1%;
       width: 90%;
@@ -112,6 +116,10 @@ export const ContainerSentList = styled.div`
   }
 
   @media (max-width: 480px) {
+    .list-container {
+      height: 80vh;
+    }
+
     .box-list {
       width: 100%;
       margin: 4rem 0;

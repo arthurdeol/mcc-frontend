@@ -29,7 +29,7 @@ export default function MainFilter({
 
   function handleFilter(eventValue) {
     setComplexFilterApplied(false);
-    const value = especialCharMask(eventValue);
+    const value = especialCharMask(eventValue).trim();
     const valueIsNumber = /^\d+(?:\.\d+)?$/.test(value);
     let filtered = [];
 
