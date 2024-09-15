@@ -84,7 +84,7 @@ export const style = {
   boxShadow: 24,
   color: "black",
   p: 4,
-  width: { xs: "90%", sm: "70%", md: "50%", lg: "auto" },
+  width: { xs: "90%", sm: "90%", md: "90%", lg: "70%" },
 };
 
 export const theme = createTheme({

@@ -125,6 +125,16 @@ export default function SendList({
                 onChange={handleChangeChurch}
               >
                 <MenuItem value={"TORONTO"}>Toronto</MenuItem>
+                <MenuItem value={"CALGARY"}>Calgary</MenuItem>
+                <MenuItem value={"VANCOUVER"}>Vancouver</MenuItem>
+                <MenuItem value={"WINNIPEG"}>Winnipeg</MenuItem>
+                <MenuItem value={"FREDERICTON"}>Fredericton</MenuItem>
+                <MenuItem value={"OTTAWA"}>Ottawa</MenuItem>
+                <MenuItem value={"AJAX"}>Ajax</MenuItem>
+                <MenuItem value={"WATERLOO"}>Waterloo</MenuItem>
+                <MenuItem value={"SARNIA"}>Sarnia</MenuItem>
+                <MenuItem value={"QUEBEC"}>Quebec</MenuItem>
+                <MenuItem value={"MONTREAL"}>Montreal</MenuItem>
               </Select>
             </FormControl>
           </Box>
