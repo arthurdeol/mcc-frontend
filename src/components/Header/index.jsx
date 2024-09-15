@@ -27,7 +27,7 @@ const Header = ({
       {navPath === "/" && (
         <div
           className="list-button"
-          onClick={() => navigate("/service-praises-list")}
+          onClick={() => navigate("/my-praises-list")}
         >
           <PiListHeart size={24} color="black" />
           {servicePraises.length > 0 && (
@@ -35,13 +35,13 @@ const Header = ({
           )}
         </div>
       )}
-      {/* TODO: change path to = /service-praises-list */}
-      {navPath === "/service-praises-list" && servicePraises.length > 0 && (
+      {/* TODO: change path to = /my-praises-list */}
+      {navPath === "/my-praises-list" && servicePraises.length > 0 && (
         <div className="share-button" onClick={() => setShowShareList(true)}>
           <LuShare2 size={20} color="black" />
         </div>
       )}
-      {navPath === "/praise" && (
+      {navPath === `/praise/${louvor.songBookMapId}` && (
         <div className="icons-container">
           {louvor.linkSheetMusic ? (
             <div

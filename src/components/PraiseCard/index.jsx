@@ -87,7 +87,9 @@ export default function PraiseCard({
         {praise.englishTitle && (
           <div className="icons-container">
             <Link
-              to={praise.linkSheetMusic ? "/praise" : null}
+              to={
+                praise.linkSheetMusic ? `/praise/${praise.songBookMapId}` : null
+              }
               className="icon-container"
               state={{
                 id: praise.songBookMapId,
@@ -101,7 +103,9 @@ export default function PraiseCard({
             </Link>
 
             <Link
-              to={praise.linkPdfLyrics ? "/praise" : null}
+              to={
+                praise.linkPdfLyrics ? `/praise/${praise.songBookMapId}` : null
+              }
               className="icon-container"
               state={{
                 id: praise.songBookMapId,
@@ -115,7 +119,7 @@ export default function PraiseCard({
             </Link>
 
             <Link
-              to={praise.linkChords ? "/praise" : null}
+              to={praise.linkChords ? `/praise/${praise.songBookMapId}` : null}
               className="icon-container"
               state={{
                 id: praise.songBookMapId,

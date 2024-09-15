@@ -6,7 +6,7 @@ import { IoHeartSharp } from "react-icons/io5";
 import PraiseCard from "../../components/PraiseCard";
 import SendList from "../../components/SendList";
 
-export default function ServicePraisesList() {
+export default function MyPraisesList() {
   const [showShareList, setShowShareList] = useState(false);
   const [servicePraises, setServicePraises] = useState(() => {
     const praisesSelected = localStorage.getItem("servicePraisesList");

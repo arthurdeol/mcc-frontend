@@ -5,7 +5,7 @@ import Praise from "./pages/Praise";
 import PraisesListAdmin from "./pages/Admin/PraisesListAdmin";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import PraiseSettings from "./pages/Admin/PraiseSettings";
-import ServicePraisesList from "./pages/ServicePraisesList";
+import MyPraisesList from "./pages/MyPraisesList";
 import DisplaySentServiceList from "./pages/DisplaySentServiceList";
 
 function RoutesApp() {
@@ -13,15 +13,11 @@ function RoutesApp() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<PraisesList />} />
-        <Route exact path="/praise" element={<Praise />} />
+        <Route exact path="/praise/:id" element={<Praise />} />
         <Route exact path="/login-admin" element={<LoginAdmin />} />
         <Route exact path="/praises-admin" element={<PraisesListAdmin />} />
         <Route exact path="/praise-settings" element={<PraiseSettings />} />
-        <Route
-          exact
-          path="/service-praises-list"
-          element={<ServicePraisesList />}
-        />
+        <Route exact path="/my-praises-list" element={<MyPraisesList />} />
         <Route
           exact
           path="/shared-praises-list/:id"
