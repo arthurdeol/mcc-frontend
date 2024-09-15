@@ -5,7 +5,6 @@ export const ContainerPraisesList = styled.div`
     display: flex;
     justify-content: center;
     height: 89vh;
-    // height: 89vh;
     width: 100vw;
   }
 
@@ -40,7 +39,6 @@ export const ContainerPraisesList = styled.div`
 
   @media (max-width: 1024px) {
     .main-container {
-      // height: 82vh;
       height: 88vh;
     }
     .box {

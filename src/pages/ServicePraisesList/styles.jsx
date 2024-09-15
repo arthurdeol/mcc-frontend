@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const ContainerServicePraiseList = styled.div`
-  height: 89vh;
-
   .service-container {
     display: flex;
     justify-content: center;
-    height: 100%;
+    height: 89vh;
   }
 
   .box {
@@ -67,7 +65,9 @@ export const ContainerServicePraiseList = styled.div`
   }
 
   @media (max-width: 1024px) {
-    // height: 90vh;
+    .service-container {
+      height: 88vh;
+    }
 
     .box {
       width: 96%;
@@ -90,6 +90,7 @@ export const ContainerServicePraiseList = styled.div`
 
   @media (max-width: 768px) {
     .service-container {
+      height: 88vh;
       margin: 0;
       box-shadow: none;
       border-radius: 0;
@@ -113,6 +114,10 @@ export const ContainerServicePraiseList = styled.div`
   }
 
   @media (max-width: 480px) {
+    .service-container {
+      height: 80vh;
+    }
+
     .box {
       width: 100%;
       margin: 4rem 0;
