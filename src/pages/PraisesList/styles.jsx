@@ -60,7 +60,7 @@ export const ContainerPraisesList = styled.div`
 
   @media (max-width: 768px) {
     .main-container {
-      height: 85vh;
+      height: 88vh;
       margin: 0;
       box-shadow: none;
       border-radius: 0;
