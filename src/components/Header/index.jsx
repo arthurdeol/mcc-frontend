@@ -11,6 +11,7 @@ const Header = ({
 }) => {
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
+  const isPathPraise = navPath.indexOf("/praise/") !== -1;
 
   return (
     <Container>
@@ -41,12 +42,12 @@ const Header = ({
           <LuShare2 size={20} color="black" />
         </div>
       )}
-      {navPath === `/praise/${louvor.songBookMapId}` && (
+      {isPathPraise && (
         <div className="icons-container">
           {louvor.linkSheetMusic ? (
             <div
               className="icon-container"
-              onClick={() => setActiveTab("LuMusic", louvor)}
+              onClick={() => setActiveTab("musicSheet", louvor)}
             >
               <LuMusic color={"black"} size={17} />
             </div>
@@ -59,7 +60,7 @@ const Header = ({
           {louvor.linkPdfLyrics ? (
             <div
               className="icon-container"
-              onClick={() => setActiveTab("LuType", louvor)}
+              onClick={() => setActiveTab("lyrics", louvor)}
             >
               <LuType color={"black"} size={17} />
             </div>
@@ -72,7 +73,7 @@ const Header = ({
           {louvor.linkChords ? (
             <div
               className="icon-container"
-              onClick={() => setActiveTab("LuListMusic", louvor)}
+              onClick={() => setActiveTab("chords", louvor)}
             >
               <LuListMusic color={"black"} size={19} />
             </div>
@@ -85,7 +86,7 @@ const Header = ({
           {/* {louvor.linkAudioFile ? (
             <div
               className="icon-container"
-              onClick={() => setActiveTab("LuVolume1", louvor)}
+              onClick={() => setActiveTab("audio", louvor)}
             >
               <LuVolume1 color={"black"} size={20} />
             </div>

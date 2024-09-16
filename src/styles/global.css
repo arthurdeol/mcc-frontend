@@ -19,3 +19,16 @@ textarea {
 button, a{
     cursor: pointer;
 }
+
+:root {
+    --color-white: #fff;
+    --color-dark-red: #b71c1c;
+    /* --color-blue: #406ba0;
+    --color-green: rgb(46, 170, 46);
+    --color-dark-gray: rgb(43, 43, 43);
+    --color-light-gray: rgb(168, 168, 168);
+    --first-color-gradient-banner: rgba(42, 88, 156, 0.712);
+    --second-color-gradient-banner: rgba(42, 69, 156, 0.548);
+    --color-gradient-blue: rgba(30, 61, 107, 0.863);
+    --color-gradient-green: rgba(46, 170, 46, 0.548); */
+}

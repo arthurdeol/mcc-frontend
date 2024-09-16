@@ -13,7 +13,7 @@ function RoutesApp() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<PraisesList />} />
-        <Route exact path="/praise/:id" element={<Praise />} />
+        <Route exact path="/praise/:id/:file" element={<Praise />} />
         <Route exact path="/login-admin" element={<LoginAdmin />} />
         <Route exact path="/praises-admin" element={<PraisesListAdmin />} />
         <Route exact path="/praise-settings" element={<PraiseSettings />} />

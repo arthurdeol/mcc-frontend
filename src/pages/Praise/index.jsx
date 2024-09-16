@@ -5,15 +5,12 @@ import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useParams } from "react-router-dom";
 
 export default function Praise() {
+  const { id, file } = useParams();
   const [louvor, setLouvor] = useState("");
   const [fileArray, setFileArray] = useState([]);
-  const location = useLocation();
-  const [iconName] = useState(location.state.iconName);
-  // const [iconName, setIconName] = useState(location.state.iconName);
-  const { id } = location.state;
-  //const activeTab = iconName;
 
   useEffect(() => {
     async function fetchData() {
@@ -22,25 +19,25 @@ export default function Praise() {
       const louvor = await response.json();
 
       setLouvor(louvor);
-      louvor ? setActiveTab(iconName, louvor) : console.log("praise not found");
+      louvor ? setActiveTab(file, louvor) : console.log("praise not found");
     }
 
     fetchData();
-  }, [iconName]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [file]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function setActiveTab(activeTab, louvor) {
+  function setActiveTab(file, louvor) {
     let arrayOfFile = [];
 
-    if (activeTab === "LuType") {
+    if (file === "lyrics") {
       louvor.lyricsPdf.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
-    } else if (activeTab === "LuListMusic") {
+    } else if (file === "chords") {
       louvor.chordsPdf.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
-    } else if (activeTab === "LuMusic") {
+    } else if (file === "musicSheet") {
       louvor.sheetMusicPdf.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
-    } else if (activeTab === "LuVolume1") {
+    } else if (file === "audio") {
       louvor.audioFile.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
     }

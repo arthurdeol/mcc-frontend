@@ -88,13 +88,11 @@ export default function PraiseCard({
           <div className="icons-container">
             <Link
               to={
-                praise.linkSheetMusic ? `/praise/${praise.songBookMapId}` : null
+                praise.linkSheetMusic
+                  ? `/praise/${praise.songBookMapId}/musicSheet`
+                  : null
               }
               className="icon-container"
-              state={{
-                id: praise.songBookMapId,
-                iconName: "LuMusic",
-              }}
             >
               <LuMusic
                 color={praise.linkSheetMusic ? "black" : "#9ca3af"}
@@ -104,13 +102,11 @@ export default function PraiseCard({
 
             <Link
               to={
-                praise.linkPdfLyrics ? `/praise/${praise.songBookMapId}` : null
+                praise.linkPdfLyrics
+                  ? `/praise/${praise.songBookMapId}/lyrics`
+                  : null
               }
               className="icon-container"
-              state={{
-                id: praise.songBookMapId,
-                iconName: "LuType",
-              }}
             >
               <LuType
                 color={praise.linkPdfLyrics ? "black" : "#9ca3af"}
@@ -119,12 +115,12 @@ export default function PraiseCard({
             </Link>
 
             <Link
-              to={praise.linkChords ? `/praise/${praise.songBookMapId}` : null}
+              to={
+                praise.linkChords
+                  ? `/praise/${praise.songBookMapId}/chords`
+                  : null
+              }
               className="icon-container"
-              state={{
-                id: praise.songBookMapId,
-                iconName: "LuListMusic",
-              }}
             >
               <LuListMusic
                 color={praise.linkChords ? "black" : "#9ca3af"}
