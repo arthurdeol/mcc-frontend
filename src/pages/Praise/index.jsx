@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./styles";
+import { ContainerPraise } from "./styles";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
@@ -45,7 +45,7 @@ export default function Praise() {
     "data:" + file.document.contentType + ";base64," + file.document.file;
 
   return (
-    <Container>
+    <ContainerPraise>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
       {louvor ? (
         <div className="file-container">
@@ -66,6 +66,6 @@ export default function Praise() {
           </Stack>
         </div>
       )}
-    </Container>
+    </ContainerPraise>
   );
 }

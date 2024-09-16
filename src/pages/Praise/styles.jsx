@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ContainerPraise = styled.div`
   overflow-x: hidden;
   width: 100vw;
   height: 100vh;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   .file-container {
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
+    margin-top: 4.3rem;
   }
 
   .file-content {
