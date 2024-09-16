@@ -24,7 +24,7 @@ export const Container = styled.div`
 
   .title-list-to-share,
   .title-list {
-    color: #808080;
+    color: var(--color-dark-gray);
     font-weight: 600;
   }
 
@@ -69,23 +69,23 @@ export const Container = styled.div`
 
 export const dateCalendar = {
   ".MuiPaper-root": {
-    border: "1px solid #b71c1c",
+    border: "1px solid var(--color-dark-red)",
     borderRadius: "10px",
   },
   ".css-23p0if-MuiButtonBase-root-MuiPickersDay-root.Mui-selected": {
-    backgroundColor: "#b71c1c !important",
+    backgroundColor: "var(--color-dark-red) !important",
   },
   ".css-innj4t-MuiPickersYear-yearButton.Mui-selected": {
-    backgroundColor: "#b71c1c !important",
+    backgroundColor: "var(--color-dark-red) !important",
   },
   ".css-bw88rr-MuiPickersMonth-monthButton.Mui-selected": {
-    backgroundColor: "#b71c1c !important",
+    backgroundColor: "var(--color-dark-red) !important",
   },
   ".css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root.Mui-selected": {
-    backgroundColor: "#b71c1c !important",
+    backgroundColor: "var(--color-dark-red) !important",
   },
   ".css-cyfsxc-MuiPickersCalendarHeader-labelContainer": {
-    color: "#b71c1c",
+    color: "var(--color-dark-red)",
   },
   // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
   //   // backgroundColor: "#f7f7f7",
@@ -99,22 +99,22 @@ export const XClose = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  border: 1px solid #acacac;
+  border: 1px solid var(--color-gray);
   top: 20px;
   right: 20px;
-  background-color: #fff;
+  background-color: var(--color-background-white);
   border-radius: 5px;
   padding: 3px;
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
   }
 
   @media (max-width: 480px) {
     &:hover {
-      border: 1px solid #acacac;
-      color: #000;
+      border: 1px solid var(--color-gray);
+      color: var(--color-black);
     }
   }
 `;
@@ -152,7 +152,7 @@ export const userNameInput = {
 
 export const title = {
   margin: "0 0 20px",
-  color: "grey.700",
+  color: "var(--color-dark-gray)",
 };
 
 export const footerSendList = {
@@ -165,9 +165,9 @@ export const footerSendList = {
 };
 
 export const ButtonStyledSendList = styled.button`
-  border: 1px solid #b71c1c;
-  background-color: #b71c1c;
-  color: #fff;
+  border: 1px solid var(--color-dark-red);
+  background-color: var(--color-dark-red);
+  color: var(--color-white);
   border-radius: 8px;
   padding: 7px 12px;
   font-size: 1rem;
@@ -175,16 +175,16 @@ export const ButtonStyledSendList = styled.button`
   height: 40px;
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
-    background-color: #fff;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
+    background-color: var(--color-background-white);
   }
 
   @media (max-width: 480px) {
     &:hover {
-      border: 1px solid #b71c1c;
-      color: #fff;
-      background-color: #b71c1c;
+      border: 1px solid var(--color-dark-red);
+      color: var(--color-background-white);
+      background-color: var(--color-dark-red);
     }
   }
 `;

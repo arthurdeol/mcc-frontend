@@ -18,7 +18,7 @@ export const Container = styled.div`
     width: 100%;
     border-radius: 8px;
     padding: 10px;
-    border: 1px solid #ededed;
+    border: 1px solid var(--color-light-gray);
     background: #f8f8f8;
     font-size: 1rem;
   }
@@ -27,8 +27,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    border: 1px solid #ededed;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
     width: 45px;
     height: 100%;
@@ -36,8 +36,8 @@ export const Container = styled.div`
   }
 
   .filter-button:hover {
-    background: #eeeeee;
-    color: white !important;
+    background: var(--color-light-gray-2);
+    color: var(--color-white) !important;
   }
 
   @media (max-width: 933px) {

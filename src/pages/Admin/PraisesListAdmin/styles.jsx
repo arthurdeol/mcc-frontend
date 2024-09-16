@@ -12,13 +12,13 @@ export const Container = styled.div`
     margin-top: 20px;
     width: 90%;
     text-align: left;
-    color: #808080;
+    color: var(--color-dark-gray);
     font-weight: 600;
     font-size: 1.4rem;
   }
 
   hr {
-    border: 0.02rem solid #ededed;
+    border: 0.02rem solid var(--color-light-gray);
   }
 
   .box {
@@ -55,7 +55,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-self: center;
     padding: 20px 10px;
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid var(--color-light-gray);
   }
 
   .titles {
@@ -71,7 +71,7 @@ export const Container = styled.div`
   .praise-title-pt {
     margin-top: 2px;
     font-size: 0.9rem;
-    color: gray;
+    color: var(--color-dark-gray);
   }
 
   .theme-tag-container {
@@ -83,10 +83,10 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     width: fit-content;
-    background: #ededed;
+    background: var(--color-light-gray);
     border-radius: 10px;
     font-size: 0.5rem;
-    color: gray;
+    color: var(--color-dark-gray);
     text-align: center;
     height: auto;
     padding: 2px 8px;
@@ -106,14 +106,14 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    border: 1px solid #ededed;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
   }
 
   .icon-container:hover {
-    background: #eeeeee;
-    color: white !important;
+    background: var(--color-light-gray-2);
+    color: var(--color-white) !important;
   }
 
   .footer {

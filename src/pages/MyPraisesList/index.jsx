@@ -66,7 +66,7 @@ export default function MyPraisesList() {
                 {servicePraises.length === 0 && (
                   <div className="praises-not-selected">
                     <div>
-                      <IoHeartSharp color={"#b71c1c"} size={37} />
+                      <IoHeartSharp color={"var(--color-dark-red)"} size={37} />
                       <p>
                         You have no praises songs selected yet! <br /> You can
                         add praises songs clicking in the little hearts...

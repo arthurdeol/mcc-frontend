@@ -8,11 +8,11 @@ export const Container = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #fff;
+    background-color: var(--color-background-white);
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    border: 1px solid gray;
+    border: 1px solid var(--color-dark-gray);
     cursor: pointer;
   }
 
@@ -30,8 +30,8 @@ export const Container = styled.div`
   thead {
     border-bottom: 1px solid rgb(160 160 160);
     text-align: center;
-    background-color: #b71c1c;
-    color: #fff;
+    background-color: var(--color-dark-red);
+    color: var(--color-white);
   }
 
   th,

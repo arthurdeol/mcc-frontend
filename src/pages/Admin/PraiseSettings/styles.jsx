@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { red, grey } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
 
 export const Container = styled.div`
@@ -8,13 +7,13 @@ export const Container = styled.div`
   align-items: center;
 
   h1 {
-    color: #808080;
+    color: var(--color-dark-gray);
     font-weight: 600;
     font-size: 1.4rem;
   }
 
   .text-error {
-    color: red;
+    color: var(--color-error);
     margin: 15px 0 0 5px;
   }
 
@@ -60,7 +59,7 @@ export const Container = styled.div`
     align-items: center;
     background-color: gray;
     border-radius: 5px;
-    color: #fff;
+    color: var(--color-white);
     cursor: pointer;
     padding: 1rem 20px;
     font-size: 16px;
@@ -85,7 +84,7 @@ export const Container = styled.div`
 
   .image-file {
     width: 350px;
-    border: 1px solid #eeeeee;
+    border: 1px solid var(--color-light-gray-2);
     margin: 1px;
   }
 
@@ -144,18 +143,18 @@ export const Container = styled.div`
 `;
 
 export const ButtonStyled = styled.button`
-  border: 1px solid #acacac;
-  background-color: #fff;
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-background-white);
   border-radius: 8px;
   padding: 7px 12px;
   font-size: 1rem;
   cursor: pointer;
   margin-right: 10px;
-  color: #000;
+  color: var(--color-black);
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
   }
 `;
 
@@ -169,10 +168,10 @@ export const PlusButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #b71c1c;
+    background-color: var(--color-dark-red);
     min-width: 50px;
     height: 50px;
-    border: 1px solid #eeeeee;
+    border: 1px solid var(--color-light-gray-2);
     border-radius: 100%;
     padding: 5px;
     cursor: pointer;
@@ -207,7 +206,7 @@ export const style = {
   height: "auto",
   bgcolor: "background.paper",
   borderRadius: "10px",
-  color: "black",
+  color: "var(--color-black)",
   p: { xs: 2, sm: 1, lg: 4 },
   marginTop: "5rem",
   width: { xs: "100%", sm: "90%", lg: "70%" },
@@ -223,13 +222,13 @@ export const nameField = {
 };
 
 export const checked = {
-  color: grey[600],
+  color: "var(--color-dark-gray)",
   "&.Mui-checked": {
-    color: red[700],
+    color: "var(--color-dark-red)",
   },
 };
 
 export const title = {
   margin: "0 0 20px",
-  color: "grey.700",
+  color: "var(--color-dark-gray)",
 };

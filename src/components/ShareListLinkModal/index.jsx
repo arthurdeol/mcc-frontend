@@ -26,7 +26,6 @@ export default function ShareListLinkModal({
   const [copied, setCopied] = useState(false);
 
   const baseUrl = "https://mccsongbook.netlify.app/";
-  //   const baseUrl = "http://localhost:3000/";
   const routeUrl = "shared-praises-list/";
   const link = `${baseUrl + routeUrl + listIdToShare}`;
 
@@ -78,9 +77,9 @@ export default function ShareListLinkModal({
 
                 <CopyButton onClick={handleCopy}>
                   {copied ? (
-                    <LuCopyCheck color={"green"} size={23} />
+                    <LuCopyCheck color={"var(--color-green)"} size={23} />
                   ) : (
-                    <LuCopy color={"#9ca3af"} size={23} />
+                    <LuCopy color={"var(--color-gray-2)"} size={23} />
                   )}
                 </CopyButton>
               </InputContainer>{" "}

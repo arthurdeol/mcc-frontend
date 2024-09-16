@@ -4,7 +4,7 @@ export const Container = styled.div`
   overflow-x: hidden;
   width: 100vw;
   height: 100vh;
-  background: #ededed;
+  background: var(--color-light-gray);
 
   .file-container {
     display: flex;
@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
 
   .file {
-    background: white;
+    background: var(--color-background-white;
     margin-top: 15px;
   }
 

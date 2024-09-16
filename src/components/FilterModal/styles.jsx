@@ -1,51 +1,50 @@
 import { createTheme } from "@mui/material/styles";
-import { red, grey } from "@mui/material/colors";
 import styled from "styled-components";
 
 export const ButtonStyled = styled.button`
-  border: 1px solid #acacac;
-  background-color: #fff;
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-background-white);
   border-radius: 8px;
   padding: 7px 12px;
   font-size: 1rem;
   cursor: pointer;
   margin-right: 10px;
-  color: #000;
+  color: var(--color-black);
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
   }
 
   @media (max-width: 480px) {
     &:hover {
-      border: 1px solid #acacac;
-      background-color: #fff;
-      color: #000;
+      border: 1px solid var(--color-gray);
+      background-color: var(--color-background-white);
+      color: var(--color-black);
     }
   }
 `;
 
 export const ButtonStyledRed = styled.button`
-  border: 1px solid #b71c1c;
-  background-color: #b71c1c;
+  border: 1px solid var(--color-dark-red);
+  background-color: var(--color-dark-red);
   border-radius: 8px;
   padding: 7px 12px;
   font-size: 1rem;
   cursor: pointer;
-  color: #fff;
+  color: var(--color-white);
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
-    background-color: #fff;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
+    background-color: var(--color-background-white);
   }
 
   @media (max-width: 480px) {
     &:hover {
-      border: 1px solid #b71c1c;
-      background-color: #b71c1c;
-      color: #fff;
+      border: 1px solid var(--color-dark-red);
+      background-color: var(--color-dark-red);
+      color: var(--color-white);
     }
   }
 `;
@@ -54,16 +53,16 @@ export const XClose = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  border: 1px solid #acacac;
+  border: 1px solid var(--color-gray);
   top: 25px;
   right: 20px;
-  background-color: #fff;
+  background-color: var(--color-background-white);
   border-radius: 5px;
   padding: 3px;
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
   }
 `;
 
@@ -73,11 +72,11 @@ export const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   height: "auto",
-  bgcolor: "background.paper",
-  border: "1px solid #ededed",
+  bgcolor: "var(--color-white)",
+  border: "1px solid var(--color-light-gray)",
   borderRadius: "10px",
   boxShadow: 24,
-  color: "black",
+  color: "var(--color-black)",
   p: 4,
   width: { xs: "90%", sm: "70%", md: "50%", lg: "auto" },
 };
@@ -105,34 +104,21 @@ export const theme = createTheme({
 });
 
 export const checked = {
-  color: grey[600],
+  color: "var(--color-dark-gray)",
   "&.Mui-checked": {
-    color: red[700],
+    color: "var(--color-dark-red)",
   },
 };
 
 export const themeTitle = {
   margin: "10px 0 8px",
-  color: "grey.700",
+  color: "var(--color-dark-gray)",
   fontSize: "16px",
 };
 
 export const title = {
   margin: "0 0 20px",
-  color: "grey.700",
-};
-
-export const button = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "#fff",
-  borderRadius: "10px",
-  borderColor: "grey.800",
-  color: "grey.800",
-  textTransform: "none",
-  fontSize: "16px",
-  marginRight: "5px",
+  color: "var(--color-dark-gray)",
 };
 
 export const footerFilter = {

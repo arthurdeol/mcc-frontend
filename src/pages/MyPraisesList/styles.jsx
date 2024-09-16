@@ -28,22 +28,22 @@ export const ContainerServicePraiseList = styled.div`
   .praise-container {
     display: flex;
     box-shadow: rgba(149, 157, 165, 0.1) 0px 4px 4px;
-    border: 1px solid #ededed;
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
     margin-bottom: 5px;
-    background-color: #fff;
+    background-color: var(--color-background-white);
   }
 
   .praise-sequence {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #b71c1c;
+    background-color: var(--color-dark-red);
     border-radius: 10px 0 0 10px;
     width: 50px;
     font-size: 2rem;
     margin-right: 20px;
-    color: #fff;
+    color: var(--color-white);
   }
 
   .praises-not-selected {
@@ -52,7 +52,7 @@ export const ContainerServicePraiseList = styled.div`
     justify-content: center;
     height: 80%;
     width: 100%;
-    color: #000;
+    color: var(--color-black);
     padding: 0 20%;
 
     div {
@@ -109,7 +109,7 @@ export const ContainerServicePraiseList = styled.div`
       width: 30px;
       font-size: 1.2rem;
       margin-right: 10px;
-      color: #fff;
+      color: var(--color-white);
     }
   }
 
@@ -162,9 +162,9 @@ export const footerSendList = {
 };
 
 export const ButtonStyledSendList = styled.button`
-  border: 1px solid #acacac;
-  background-color: #b71c1c;
-  color: #fff;
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-dark-red);
+  color: var(--color-white);
   border-radius: 8px;
   padding: 7px 12px;
   font-size: 1rem;
@@ -174,7 +174,7 @@ export const ButtonStyledSendList = styled.button`
   width: 130px;
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
   }
 `;

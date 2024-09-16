@@ -371,7 +371,7 @@ export default function PraiseSettings() {
               </div>
 
               <PlusButton onClick={addFile}>
-                <LuPlus size={30} color={"#fff"} />
+                <LuPlus size={30} color={"var(--color-white)"} />
               </PlusButton>
             </div>
             {errorMessageFile !== "" && (

@@ -111,7 +111,11 @@ const PraisesList = () => {
               displayError === false &&
               praiseNotFound === false ? (
                 <div className="progress-container">
-                  <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
+                  <Stack
+                    sx={{ color: "var(--color-dark-gray)" }}
+                    spacing={2}
+                    direction="row"
+                  >
                     <CircularProgress color="inherit" />
                   </Stack>
                 </div>

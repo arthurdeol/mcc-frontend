@@ -21,7 +21,7 @@ export const ContainerPraisesList = styled.div`
   }
 
   hr {
-    border: 0.02rem solid #ededed;
+    border: 0.02rem solid var(--color-light-gray);
   }
 
   .progress-container {

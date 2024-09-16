@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const linkStyle = {
   textDecoration: "none",
-  color: "#000",
+  color: "var(--color-black)",
 };
 
 export const Container = styled.div`
   position: fixed;
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color-background-white);
   height: 4rem;
   display: flex;
   justify-content: space-between;
@@ -37,10 +37,9 @@ export const Container = styled.div`
     width: 35px;
     height: 35px;
     margin-right: 5px;
-    background: #fff;
-    border: 1px solid #ededed;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
-    color: red;
     font-size: 1rem;
   }
 
@@ -50,8 +49,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    border: 1px solid #ededed;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
     width: 45px;
     height: 100%;
@@ -60,7 +59,7 @@ export const Container = styled.div`
 
   .list-button:hover,
   .share-button:hover {
-    background: #eeeeee;
+    background: var(--color-light-gray-2);
   }
 
   .list-length {
@@ -98,7 +97,7 @@ export const Container = styled.div`
 
     .list-button:hover,
     .share-button:hover {
-      background: #fff;
+      background: var(--color-background-white);
     }
   }
 

@@ -50,13 +50,13 @@ export default function PraiseCard({
               (item) => item.songBookMapId === praise.songBookMapId
             ) ? (
               <IoHeartSharp
-                color={"#b71c1c"}
+                color={"var(--color-dark-red)"}
                 size={19}
                 onClick={() => unSelectPraise(praise)}
               />
             ) : (
               <IoHeartOutline
-                color={"gray"}
+                color={"var(--color-gray)"}
                 size={19}
                 onClick={() => selectPraise(praise)}
               />
@@ -80,7 +80,7 @@ export default function PraiseCard({
               praiseData: praise,
             }}
           >
-            <BiEditAlt color={"black"} size={22} />
+            <BiEditAlt color={"var(--color-black)"} size={22} />
           </Link>
         )}
 
@@ -95,7 +95,11 @@ export default function PraiseCard({
               className="icon-container"
             >
               <LuMusic
-                color={praise.linkSheetMusic ? "black" : "#9ca3af"}
+                color={
+                  praise.linkSheetMusic
+                    ? "var(--color-black)"
+                    : "var(--color-gray-2)"
+                }
                 size={17}
               />
             </Link>
@@ -109,7 +113,11 @@ export default function PraiseCard({
               className="icon-container"
             >
               <LuType
-                color={praise.linkPdfLyrics ? "black" : "#9ca3af"}
+                color={
+                  praise.linkPdfLyrics
+                    ? "var(--color-black)"
+                    : "var(--color-gray-2)"
+                }
                 size={17}
               />
             </Link>
@@ -123,7 +131,11 @@ export default function PraiseCard({
               className="icon-container"
             >
               <LuListMusic
-                color={praise.linkChords ? "black" : "#9ca3af"}
+                color={
+                  praise.linkChords
+                    ? "var(--color-black)"
+                    : "var(--color-gray-2)"
+                }
                 size={19}
               />
             </Link>

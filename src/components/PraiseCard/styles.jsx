@@ -21,7 +21,7 @@ export const Card = styled.div`
   .praise-title-pt {
     margin-top: 2px;
     font-size: 0.9rem;
-    color: gray;
+    color: var(--color-dark-gray);
   }
 
   .theme-tag-container {
@@ -32,10 +32,10 @@ export const Card = styled.div`
 
   .theme-tag {
     display: flex;
-    background: #ededed;
+    background: var(--color-light-gray);
     border-radius: 10px;
     font-size: 0.5rem;
-    color: gray;
+    color: var(--color-dark-gray);
     text-align: center;
     padding: 2px 8px;
     margin-right: 4px;
@@ -62,14 +62,14 @@ export const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    border: 1px solid #ededed;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
   }
 
   .icon-container:hover {
-    background: #eeeeee;
-    color: white !important;
+    background: var(--color-light-gray-2);
+    color: var(--color-white) !important;
   }
 
   .edit-button {
@@ -77,11 +77,11 @@ export const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #eeeeee;
+    border: 1px solid var(--color-light-gray-2);
     top: 10px;
     right: 10px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: var(--color-background-white);
     border-radius: 10px;
     padding: 2px;
     width: 35px;
@@ -159,17 +159,17 @@ export const XClose = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  border: 1px solid #eeeeee;
+  border: 1px solid var(--color-light-gray-2);
   top: 10px;
   right: 10px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: var(--color-background-white);
   border-radius: 5px;
   padding: 2px;
 
   &:hover {
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
   }
 
   @media (max-width: 480px) {

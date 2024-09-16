@@ -20,7 +20,7 @@ export const ContainerSentList = styled.div`
   }
 
   h1 {
-    color: #b71c1c;
+    color: var(--color-dark-red);
     font-weight: 600;
     font-size: 1.4rem;
     margin-bottom: 5px;
@@ -33,7 +33,7 @@ export const ContainerSentList = styled.div`
 
   .sent-by {
     font-size: 0.8rem;
-    color: #808080;
+    color: var(--color-dark-gray);
   }
 
   .title-container {
@@ -55,22 +55,22 @@ export const ContainerSentList = styled.div`
   .praise-container {
     display: flex;
     box-shadow: rgba(149, 157, 165, 0.1) 0px 4px 4px;
-    border: 1px solid #ededed;
+    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
     margin-bottom: 5px;
-    background-color: #fff;
+    background-color: var(--color-background-white);
   }
 
   .praise-sequence {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #b71c1c;
+    background-color: var(--color-dark-red);
     border-radius: 10px 0 0 10px;
     width: 50px;
     font-size: 2rem;
     margin-right: 20px;
-    color: #fff;
+    color: var(--color-white);
   }
 
   @media (max-width: 1024px) {
@@ -111,7 +111,7 @@ export const ContainerSentList = styled.div`
       width: 30px;
       font-size: 1.2rem;
       margin-right: 10px;
-      color: #fff;
+      color: var(--color-white);
     }
   }
 

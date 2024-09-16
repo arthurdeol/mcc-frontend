@@ -196,7 +196,7 @@ export default function MainFilter({
           placeholder="Which praise song are you looking for?"
         />
         <div className="filter-button" onClick={handleOpen}>
-          <LuSettings2 color={"black"} size={17} />
+          <LuSettings2 color={"var(--color-black)"} size={17} />
         </div>
       </div>
 

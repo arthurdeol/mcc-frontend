@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "./styles";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -58,7 +57,11 @@ export default function Praise() {
         </div>
       ) : (
         <div className="progress-container">
-          <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
+          <Stack
+            sx={{ color: "var(--color-dark-gray)" }}
+            spacing={2}
+            direction="row"
+          >
             <CircularProgress color="inherit" />
           </Stack>
         </div>
