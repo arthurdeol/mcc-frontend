@@ -37,9 +37,9 @@ export const ContainerPraisesList = styled.div`
     overflow-y: auto;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     .main-container {
-      height: 88vh;
+      height: 87vh;
     }
     .box {
       width: 96%;
