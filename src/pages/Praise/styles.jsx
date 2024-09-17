@@ -34,15 +34,19 @@ export const ContainerPraise = styled.div`
     height: 100%;
   }
 
-  @media (max-width: 1024px) {
-    .file {
-      margin-top: 6px;
+  @media (max-width: 1300px) {
+    .file-content {
+      width: 99%;
     }
   }
 
-  @media (max-width: 768px) {
-    .file-content {
-      width: 95%;
+  @media (max-width: 1024px) {
+    .file-container {
+      margin-top: 4.1rem;
+    }
+
+    .file {
+      margin-top: 6px;
     }
   }
 `;
