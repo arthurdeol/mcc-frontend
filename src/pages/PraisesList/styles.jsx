@@ -42,7 +42,7 @@ export const ContainerPraisesList = styled.div`
       height: 84vh;
     }
     .box {
-      width: 96%;
+      width: 98%;
     }
 
     .praises-container {
