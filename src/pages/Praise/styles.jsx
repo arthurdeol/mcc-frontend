@@ -17,6 +17,7 @@ export const ContainerPraise = styled.div`
     flex-direction: column;
     width: 70%;
     margin: 0 0 15px;
+    // width: 99%;
   }
 
   .file {
@@ -32,13 +33,15 @@ export const ContainerPraise = styled.div`
     height: 100%;
   }
 
-  @media (max-width: 1024px) {
-    .file-content {
-      width: 99%;
-    }
-
+   @media (max-width: 1024px) {
     .file {
       margin-top: 6px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .file-content {
+      width: 99%;
     }
   }
 `;
