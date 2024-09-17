@@ -83,36 +83,38 @@ export default function MyPraisesList() {
                   />
                 )}
 
-                <div className="praises-container">
-                  {servicePraises.map((praise, i) => (
-                    <Draggable
-                      draggableId={praise.songBookMapId}
-                      key={praise.songBookMapId}
-                      index={i}
-                    >
-                      {(provided) => (
-                        <div
-                          className="praise-container"
-                          {...provided.dragHandleProps}
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                        >
-                          <div className="praise-sequence">{i + 1}</div>
-                          <PraiseCard
-                            praise={praise}
-                            servicePraises={servicePraises}
-                            deletePraiseFromServiceList={
-                              deletePraiseFromServiceList
-                            }
-                            hasCloseButton={true}
-                            hasHeartButton={false}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
+                {!showShareList && (
+                  <div className="praises-container">
+                    {servicePraises.map((praise, i) => (
+                      <Draggable
+                        draggableId={praise.songBookMapId}
+                        key={praise.songBookMapId}
+                        index={i}
+                      >
+                        {(provided) => (
+                          <div
+                            className="praise-container"
+                            {...provided.dragHandleProps}
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                          >
+                            <div className="praise-sequence">{i + 1}</div>
+                            <PraiseCard
+                              praise={praise}
+                              servicePraises={servicePraises}
+                              deletePraiseFromServiceList={
+                                deletePraiseFromServiceList
+                              }
+                              hasCloseButton={true}
+                              hasHeartButton={false}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
               </div>
             )}
           </Droppable>

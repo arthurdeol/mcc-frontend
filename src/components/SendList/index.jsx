@@ -109,8 +109,32 @@ export default function SendList({
 
         <div className="title-list-container">
           <h2 className="title-list-to-share">
-            Do you want to share this list below?
+            Do you want to share this list?
           </h2>
+        </div>
+
+        <div className="list-content">
+          {servicePraises.map((praise, i) => (
+            <div className="item-container">
+              <div className="number">{i + 1}</div>
+
+              <p>
+                {praise.englishSongBookNumber &&
+                  `${praise.englishSongBookNumber} - `}
+                {praise.englishTitle
+                  ? praise.englishTitle
+                  : praise.portugueseSongBookNumber
+                  ? praise.portugueseSongBookNumber +
+                    " - " +
+                    praise.portugueseTitle
+                  : praise.portugueseTitle}
+
+                {praise.containsInCiasSongBook && (
+                  <div className="theme-tag">CIA</div>
+                )}
+              </p>
+            </div>
+          ))}
         </div>
 
         <Box sx={inputsContainer}>
@@ -186,8 +210,6 @@ export default function SendList({
             Share List
           </ButtonStyledSendList>
         </Box>
-
-        <h2 className="title-list">List to be shared:</h2>
       </div>
     </Container>
   );

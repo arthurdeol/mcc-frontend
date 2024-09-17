@@ -36,13 +36,55 @@ export const Container = styled.div`
     margin-bottom: 10px;
   }
 
+  .theme-tag {
+    display: flex;
+    align-self: center;
+    background: var(--color-white);
+    border: 1px solid var(--color-dark-red);
+    border-radius: 10px;
+    font-size: 0.5rem;
+    color: var(--color-dark-red);
+    text-align: center;
+    padding: 2px 8px;
+    margin-right: 4px;
+    height: 15px;
+    width: fit-content;
+  }
+
+  .list-content {
+    width: 95%;
+  }
+
+  .item-container {
+    display: flex;
+    border: 1px solid var(--color-light-gray-3);
+    border-radius: 5px;
+    margin-bottom: 1px;
+
+    p {
+      padding: 3px;
+    }
+  }
+
+  .number {
+    background-color: var(--color-dark-red);
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    min-width: 30px;
+    margin-right: 10px;
+    border-radius: 4px 0 0 4px;
+  }
+
   @media (max-width: 1024px) {
     width: 100%;
   }
 
   @media (max-width: 768px) {
-    .title-list-container {
-      margin: 30px 0 15px;
+    .list-content {
+      width: 92%;
     }
 
     .title-list {
@@ -59,10 +101,9 @@ export const Container = styled.div`
       font-size: 1.2rem;
     }
   }
-
-  @media (max-width: 480px) {
-    .title-list-container {
-      margin: 15px 0;
+  @media (max-width: 430px) {
+    .list-content {
+      width: 88%;
     }
   }
 `;
@@ -125,7 +166,7 @@ export const inputsContainer = {
   flexWrap: { xs: "wrap", sm: "wrap", md: "nowrap", lg: "nowrap" },
   width: "100%",
   marginBottom: { xs: "15px", sm: "10px", md: "20px", lg: "20px" },
-  padding: "0 25px",
+  padding: "40px 25px 0",
 };
 
 export const churchesSelect = {
@@ -167,6 +208,7 @@ export const footerSendList = {
 export const ButtonStyledSendList = styled.button`
   border: 1px solid var(--color-dark-red);
   background-color: var(--color-dark-red);
+  margin-top: 20px;
   color: var(--color-white);
   border-radius: 8px;
   padding: 7px 12px;
