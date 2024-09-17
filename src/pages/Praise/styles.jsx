@@ -22,7 +22,7 @@ export const ContainerPraise = styled.div`
   .file {
     width: 100%;
     height: 100%;
-    background: var(--color-background-white;
+    background: var(--color-background-white);
     margin-top: 15px;
   }
 
