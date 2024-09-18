@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Praise() {
+  const navigate = useNavigate();
   const { id, file } = useParams();
   const [louvor, setLouvor] = useState("");
   const [fileArray, setFileArray] = useState([]);
@@ -40,6 +41,7 @@ export default function Praise() {
       louvor.audioFile.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
     }
+    navigate(`/praise/${id}/${file}`);
   }
   const setUrl = (file) =>
     "data:" + file.document.contentType + ";base64," + file.document.file;
