@@ -26,10 +26,9 @@ export const ContainerPraise = styled.div`
 
   .progress-container {
     display: flex;
-    padding-top: 50%;
+    padding-top: 20%;
     justify-content: center;
     width: 100%;
-    height: 100%;
   }
 
   // .file-fullscreen {
