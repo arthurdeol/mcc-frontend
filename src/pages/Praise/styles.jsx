@@ -50,12 +50,21 @@ export const ContainerPraise = styled.div`
   }
 
   @media (max-width: 1024px) {
+    .progress-container {
+      padding-top: 40%;
+    }
     .file-container {
       margin-top: 4.1rem;
     }
 
     .file {
       margin-top: 6px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .progress-container {
+      padding-top: 50%;
     }
   }
 `;
