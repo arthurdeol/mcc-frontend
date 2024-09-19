@@ -1,22 +1,22 @@
 import React from "react";
 import {
   ContainerPraise,
-  FullScreenButton,
-  ExitFullScreenButton,
+  // FullScreenButton,
+  // ExitFullScreenButton,
 } from "./styles";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate, useParams } from "react-router-dom";
-import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
+// import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 
 export default function Praise() {
   const navigate = useNavigate();
   const { id, file } = useParams();
   const [louvor, setLouvor] = useState("");
   const [fileArray, setFileArray] = useState([]);
-  const [goFull, setGoFull] = useState(false);
+  // const [goFull, setGoFull] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,15 +30,15 @@ export default function Praise() {
     fetchData();
   }, [file]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    let e = document.getElementById("my-fullscreen");
-    let doc = document.documentElement,
-      state = document.webkitIsFullScreen || document.isFullScreen,
-      requestFunc = doc.requestFullscreen || doc.webkitRequestFullScreen,
-      cancelFunc = document.cancelFullScreen || document.webkitCancelFullScreen;
+  // useEffect(() => {
+  //   let e = document.getElementById("my-fullscreen");
+  //   let doc = document.documentElement,
+  //     state = document.webkitIsFullScreen || document.isFullScreen,
+  //     requestFunc = doc.requestFullscreen || doc.webkitRequestFullScreen,
+  //     cancelFunc = document.cancelFullScreen || document.webkitCancelFullScreen;
 
-    !state && e ? requestFunc.call(e) : cancelFunc.call(document);
-  }, [goFull]); // eslint-disable-line react-hooks/exhaustive-deps
+  //   !state && e ? requestFunc.call(e) : cancelFunc.call(document);
+  // }, [goFull]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function setActiveTab(file, louvor) {
     let arrayOfFile = [];
@@ -66,7 +66,7 @@ export default function Praise() {
       <Header louvor={louvor} setActiveTab={setActiveTab} />
       {louvor ? (
         <div className="file-container">
-          <div
+          {/* <div
             id="my-fullscreen"
             className={goFull ? "file-fullscreen" : "file-content"}
           >
@@ -74,14 +74,15 @@ export default function Praise() {
               <ExitFullScreenButton onClick={() => setGoFull(!goFull)}>
                 <RxExitFullScreen color={"var(--color-black)"} size={17} />
               </ExitFullScreenButton>
-            )}
-
+            )} */}
+          <div className="file-content">
             {fileArray.map((url, i) => (
               <img
                 key={i}
                 src={url}
                 alt="praiseImg"
-                className={goFull ? "img-fullscreen" : "file"}
+                // className={goFull ? "img-fullscreen" : "file"}
+                className="file"
               />
             ))}
           </div>
@@ -98,9 +99,9 @@ export default function Praise() {
         </div>
       )}
 
-      <FullScreenButton onClick={(e) => setGoFull(!goFull)}>
+      {/* <FullScreenButton onClick={(e) => setGoFull(!goFull)}>
         <RxEnterFullScreen color={"var(--color-black)"} size={17} />
-      </FullScreenButton>
+      </FullScreenButton> */}
     </ContainerPraise>
   );
 }
