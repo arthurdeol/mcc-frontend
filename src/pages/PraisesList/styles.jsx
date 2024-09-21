@@ -4,8 +4,8 @@ export const ContainerPraisesList = styled.div`
   .main-container {
     display: flex;
     justify-content: center;
-    height: 89vh;
     width: 100vw;
+    height: 100vh;
   }
 
   .box {
@@ -15,9 +15,8 @@ export const ContainerPraisesList = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1rem;
-    margin: 5rem 5% 0 5%;
+    margin: 5rem 5% 1rem;
     width: 80%;
-    height: 100%;
   }
 
   hr {
@@ -38,9 +37,6 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 1300px) {
-    .main-container {
-      height: 84vh;
-    }
     .box {
       width: 98%;
     }
@@ -57,32 +53,18 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 768px) {
-    .main-container {
-      height: 88vh;
-      margin: 0;
-      box-shadow: none;
-      border-radius: 0;
-    }
-
     .box {
-      margin: 5rem 1% 1%;
       width: 90%;
     }
   }
 
   @media (max-width: 480px) {
-    .main-container {
-      height: 80vh;
-    }
     .box {
       width: 100%;
-      margin: 4rem 0;
+      margin: 4rem 0 0;
       border-radius: 0;
-    }
-  }
-  @media (max-width: 430px) {
-    .box {
       box-shadow: none;
+      border-radius: 0;
     }
   }
 `;
