@@ -6,7 +6,7 @@ export const ContainerPraisesList = styled.div`
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   .box {
