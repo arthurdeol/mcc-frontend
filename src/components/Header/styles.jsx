@@ -7,6 +7,7 @@ export const linkStyle = {
 
 export const Container = styled.div`
   position: fixed;
+  // position: sticky;
   width: 100%;
   background-color: var(--color-background-white);
   height: 4rem;
@@ -16,6 +17,8 @@ export const Container = styled.div`
   z-index: 500;
   padding: 10px 30px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  top: 0;
+  left: 0;
 
   img {
     width: 150px;
@@ -53,7 +56,7 @@ export const Container = styled.div`
     border: 1px solid var(--color-light-gray);
     border-radius: 10px;
     width: 45px;
-    height: 100%;
+    height: 45px;
     margin-left: 5px;
   }
 
