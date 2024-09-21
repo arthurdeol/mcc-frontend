@@ -34,6 +34,7 @@ export const ContainerPraisesList = styled.div`
 
   .praises-container {
     width: 92%;
+    overflow-y: auto;
   }
 
   @media (max-width: 1300px) {
