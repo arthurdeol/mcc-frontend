@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const ContainerPraisesList = styled.div`
+  overflow-y: hidden;
+
   .main-container {
     display: flex;
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    overflow-y: hidden;
   }
 
   .box {
