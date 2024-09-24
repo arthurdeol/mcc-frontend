@@ -48,7 +48,7 @@ export const ContainerPraisesList = styled.div`
     height: 92vh;
 
     .main-container {
-      height: 95%;
+      height: 94%;
     }
 
     .box {
@@ -74,10 +74,6 @@ export const ContainerPraisesList = styled.div`
 
   @media (max-width: 480px) {
     height: 81vh;
-
-    // .main-container {
-    //   height: 100%;
-    // }
 
     .box {
       width: 100%;
