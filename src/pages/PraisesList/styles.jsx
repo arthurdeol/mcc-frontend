@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ContainerPraisesList = styled.div`
   width: 100vw;
   height: 100vh;
+  // height: 100%;
   // background: purple;
 
   .main-container {
@@ -44,6 +45,8 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 1300px) {
+    height: 80vh;
+
     .box {
       width: 98%;
     }
