@@ -73,6 +73,12 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 480px) {
+    height: 89vh;
+
+    .main-container {
+      height: 100%;
+    }
+
     .box {
       width: 100%;
       margin: 0;
