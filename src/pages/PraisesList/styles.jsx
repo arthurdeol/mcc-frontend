@@ -45,7 +45,7 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 1300px) {
-    height: 94vh;
+    height: 92vh;
 
     .box {
       width: 98%;
