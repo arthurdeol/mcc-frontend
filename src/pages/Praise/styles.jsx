@@ -8,7 +8,10 @@ export const ContainerPraise = styled.div`
   .file-container {
     display: flex;
     justify-content: center;
-    margin-top: 4.3rem;
+    margin-top: 15px;
+    // background: pink;
+    height: 90%;
+    overflow-x: auto;
   }
 
   .file-content {
@@ -21,7 +24,6 @@ export const ContainerPraise = styled.div`
   .file {
     width: 100%;
     background: var(--color-background-white);
-    margin-top: 15px;
   }
 
   .progress-container {
@@ -54,11 +56,7 @@ export const ContainerPraise = styled.div`
       padding-top: 40%;
     }
     .file-container {
-      margin-top: 4.1rem;
-    }
-
-    .file {
-      margin-top: 6px;
+      margin-top: 5px;
     }
   }
 

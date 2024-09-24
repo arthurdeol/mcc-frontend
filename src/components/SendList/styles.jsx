@@ -13,6 +13,8 @@ export const Container = styled.div`
     border-radius: 20px;
     font-size: 1rem;
     width: 100%;
+    height: 100%;
+    background-color: var(--color-white);
   }
 
   .title-list-container,
@@ -101,7 +103,11 @@ export const Container = styled.div`
       font-size: 1.2rem;
     }
   }
+
   @media (max-width: 430px) {
+    .main {
+      border-radius: 0;
+    }
     .list-content {
       width: 88%;
     }
