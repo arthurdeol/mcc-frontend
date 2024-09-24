@@ -4,7 +4,7 @@ export const ContainerPraisesList = styled.div`
   width: 100vw;
   height: 100vh;
   // height: 100%;
-  // background: purple;
+  //background: purple;
 
   .main-container {
     display: flex;
@@ -45,7 +45,7 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 1300px) {
-    height: 96vh;
+    height: 94vh;
 
     .box {
       width: 98%;
