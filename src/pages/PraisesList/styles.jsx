@@ -88,7 +88,7 @@ export const ContainerPraisesList = styled.div`
 
     .box {
       width: 100%;
-      margin: 4rem 0;
+      margin: 4rem 0 1rem;
       border-radius: 0;
       box-shadow: none;
     }

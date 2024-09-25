@@ -117,7 +117,9 @@ export default function SendList({
           {servicePraises.map((praise, i) => (
             <div className="item-container">
               <div className="number">{i + 1}</div>
-
+              {praise.containsInCiasSongBook && (
+                <div className="theme-tag-cia">CIA's</div>
+              )}
               <p>
                 {praise.englishSongBookNumber &&
                   `${praise.englishSongBookNumber} - `}
@@ -128,10 +130,6 @@ export default function SendList({
                     " - " +
                     praise.portugueseTitle
                   : praise.portugueseTitle}
-
-                {praise.containsInCiasSongBook && (
-                  <div className="theme-tag">CIA</div>
-                )}
               </p>
             </div>
           ))}

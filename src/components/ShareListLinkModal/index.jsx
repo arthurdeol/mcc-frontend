@@ -59,7 +59,7 @@ export default function ShareListLinkModal({
                 variant="h5"
                 component="h2"
               >
-                Share this list throught this link
+                share the list through this link
               </Typography>
               <InputContainer>
                 <TextField

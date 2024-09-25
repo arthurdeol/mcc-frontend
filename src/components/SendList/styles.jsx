@@ -38,18 +38,18 @@ export const Container = styled.div`
     margin-bottom: 10px;
   }
 
-  .theme-tag {
+  .theme-tag-cia {
     display: flex;
     align-self: center;
     background: var(--color-white);
-    border: 1px solid var(--color-dark-red);
+    border: 1px solid var(--color-dark-red-1);
+    color: var(--color-dark-red);
     border-radius: 10px;
     font-size: 0.5rem;
-    color: var(--color-dark-red);
     text-align: center;
-    padding: 2px 8px;
+    padding: 1px 6px;
     margin-right: 4px;
-    height: 15px;
+    //height: 15px;
     width: fit-content;
   }
 

@@ -4,7 +4,7 @@ export const ContainerSentList = styled.div`
   .list-container {
     display: flex;
     justify-content: center;
-    height: 89vh;
+    //height: 89vh;
   }
 
   .box-list {
@@ -12,11 +12,11 @@ export const ContainerSentList = styled.div`
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
     font-size: 1rem;
-    margin: 5rem 5% 0 5%;
+    margin: 3.7rem 5% 1rem 5%;
     width: 80%;
-    height: 100%;
+    //height: 100%;
   }
 
   h1 {
@@ -33,13 +33,21 @@ export const ContainerSentList = styled.div`
 
   .sent-by {
     font-size: 0.8rem;
+    font-weight: 100;
     color: var(--color-dark-gray);
   }
 
   .title-container {
-    margin: 20px 0 5px;
+    // margin: 20px 0 5px;
     width: 100%;
-    padding: 0 25px;
+    // padding: 0 25px;
+    position: fixed;
+    width: 80%;
+
+    background-color: var(--color-white);
+    //background: pink;
+    padding: 1.5rem 3rem 15px;
+    z-index: 500;
   }
 
   .date-container {
@@ -50,6 +58,7 @@ export const ContainerSentList = styled.div`
     width: 92%;
     overflow-y: auto;
     margin: 20px 0;
+    padding-top: 6.5rem;
   }
 
   .praise-container {
@@ -74,8 +83,13 @@ export const ContainerSentList = styled.div`
   }
 
   @media (max-width: 1024px) {
-    .list-container {
-      height: 88vh;
+    // .list-container {
+    //   height: 88vh;
+    // }
+
+    .title-container {
+      width: 90%;
+      padding: 1.5rem 2rem 15px;
     }
 
     .box-list {
@@ -89,7 +103,7 @@ export const ContainerSentList = styled.div`
 
   @media (max-width: 933px) {
     .box-list {
-      margin: 5rem 1%;
+      // margin: 5rem 1%;
     }
 
     .praises-container {
@@ -98,12 +112,12 @@ export const ContainerSentList = styled.div`
   }
 
   @media (max-width: 768px) {
-    .list-container {
-      height: 88vh;
-    }
+    // .list-container {
+    //   height: 88vh;
+    // }
 
     .box-list {
-      margin: 5rem 1% 1%;
+      // margin: 4rem 1% 1%;
       width: 90%;
     }
 
@@ -116,23 +130,36 @@ export const ContainerSentList = styled.div`
   }
 
   @media (max-width: 480px) {
-    .list-container {
-      height: 80vh;
+    // .list-container {
+    //   height: 80vh;
+    // }
+
+    h1 {
+      font-size: 1.1rem;
+    }
+
+    .comment {
+      font-size: 1rem;
+    }
+
+    .sent-by {
+      font-size: 0.7rem;
+    }
+
+    .title-container {
+      width: 100%;
+      padding: 1.2rem 1.5rem 10px;
     }
 
     .box-list {
       width: 100%;
-      margin: 4rem 0;
+      margin: 4rem 0 1rem;
       border-radius: 0;
+      box-shadow: none;
     }
 
     .praises-container {
-      margin: 20px 0 0;
-    }
-  }
-  @media (max-width: 430px) {
-    .box-list {
-      box-shadow: none;
+      margin: 5px 0 0;
     }
   }
 `;

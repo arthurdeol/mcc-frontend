@@ -37,7 +37,7 @@ export default function PraiseCard({
         )}
         <div className="theme-tag-container">
           {praise.containsInCiasSongBook && (
-            <div className="theme-tag">CIA</div>
+            <div className="theme-tag-cia">CIA's</div>
           )}
           <div className="theme-tag">{praise.theme}</div>
         </div>

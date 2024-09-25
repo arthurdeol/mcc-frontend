@@ -30,14 +30,26 @@ export const Card = styled.div`
     margin-top: 9px;
   }
 
-  .theme-tag {
+  .theme-tag,
+  .theme-tag-cia {
     display: flex;
-    background: var(--color-light-gray);
     border-radius: 10px;
     font-size: 0.5rem;
-    color: var(--color-dark-gray);
     text-align: center;
-    padding: 2px 8px;
+  }
+
+  .theme-tag {
+    background: var(--color-light-gray-1);
+    border: 1px solid var(--color-light-gray);
+    color: var(--color-dark-gray);
+    padding: 1px 7px;
+  }
+
+  .theme-tag-cia {
+    background: var(--color-white);
+    color: var(--color-dark-red);
+    border: 1px solid var(--color-dark-red-1);
+    padding: 1px 6px;
     margin-right: 4px;
   }
 

@@ -72,8 +72,11 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f9f9f9;
-    border: 1px solid #a5a5a5;
+    background: var(--color-white);
+    color: var(--color-dark-red);
+    border: 1px solid var(--color-dark-red-1);
+    // background: #f9f9f9;
+    // border: 1px solid #a5a5a5;
     font-size: 0.5rem;
     border-radius: 100%;
     height: 17px;
