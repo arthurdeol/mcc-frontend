@@ -56,9 +56,9 @@ export const ContainerPraise = styled.div`
   }
 
   @media (max-width: 1300px) {
-    // .progress-container {
-    //   padding-top: 40%;
-    // }
+    .progress-container {
+      padding-top: 40%;
+    }
 
     .file-container {
       margin-top: 5px;
