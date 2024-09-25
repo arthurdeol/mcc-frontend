@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ContainerPraise = styled.div`
   overflow-x: hidden;
-  height: 100vh;
-  background: var(--color-light-gray);
+  //height: 100vh;
+  //background: var(--color-light-gray);
 
   .file-container {
     display: flex;
@@ -12,6 +12,7 @@ export const ContainerPraise = styled.div`
     // background: pink;
     //height: 90%;
     overflow-x: auto;
+    background: var(--color-light-gray);
   }
 
   .file-content {
@@ -25,6 +26,7 @@ export const ContainerPraise = styled.div`
   .file {
     width: 100%;
     background: var(--color-background-white);
+    border: 0;
   }
 
   .progress-container {
@@ -32,6 +34,7 @@ export const ContainerPraise = styled.div`
     padding-top: 20%;
     justify-content: center;
     width: 100%;
+    background: var(--color-background-white);
   }
 
   // .file-fullscreen {
@@ -52,12 +55,23 @@ export const ContainerPraise = styled.div`
     }
   }
 
-  @media (max-width: 1024px) {
-    .progress-container {
-      padding-top: 40%;
-    }
+  @media (max-width: 1300px) {
+    // .progress-container {
+    //   padding-top: 40%;
+    // }
+
     .file-container {
       margin-top: 5px;
+    }
+  }
+
+  @media (max-width: 670px) {
+    .file-container {
+      background: var(--color-white);
+    }
+
+    .file {
+      border: 1px solid var(--color-light-gray-1);
     }
   }
 
