@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ContainerServicePraiseList = styled.div`
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  // height: 100vh;
   // background: green;
 
   .service-container {
@@ -11,6 +11,7 @@ export const ContainerServicePraiseList = styled.div`
     // height: 89vh;
     height: 90%;
     // background: red;
+    margin-top: 4rem;
   }
 
   .box {
@@ -18,7 +19,7 @@ export const ContainerServicePraiseList = styled.div`
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
     font-size: 1rem;
     // margin: 5rem 5% 0 5%;
     margin: 1rem 5%;
@@ -58,10 +59,10 @@ export const ContainerServicePraiseList = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80%;
+    // height: 80%;
     width: 100%;
     color: var(--color-black);
-    padding: 0 20%;
+    padding: 7% 0 4%;
 
     div {
       display: flex;

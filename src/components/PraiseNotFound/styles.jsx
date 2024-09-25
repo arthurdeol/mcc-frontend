@@ -5,6 +5,7 @@ export const ErrorPage = styled.div`
   align-items: center;
   align-self: center;
   padding: 15% 20%;
+  margin: 20% 0 10% 0;
 
   .musical-note-error-page {
     width: 120px;
@@ -39,6 +40,7 @@ export const ErrorPage = styled.div`
   }
 
   @media (max-width: 435px) {
+    margin: 40% 0 10% 0;
     .img-praise-not-found {
       margin-right: 20px;
     }

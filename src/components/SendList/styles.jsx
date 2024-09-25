@@ -203,7 +203,7 @@ export const title = {
 };
 
 export const footerSendList = {
-  margin: { xs: "0", sm: "0", md: "0 0 20px", lg: "0 0 20px" },
+  margin: { xs: "0 0 20px", sm: "0 0 20px", md: "0 0 30px", lg: "0 0 20px" },
   width: "100%",
   display: "flex",
   alignItems: "center",

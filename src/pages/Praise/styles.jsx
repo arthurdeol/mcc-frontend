@@ -8,9 +8,9 @@ export const ContainerPraise = styled.div`
   .file-container {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    //margin-top: 15px;
     // background: pink;
-    height: 90%;
+    //height: 90%;
     overflow-x: auto;
   }
 
@@ -19,6 +19,7 @@ export const ContainerPraise = styled.div`
     flex-direction: column;
     width: 70%;
     margin: 0 0 15px;
+    margin-top: 4.2rem;
   }
 
   .file {

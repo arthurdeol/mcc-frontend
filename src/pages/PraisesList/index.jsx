@@ -91,16 +91,15 @@ const PraisesList = () => {
     <ContainerPraisesList>
       <Header servicePraises={servicePraises} />
       <div className="main-container">
+        <MainFilter
+          louvores={louvores}
+          setPraiseNotFound={setPraiseNotFound}
+          setFilteredLouvores={setFilteredLouvores}
+          complexFilterApplied={complexFilterApplied}
+          setComplexFilterApplied={setComplexFilterApplied}
+          setMainFilterApplied={setMainFilterApplied}
+        />
         <div className="box">
-          <MainFilter
-            louvores={louvores}
-            setPraiseNotFound={setPraiseNotFound}
-            setFilteredLouvores={setFilteredLouvores}
-            complexFilterApplied={complexFilterApplied}
-            setComplexFilterApplied={setComplexFilterApplied}
-            setMainFilterApplied={setMainFilterApplied}
-          />
-
           {displayError && <ErrorDisplay />}
 
           {!displayError && (

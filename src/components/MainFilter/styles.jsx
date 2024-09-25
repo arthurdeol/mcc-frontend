@@ -2,8 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  position: fixed;
   justify-content: center;
-  width: 100%;
+  // width: 90%;
+  width: 80%;
+  z-index: 500;
+  // border-radius: 20px 20px 0 0;
+  background-color: var(--color-white);
+  margin-top: 3.8rem;
+
   // padding-top: 5rem;
 
   .search-container {
@@ -40,10 +47,29 @@ export const Container = styled.div`
     color: var(--color-white) !important;
   }
 
+  @media (max-width: 1300px) {
+    width: 90%;
+  }
+
   @media (max-width: 933px) {
     .search-container {
       width: 92%;
       padding: 2rem 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    border-radius: 0;
+    margin-top: 4rem;
+
+    .search-container {
+      padding: 1.2rem 10px;
+      width: 100%;
     }
   }
 `;
