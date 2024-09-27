@@ -95,7 +95,7 @@ export const ContainerServicePraiseList = styled.div`
     }
 
     .praises-not-selected {
-      padding: 0 5%;
+      padding: 7% 5% 4%;
     }
 
     .praise-sequence {
@@ -114,6 +114,10 @@ export const ContainerServicePraiseList = styled.div`
       box-shadow: none;
     }
 
+    .praises-not-selected {
+      padding: 40% 5%;
+    }
+
     .praises-container {
       margin: 20px 0 15px;
     }
@@ -121,13 +125,13 @@ export const ContainerServicePraiseList = styled.div`
 
   @media (max-width: 430px) {
     .praises-not-selected {
-      padding: 0 8%;
+      padding: 40% 8%;
     }
   }
 
   @media (max-width: 375px) {
     .praises-not-selected {
-      padding: 0 15%;
+      padding: 35% 15%;
       div {
         flex-direction: column;
         align-items: center;
