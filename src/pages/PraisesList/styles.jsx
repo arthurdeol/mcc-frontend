@@ -1,18 +1,11 @@
 import styled from "styled-components";
 
 export const ContainerPraisesList = styled.div`
-  // width: 100vw;
-  // height: 100vh;
-  // height: 100%;
-  //background: purple;
   overflow-x: hidden;
 
   .main-container {
     display: flex;
     justify-content: center;
-    // overflow-y: hidden;
-    //height: 100%;
-    //background: blue;
   }
 
   .box {
@@ -22,12 +15,8 @@ export const ContainerPraisesList = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
     font-size: 1rem;
-    // margin: 5rem 5% 1rem;
     margin: 4.5rem 5% 1rem 5%;
-    //padding: 4rem 0 0;
     width: 80%;
-    //background: pink;
-    // height: auto;
     overflow-x: hidden;
   }
 
@@ -45,19 +34,10 @@ export const ContainerPraisesList = styled.div`
 
   .praises-container {
     width: 92%;
-    // overflow-y: auto;
-    // overflow-x: auto;
     margin-top: 8rem;
-    //background: yellow;
   }
 
   @media (max-width: 1300px) {
-    // height: 92vh;
-
-    // .main-container {
-    //   height: 94%;
-    // }
-
     .box {
       width: 98%;
     }
@@ -84,8 +64,6 @@ export const ContainerPraisesList = styled.div`
   }
 
   @media (max-width: 480px) {
-    // height: 81vh;
-
     .box {
       width: 100%;
       margin: 4rem 0 1rem;

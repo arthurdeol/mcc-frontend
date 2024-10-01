@@ -79,17 +79,18 @@ const PraisesListAdmin = () => {
   return (
     <Container>
       <Header />
-      <div className="main-container">
-        <div className="box">
-          <h1>Admin - Praises</h1>
-          <MainFilter
-            louvores={louvores}
-            setPraiseNotFound={setPraiseNotFound}
-            setFilteredLouvores={setFilteredLouvores}
-            setComplexFilterApplied={setComplexFilterApplied}
-            setMainFilterApplied={setMainFilterApplied}
-          />
 
+      <div className="main-container">
+        <MainFilter
+          louvores={louvores}
+          setPraiseNotFound={setPraiseNotFound}
+          setFilteredLouvores={setFilteredLouvores}
+          setComplexFilterApplied={setComplexFilterApplied}
+          setMainFilterApplied={setMainFilterApplied}
+        />
+
+        <div className="box">
+          <div className="admin-praises">Admin - Praises</div>
           {displayError && <ErrorDisplay />}
 
           {!displayError && (

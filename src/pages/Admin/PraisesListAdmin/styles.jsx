@@ -1,20 +1,29 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  overflow-x: hidden;
+
   .main-container {
     display: flex;
     justify-content: center;
-    height: 91vh;
-    width: 100vw;
   }
 
-  h1 {
-    margin-top: 20px;
-    width: 90%;
+  .admin-praises {
+    position: fixed;
+    margin-top: 7rem;
+    width: 80%;
     text-align: left;
     color: var(--color-dark-gray);
     font-weight: 600;
     font-size: 1.4rem;
+    background: var(--color-white);
+    padding: 1rem 5% 0;
+    z-index: 200;
+  }
+
+  .praises-container {
+    width: 92%;
+    margin-top: 11.5rem;
   }
 
   hr {
@@ -26,108 +35,28 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    margin: 5rem 5% 0 5%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+    font-size: 1rem;
+    margin: 4.5rem 5% 1rem 5%;
     width: 80%;
-    height: 100%;
+    overflow-x: hidden;
   }
 
   .progress-container {
     display: flex;
-    padding-top: 15%;
+    padding: 30% 0;
     justify-content: center;
     width: 100%;
-    height: 100vh;
-  }
-
-  .praises-container {
-    width: 92%;
-    overflow-y: auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .praise-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-self: center;
-    padding: 20px 10px;
-    border-bottom: 1px solid var(--color-light-gray);
-  }
-
-  .titles {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: space-between;
-  }
-
-  .praise-title-en {
-    font-size: 1rem;
-  }
-
-  .praise-title-pt {
-    margin-top: 2px;
-    font-size: 0.9rem;
-    color: var(--color-dark-gray);
-  }
-
-  .theme-tag-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .theme-tag {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    background: var(--color-light-gray);
-    border-radius: 10px;
-    font-size: 0.5rem;
-    color: var(--color-dark-gray);
-    text-align: center;
     height: auto;
-    padding: 2px 8px;
-    margin-right: 2px;
   }
 
-  .icons-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .icon-container {
-    width: 35px;
-    height: 35px;
-    margin-right: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--color-background-white);
-    border: 1px solid var(--color-light-gray);
-    border-radius: 10px;
-  }
-
-  .icon-container:hover {
-    background: var(--color-light-gray-2);
-    color: var(--color-white) !important;
-  }
-
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-  }
-
-  @media (max-width: 1024px) {
-    .main-container {
-      height: 90vh;
-    }
+  @media (max-width: 1300px) {
     .box {
-      width: 96%;
+      width: 98%;
+    }
+
+    .admin-praises {
+      width: 90%;
     }
 
     .praises-container {
@@ -136,86 +65,41 @@ export const Container = styled.div`
   }
 
   @media (max-width: 933px) {
-    .box {
-      margin: 5rem 1% 1%;
-    }
-
     .praises-container {
       width: 93%;
     }
   }
 
   @media (max-width: 768px) {
-    .main-container {
-      margin: 0;
-      // height: 100vh;
-      box-shadow: none;
-      border-radius: 0;
-    }
-
     .box {
       width: 90%;
     }
 
-    .praise-title {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
+    .admin-praises {
+      margin-top: 6rem;
     }
 
-    .theme-tag {
-      font-size: 0.5rem;
-      text-align: center;
-      height: fit-content;
-      padding: 2px 5px;
+    .praises-container {
+      margin-top: 10rem;
     }
 
-    .icons-container {
-      margin-left: 5%;
+    .progress-container {
+      padding: 35% 0;
     }
   }
 
   @media (max-width: 480px) {
     .box {
       width: 100%;
-      margin: 5rem 0 0;
+      margin: 4rem 0 1rem;
       border-radius: 0;
-    }
-
-    .praise-container {
-      flex-direction: column;
-      padding: 15px 0;
-    }
-
-    .icons-container {
-      margin-left: 0;
-      display: flex;
-      justify-content: end;
-    }
-  }
-  @media (max-width: 430px) {
-    .box {
       box-shadow: none;
     }
-  }
 
-  @media (max-width: 425px) {
-    .praise-title-en {
-      font-size: 0.9rem;
-    }
-
-    .praise-title-pt {
-      font-size: 0.8rem;
-    }
-
-    .theme-tag {
-      font-size: 0.45rem;
-    }
-
-    .icon-container {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
+    .admin-praises {
+      margin-top: 5rem;
+      width: 100%;
+      padding: 1rem 3% 0;
     }
   }
 `;
