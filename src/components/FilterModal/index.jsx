@@ -29,7 +29,7 @@ export default function FilterModal({
     containsInCiasSongBook: false,
     pleadingTheme: false,
     chorusesTheme: false,
-    confortAndEncouragementTheme: false,
+    comfortAndEncouragementTheme: false,
     dedicationTheme: false,
     deathRessurectionAndSalvationTheme: false,
     eternityAndTheReturnOfJesusTheme: false,
@@ -43,7 +43,7 @@ export default function FilterModal({
     containsInCiasSongBook,
     pleadingTheme,
     chorusesTheme,
-    confortAndEncouragementTheme,
+    comfortAndEncouragementTheme,
     dedicationTheme,
     deathRessurectionAndSalvationTheme,
     eternityAndTheReturnOfJesusTheme,
@@ -75,8 +75,8 @@ export default function FilterModal({
       if (formValue.chorusesTheme) {
         themesApplied.push("CHORUSES");
       }
-      if (formValue.confortAndEncouragementTheme) {
-        themesApplied.push("CONFORT AND ENCOURAGEMENT");
+      if (formValue.comfortAndEncouragementTheme) {
+        themesApplied.push("COMFORT AND ENCOURAGEMENT");
       }
       if (formValue.dedicationTheme) {
         themesApplied.push("DEDICATION");
@@ -109,7 +109,7 @@ export default function FilterModal({
       containsInCiasSongBook: false,
       pleadingTheme: false,
       chorusesTheme: false,
-      confortAndEncouragementTheme: false,
+      comfortAndEncouragementTheme: false,
       dedicationTheme: false,
       deathRessurectionAndSalvationTheme: false,
       eternityAndTheReturnOfJesusTheme: false,
@@ -167,9 +167,9 @@ export default function FilterModal({
               control={
                 <Checkbox
                   sx={checked}
-                  checked={confortAndEncouragementTheme}
+                  checked={comfortAndEncouragementTheme}
                   onChange={handleChange}
-                  name="confortAndEncouragementTheme"
+                  name="comfortAndEncouragementTheme"
                 />
               }
               label="Comfort and Encouragement"
