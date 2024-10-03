@@ -186,5 +186,10 @@ export const XClose = styled.div`
 
   @media (max-width: 480px) {
     right: 5px;
+
+    &:hover {
+      border: 1px solid var(--color-light-gray-2);
+      color: var(--color-black);
+    }
   }
 `;
