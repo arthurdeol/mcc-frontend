@@ -31,7 +31,7 @@ export default function FilterModal({
     chorusesTheme: false,
     comfortAndEncouragementTheme: false,
     dedicationTheme: false,
-    deathRessurectionAndSalvationTheme: false,
+    deathResurrectionAndSalvationTheme: false,
     eternityAndTheReturnOfJesusTheme: false,
     invocationFellowshipTheme: false,
     santificationOutpouringHSTheme: false,
@@ -45,7 +45,7 @@ export default function FilterModal({
     chorusesTheme,
     comfortAndEncouragementTheme,
     dedicationTheme,
-    deathRessurectionAndSalvationTheme,
+    deathResurrectionAndSalvationTheme,
     eternityAndTheReturnOfJesusTheme,
     invocationFellowshipTheme,
     santificationOutpouringHSTheme,
@@ -81,8 +81,8 @@ export default function FilterModal({
       if (formValue.dedicationTheme) {
         themesApplied.push("DEDICATION");
       }
-      if (formValue.deathRessurectionAndSalvationTheme) {
-        themesApplied.push("DEATH, RESSURECTION AND SALVATION");
+      if (formValue.deathResurrectionAndSalvationTheme) {
+        themesApplied.push("DEATH, RESURRECTION AND SALVATION");
       }
       if (formValue.eternityAndTheReturnOfJesusTheme) {
         themesApplied.push("ETERNITY AND THE RETURN OF JESUS");
@@ -111,7 +111,7 @@ export default function FilterModal({
       chorusesTheme: false,
       comfortAndEncouragementTheme: false,
       dedicationTheme: false,
-      deathRessurectionAndSalvationTheme: false,
+      deathResurrectionAndSalvationTheme: false,
       eternityAndTheReturnOfJesusTheme: false,
       invocationFellowshipTheme: false,
       santificationOutpouringHSTheme: false,
@@ -201,9 +201,9 @@ export default function FilterModal({
               control={
                 <Checkbox
                   sx={checked}
-                  checked={deathRessurectionAndSalvationTheme}
+                  checked={deathResurrectionAndSalvationTheme}
                   onChange={handleChange}
-                  name="deathRessurectionAndSalvationTheme"
+                  name="deathResurrectionAndSalvationTheme"
                 />
               }
               label="Death, Resurrection and Salvation"
