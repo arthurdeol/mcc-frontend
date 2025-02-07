@@ -33,7 +33,8 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
-  .icon-container {
+  .icon-container,
+  .sent-service-list-button {
     display: flex;
     justify-content: center;
     align-items: center;

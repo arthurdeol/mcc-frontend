@@ -1,6 +1,12 @@
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic, LuShare2 } from "react-icons/lu";
+import {
+  LuType,
+  LuListMusic,
+  LuMusic,
+  LuShare2,
+  LuListEnd,
+} from "react-icons/lu";
 import { PiListHeart } from "react-icons/pi";
 
 const Header = ({
@@ -12,6 +18,7 @@ const Header = ({
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
   const isPathPraise = navPath.indexOf("/praise/") !== -1;
+  const takeSentServiceListId = localStorage.getItem("sentServiceListId");
 
   return (
     <Container>
@@ -40,6 +47,21 @@ const Header = ({
       {navPath === "/my-praises-list" && servicePraises.length > 0 && (
         <div className="share-button" onClick={() => setShowShareList(true)}>
           <LuShare2 size={20} color="var(--color-black)" />
+        </div>
+      )}
+
+      {/* ----------------Return to Service List------------------ */}
+      {localStorage.getItem("sentServiceListId") && isPathPraise && (
+        <div
+          className="sent-service-list-button"
+          onClick={() =>
+            navigate(`/shared-praises-list/${takeSentServiceListId}`)
+          }
+        >
+          <LuListEnd size={20} color="var(--color-black)" />
+          {servicePraises.length > 0 && (
+            <div className="list-length">{servicePraises.length}</div>
+          )}
         </div>
       )}
 

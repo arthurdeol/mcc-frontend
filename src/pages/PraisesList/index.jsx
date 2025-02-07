@@ -48,6 +48,7 @@ const PraisesList = () => {
   }
 
   useEffect(() => {
+    localStorage.setItem("sentServiceListId", "");
     if (!complexFilterApplied && !mainFilterApplied) {
       fetch(url)
         .then((res) => res.json())
