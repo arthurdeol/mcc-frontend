@@ -50,21 +50,6 @@ const Header = ({
         </div>
       )}
 
-      {/* ----------------Return to Service List------------------ */}
-      {localStorage.getItem("sentServiceListId") && isPathPraise && (
-        <div
-          className="sent-service-list-button"
-          onClick={() =>
-            navigate(`/shared-praises-list/${takeSentServiceListId}`)
-          }
-        >
-          <LuListEnd size={20} color="var(--color-black)" />
-          {servicePraises.length > 0 && (
-            <div className="list-length">{servicePraises.length}</div>
-          )}
-        </div>
-      )}
-
       {isPathPraise && (
         <div className="icons-container">
           {louvor.linkSheetMusic ? (
@@ -118,6 +103,21 @@ const Header = ({
               <LuVolume1 color={"var(--color-gray-2)"} size={20} />
             </div>
           )} */}
+
+          {/* ----------------Return to Service List------------------ */}
+          {localStorage.getItem("sentServiceListId") && isPathPraise && (
+            <div
+              className="sent-service-list-button"
+              onClick={() =>
+                navigate(`/shared-praises-list/${takeSentServiceListId}`)
+              }
+            >
+              <LuListEnd size={20} color="var(--color-black)" />
+              {servicePraises.length > 0 && (
+                <div className="list-length">{servicePraises.length}</div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </Container>

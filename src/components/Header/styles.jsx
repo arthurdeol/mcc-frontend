@@ -47,6 +47,10 @@ export const Container = styled.div`
     font-size: 1rem;
   }
 
+  .sent-service-list-button {
+    margin-left: 30px;
+  }
+
   .list-button,
   .share-button {
     position: relative;
