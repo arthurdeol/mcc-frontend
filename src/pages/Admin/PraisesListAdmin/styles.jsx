@@ -8,19 +8,6 @@ export const Container = styled.div`
     justify-content: center;
   }
 
-  .admin-praises {
-    position: fixed;
-    margin-top: 7rem;
-    width: 80%;
-    text-align: left;
-    color: var(--color-dark-gray);
-    font-weight: 600;
-    font-size: 1.4rem;
-    background: var(--color-white);
-    padding: 1rem 5% 0;
-    z-index: 200;
-  }
-
   .praises-container {
     width: 92%;
     margin-top: 8rem;
@@ -55,10 +42,6 @@ export const Container = styled.div`
       width: 98%;
     }
 
-    .admin-praises {
-      width: 90%;
-    }
-
     .praises-container {
       width: 95%;
     }
@@ -75,12 +58,8 @@ export const Container = styled.div`
       width: 90%;
     }
 
-    .admin-praises {
-      margin-top: 6rem;
-    }
-
     .praises-container {
-      margin-top: 10rem;
+      margin-top: 6rem;
     }
 
     .progress-container {
@@ -94,12 +73,6 @@ export const Container = styled.div`
       margin: 4rem 0 1rem;
       border-radius: 0;
       box-shadow: none;
-    }
-
-    .admin-praises {
-      margin-top: 5rem;
-      width: 100%;
-      padding: 1rem 3% 0;
     }
   }
 `;

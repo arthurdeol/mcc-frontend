@@ -111,6 +111,10 @@ export const Container = styled.div`
       margin-left: 5px;
     }
 
+    .praise-settings-title {
+      text-align: right;
+    }
+
     .list-button,
     .share-button {
       margin-right: 6px;
