@@ -27,7 +27,9 @@ const Header = ({
         src="/images/logomcc.jpeg"
         alt="mcc logo"
         onClick={() =>
-          navPath === "/praise-settings" || navPath === "/praises-admin"
+          navPath === "/praise-settings" ||
+          navPath === "/praises-admin" ||
+          navPath === "/add-praise"
             ? navigate("/praises-admin")
             : navigate("/")
         }
