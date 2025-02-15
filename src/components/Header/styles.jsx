@@ -88,6 +88,16 @@ export const Container = styled.div`
     width: 17px;
   }
 
+  .praise-settings-title {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    margin-left: -2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-dark-red);
+  }
+
   @media (max-width: 767px) {
     padding: 10px;
     img {

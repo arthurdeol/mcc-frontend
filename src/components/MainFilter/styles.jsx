@@ -30,21 +30,38 @@ export const Container = styled.div`
     font-size: 1rem;
   }
 
-  .filter-button {
+  .filter-button,
+  .new-praise-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color-background-white);
-    border: 1px solid var(--color-light-gray);
     border-radius: 10px;
-    width: 45px;
     height: 100%;
+    width: 45px;
     margin-left: 5px;
+    cursor: pointer;
   }
 
-  .filter-button:hover {
-    background: var(--color-light-gray-2);
-    color: var(--color-white) !important;
+  .filter-button {
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
+
+    &:hover {
+      background: var(--color-light-gray-2);
+      color: var(--color-white) !important;
+    }
+  }
+
+  .new-praise-button {
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
+    background-color: var(--color-background-white);
+    margin-left: 1rem;
+
+    &:hover {
+      background: var(--color-dark-red);
+      color: var(--color-white);
+    }
   }
 
   @media (max-width: 1300px) {

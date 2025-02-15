@@ -90,7 +90,6 @@ const PraisesListAdmin = () => {
         />
 
         <div className="box">
-          <div className="admin-praises">Admin - Praises</div>
           {displayError && <ErrorDisplay />}
 
           {!displayError && (

@@ -10,13 +10,6 @@ export const Container = styled.div`
     color: var(--color-dark-red);
     font-weight: 600;
     font-size: 1.6rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    color: var(--color-black);
-    font-size: 1.2rem;
     margin-bottom: 1rem;
   }
 
@@ -102,30 +95,6 @@ export const Container = styled.div`
     padding: 30px;
   }
 
-  .initial-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .delete-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    height: 45px;
-    width: 45px;
-    cursor: pointer;
-    border: 1px solid var(--color-dark-red);
-    color: var(--color-dark-red);
-    background-color: var(--color-background-white);
-
-    &:hover {
-      background: var(--color-dark-red);
-      color: var(--color-white);
-    }
-  }
-
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;
@@ -187,30 +156,6 @@ export const ButtonStyled = styled.button`
   &:hover {
     border: 1px solid var(--color-dark-red);
     color: var(--color-dark-red);
-  }
-`;
-
-export const ButtonStyledRed = styled.button`
-  border: 1px solid var(--color-dark-red);
-  background-color: var(--color-dark-red);
-  border-radius: 8px;
-  padding: 7px 12px;
-  font-size: 1rem;
-  cursor: pointer;
-  color: var(--color-white);
-
-  &:hover {
-    border: 1px solid var(--color-dark-red);
-    color: var(--color-dark-red);
-    background-color: var(--color-background-white);
-  }
-
-  @media (max-width: 480px) {
-    &:hover {
-      border: 1px solid var(--color-dark-red);
-      background-color: var(--color-dark-red);
-      color: var(--color-white);
-    }
   }
 `;
 
@@ -288,3 +233,27 @@ export const title = {
   margin: "0 0 20px",
   color: "var(--color-dark-gray)",
 };
+
+export const ButtonStyledRed = styled.button`
+  border: 1px solid var(--color-dark-red);
+  background-color: var(--color-dark-red);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--color-white);
+
+  &:hover {
+    border: 1px solid var(--color-dark-red);
+    color: var(--color-dark-red);
+    background-color: var(--color-background-white);
+  }
+
+  @media (max-width: 480px) {
+    &:hover {
+      border: 1px solid var(--color-dark-red);
+      background-color: var(--color-dark-red);
+      color: var(--color-white);
+    }
+  }
+`;

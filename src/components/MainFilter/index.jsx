@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styles";
 import { LuSettings2 } from "react-icons/lu";
+import { PiPlusBold } from "react-icons/pi";
 import FilterModal from "../../components/FilterModal";
+import { useNavigate } from "react-router-dom";
 
 export default function MainFilter({
   louvores,
@@ -11,10 +13,12 @@ export default function MainFilter({
   setComplexFilterApplied,
   setMainFilterApplied,
 }) {
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [eventValue, setEventValue] = useState("");
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
+  const navPath = window.location.pathname?.toString();
 
   function especialCharMask(especialChar) {
     return especialChar.normalize("NFD").replace(/[^a-zA-Z0-9\s]/g, "");
@@ -198,6 +202,14 @@ export default function MainFilter({
         <div className="filter-button" onClick={handleOpen}>
           <LuSettings2 color={"var(--color-black)"} size={17} />
         </div>
+        {navPath === "/praises-admin" && (
+          <div
+            className="new-praise-button"
+            onClick={() => navigate("/add-praise")}
+          >
+            <PiPlusBold size={17} />
+          </div>
+        )}
       </div>
 
       <FilterModal

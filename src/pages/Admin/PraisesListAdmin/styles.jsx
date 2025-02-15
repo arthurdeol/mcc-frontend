@@ -23,7 +23,7 @@ export const Container = styled.div`
 
   .praises-container {
     width: 92%;
-    margin-top: 11.5rem;
+    margin-top: 8rem;
   }
 
   hr {

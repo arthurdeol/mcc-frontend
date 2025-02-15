@@ -7,6 +7,7 @@ import LoginAdmin from "./pages/Admin/LoginAdmin";
 import PraiseSettings from "./pages/Admin/PraiseSettings";
 import MyPraisesList from "./pages/MyPraisesList";
 import DisplaySentServiceList from "./pages/DisplaySentServiceList";
+import AddPraise from "./pages/Admin/AddPraise";
 
 function RoutesApp() {
   return (
@@ -17,6 +18,7 @@ function RoutesApp() {
         <Route exact path="/login-admin" element={<LoginAdmin />} />
         <Route exact path="/praises-admin" element={<PraisesListAdmin />} />
         <Route exact path="/praise-settings" element={<PraiseSettings />} />
+        <Route exact path="/add-praise" element={<AddPraise />} />
         <Route exact path="/my-praises-list" element={<MyPraisesList />} />
         <Route
           exact

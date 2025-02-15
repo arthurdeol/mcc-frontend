@@ -50,6 +50,10 @@ const Header = ({
         </div>
       )}
 
+      {navPath === "/praises-admin" && (
+        <h1 className="praise-settings-title">Admin - Praises</h1>
+      )}
+
       {isPathPraise && (
         <div className="icons-container">
           {louvor.linkSheetMusic ? (

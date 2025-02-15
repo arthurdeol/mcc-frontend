@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
 import { LuPlus } from "react-icons/lu";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import api from "../../../services/api";
 import Header from "../../../components/Header";
 import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import DeleteModal from "../../../components/DeleteModal";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -30,40 +28,20 @@ import {
   FooterFilter,
 } from "./styles";
 
-export default function PraiseSettings() {
+export default function AddPraise() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [praiseId] = useState(location.state.praiseId);
 
-  const { praiseData } = location.state;
-
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const handleOpen = () => setOpenDeleteModal(true);
-  const handleClose = () => setOpenDeleteModal(false);
-
-  const [praiseTheme, setPraiseTheme] = useState(praiseData.theme.trim());
-  const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState(
-    praiseData.portugueseSongBookNumber
-  );
-  const [portugueseTitle, setPortugueseTitle] = useState(
-    praiseData.portugueseTitle
-  );
-  const [englishSongBookNumber, setEnglishSongBookNumber] = useState(
-    praiseData.englishSongBookNumber
-  );
-  const [englishTitle, setEnglishTitle] = useState(praiseData.englishTitle);
+  const [praiseTheme, setPraiseTheme] = useState("");
+  const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState("");
+  const [portugueseTitle, setPortugueseTitle] = useState("");
+  const [englishSongBookNumber, setEnglishSongBookNumber] = useState("");
+  const [englishTitle, setEnglishTitle] = useState("");
   const [checkeds, setCheckeds] = useState({
-    containsInPortugueseSongBook: praiseData.containsInPortugueseSongBook,
-    containsInCiasSongBook: praiseData.containsInCiasSongBook,
-    containsInSuplementareASongBook: praiseData.containsInSuplementareASongBook,
-    containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
+    containsInPortugueseSongBook: false,
+    containsInCiasSongBook: false,
+    containsInSuplementareASongBook: false,
+    containsInSuplementareBSongBook: false,
   });
-
-  const [orderFile, setOrderFile] = useState(1);
-  const [typeFile, setTypeFile] = useState("");
-  const [fileData, setfileData] = useState([]);
-  const [filesSelected, setFilesSelected] = useState([]);
-  const [errorMessageFile, setErrorMessageFile] = useState("");
 
   const {
     containsInPortugueseSongBook,
@@ -71,6 +49,13 @@ export default function PraiseSettings() {
     containsInSuplementareASongBook,
     containsInSuplementareBSongBook,
   } = checkeds;
+
+  const [orderFile, setOrderFile] = useState(1);
+  const [typeFile, setTypeFile] = useState("");
+  const [fileData, setfileData] = useState([]);
+  const [filesSelected, setFilesSelected] = useState([]);
+  const [errorMessageFile, setErrorMessageFile] = useState("");
+  const [displayFormError, setDisplayFormError] = useState(false);
 
   const handleChangeCheckbox = (event) => {
     setCheckeds({
@@ -134,45 +119,52 @@ export default function PraiseSettings() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("songBookMapId", praiseId);
-    formData.append(
-      "containsInPortugueseSongBook",
-      checkeds.containsInPortugueseSongBook
-    );
-    formData.append("containsInCiasSongBook", checkeds.containsInCiasSongBook);
-    formData.append(
-      "containsInSuplementareASongBook",
-      checkeds.containsInSuplementareASongBook
-    );
-    formData.append(
-      "containsInSuplementareBSongBook",
-      checkeds.containsInSuplementareBSongBook
-    );
-    formData.append("theme", praiseTheme);
-    formData.append("portugueseSongBookNumber", portugueseSongBookNumber);
-    formData.append("portugueseTitle", portugueseTitle);
-    formData.append("englishSongBookNumber", englishSongBookNumber);
-    formData.append("englishTitle", englishTitle);
+    if ((praiseTheme && portugueseTitle) || (praiseTheme && englishTitle)) {
+      setDisplayFormError(false);
+      const formData = new FormData();
+      formData.append(
+        "containsInPortugueseSongBook",
+        checkeds.containsInPortugueseSongBook
+      );
+      formData.append(
+        "containsInCiasSongBook",
+        checkeds.containsInCiasSongBook
+      );
+      formData.append(
+        "containsInSuplementareASongBook",
+        checkeds.containsInSuplementareASongBook
+      );
+      formData.append(
+        "containsInSuplementareBSongBook",
+        checkeds.containsInSuplementareBSongBook
+      );
+      formData.append("theme", praiseTheme);
+      formData.append("portugueseSongBookNumber", portugueseSongBookNumber);
+      formData.append("portugueseTitle", portugueseTitle);
+      formData.append("englishSongBookNumber", englishSongBookNumber);
+      formData.append("englishTitle", englishTitle);
 
-    if (filesSelected.length > 0) {
-      filesSelected.forEach((file, index) => {
-        formData.append(`files[${index}].fileType`, file.fileType);
-        formData.append(`files[${index}].order`, file.order);
-        formData.append(`files[${index}].file`, file.file);
-      });
+      if (filesSelected.length > 0) {
+        filesSelected.forEach((file, index) => {
+          formData.append(`files[${index}].fileType`, file.fileType);
+          formData.append(`files[${index}].order`, file.order);
+          formData.append(`files[${index}].file`, file.file);
+        });
+      } else {
+        formData.append("files", null);
+      }
+
+      try {
+        const response = await api.post("/SongBookMap", formData);
+        alert("New praise added with Success");
+        navigate("/praises-admin");
+        console.log(response);
+      } catch (error) {
+        alert("Something went wrong! Please, try again later!");
+        console.log(error);
+      }
     } else {
-      formData.append("files", null);
-    }
-
-    try {
-      const response = await api.put("/SongBookMap", formData);
-      alert("Settings applied with Success");
-      navigate("/praises-admin");
-      console.log(response);
-    } catch (error) {
-      alert("Something went wrong! Please, try again later!");
-      console.log(error);
+      setDisplayFormError(true);
     }
   }
 
@@ -181,17 +173,8 @@ export default function PraiseSettings() {
       <Header />
       <ThemeProvider theme={themeStyled}>
         <Box sx={style}>
-          <div className="initial-container">
-            <h1> Praise Settings</h1>
-
-            <div className="delete-button" onClick={handleOpen}>
-              <RiDeleteBin5Line size={20} />
-            </div>
-          </div>
-
-          <h2>{`${englishTitle ? englishTitle : portugueseTitle}`}</h2>
+          <h1>New Praise</h1>
           <br></br>
-
           <FormControlLabel
             control={
               <Checkbox
@@ -239,13 +222,16 @@ export default function PraiseSettings() {
           <br></br>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <InputLabel id="simple-select-label">Theme</InputLabel>
+              <InputLabel id="simple-select-label" required>
+                Theme
+              </InputLabel>
               <Select
                 labelId="simple-select-label"
                 id="simple-select"
                 value={praiseTheme}
                 label="Theme"
                 onChange={handleChangePraiseTheme}
+                required
               >
                 <MenuItem value={"PLEADING"}>Pleading</MenuItem>
                 <MenuItem value={"CHORUSES"}>Choruses</MenuItem>
@@ -399,18 +385,18 @@ export default function PraiseSettings() {
             setFilesSelected={setFilesSelected}
           />
 
+          {displayFormError && (
+            <p className="text-error">
+              At Least the Theme and a Name must be filled!
+            </p>
+          )}
+
           <FooterFilter>
             <ButtonStyledRed type="submit" onClick={handleSubmit}>
-              Apply Settings
+              Send
             </ButtonStyledRed>
           </FooterFilter>
         </Box>
-        <DeleteModal
-          openModal={openDeleteModal}
-          onCloseModal={handleClose}
-          praiseId={praiseId}
-          praiseData={praiseData}
-        />
       </ThemeProvider>
     </Container>
   );
