@@ -15,6 +15,8 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import TableFiles from "../../../components/TableFiles";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import {
   Container,
   themeStyled,
@@ -30,6 +32,27 @@ import {
 
 export default function AddPraise() {
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState({
+    status: "success",
+    message: "...",
+    time: 1000,
+  });
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    if (snackbarData.status === "success") {
+      navigate("/praises-admin");
+    }
+    setOpen(false);
+  };
 
   const [praiseTheme, setPraiseTheme] = useState("");
   const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState("");
@@ -155,13 +178,20 @@ export default function AddPraise() {
       }
 
       try {
-        const response = await api.post("/SongBookMap", formData);
-        alert("New praise added with Success");
-        navigate("/praises-admin");
-        console.log(response);
+        await api.post("/SongBookMap", formData);
+        handleClick();
+        setSnackbarData({
+          status: "success",
+          message: "New praise added with Success!",
+          time: 2000,
+        });
       } catch (error) {
-        alert("Something went wrong! Please, try again later!");
-        console.log(error);
+        handleClick();
+        setSnackbarData({
+          status: "error",
+          message: "Something went wrong! Please, try again later!",
+          time: 3000,
+        });
       }
     } else {
       setDisplayFormError(true);
@@ -398,6 +428,21 @@ export default function AddPraise() {
           </FooterFilter>
         </Box>
       </ThemeProvider>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={snackbarData.time}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbarData.status}
+          sx={{ width: "100%" }}
+        >
+          {snackbarData.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

@@ -17,6 +17,8 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import TableFiles from "../../../components/TableFiles";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import {
   Container,
   themeStyled,
@@ -36,6 +38,27 @@ export default function PraiseSettings() {
   const [praiseId] = useState(location.state.praiseId);
 
   const { praiseData } = location.state;
+
+  const [open, setOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState({
+    status: "success",
+    message: "...",
+    time: 1000,
+  });
+
+  const handleClickSnackbar = () => {
+    setOpen(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    if (snackbarData.status === "success") {
+      navigate("/praises-admin");
+    }
+    setOpen(false);
+  };
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const handleOpen = () => setOpenDeleteModal(true);
@@ -166,13 +189,20 @@ export default function PraiseSettings() {
     }
 
     try {
-      const response = await api.put("/SongBookMap", formData);
-      alert("Settings applied with Success");
-      navigate("/praises-admin");
-      console.log(response);
+      await api.put("/SongBookMapp", formData);
+      handleClickSnackbar({});
+      setSnackbarData({
+        status: "success",
+        message: "Settings applied with Success",
+        time: 2000,
+      });
     } catch (error) {
-      alert("Something went wrong! Please, try again later!");
-      console.log(error);
+      handleClickSnackbar({});
+      setSnackbarData({
+        status: "error",
+        message: "Something went wrong! Please, try again later!",
+        time: 3000,
+      });
     }
   }
 
@@ -412,6 +442,21 @@ export default function PraiseSettings() {
           praiseData={praiseData}
         />
       </ThemeProvider>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={snackbarData.time}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbarData.status}
+          sx={{ width: "100%" }}
+        >
+          {snackbarData.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
