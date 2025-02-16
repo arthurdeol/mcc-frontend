@@ -33,33 +33,28 @@ export default function ShareListLinkModal({
   const link = `${baseUrl + routeUrl + listIdToShare}`;
 
   const shareOnWhatsApp = () => {
-    const praisesListWhatsapp = [];
+    const praisesListWhatsapp = servicePraises.map(
+      ({
+        englishTitle,
+        englishSongBookNumber,
+        portugueseTitle,
+        portugueseSongBookNumber,
+        containsInCiasSongBook,
+      }) => {
+        const title = englishTitle || portugueseTitle;
+        const number = englishSongBookNumber || portugueseSongBookNumber;
 
-    console.log(servicePraises);
-    for (let i = 0; i < servicePraises.length; i++) {
-      if (servicePraises[i].englishTitle) {
-        if (servicePraises[i].englishSongBookNumber) {
-          praisesListWhatsapp.push(
-            `${servicePraises[i].englishSongBookNumber} - ${servicePraises[i].englishTitle}`
-          );
-        } else {
-          praisesListWhatsapp.push(servicePraises[i].englishTitle);
-        }
-      } else {
-        if (servicePraises[i].portugueseSongBookNumber) {
-          praisesListWhatsapp.push(
-            `${servicePraises[i].portugueseSongBookNumber} - ${servicePraises[i].portugueseTitle}`
-          );
-        } else {
-          praisesListWhatsapp.push(servicePraises[i].portugueseTitle);
-        }
+        let message = number ? `${number} - ${title}` : title;
+        if (containsInCiasSongBook) message = `(CIA's) ${message}`;
+
+        return message;
       }
-    }
+    );
 
     const formattedMessage = praisesListWhatsapp.join("\n");
 
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-      formattedMessage + "\n\n" + link
+      `${formattedMessage}\n\n${link}`
     )}`;
 
     window.open(whatsappUrl, "_blank");
