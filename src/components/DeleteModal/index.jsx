@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { LuX } from "react-icons/lu";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
@@ -9,7 +8,6 @@ import Alert from "@mui/material/Alert";
 import {
   style,
   Card,
-  XClose,
   ButtonStyledRed,
   ButtonStyled,
   FooterFilter,
@@ -70,9 +68,6 @@ export default function DeleteModal({
     <>
       <Modal open={openModal} onClose={onCloseModal}>
         <Box sx={{ ...style }}>
-          <XClose onClick={onCloseModal}>
-            <LuX />
-          </XClose>
           <h2>Are you sure you want to delete this praise?</h2>
           <Card className="text-container">
             {praiseData.englishTitle && (

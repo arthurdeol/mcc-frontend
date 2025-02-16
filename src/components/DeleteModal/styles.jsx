@@ -67,23 +67,6 @@ export const Card = styled.div`
   }
 `;
 
-export const XClose = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  border: 1px solid var(--color-gray);
-  top: 20px;
-  right: 20px;
-  background-color: var(--color-background-white);
-  border-radius: 5px;
-  padding: 3px;
-
-  &:hover {
-    border: 1px solid var(--color-dark-red);
-    color: var(--color-dark-red);
-  }
-`;
-
 export const ButtonStyledRed = styled.button`
   border: 1px solid var(--color-dark-red);
   background-color: var(--color-dark-red);
