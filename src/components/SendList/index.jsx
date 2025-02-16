@@ -5,6 +5,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -35,13 +37,30 @@ export default function SendList({
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
 
+  const [open, setOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState({
+    status: "success",
+    message: "...",
+    time: 1000,
+  });
+
+  const handleClickSnackbar = () => {
+    setOpen(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   const [fillError, setFillError] = useState(false);
   const [comment, setComment] = useState("");
   const [church, setChurch] = useState("");
   const [userName, setUserName] = useState("");
   const [date, setDate] = useState(dayjs(new Date()));
   const [listIdToShare, setListIdToShare] = useState("");
-  const [diplayError, setDisplayError] = useState(false);
 
   const handleChangeComment = (event) => {
     setComment(event.target.value);
@@ -79,10 +98,13 @@ export default function SendList({
         const response = await api.post("/SongBookMapList", formData);
         setListIdToShare(response.data);
         handleOpen();
-        console.log(listIdToShare);
       } catch (error) {
-        setDisplayError(true);
-        console.log(error);
+        handleClickSnackbar();
+        setSnackbarData({
+          status: "error",
+          message: "Something went wrong! Please, try again later!",
+          time: 3000,
+        });
       }
     } else {
       setFillError(true);
@@ -99,7 +121,6 @@ export default function SendList({
         openModal={openModal}
         onCloseModal={handleClose}
         listIdToShare={listIdToShare}
-        diplayError={diplayError}
       />
 
       <div className="main">
@@ -209,6 +230,21 @@ export default function SendList({
           </ButtonStyledSendList>
         </Box>
       </div>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={snackbarData.time}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbarData.status}
+          sx={{ width: "100%" }}
+        >
+          {snackbarData.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
