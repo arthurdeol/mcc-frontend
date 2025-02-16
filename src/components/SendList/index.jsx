@@ -137,7 +137,7 @@ export default function SendList({
 
         <div className="list-content">
           {servicePraises.map((praise, i) => (
-            <div className="item-container">
+            <div className="item-container" key={i}>
               <div className="number">{i + 1}</div>
               {praise.containsInCiasSongBook && (
                 <div className="theme-tag-cia">CIA's</div>
