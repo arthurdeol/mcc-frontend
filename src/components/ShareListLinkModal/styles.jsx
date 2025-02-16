@@ -158,5 +158,5 @@ export const footerFilter = {
 };
 
 export const linkInput = {
-  width: "90%",
+  width: "100%",
 };
