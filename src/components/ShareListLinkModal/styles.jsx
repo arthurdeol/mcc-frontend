@@ -41,7 +41,7 @@ export const CopyButton = styled.div`
   justify-content: center;
   align-items: center;
   width: 60px;
-  height: inherit;
+  height: 60px;
   margin-right: 5px;
   background: var(--color-background-white);
   border: 1px solid var(--color-gray);
@@ -52,6 +52,30 @@ export const CopyButton = styled.div`
     border: 1px solid var(--color-light-gray);
     background-color: var(--color-background-white);
   }
+`;
+
+export const WhatsappButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
+  background: var(--color-background-white);
+  border: 1px solid var(--color-green);
+  border-radius: 10px;
+  margin-left: 10px;
+
+  &:hover {
+    border: 1px solid var(--color-light-gray);
+    background-color: var(--color-background-white);
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 `;
 
 export const XClose = styled.div`

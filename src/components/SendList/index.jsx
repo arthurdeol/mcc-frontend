@@ -121,6 +121,7 @@ export default function SendList({
         openModal={openModal}
         onCloseModal={handleClose}
         listIdToShare={listIdToShare}
+        servicePraises={servicePraises}
       />
 
       <div className="main">
