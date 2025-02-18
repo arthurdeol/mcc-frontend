@@ -7,6 +7,7 @@ import MainFilter from "../../components/MainFilter";
 import PraiseNotFound from "../../components/PraiseNotFound";
 import ErrorDisplay from "../../components/ErrorDisplay";
 import PraiseCard from "../../components/PraiseCard";
+import { IoArrowUp } from "react-icons/io5";
 
 const PraisesList = () => {
   const [newSelection, setNewSelection] = useState(false);
@@ -115,6 +116,14 @@ const PraisesList = () => {
     localStorage.setItem("praiseIdClicked", praiseId);
   }
 
+  function scrollToTopOfList() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setLastClickedPraise(filteredLouvores[0].songBookMapId);
+  }
+
   return (
     <ContainerPraisesList>
       <Header servicePraises={servicePraises} />
@@ -168,6 +177,10 @@ const PraisesList = () => {
           )}
         </div>
       </div>
+
+      <button className="scroll-to-top" onClick={() => scrollToTopOfList()}>
+        <IoArrowUp color={"var(--color-dark-gray-2)"} size={22} />
+      </button>
     </ContainerPraisesList>
   );
 };

@@ -1,22 +1,16 @@
-import React from "react";
-import {
-  ContainerPraise,
-  // FullScreenButton,
-  // ExitFullScreenButton,
-} from "./styles";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { ContainerPraise } from "./styles";
 import Header from "../../components/Header";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate, useParams } from "react-router-dom";
-// import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 
 export default function Praise() {
   const navigate = useNavigate();
   const { id, file } = useParams();
   const [louvor, setLouvor] = useState("");
   const [fileArray, setFileArray] = useState([]);
-  // const [goFull, setGoFull] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,20 +19,16 @@ export default function Praise() {
       const louvor = await response.json();
 
       setLouvor(louvor);
-      louvor ? setActiveTab(file, louvor) : console.log("praise not found");
+      if (louvor) {
+        setActiveTab(file, louvor);
+      } else {
+        console.log("Praise not found");
+      }
+      setLoading(false);
     }
     fetchData();
-  }, [file]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // useEffect(() => {
-  //   let e = document.getElementById("my-fullscreen");
-  //   let doc = document.documentElement,
-  //     state = document.webkitIsFullScreen || document.isFullScreen,
-  //     requestFunc = doc.requestFullscreen || doc.webkitRequestFullScreen,
-  //     cancelFunc = document.cancelFullScreen || document.webkitCancelFullScreen;
-
-  //   !state && e ? requestFunc.call(e) : cancelFunc.call(document);
-  // }, [goFull]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
+  }, [file]);
 
   function setActiveTab(file, louvor) {
     let arrayOfFile = [];
@@ -56,38 +46,20 @@ export default function Praise() {
       louvor.audioFile.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
     }
-    navigate(`/praise/${id}/${file}`);
+
+    // Check if the URL is already the same before navigating to avoid unnecessary reloads
+    if (window.location.pathname !== `/praise/${id}/${file}`) {
+      navigate(`/praise/${id}/${file}`);
+    }
   }
+
   const setUrl = (file) =>
     "data:" + file.document.contentType + ";base64," + file.document.file;
 
   return (
     <ContainerPraise>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
-      {louvor ? (
-        <div className="file-container">
-          {/* <div
-            id="my-fullscreen"
-            className={goFull ? "file-fullscreen" : "file-content"}
-          >
-            {goFull && (
-              <ExitFullScreenButton onClick={() => setGoFull(!goFull)}>
-                <RxExitFullScreen color={"var(--color-black)"} size={17} />
-              </ExitFullScreenButton>
-            )} */}
-          <div className="file-content">
-            {fileArray.map((url, i) => (
-              <img
-                key={i}
-                src={url}
-                alt="praiseImg"
-                // className={goFull ? "img-fullscreen" : "file"}
-                className="file"
-              />
-            ))}
-          </div>
-        </div>
-      ) : (
+      {loading ? (
         <div className="progress-container">
           <Stack
             sx={{ color: "var(--color-dark-gray)" }}
@@ -97,11 +69,15 @@ export default function Praise() {
             <CircularProgress color="inherit" />
           </Stack>
         </div>
+      ) : (
+        <div className="file-container">
+          <div className="file-content">
+            {fileArray.map((url, i) => (
+              <img key={i} src={url} alt="praiseImg" className="file" />
+            ))}
+          </div>
+        </div>
       )}
-
-      {/* <FullScreenButton onClick={(e) => setGoFull(!goFull)}>
-        <RxEnterFullScreen color={"var(--color-black)"} size={17} />
-      </FullScreenButton> */}
     </ContainerPraise>
   );
 }
