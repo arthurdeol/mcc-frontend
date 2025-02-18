@@ -9,6 +9,7 @@ import ErrorDisplay from "../../components/ErrorDisplay";
 import PraiseCard from "../../components/PraiseCard";
 
 const PraisesList = () => {
+  const [newSelection, setNewSelection] = useState(false);
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
@@ -77,8 +78,28 @@ const PraisesList = () => {
     localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
   }, [complexFilterApplied, mainFilterApplied, servicePraises]);
 
+  useEffect(() => {
+    const savedPraiseId = localStorage.getItem("praiseIdClicked");
+    if (savedPraiseId && !newSelection) {
+      const praiseElement = document.getElementById(savedPraiseId);
+      if (praiseElement) {
+        // Rolagem com margem considerando o cabeçalho e o filtro principal
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 0;
+        const mainFilterHeight =
+          document.querySelector(".search-container")?.offsetHeight || 0;
+
+        window.scrollTo({
+          top: praiseElement.offsetTop - headerHeight - (mainFilterHeight + 60),
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [louvores, newSelection]);
+
   function selectPraise(praise) {
     setServicePraises([...servicePraises, praise]);
+    setLastClickedPraise(praise.songBookMapId);
   }
 
   function unSelectPraise(praise) {
@@ -86,6 +107,12 @@ const PraisesList = () => {
       (item) => item.songBookMapId !== praise.songBookMapId
     );
     setServicePraises(praises);
+    setLastClickedPraise(praise.songBookMapId);
+  }
+
+  function setLastClickedPraise(praiseId) {
+    setNewSelection(true);
+    localStorage.setItem("praiseIdClicked", praiseId);
   }
 
   return (
@@ -122,7 +149,7 @@ const PraisesList = () => {
               ) : (
                 <div className="praises-container">
                   {filteredLouvores.map((louvor, i) => (
-                    <div key={i}>
+                    <div key={i} id={louvor.songBookMapId}>
                       <PraiseCard
                         praise={louvor}
                         servicePraises={servicePraises}
@@ -130,6 +157,7 @@ const PraisesList = () => {
                         selectPraise={selectPraise}
                         hasCloseButton={false}
                         hasHeartButton={true}
+                        setLastClickedPraise={setLastClickedPraise}
                       />
                       <hr />
                     </div>

@@ -15,6 +15,7 @@ export default function PraiseCard({
   servicePraises = null,
   unSelectPraise = null,
   deletePraiseFromServiceList = null,
+  setLastClickedPraise,
 }) {
   return (
     <Card>
@@ -87,6 +88,7 @@ export default function PraiseCard({
         {praise.englishTitle && (
           <div className="icons-container">
             <Link
+              onClick={() => setLastClickedPraise(praise.songBookMapId)}
               to={
                 praise.linkSheetMusic
                   ? `/praise/${praise.songBookMapId}/musicSheet`
@@ -105,6 +107,7 @@ export default function PraiseCard({
             </Link>
 
             <Link
+              onClick={() => setLastClickedPraise(praise.songBookMapId)}
               to={
                 praise.linkPdfLyrics
                   ? `/praise/${praise.songBookMapId}/lyrics`
@@ -123,6 +126,7 @@ export default function PraiseCard({
             </Link>
 
             <Link
+              onClick={() => setLastClickedPraise(praise.songBookMapId)}
               to={
                 praise.linkChords
                   ? `/praise/${praise.songBookMapId}/chords`
