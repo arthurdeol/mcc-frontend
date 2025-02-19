@@ -94,6 +94,7 @@ const PraisesList = () => {
           top: praiseElement.offsetTop - headerHeight - (mainFilterHeight + 60),
           behavior: "smooth",
         });
+        localStorage.removeItem("praiseIdClicked");
       }
     }
   }, [louvores, newSelection]);
