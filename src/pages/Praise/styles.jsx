@@ -11,6 +11,7 @@ export const ContainerPraise = styled.div`
     justify-content: center;
     overflow-x: auto;
     background: var(--color-background-white);
+    display: none;
   }
 
   .praise-main {

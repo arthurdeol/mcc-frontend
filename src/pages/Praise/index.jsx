@@ -212,8 +212,6 @@ export default function Praise() {
   const setUrl = (file) =>
     "data:" + file.document.contentType + ";base64," + file.document.file;
 
-  console.log(processChords(louvor.chords));
-
   return (
     <ContainerPraise>
       <Header louvor={louvor} setActiveTab={setActiveTab} />
@@ -233,6 +231,16 @@ export default function Praise() {
             {fileArray.map((url, i) => (
               <img key={i} src={url} alt="praiseImg" className="file" />
             ))}
+          </div>
+          <div className="praise-container">
+            <div className="praise-main">
+              <h1 className="praise-title">{louvor.englishTitle}</h1>
+              {louvor.chords && (
+                <div className="praise-lines">
+                  {processChords(louvor.chords)}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
