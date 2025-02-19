@@ -5,6 +5,29 @@ export const ContainerPraise = styled.div`
   //height: 100vh;
   //background: var(--color-light-gray);
 
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  .praise-container {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    background: var(--color-background-white);
+  }
+
+  .praise-main {
+    width: fit-content;
+    padding: 7rem 0 4rem 0;
+  }
+
+  .praise-title {
+    color: var(--color-black);
+    font-size: 1.3rem;
+  }
+
+  .praise-lines {
+    margin-top: 1rem;
+  }
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
   .file-container {
     display: flex;
     justify-content: center;

@@ -82,6 +82,9 @@ export default function PraiseSettings() {
     containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
   });
 
+  const [lyricsContent, setLyricsContent] = useState(praiseData.lyrics);
+  const [chordsContent, setChordsContent] = useState(praiseData.chords);
+
   const [orderFile, setOrderFile] = useState(1);
   const [typeFile, setTypeFile] = useState("");
   const [fileData, setfileData] = useState([]);
@@ -154,6 +157,14 @@ export default function PraiseSettings() {
     setEnglishTitle(event.target.value);
   };
 
+  const handleChangeChordsContent = (event) => {
+    setChordsContent(event.target.value);
+  };
+
+  const handleChangeLyricsContent = (event) => {
+    setLyricsContent(event.target.value);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -177,6 +188,8 @@ export default function PraiseSettings() {
     formData.append("portugueseTitle", portugueseTitle);
     formData.append("englishSongBookNumber", englishSongBookNumber);
     formData.append("englishTitle", englishTitle);
+    formData.append("chords", chordsContent);
+    formData.append("lyrics", lyricsContent);
 
     if (filesSelected.length > 0) {
       filesSelected.forEach((file, index) => {
@@ -189,7 +202,7 @@ export default function PraiseSettings() {
     }
 
     try {
-      await api.put("/SongBookMapp", formData);
+      await api.put("/SongBookMap", formData);
       handleClickSnackbar({});
       setSnackbarData({
         status: "success",
@@ -351,6 +364,42 @@ export default function PraiseSettings() {
                 label="Number"
                 variant="outlined"
                 onChange={handleChangePortugueseSongBookNumber}
+              />
+            </Box>
+          </div>
+          <br></br>
+
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Lyrics:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                fullWidth
+                id="outlined-multiline-static"
+                multiline
+                rows={10}
+                variant="outlined"
+                onChange={handleChangeLyricsContent}
+                value={lyricsContent}
+              />
+            </Box>
+          </div>
+          <br></br>
+
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Chords:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                fullWidth
+                id="outlined-multiline-static"
+                multiline
+                rows={10}
+                variant="outlined"
+                onChange={handleChangeChordsContent}
+                value={chordsContent}
               />
             </Box>
           </div>
