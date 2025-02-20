@@ -17,6 +17,7 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import TableFiles from "../../../components/TableFiles";
+import TableSymbols from "../../../components/TablePraiseSymbols";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import {
@@ -82,8 +83,12 @@ export default function PraiseSettings() {
     containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
   });
 
-  const [lyricsContent, setLyricsContent] = useState(praiseData.lyrics);
-  const [chordsContent, setChordsContent] = useState(praiseData.chords);
+  const [lyricsContent, setLyricsContent] = useState(
+    praiseData.lyrics !== "null" && praiseData.lyrics ? praiseData.lyrics : ""
+  );
+  const [chordsContent, setChordsContent] = useState(
+    praiseData.chords !== "null" && praiseData.chords ? praiseData.chords : ""
+  );
 
   const [orderFile, setOrderFile] = useState(1);
   const [typeFile, setTypeFile] = useState("");
@@ -367,6 +372,9 @@ export default function PraiseSettings() {
               />
             </Box>
           </div>
+          <br></br>
+
+          <TableSymbols />
           <br></br>
 
           <div className="data-container">
