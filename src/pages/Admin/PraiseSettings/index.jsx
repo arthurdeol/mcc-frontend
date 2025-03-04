@@ -81,6 +81,7 @@ export default function PraiseSettings() {
     containsInCiasSongBook: praiseData.containsInCiasSongBook,
     containsInSuplementareASongBook: praiseData.containsInSuplementareASongBook,
     containsInSuplementareBSongBook: praiseData.containsInSuplementareBSongBook,
+    displayFilesSVGInsteadOfText: praiseData.filesSVGFlag,
   });
 
   const [lyricsContent, setLyricsContent] = useState(
@@ -101,6 +102,7 @@ export default function PraiseSettings() {
     containsInCiasSongBook,
     containsInSuplementareASongBook,
     containsInSuplementareBSongBook,
+    displayFilesSVGInsteadOfText,
   } = checkeds;
 
   const handleChangeCheckbox = (event) => {
@@ -188,6 +190,7 @@ export default function PraiseSettings() {
       "containsInSuplementareBSongBook",
       checkeds.containsInSuplementareBSongBook
     );
+    formData.append("filesSVGFlag", checkeds.displayFilesSVGInsteadOfText);
     formData.append("theme", praiseTheme);
     formData.append("portugueseSongBookNumber", portugueseSongBookNumber);
     formData.append("portugueseTitle", portugueseTitle);
@@ -412,6 +415,20 @@ export default function PraiseSettings() {
             </Box>
           </div>
           <br></br>
+
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  sx={checked}
+                  checked={displayFilesSVGInsteadOfText}
+                  onChange={handleChangeCheckbox}
+                  name="displayFilesSVGInsteadOfText"
+                />
+              }
+              label="Display Files SVG instead of Text"
+            />
+          </div>
 
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">

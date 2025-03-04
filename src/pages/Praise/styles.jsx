@@ -12,7 +12,7 @@ export const ContainerPraise = styled.div`
     overflow-x: auto;
     background: var(--color-background-white);
     width: 100%;
-    display: none;
+    //display: none;
   }
 
   .praise-main {

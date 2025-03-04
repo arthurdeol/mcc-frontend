@@ -117,7 +117,9 @@ export default function PraiseCard({
             >
               <LuType
                 color={
-                  praise.linkPdfLyrics
+                  praise.filesSVGFlag && praise.linkPdfLyrics
+                    ? "var(--color-black)"
+                    : !praise.filesSVGFlag && praise.lyrics
                     ? "var(--color-black)"
                     : "var(--color-gray-2)"
                 }
@@ -136,7 +138,9 @@ export default function PraiseCard({
             >
               <LuListMusic
                 color={
-                  praise.linkChords
+                  praise.filesSVGFlag && praise.linkChords
+                    ? "var(--color-black)"
+                    : !praise.filesSVGFlag && praise.chords
                     ? "var(--color-black)"
                     : "var(--color-gray-2)"
                 }

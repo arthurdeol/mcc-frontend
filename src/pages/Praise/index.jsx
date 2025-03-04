@@ -14,6 +14,9 @@ export default function Praise() {
   const [loading, setLoading] = useState(true);
   const [displayLyrics, setDisplayLyrics] = useState(false);
   const [displayChords, setDisplayChords] = useState(false);
+  const [displayFilesSVGFlag, setDisplayFilesSVGFlag] = useState(
+    louvor.filesSVGFlag
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -386,14 +389,19 @@ export default function Praise() {
       setFileArray(arrayOfFile);
       setDisplayLyrics(true);
       setDisplayChords(false);
+      setDisplayFilesSVGFlag(louvor.filesSVGFlag);
     } else if (file === "chords") {
       louvor.chordsPdf.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
       setDisplayChords(true);
       setDisplayLyrics(false);
+      setDisplayFilesSVGFlag(louvor.filesSVGFlag);
     } else if (file === "musicSheet") {
       louvor.sheetMusicPdf.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
+      setDisplayLyrics(false);
+      setDisplayChords(false);
+      setDisplayFilesSVGFlag(true);
     } else if (file === "audio") {
       louvor.audioFile.map((item) => arrayOfFile.push(setUrl(item)));
       setFileArray(arrayOfFile);
@@ -423,31 +431,58 @@ export default function Praise() {
         </div>
       ) : (
         <div className="file-container">
-          <div className="file-content">
-            {fileArray.map((url, i) => (
-              <img key={i} src={url} alt="praiseImg" className="file" />
-            ))}
-          </div>
-          <div className="praise-container">
-            <div className="praise-main">
-              {louvor.lyrics && displayLyrics && (
-                <>
-                  <h1 className="praise-title">{louvor.englishTitle}</h1>
-                  <div className="praise-lines-lyrics">
-                    {processLyrics(louvor.lyrics)}
-                  </div>
-                </>
-              )}
-              {louvor.chords && displayChords && (
-                <>
-                  <h1 className="praise-title">{louvor.englishTitle}</h1>
-                  <div className="praise-lines">
-                    {processChords(louvor.chords)}
-                  </div>
-                </>
-              )}
+          {displayFilesSVGFlag && (
+            <div className="file-content">
+              {fileArray.map((url, i) => (
+                <img key={i} src={url} alt="praiseImg" className="file" />
+              ))}
             </div>
-          </div>
+          )}
+          {!displayFilesSVGFlag && (
+            <div className="praise-container">
+              <div className="praise-main">
+                {louvor.lyrics && displayLyrics && (
+                  <>
+                    {louvor.englishTitle.includes("(") ? (
+                      <>
+                        <h1 className="praise-title">
+                          {louvor.englishTitle.split("(")[0].trim()}
+                        </h1>
+                        <h2 className="praise-title">
+                          {"(" + louvor.englishTitle.split("(")[1].trim()}
+                        </h2>
+                      </>
+                    ) : (
+                      <h1 className="praise-title">{louvor.englishTitle}</h1>
+                    )}
+                    <div className="praise-lines-lyrics">
+                      {processLyrics(louvor.lyrics)}
+                    </div>
+                  </>
+                )}
+                {louvor.chords && displayChords && (
+                  <>
+                    {louvor.englishTitle.includes("(") ? (
+                      <>
+                        <h1 className="praise-title">
+                          {louvor.englishTitle.split("(")[0].trim()}
+                        </h1>
+                        <h2 className="praise-title">
+                          {"(" + louvor.englishTitle.split("(")[1].trim()}
+                        </h2>
+                      </>
+                    ) : (
+                      <h1 className="praise-title">{louvor.englishTitle}</h1>
+                    )}
+
+                    <div className="praise-lines">
+                      {processChords(louvor.chords)}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </ContainerPraise>
