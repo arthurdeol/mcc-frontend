@@ -28,6 +28,10 @@ export const ContainerPraise = styled.div`
   .praise-lines {
     margin-top: 1rem;
   }
+
+  .praise-lines-lyrics {
+    margin-top: 2rem;
+  }
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   .file-container {
@@ -46,6 +50,7 @@ export const ContainerPraise = styled.div`
     width: 70%;
     margin: 0 0 15px;
     margin-top: 4.2rem;
+    //display: none;
   }
 
   .file {

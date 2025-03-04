@@ -31,6 +31,16 @@ export default function TableSymbols() {
       }
     ),
     createData(
+      "Introduction with arrows",
+      "[arrowR] or [arrowL]",
+      "[arrowR] Points to the right: Place it in the line to indicate the intro's start. [arrowL] Points to the left: place it in the line to indicate the intro's finish. Ex.: [arrowR][Dm]You are all I[C/D]want, [arrowL]By Your [C/E] blood I am re[Gm]newed;",
+      {
+        url: "../../images/tablePraiseSettings/intro-arrows.png",
+        height: 100,
+        width: 200,
+      }
+    ),
+    createData(
       "Who sings?",
       " ",
       "You don't need to put any symbols. Just add (M), (W) or (All) in the text as normal. Ex.: (W) By Your [C/E] blood I am re[Gm]newed;",
@@ -89,6 +99,16 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/repeat2x.png",
         height: 32,
         width: 90,
+      }
+    ),
+    createData(
+      "Black line",
+      "[b]",
+      "In a new line, without chords in the text. You may use it for extra information. Ex.: [b]Return to the line 'Jesus you are my Lord'",
+      {
+        url: "../../images/tablePraiseSettings/return-to.png",
+        height: 18,
+        width: 200,
       }
     ),
     createData(
