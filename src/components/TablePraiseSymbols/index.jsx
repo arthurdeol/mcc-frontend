@@ -102,6 +102,16 @@ export default function TableSymbols() {
       }
     ),
     createData(
+      "Instrumental",
+      "[instrumental]",
+      "On the same line with the following chords. Ex.: [instrumental] [C7] [F] [C]",
+      {
+        url: "../../images/tablePraiseSettings/instr.png",
+        height: 20,
+        width: 120,
+      }
+    ),
+    createData(
       "Black line",
       "[b]",
       "In a new line, without chords in the text. You may use it for extra information. Ex.: [b]Return to the line 'Jesus you are my Lord'",
