@@ -22,15 +22,23 @@ export const ContainerPraise = styled.div`
 
   .praise-title {
     color: var(--color-black);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .praise-lines {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    font-family: monospace;
+    font-weight: normal;
   }
 
   .praise-lines-lyrics {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .repetitions-number {
+    position: absolute;
+    right: -30px;
+    color: black;
   }
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -108,6 +116,19 @@ export const ContainerPraise = styled.div`
   @media (max-width: 425px) {
     .progress-container {
       padding-top: 50%;
+    }
+
+    .praise-main {
+      // width: 85%;
+      font-size: 0.8rem;
+    }
+
+    .repetitions-number {
+      right: -22px;
+    }
+
+    .praise-title {
+      font-size: 1.2rem;
     }
   }
 `;

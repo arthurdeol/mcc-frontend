@@ -31,6 +31,7 @@ import {
   ButtonStyledRed,
   PlusButton,
   FooterFilter,
+  ButtonStyled,
 } from "./styles";
 
 export default function PraiseSettings() {
@@ -54,9 +55,6 @@ export default function PraiseSettings() {
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
-    }
-    if (snackbarData.status === "success") {
-      navigate("/praises-admin");
     }
     setOpen(false);
   };
@@ -504,6 +502,9 @@ export default function PraiseSettings() {
           />
 
           <FooterFilter>
+            <ButtonStyled onClick={() => navigate("/praises-admin")}>
+              Return to Admin Home
+            </ButtonStyled>
             <ButtonStyledRed type="submit" onClick={handleSubmit}>
               Apply Settings
             </ButtonStyledRed>
