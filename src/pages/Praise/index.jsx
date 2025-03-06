@@ -29,6 +29,25 @@ const SHARP_TO_FLAT = {
   B: "Cb",
 };
 
+function normalizeToFlats(chord) {
+  const SHARP_TO_FLAT = {
+    "A#": "Bb",
+    "D#": "Eb",
+  };
+
+  const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
+  if (!match) return chord;
+
+  let [, root, suffix] = match;
+
+  // Se for enarmônico, converte
+  if (SHARP_TO_FLAT[root]) {
+    root = SHARP_TO_FLAT[root];
+  }
+
+  return root + suffix;
+}
+
 function transposeChord(chord, steps) {
   // Ajuste da regex para capturar acordes diminutos corretamente
   const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
@@ -57,15 +76,36 @@ function transposeChord(chord, steps) {
 function transposeTextChords(text, steps) {
   const CHORD_REGEX =
     /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+
   return text.replace(CHORD_REGEX, (match, chord) => {
+    let transposedChord;
+
     if (chord.includes("/")) {
       const [base, bass] = chord.split("/");
-      return `[${transposeChord(base, steps)}/${transposeChord(bass, steps)}]`;
+      transposedChord = `${transposeChord(base, steps)}/${transposeChord(
+        bass,
+        steps
+      )}`;
     } else {
-      return `[${transposeChord(chord, steps)}]`;
+      transposedChord = transposeChord(chord, steps);
     }
+
+    return `[${normalizeToFlats(transposedChord)}]`;
   });
 }
+
+// function transposeTextChords(text, steps) {
+//   const CHORD_REGEX =
+//     /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+//   return text.replace(CHORD_REGEX, (match, chord) => {
+//     if (chord.includes("/")) {
+//       const [base, bass] = chord.split("/");
+//       return `[${transposeChord(base, steps)}/${transposeChord(bass, steps)}]`;
+//     } else {
+//       return `[${transposeChord(chord, steps)}]`;
+//     }
+//   });
+// }
 
 export default function Praise() {
   const navigate = useNavigate();
@@ -142,7 +182,10 @@ export default function Praise() {
       const originalLine = line;
       line = line.replace(/\[\..*?\]/g, "").replace(/\[@\]/g, "");
 
-      const regex = /\[([A-G](?:#°|[#b°])?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g;
+      const regex =
+        /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+
+      // const regex = /\[([A-G](?:#°|[#b°])?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g;
 
       // Extrai acordes da linha e gera a linha de texto sem acordes
       const chordPositions = [];
