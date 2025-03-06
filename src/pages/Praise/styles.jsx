@@ -40,6 +40,31 @@ export const ContainerPraise = styled.div`
     right: -30px;
     color: black;
   }
+
+  .chord-key-container {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-light-gray);
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    // position: absolute;
+    // right: 40px;
+  }
+
+  .button-change-key {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
+    font-size: 1rem;
+  }
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   .file-container {
@@ -121,6 +146,7 @@ export const ContainerPraise = styled.div`
     .praise-main {
       // width: 85%;
       font-size: 0.8rem;
+      max-width: 90%;
     }
 
     .repetitions-number {
@@ -129,6 +155,11 @@ export const ContainerPraise = styled.div`
 
     .praise-title {
       font-size: 1.2rem;
+    }
+
+    .button-change-key {
+      width: 25px;
+      height: 25px;
     }
   }
 `;
