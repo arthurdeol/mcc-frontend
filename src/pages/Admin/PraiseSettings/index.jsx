@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
 import { LuPlus } from "react-icons/lu";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { HiArrowCircleRight, HiArrowCircleLeft } from "react-icons/hi";
 import api from "../../../services/api";
 import Header from "../../../components/Header";
 import { ThemeProvider } from "@mui/material/styles";
@@ -225,13 +226,400 @@ export default function PraiseSettings() {
     }
   }
 
+  const processChords = (text) => {
+    if (!text) return [];
+
+    const lines = text.split("\n");
+    const elements = [];
+    let group = null;
+    let groupClass = "";
+
+    lines.forEach((line, index) => {
+      if (!line.trim()) return; // Ignora linhas em branco
+
+      // Remove as tags [ . ] e [ @ ] do texto, mas preserva o formato de grupos
+      const originalLine = line;
+      line = line.replace(/\[\..*?\]/g, "").replace(/\[@\]/g, "");
+
+      const regex = /\[([A-G][#b]?[mM\d]*(?:\/[A-G][#b]?)?)\]/g;
+
+      // Extrai acordes da linha e gera a linha de texto sem acordes
+      const chordPositions = [];
+      let match;
+      while ((match = regex.exec(line)) !== null) {
+        chordPositions.push({ chord: match[1], index: match.index });
+      }
+
+      let plainTextLine = line.replace(regex, ""); // Texto sem acordes
+      const chordLine = Array(plainTextLine.length).fill(" ");
+
+      chordPositions.forEach(({ chord, index }) => {
+        let adjustedIndex =
+          index -
+          (line.substring(0, index).match(/\[.*?\]/g) || []).join("").length;
+        if (adjustedIndex < 0) adjustedIndex = 0;
+        chordLine.splice(adjustedIndex, chord.length, ...chord.split(""));
+      });
+
+      const chordLineString = chordLine.join("").trimEnd();
+
+      // Verifica e controla grupos [.N] e [@]
+      const groupMatch = originalLine.match(/^\[\.(\d+)\]/);
+      const showNumberOfRepetition = /\[@\]/.test(originalLine);
+
+      if (groupMatch) {
+        if (group) {
+          elements.push(
+            <div
+              key={`group-${index}`}
+              className={groupClass}
+              style={{
+                borderRight: "2px solid #3a3a3a",
+                paddingRight: "1rem",
+                position: "relative",
+              }}
+            >
+              {group}
+            </div>
+          );
+        }
+        group = [];
+        groupClass = `group-${groupMatch[1]}`;
+        line = line.replace(/^\[\.(\d+)\]/, "").replace(/\[@\]/g, "");
+
+        if (showNumberOfRepetition) {
+          group.push(
+            <span key={`repeat-${index}`} className="repetitions-number">
+              {groupMatch[1]}x
+            </span>
+          );
+        }
+      } else if (group) {
+        elements.push(
+          <div
+            key={`group-${index}`}
+            className={groupClass}
+            style={{
+              borderRight: "2px solid #3a3a3a",
+              paddingRight: "1rem",
+            }}
+          >
+            {group}
+          </div>
+        );
+        group = null;
+        groupClass = "";
+      }
+
+      const specialTags = {
+        "[intro]": { label: "Intro:", color: "red", bold: true },
+        "[instrumental]": { label: "Instrumental:", color: "red", bold: true },
+        "[chorus]": { label: "Chorus:", color: "black", bold: true },
+        "[final]": { label: "Final:", color: "black", bold: true },
+        "[b]": { label: "", color: "black", bold: true },
+      };
+
+      for (const tag in specialTags) {
+        if (originalLine.includes(tag)) {
+          const { label, color, bold } = specialTags[tag];
+          const content = originalLine.replace(
+            new RegExp(`\\[/?${tag.replace(/[[]]/g, "")}\\]`, "g"),
+            ""
+          );
+
+          const chordsWithBrackets = (content.match(regex) || [])
+            .map((chord) => chord.replace(/\[|\]/g, "")) // Remove os colchetes
+            .join(" ");
+
+          const element = (
+            <div key={index} style={{ color }}>
+              <span
+                style={{
+                  color: "black",
+                  fontWeight: bold ? "bold" : "normal",
+                  marginRight: "5px",
+
+                  fontStyle: "italic",
+                }}
+              >
+                {label}
+              </span>
+              <span
+                style={{
+                  color: "red",
+
+                  fontWeight: "normal",
+                }}
+              >
+                {chordsWithBrackets}
+              </span>
+            </div>
+          );
+
+          group ? group.push(element) : elements.push(element);
+          return;
+        }
+      }
+
+      if (originalLine.includes("[repeat")) {
+        const repeatCount = originalLine.match(/\[repeat (\d+)x\]/)?.[1] || "?";
+        const element = (
+          <div
+            key={index}
+            style={{
+              fontWeight: "bold",
+              fontStyle: "italic",
+            }}
+          >
+            Repeat {repeatCount}x:
+          </div>
+        );
+        group ? group.push(element) : elements.push(element);
+        return;
+      }
+
+      if (originalLine.includes("[%%]")) {
+        const element = (
+          <div key={index} style={{ width: "100%", height: "3rem" }}>
+            &nbsp;
+          </div>
+        );
+        group ? group.push(element) : elements.push(element);
+        return;
+      }
+
+      // Remover as tags especiais do texto, mas manter grupos e margin-right
+      line = line.replace(/\[\..*\]/g, "").replace(/\[@\]/g, "");
+
+      const chordElement = (
+        <pre
+          key={`chords-${index}`}
+          style={{
+            whiteSpace: "pre",
+            color: "red",
+
+            margin: 0,
+            paddingBottom: "2px",
+          }}
+        >
+          {chordLineString}
+        </pre>
+      );
+
+      const textElement = (
+        <pre
+          key={`lyrics-${index}`}
+          style={{
+            whiteSpace: "pre",
+            color: "black",
+
+            margin: 0,
+            paddingBottom: "5px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          {originalLine.includes("[arrowR]") && (
+            <HiArrowCircleRight color="red" style={{ marginRight: "2px" }} />
+          )}
+          {plainTextLine.replace(/\[arrow[L|R]\]/g, "")}
+          {originalLine.includes("[arrowL]") && (
+            <HiArrowCircleLeft color="red" style={{ marginLeft: "2px" }} />
+          )}
+        </pre>
+      );
+
+      if (group) {
+        group.push(chordElement, textElement);
+      } else {
+        elements.push(chordElement, textElement);
+      }
+    });
+
+    if (group) {
+      elements.push(
+        <div
+          className={groupClass}
+          style={{
+            borderRight: "2px solid #3a3a3a",
+            paddingRight: "1rem",
+            position: "relative",
+          }}
+        >
+          {group}
+        </div>
+      );
+    }
+
+    return elements;
+  };
+
+  const processLyrics = (text) => {
+    const lines = text.split("\n"); // Divide o texto em linhas
+    const elements = [];
+    let group = null;
+    let groupClass = "";
+
+    lines.forEach((line, index) => {
+      // Verifica se a linha começa com [.N] para iniciar um grupo
+      const groupMatch = line.match(/^\[\.(\d+)\]/);
+      const showNumberOfRepetition = /\[@\]/.test(line);
+
+      if (groupMatch) {
+        if (group) {
+          elements.push(
+            <div
+              key={`group-${index}`}
+              className={groupClass}
+              style={{
+                borderRight: "2px solid #3a3a3a",
+                paddingRight: "1rem",
+                position: "relative",
+              }}
+            >
+              {group}
+            </div>
+          );
+        }
+        group = [];
+        groupClass = `group-${groupMatch[1]}`;
+        line = line.replace(/^\[\.(\d+)\]/, "");
+        line = line.replace(/\[@\]/g, "");
+
+        if (showNumberOfRepetition) {
+          group.push(
+            <span key={`repeat-${index}`} className="repetitions-number">
+              {groupMatch[1]}x
+            </span>
+          );
+        }
+      } else if (group) {
+        elements.push(
+          <div
+            key={`group-${index}`}
+            className={groupClass}
+            style={{
+              borderRight: "2px solid #3a3a3a",
+              paddingRight: "1rem",
+            }}
+          >
+            {group}
+          </div>
+        );
+        group = null;
+        groupClass = "";
+      }
+
+      // Mapeia tags especiais para estilos específicos
+      const specialTags = {
+        "[intro]": { label: "Intro:", color: "red", bold: true },
+        "[instrumental]": { label: "Instrumental:", color: "red", bold: true },
+        "[chorus]": {
+          label: `Chorus: ${line.replace(/\[\/?chorus\]/g, "")}`,
+          color: "black",
+          bold: true,
+        },
+        "[final]": { label: "Final:", color: "black", bold: true },
+        "[b]": {
+          label: line.replace(/\[b\]/g, ""),
+          color: "black",
+          bold: true,
+        },
+      };
+
+      for (const tag in specialTags) {
+        if (line.includes(tag)) {
+          const { label, color, bold } = specialTags[tag];
+          const element = (
+            <div key={index} style={{ color }}>
+              <span
+                style={{
+                  fontWeight: bold ? "bold" : "normal",
+                  fontFamily: "arial",
+                  fontStyle: "italic",
+                }}
+              >
+                {label}
+              </span>
+            </div>
+          );
+          group ? group.push(element) : elements.push(element);
+          return;
+        }
+      }
+
+      // Tratamento específico para repetições
+      if (line.includes("[repeat")) {
+        const repeatCount = line.match(/\[repeat (\d+)x\]/)?.[1] || "?";
+        const element = (
+          <div key={index} style={{ fontWeight: "bold", fontFamily: "arial" }}>
+            Repeat {repeatCount}x:
+          </div>
+        );
+        group ? group.push(element) : elements.push(element);
+        return;
+      }
+
+      // Tratamento para marcação de espaço
+      if (line.includes("[%%]")) {
+        const element = (
+          <div key={index} style={{ width: "100%", height: "1.5rem" }}>
+            &nbsp;
+          </div>
+        );
+        group ? group.push(element) : elements.push(element);
+        return;
+      }
+
+      // Adiciona a linha de texto ao array de elementos
+      const textElement = (
+        <div
+          key={`lyrics-${index}`}
+          style={{
+            whiteSpace: "pre",
+            color: "black",
+            fontFamily: "arial",
+            fontWeight: "normal",
+            paddingBottom: "5px",
+          }}
+        >
+          {line}
+        </div>
+      );
+
+      if (group) {
+        group.push(textElement);
+      } else {
+        elements.push(textElement);
+      }
+    });
+
+    // Se houver um grupo aberto no final, adiciona ele aos elementos
+    if (group) {
+      elements.push(
+        <div
+          className={groupClass}
+          style={{
+            borderRight: "2px solid #3a3a3a",
+            paddingRight: "1rem",
+            position: "relative",
+          }}
+        >
+          {group}
+        </div>
+      );
+    }
+
+    return elements;
+  };
+
   return (
     <Container>
       <Header />
       <ThemeProvider theme={themeStyled}>
         <Box sx={style}>
           <div className="initial-container">
-            <h1> Praise Settings</h1>
+            <h1>Praise Settings</h1>
 
             <div className="delete-button" onClick={handleOpen}>
               <RiDeleteBin5Line size={20} />
@@ -393,6 +781,28 @@ export default function PraiseSettings() {
                 value={lyricsContent}
               />
             </Box>
+
+            {lyricsContent && (
+              <div className="praise-container">
+                <div className="praise-main">
+                  {praiseData.englishTitle.includes("(") ? (
+                    <>
+                      <h1 className="praise-title">
+                        {praiseData.englishTitle.split("(")[0].trim()}
+                      </h1>
+                      <h2 className="praise-title">
+                        {"(" + praiseData.englishTitle.split("(")[1].trim()}
+                      </h2>
+                    </>
+                  ) : (
+                    <h1 className="praise-title">{praiseData.englishTitle}</h1>
+                  )}
+                  <div className="praise-lines-lyrics">
+                    {processLyrics(lyricsContent)}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <br></br>
 
@@ -411,6 +821,28 @@ export default function PraiseSettings() {
                 value={chordsContent}
               />
             </Box>
+
+            {chordsContent && (
+              <div className="praise-container">
+                <div className="praise-main">
+                  {praiseData.englishTitle.includes("(") ? (
+                    <>
+                      <h1 className="praise-title">
+                        {praiseData.englishTitle.split("(")[0].trim()}
+                      </h1>
+                      <h2 className="praise-title">
+                        {"(" + praiseData.englishTitle.split("(")[1].trim()}
+                      </h2>
+                    </>
+                  ) : (
+                    <h1 className="praise-title">{praiseData.englishTitle}</h1>
+                  )}
+                  <div className="praise-lines">
+                    {processChords(chordsContent)}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <br></br>
 

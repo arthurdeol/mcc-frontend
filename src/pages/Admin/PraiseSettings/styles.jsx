@@ -126,6 +126,45 @@ export const Container = styled.div`
     }
   }
 
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  .praise-container {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    background: var(--color-background-white);
+    width: 100%;
+    //display: none;
+  }
+
+  .praise-main {
+    width: fit-content;
+    padding: 7rem 0 4rem 0;
+  }
+
+  .praise-title {
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0;
+    color: var(--color-black);
+    font-size: 1.5rem;
+  }
+
+  .praise-lines {
+    margin-top: 1.5rem;
+    font-family: monospace;
+    font-weight: normal;
+  }
+
+  .praise-lines-lyrics {
+    margin-top: 2.5rem;
+  }
+
+  .repetitions-number {
+    position: absolute;
+    right: -30px;
+    color: black;
+  }
+
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;
@@ -164,6 +203,19 @@ export const Container = styled.div`
 
     .file-data-input > span {
       margin: 15px;
+    }
+
+    .praise-main {
+      // width: 85%;
+      font-size: 0.8rem;
+    }
+
+    .repetitions-number {
+      right: -22px;
+    }
+
+    .praise-title {
+      font-size: 1.2rem;
     }
   }
 
