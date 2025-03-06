@@ -40,7 +40,6 @@ function normalizeToFlats(chord) {
 
   let [, root, suffix] = match;
 
-  // Se for enarmônico, converte
   if (SHARP_TO_FLAT[root]) {
     root = SHARP_TO_FLAT[root];
   }
@@ -49,23 +48,19 @@ function normalizeToFlats(chord) {
 }
 
 function transposeChord(chord, steps) {
-  // Ajuste da regex para capturar acordes diminutos corretamente
   const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
   if (!match) return chord;
 
   let [, root, suffix] = match;
 
-  // Normalizar bemóis para sustenidos antes de buscar o índice
   root = FLAT_TO_SHARP[root] || root;
 
   const rootIndex = NOTES.indexOf(root);
   if (rootIndex === -1) return chord;
 
-  // Encontrar nova nota após a transposição
   const newIndex = (rootIndex + steps + NOTES.length) % NOTES.length;
   let newRoot = NOTES[newIndex];
 
-  // Se o acorde original era bemol, converter de volta para bemol (opcional)
   if (Object.keys(FLAT_TO_SHARP).includes(root)) {
     newRoot = SHARP_TO_FLAT[newRoot] || newRoot;
   }
@@ -75,7 +70,7 @@ function transposeChord(chord, steps) {
 
 function transposeTextChords(text, steps) {
   const CHORD_REGEX =
-    /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+    /\[([A-G][#b]?(m|M|maj7|7|sus4|sus2|dim|aug|add9|6|9|11|13|°|°7)?(?:\/[A-G][#b]?)?)\]/g;
 
   return text.replace(CHORD_REGEX, (match, chord) => {
     let transposedChord;
@@ -117,7 +112,6 @@ export default function Praise() {
   const [displayChords, setDisplayChords] = useState(false);
   const [displayFilesSVGFlag, setDisplayFilesSVGFlag] = useState(false);
   const [praiseKeyChord, setPraiseKeyChord] = useState(null);
-
   const [currentKey, setCurrentKey] = useState("");
 
   useEffect(() => {
@@ -130,7 +124,7 @@ export default function Praise() {
       setLouvor(louvorData);
 
       if (louvorData.chordsKey) {
-        setCurrentKey(louvorData.chordsKey.replace(/m$/, "")); // pega o tom inicial
+        setCurrentKey(louvorData.chordsKey.replace(/m$/, ""));
         setPraiseKeyChord(keyWithouScale.replace(/m$/, ""));
       }
 
@@ -182,8 +176,10 @@ export default function Praise() {
       const originalLine = line;
       line = line.replace(/\[\..*?\]/g, "").replace(/\[@\]/g, "");
 
+      // const regex =
+      //   /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
       const regex =
-        /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+        /\[([A-G][#b]?(m|M|maj7|7|9|11|13|sus2|sus4|dim|aug|add9|6|°|°7|m7|m9|m11|m13|7#9|7b9|7#5|7b5|9#11|13b9|13#11|6\/9)?(?:\/[A-G][#b]?)?)\]/g;
 
       // const regex = /\[([A-G](?:#°|[#b°])?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g;
 

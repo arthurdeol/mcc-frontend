@@ -83,6 +83,10 @@ export default function PraiseSettings() {
     displayFilesSVGInsteadOfText: praiseData.filesSVGFlag,
   });
 
+  const [praiseKeyChord, setPraiseKeyChord] = useState(
+    praiseData.chordsKey !== null ? praiseData.chordsKey : ""
+  );
+
   const [lyricsContent, setLyricsContent] = useState(
     praiseData.lyrics !== "null" && praiseData.lyrics ? praiseData.lyrics : ""
   );
@@ -171,6 +175,10 @@ export default function PraiseSettings() {
     setLyricsContent(event.target.value);
   };
 
+  const handleChangePraiseChordKey = (event) => {
+    setPraiseKeyChord(event.target.value);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -197,6 +205,7 @@ export default function PraiseSettings() {
     formData.append("englishTitle", englishTitle);
     formData.append("chords", chordsContent);
     formData.append("lyrics", lyricsContent);
+    formData.append("chordsKey", praiseKeyChord);
 
     if (filesSelected.length > 0) {
       filesSelected.forEach((file, index) => {
@@ -241,7 +250,12 @@ export default function PraiseSettings() {
       const originalLine = line;
       line = line.replace(/\[\..*?\]/g, "").replace(/\[@\]/g, "");
 
-      const regex = /\[([A-G][#b]?[mM\d]*(?:\/[A-G][#b]?)?)\]/g;
+      // const regex =
+      //   /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+      const regex =
+        /\[([A-G][#b]?(m|M|maj7|7|9|11|13|sus2|sus4|dim|aug|add9|6|°|°7|m7|m9|m11|m13|7#9|7b9|7#5|7b5|9#11|13b9|13#11|6\/9)?(?:\/[A-G][#b]?)?)\]/g;
+
+      // const regex = /\[([A-G](?:#°|[#b°])?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g;
 
       // Extrai acordes da linha e gera a linha de texto sem acordes
       const chordPositions = [];
@@ -805,6 +819,42 @@ export default function PraiseSettings() {
             )}
           </div>
           <br></br>
+
+          <FormControl style={{ width: "120px", marginBottom: "5px" }}>
+            <InputLabel id="simple-select-label">Key / Tone</InputLabel>
+            <Select
+              labelId="simple-select-label"
+              id="simple-select"
+              value={praiseKeyChord}
+              label="Key/Tone"
+              onChange={handleChangePraiseChordKey}
+            >
+              <MenuItem value={"C"}>C</MenuItem>
+              <MenuItem value={"Cm"}>Cm</MenuItem>
+              <MenuItem value={"C#"}>C# - Db</MenuItem>
+              <MenuItem value={"C#m"}>C#m - Dbm</MenuItem>
+              <MenuItem value={"D"}>D</MenuItem>
+              <MenuItem value={"Dm"}>Dm</MenuItem>
+              <MenuItem value={"D#"}>D# - Eb</MenuItem>
+              <MenuItem value={"D#m"}>D#m - Ebm</MenuItem>
+              <MenuItem value={"E"}>E</MenuItem>
+              <MenuItem value={"Em"}>Em</MenuItem>
+              <MenuItem value={"F"}>F</MenuItem>
+              <MenuItem value={"Fm"}>Fm</MenuItem>
+              <MenuItem value={"F#"}>F# - Gb</MenuItem>
+              <MenuItem value={"F#m"}>F#m - Gbm</MenuItem>
+              <MenuItem value={"G"}>G</MenuItem>
+              <MenuItem value={"Gm"}>Gm</MenuItem>
+              <MenuItem value={"G#"}>G# - Ab</MenuItem>
+              <MenuItem value={"G#m"}>G#m - Abm</MenuItem>
+              <MenuItem value={"A"}>A</MenuItem>
+              <MenuItem value={"Am"}>Am</MenuItem>
+              <MenuItem value={"A#"}>A# - Bb</MenuItem>
+              <MenuItem value={"A#m"}>A#m - Bbm</MenuItem>
+              <MenuItem value={"B"}>B</MenuItem>
+              <MenuItem value={"Bm"}>Bm</MenuItem>
+            </Select>
+          </FormControl>
 
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">

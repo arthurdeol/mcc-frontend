@@ -136,12 +136,6 @@ export const ContainerPraise = styled.div`
     .file {
       border: 1px solid var(--color-light-gray-1);
     }
-  }
-
-  @media (max-width: 425px) {
-    .progress-container {
-      padding-top: 50%;
-    }
 
     .praise-main {
       // width: 85%;
@@ -160,6 +154,12 @@ export const ContainerPraise = styled.div`
     .button-change-key {
       width: 25px;
       height: 25px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .progress-container {
+      padding-top: 50%;
     }
   }
 `;
