@@ -34,7 +34,7 @@ function transposeChord(chord, steps) {
   const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
   if (!match) return chord;
 
-  let [_, root, suffix] = match;
+  let [, root, suffix] = match;
 
   // Normalizar bemóis para sustenidos antes de buscar o índice
   root = FLAT_TO_SHARP[root] || root;
