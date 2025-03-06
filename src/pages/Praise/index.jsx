@@ -9,25 +9,54 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
+const FLAT_TO_SHARP = {
+  "Db": "C#",
+  "Eb": "D#",
+  "Fb": "E",
+  "Gb": "F#",
+  "Ab": "G#",
+  "Bb": "A#",
+  "Cb": "B",
+};
+
+const SHARP_TO_FLAT = {
+  "C#": "Db",
+  "D#": "Eb",
+  "E": "Fb",
+  "F#": "Gb",
+  "G#": "Ab",
+  "A#": "Bb",
+  "B": "Cb",
+};
+
 function transposeChord(chord, steps) {
+  // Ajuste da regex para capturar acordes diminutos corretamente
   const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
   if (!match) return chord;
 
-  const [, root, suffix] = match;
-  const rootIndex = NOTES.findIndex(
-    (n) => n === root.replace("b", "B").replace("#", "#")
-  );
+  let [_, root, suffix] = match;
+
+  // Normalizar bemóis para sustenidos antes de buscar o índice
+  root = FLAT_TO_SHARP[root] || root;
+
+  const rootIndex = NOTES.indexOf(root);
   if (rootIndex === -1) return chord;
 
+  // Encontrar nova nota após a transposição
   const newIndex = (rootIndex + steps + NOTES.length) % NOTES.length;
-  const newRoot = NOTES[newIndex];
+  let newRoot = NOTES[newIndex];
+
+  // Se o acorde original era bemol, converter de volta para bemol (opcional)
+  if (Object.keys(FLAT_TO_SHARP).includes(root)) {
+    newRoot = SHARP_TO_FLAT[newRoot] || newRoot;
+  }
 
   return newRoot + suffix;
 }
 
 function transposeTextChords(text, steps) {
   return text.replace(
-    /\[([A-G][#b]?[mM\d]*(?:\/[A-G][#b]?)?)\]/g,
+    /\[([A-G][#b°]?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g,
     (match, chord) => {
       if (chord.includes("/")) {
         const [base, bass] = chord.split("/");
@@ -117,7 +146,7 @@ export default function Praise() {
       const originalLine = line;
       line = line.replace(/\[\..*?\]/g, "").replace(/\[@\]/g, "");
 
-      const regex = /\[([A-G][#b]?[mM\d]*(?:\/[A-G][#b]?)?)\]/g;
+      const regex = /\[([A-G](?:#°|[#b°])?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g;
 
       // Extrai acordes da linha e gera a linha de texto sem acordes
       const chordPositions = [];
