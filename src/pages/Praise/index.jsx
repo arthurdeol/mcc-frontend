@@ -10,23 +10,23 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const FLAT_TO_SHARP = {
-  "Db": "C#",
-  "Eb": "D#",
-  "Fb": "E",
-  "Gb": "F#",
-  "Ab": "G#",
-  "Bb": "A#",
-  "Cb": "B",
+  Db: "C#",
+  Eb: "D#",
+  Fb: "E",
+  Gb: "F#",
+  Ab: "G#",
+  Bb: "A#",
+  Cb: "B",
 };
 
 const SHARP_TO_FLAT = {
   "C#": "Db",
   "D#": "Eb",
-  "E": "Fb",
+  E: "Fb",
   "F#": "Gb",
   "G#": "Ab",
   "A#": "Bb",
-  "B": "Cb",
+  B: "Cb",
 };
 
 function transposeChord(chord, steps) {
@@ -55,20 +55,16 @@ function transposeChord(chord, steps) {
 }
 
 function transposeTextChords(text, steps) {
-  return text.replace(
-    /\[([A-G][#b°]?[mM\d]*(?:\/[A-G][#b°]?)?)\]/g,
-    (match, chord) => {
-      if (chord.includes("/")) {
-        const [base, bass] = chord.split("/");
-        return `[${transposeChord(base, steps)}/${transposeChord(
-          bass,
-          steps
-        )}]`;
-      } else {
-        return `[${transposeChord(chord, steps)}]`;
-      }
+  const CHORD_REGEX =
+    /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
+  return text.replace(CHORD_REGEX, (match, chord) => {
+    if (chord.includes("/")) {
+      const [base, bass] = chord.split("/");
+      return `[${transposeChord(base, steps)}/${transposeChord(bass, steps)}]`;
+    } else {
+      return `[${transposeChord(chord, steps)}]`;
     }
-  );
+  });
 }
 
 export default function Praise() {
