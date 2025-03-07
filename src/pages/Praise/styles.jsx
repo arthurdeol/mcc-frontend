@@ -25,6 +25,12 @@ export const ContainerPraise = styled.div`
     font-size: 1.5rem;
   }
 
+  .praise-title-portuguese {
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--color-dark-gray);
+  }
+
   .praise-lines {
     margin-top: 1.5rem;
     font-family: monospace;
@@ -163,48 +169,3 @@ export const ContainerPraise = styled.div`
     }
   }
 `;
-
-// export const FullScreenButton = styled.div`
-//   position: absolute;
-//   top: 5rem;
-//   right: 2rem;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 35px;
-//   height: 35px;
-//   margin-right: 5px;
-//   background: var(--color-background-white);
-//   border: 1px solid var(--color-light-gray);
-//   border-radius: 10px;
-//   font-size: 1rem;
-
-//   @media (max-width: 435px) {
-//     right: 0.1rem;
-//     width: 25px;
-//     height: 25px;
-//   }
-// `;
-
-// export const ExitFullScreenButton = styled.div`
-//   position: fixed;
-//   top: 2rem;
-//   right: 2rem;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 35px;
-//   height: 35px;
-//   margin-right: 5px;
-//   background: var(--color-light-gray);
-//   border: 1px solid var(--color-gray);
-//   border-radius: 10px;
-//   font-size: 1rem;
-
-//   @media (max-width: 435px) {
-//     top: 0.4rem;
-//     right: 0.1rem;
-//     width: 25px;
-//     height: 25px;
-//   }
-// `;

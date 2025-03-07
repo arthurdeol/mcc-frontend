@@ -619,6 +619,14 @@ export default function Praise() {
                         {louvor.englishTitle}
                       </h1>
                     )}
+                    {louvor.portugueseTitle && (
+                      <h3 className="praise-title-portuguese">
+                        {louvor.portugueseSongBookNumber
+                          ? louvor.portugueseSongBookNumber + " - "
+                          : ""}
+                        {louvor.portugueseTitle}
+                      </h3>
+                    )}
                     <div className="praise-lines-lyrics">
                       {processLyrics(louvor.lyrics)}
                     </div>
@@ -648,6 +656,14 @@ export default function Praise() {
                           {louvor.englishTitle}
                         </h1>
                       </>
+                    )}
+                    {louvor.portugueseTitle && (
+                      <h3 className="praise-title-portuguese">
+                        {louvor.portugueseSongBookNumber
+                          ? louvor.portugueseSongBookNumber + " - "
+                          : ""}
+                        {louvor.portugueseTitle}
+                      </h3>
                     )}
 
                     {displayChords && louvor.chordsKey && (

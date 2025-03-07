@@ -841,6 +841,14 @@ export default function PraiseSettings() {
                       {englishTitle}
                     </h1>
                   )}
+                  {portugueseTitle && (
+                    <h3>
+                      {portugueseSongBookNumber
+                        ? portugueseSongBookNumber + " - "
+                        : ""}
+                      {portugueseTitle}
+                    </h3>
+                  )}
                   <div className="praise-lines-lyrics">
                     {processLyrics(lyricsContent)}
                   </div>
@@ -926,6 +934,14 @@ export default function PraiseSettings() {
                         {englishTitle}
                       </h1>
                     </>
+                  )}
+                  {portugueseTitle && (
+                    <h3>
+                      {portugueseSongBookNumber
+                        ? portugueseSongBookNumber + " - "
+                        : ""}
+                      {portugueseTitle}
+                    </h3>
                   )}
                   <div className="praise-lines">
                     {processChords(chordsContent)}

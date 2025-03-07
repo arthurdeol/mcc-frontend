@@ -20,6 +20,12 @@ export const Container = styled.div`
     margin-bottom: 1rem;
   }
 
+  h3 {
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--color-dark-gray);
+  }
+
   .text-error {
     color: var(--color-error);
     margin: 15px 0 0 5px;
