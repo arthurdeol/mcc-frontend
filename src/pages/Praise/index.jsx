@@ -89,19 +89,6 @@ function transposeTextChords(text, steps) {
   });
 }
 
-// function transposeTextChords(text, steps) {
-//   const CHORD_REGEX =
-//     /\[([A-G][#b]?(°|°7|m|M|maj7|7|sus4|sus2|dim|aug|add9|6)?(?:\/[A-G][#b]?)?)\]/g;
-//   return text.replace(CHORD_REGEX, (match, chord) => {
-//     if (chord.includes("/")) {
-//       const [base, bass] = chord.split("/");
-//       return `[${transposeChord(base, steps)}/${transposeChord(bass, steps)}]`;
-//     } else {
-//       return `[${transposeChord(chord, steps)}]`;
-//     }
-//   });
-// }
-
 export default function Praise() {
   const navigate = useNavigate();
   const { id, file } = useParams();
@@ -616,6 +603,9 @@ export default function Praise() {
                     {louvor.englishTitle.includes("(") ? (
                       <>
                         <h1 className="praise-title">
+                          {louvor.englishSongBookNumber
+                            ? louvor.englishSongBookNumber + " - "
+                            : ""}
                           {louvor.englishTitle.split("(")[0].trim()}
                         </h1>
                         <h2 className="praise-title">
@@ -623,7 +613,12 @@ export default function Praise() {
                         </h2>
                       </>
                     ) : (
-                      <h1 className="praise-title">{louvor.englishTitle}</h1>
+                      <h1 className="praise-title">
+                        {louvor.englishSongBookNumber
+                          ? louvor.englishSongBookNumber + " - "
+                          : ""}
+                        {louvor.englishTitle}
+                      </h1>
                     )}
                     <div className="praise-lines-lyrics">
                       {processLyrics(louvor.lyrics)}
@@ -636,6 +631,9 @@ export default function Praise() {
                     {louvor.englishTitle.includes("(") ? (
                       <>
                         <h1 className="praise-title">
+                          {louvor.englishSongBookNumber
+                            ? louvor.englishSongBookNumber + " - "
+                            : ""}
                           {louvor.englishTitle.split("(")[0].trim()}
                         </h1>
                         <h2 className="praise-title">
@@ -643,7 +641,14 @@ export default function Praise() {
                         </h2>
                       </>
                     ) : (
-                      <h1 className="praise-title">{louvor.englishTitle}</h1>
+                      <>
+                        <h1 className="praise-title">
+                          {louvor.englishSongBookNumber
+                            ? louvor.englishSongBookNumber + " - "
+                            : ""}
+                          {louvor.englishTitle}
+                        </h1>
+                      </>
                     )}
 
                     {displayChords && louvor.chordsKey && (

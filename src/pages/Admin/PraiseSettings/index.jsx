@@ -802,6 +802,9 @@ export default function PraiseSettings() {
                   {praiseData.englishTitle.includes("(") ? (
                     <>
                       <h1 className="praise-title">
+                        {praiseData.englishSongBookNumber
+                          ? praiseData.englishSongBookNumber + " - "
+                          : ""}
                         {praiseData.englishTitle.split("(")[0].trim()}
                       </h1>
                       <h2 className="praise-title">
@@ -809,7 +812,12 @@ export default function PraiseSettings() {
                       </h2>
                     </>
                   ) : (
-                    <h1 className="praise-title">{praiseData.englishTitle}</h1>
+                    <h1 className="praise-title">
+                      {praiseData.englishSongBookNumber
+                        ? praiseData.englishSongBookNumber + " - "
+                        : ""}
+                      {praiseData.englishTitle}
+                    </h1>
                   )}
                   <div className="praise-lines-lyrics">
                     {processLyrics(lyricsContent)}
@@ -878,6 +886,9 @@ export default function PraiseSettings() {
                   {praiseData.englishTitle.includes("(") ? (
                     <>
                       <h1 className="praise-title">
+                        {praiseData.englishSongBookNumber
+                          ? praiseData.englishSongBookNumber + " - "
+                          : ""}
                         {praiseData.englishTitle.split("(")[0].trim()}
                       </h1>
                       <h2 className="praise-title">
@@ -885,7 +896,14 @@ export default function PraiseSettings() {
                       </h2>
                     </>
                   ) : (
-                    <h1 className="praise-title">{praiseData.englishTitle}</h1>
+                    <>
+                      <h1 className="praise-title">
+                        {praiseData.englishSongBookNumber
+                          ? praiseData.englishSongBookNumber + " - "
+                          : ""}
+                        {praiseData.englishTitle}
+                      </h1>
+                    </>
                   )}
                   <div className="praise-lines">
                     {processChords(chordsContent)}
