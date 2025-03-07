@@ -552,6 +552,7 @@ export default function Praise() {
       chords: louvor.chordsPdf,
       musicSheet: louvor.sheetMusicPdf,
       audio: louvor.audioFile,
+      gestures: louvor.gesturesFile,
     };
 
     if (fileMap[file]) {
@@ -560,7 +561,9 @@ export default function Praise() {
 
     setDisplayLyrics(file === "lyrics");
     setDisplayChords(file === "chords");
-    setDisplayFilesSVGFlag(file === "musicSheet" || louvor.filesSVGFlag);
+    setDisplayFilesSVGFlag(
+      file === "musicSheet" || file === "gestures" || louvor.filesSVGFlag
+    );
 
     if (window.location.pathname !== `/praise/${id}/${file}`) {
       navigate(`/praise/${id}/${file}`);

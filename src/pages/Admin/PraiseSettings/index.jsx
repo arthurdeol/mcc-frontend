@@ -950,6 +950,7 @@ export default function PraiseSettings() {
                         <MenuItem value={"Lyrics"}>Lyrics</MenuItem>
                         <MenuItem value={"Chords"}>Chords</MenuItem>
                         <MenuItem value={"SheetMusic"}>Music Sheet</MenuItem>
+                        <MenuItem value={"Gestures"}>CIA's Gestures</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>

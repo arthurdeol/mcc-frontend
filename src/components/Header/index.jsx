@@ -7,7 +7,7 @@ import {
   LuShare2,
   LuListEnd,
 } from "react-icons/lu";
-import { PiListHeart } from "react-icons/pi";
+import { PiListHeart, PiHandWaving } from "react-icons/pi";
 
 const Header = ({
   louvor = {},
@@ -58,6 +58,23 @@ const Header = ({
 
       {isPathPraise && (
         <div className="icons-container">
+          {louvor.containsInCiasSongBook && (
+            <>
+              {louvor.linkGestures ? (
+                <div
+                  className="icon-container"
+                  onClick={() => setActiveTab("gestures", louvor)}
+                >
+                  <PiHandWaving color={"var(--color-black)"} size={19} />
+                </div>
+              ) : (
+                <div className="icon-container">
+                  <PiHandWaving color={"var(--color-gray-2)"} size={17} />
+                </div>
+              )}
+            </>
+          )}
+
           {louvor.linkSheetMusic ? (
             <div
               className="icon-container"
