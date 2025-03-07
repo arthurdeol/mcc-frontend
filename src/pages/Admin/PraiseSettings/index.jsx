@@ -825,24 +825,24 @@ export default function PraiseSettings() {
             {lyricsContent && (
               <div className="praise-container">
                 <div className="praise-main">
-                  {praiseData.englishTitle.includes("(") ? (
+                  {englishTitle.includes("(") ? (
                     <>
                       <h1 className="praise-title">
-                        {praiseData.englishSongBookNumber
-                          ? praiseData.englishSongBookNumber + " - "
+                        {englishSongBookNumber
+                          ? englishSongBookNumber + " - "
                           : ""}
-                        {praiseData.englishTitle.split("(")[0].trim()}
+                        {englishTitle.split("(")[0].trim()}
                       </h1>
                       <h2 className="praise-title">
-                        {"(" + praiseData.englishTitle.split("(")[1].trim()}
+                        {"(" + englishTitle.split("(")[1].trim()}
                       </h2>
                     </>
                   ) : (
                     <h1 className="praise-title">
-                      {praiseData.englishSongBookNumber
-                        ? praiseData.englishSongBookNumber + " - "
+                      {englishSongBookNumber
+                        ? englishSongBookNumber + " - "
                         : ""}
-                      {praiseData.englishTitle}
+                      {englishTitle}
                     </h1>
                   )}
                   <div className="praise-lines-lyrics">
@@ -909,25 +909,25 @@ export default function PraiseSettings() {
             {chordsContent && (
               <div className="praise-container">
                 <div className="praise-main">
-                  {praiseData.englishTitle.includes("(") ? (
+                  {englishTitle.includes("(") ? (
                     <>
                       <h1 className="praise-title">
-                        {praiseData.englishSongBookNumber
-                          ? praiseData.englishSongBookNumber + " - "
+                        {englishSongBookNumber
+                          ? englishSongBookNumber + " - "
                           : ""}
-                        {praiseData.englishTitle.split("(")[0].trim()}
+                        {englishTitle.split("(")[0].trim()}
                       </h1>
                       <h2 className="praise-title">
-                        {"(" + praiseData.englishTitle.split("(")[1].trim()}
+                        {"(" + englishTitle.split("(")[1].trim()}
                       </h2>
                     </>
                   ) : (
                     <>
                       <h1 className="praise-title">
-                        {praiseData.englishSongBookNumber
-                          ? praiseData.englishSongBookNumber + " - "
+                        {englishSongBookNumber
+                          ? englishSongBookNumber + " - "
                           : ""}
-                        {praiseData.englishTitle}
+                        {englishTitle}
                       </h1>
                     </>
                   )}
