@@ -109,7 +109,7 @@ export default function PraiseCard({
             <Link
               onClick={() => setLastClickedPraise(praise.songBookMapId)}
               to={
-                praise.linkPdfLyrics
+                praise.linkPdfLyrics || praise.lyrics
                   ? `/praise/${praise.songBookMapId}/lyrics`
                   : null
               }
@@ -130,7 +130,7 @@ export default function PraiseCard({
             <Link
               onClick={() => setLastClickedPraise(praise.songBookMapId)}
               to={
-                praise.linkChords
+                praise.linkChords || praise.chords
                   ? `/praise/${praise.songBookMapId}/chords`
                   : null
               }
