@@ -83,6 +83,10 @@ export default function PraiseSettings() {
     displayFilesSVGInsteadOfText: praiseData.filesSVGFlag,
   });
 
+  const [linkInstruments, setLinkInstruments] = useState(
+    praiseData.linkDriveFolder
+  );
+
   const [praiseKeyChord, setPraiseKeyChord] = useState(
     praiseData.chordsKey !== null ? praiseData.chordsKey : ""
   );
@@ -167,6 +171,10 @@ export default function PraiseSettings() {
     setEnglishTitle(event.target.value);
   };
 
+  const handleChangeLinkInstruments = (event) => {
+    setLinkInstruments(event.target.value);
+  };
+
   const handleChangeChordsContent = (event) => {
     setChordsContent(event.target.value);
   };
@@ -203,6 +211,7 @@ export default function PraiseSettings() {
     formData.append("portugueseTitle", portugueseTitle);
     formData.append("englishSongBookNumber", englishSongBookNumber);
     formData.append("englishTitle", englishTitle);
+    formData.append("linkDriveFolder", linkInstruments);
     formData.append("chords", chordsContent);
     formData.append("lyrics", lyricsContent);
     formData.append("chordsKey", praiseKeyChord);
@@ -772,6 +781,23 @@ export default function PraiseSettings() {
                 label="Number"
                 variant="outlined"
                 onChange={handleChangePortugueseSongBookNumber}
+              />
+            </Box>
+          </div>
+          <br></br>
+
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Link to Instruments Drive:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={linkInstruments}
+                id="outlined-basic"
+                variant="outlined"
+                onChange={handleChangeLinkInstruments}
               />
             </Box>
           </div>

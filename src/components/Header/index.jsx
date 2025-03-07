@@ -6,6 +6,7 @@ import {
   LuMusic,
   LuShare2,
   LuListEnd,
+  LuFolderClosed,
 } from "react-icons/lu";
 import { PiListHeart, PiHandWaving } from "react-icons/pi";
 
@@ -58,21 +59,25 @@ const Header = ({
 
       {isPathPraise && (
         <div className="icons-container">
-          {louvor.containsInCiasSongBook && (
-            <>
-              {louvor.linkGestures ? (
-                <div
-                  className="icon-container"
-                  onClick={() => setActiveTab("gestures", louvor)}
-                >
-                  <PiHandWaving color={"var(--color-black)"} size={19} />
-                </div>
-              ) : (
-                <div className="icon-container">
-                  <PiHandWaving color={"var(--color-gray-2)"} size={17} />
-                </div>
-              )}
-            </>
+          {louvor.linkDriveFolder && (
+            <a
+              href={louvor.linkDriveFolder}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="icon-container">
+                <LuFolderClosed color={"var(--color-black)"} size={19} />
+              </div>
+            </a>
+          )}
+
+          {louvor.linkGestures && louvor.containsInCiasSongBook && (
+            <div
+              className="icon-container"
+              onClick={() => setActiveTab("gestures", louvor)}
+            >
+              <PiHandWaving color={"var(--color-black)"} size={19} />
+            </div>
           )}
 
           {louvor.linkSheetMusic ? (
