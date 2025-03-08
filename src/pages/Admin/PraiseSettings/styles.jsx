@@ -213,7 +213,7 @@ export const Container = styled.div`
 
     .praise-main {
       // width: 85%;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     .repetitions-number {
