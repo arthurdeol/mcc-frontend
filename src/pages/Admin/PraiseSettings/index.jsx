@@ -83,8 +83,12 @@ export default function PraiseSettings() {
     displayFilesSVGInsteadOfText: praiseData.filesSVGFlag,
   });
 
+  console.log(praiseData.linkDriveFolder, "link drive");
+
   const [linkInstruments, setLinkInstruments] = useState(
-    praiseData.linkDriveFolder
+    praiseData.linkDriveFolder !== "null" && praiseData.linkDriveFolder
+      ? praiseData.linkDriveFolder
+      : ""
   );
 
   const [praiseKeyChord, setPraiseKeyChord] = useState(
@@ -190,6 +194,7 @@ export default function PraiseSettings() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    console.log(linkInstruments);
     const formData = new FormData();
     formData.append("songBookMapId", praiseId);
     formData.append(

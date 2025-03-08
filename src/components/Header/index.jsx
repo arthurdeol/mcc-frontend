@@ -59,17 +59,20 @@ const Header = ({
 
       {isPathPraise && (
         <div className="icons-container">
-          {louvor.linkDriveFolder && (
-            <a
-              href={louvor.linkDriveFolder}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="icon-container">
-                <LuFolderClosed color={"var(--color-black)"} size={19} />
-              </div>
-            </a>
-          )}
+          {louvor.linkDriveFolder &&
+            louvor.linkDriveFolder !== "null" &&
+            (louvor.linkDriveFolder?.includes("http://") ||
+              louvor.linkDriveFolder?.includes("https://")) && (
+              <a
+                href={louvor.linkDriveFolder}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon-container">
+                  <LuFolderClosed color={"var(--color-black)"} size={19} />
+                </div>
+              </a>
+            )}
 
           {louvor.linkGestures && louvor.containsInCiasSongBook && (
             <div
