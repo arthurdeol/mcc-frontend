@@ -15,7 +15,7 @@ export const ContainerPraisesList = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
     font-size: 1rem;
-    margin: 4.5rem 5% 1rem 5%;
+    margin: 4.5rem 5% 3rem 5%;
     width: 80%;
     overflow-x: hidden;
   }

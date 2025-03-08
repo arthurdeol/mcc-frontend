@@ -88,6 +88,11 @@ export const ContainerPraise = styled.div`
     background-color: var(--color-background-white);
     padding: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+
+    &:hover {
+      border: 1px solid var(--color-dark-gray);
+      background: var(--color-light-gray-2);
+    }
   }
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
