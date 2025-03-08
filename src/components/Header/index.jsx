@@ -5,9 +5,9 @@ import {
   LuListMusic,
   LuMusic,
   LuShare2,
-  LuListEnd,
   LuFolderClosed,
 } from "react-icons/lu";
+// import { LuListEnd } from "react-icons/lu";
 import { PiListHeart, PiHandWaving } from "react-icons/pi";
 
 const Header = ({
@@ -19,7 +19,7 @@ const Header = ({
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
   const isPathPraise = navPath.indexOf("/praise/") !== -1;
-  const takeSentServiceListId = localStorage.getItem("sentServiceListId");
+  // const takeSentServiceListId = localStorage.getItem("sentServiceListId");
 
   return (
     <Container>
@@ -138,7 +138,7 @@ const Header = ({
           )} */}
 
           {/* ----------------Return to Service List------------------ */}
-          {localStorage.getItem("sentServiceListId") && isPathPraise && (
+          {/* {localStorage.getItem("sentServiceListId") && isPathPraise && (
             <div
               className="sent-service-list-button"
               onClick={() =>
@@ -150,7 +150,7 @@ const Header = ({
                 <div className="list-length">{servicePraises.length}</div>
               )}
             </div>
-          )}
+          )} */}
         </div>
       )}
     </Container>

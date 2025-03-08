@@ -6,88 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate, useParams } from "react-router-dom";
 import { HiArrowCircleRight, HiArrowCircleLeft } from "react-icons/hi";
 import { FiPlus, FiMinus } from "react-icons/fi";
-
-const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-
-const FLAT_TO_SHARP = {
-  Db: "C#",
-  Eb: "D#",
-  Fb: "E",
-  Gb: "F#",
-  Ab: "G#",
-  Bb: "A#",
-  Cb: "B",
-};
-
-const SHARP_TO_FLAT = {
-  "C#": "Db",
-  "D#": "Eb",
-  E: "Fb",
-  "F#": "Gb",
-  "G#": "Ab",
-  "A#": "Bb",
-  B: "Cb",
-};
-
-function normalizeToFlats(chord) {
-  const SHARP_TO_FLAT = {
-    "A#": "Bb",
-    "D#": "Eb",
-  };
-
-  const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
-  if (!match) return chord;
-
-  let [, root, suffix] = match;
-
-  if (SHARP_TO_FLAT[root]) {
-    root = SHARP_TO_FLAT[root];
-  }
-
-  return root + suffix;
-}
-
-function transposeChord(chord, steps) {
-  const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
-  if (!match) return chord;
-
-  let [, root, suffix] = match;
-
-  root = FLAT_TO_SHARP[root] || root;
-
-  const rootIndex = NOTES.indexOf(root);
-  if (rootIndex === -1) return chord;
-
-  const newIndex = (rootIndex + steps + NOTES.length) % NOTES.length;
-  let newRoot = NOTES[newIndex];
-
-  if (Object.keys(FLAT_TO_SHARP).includes(root)) {
-    newRoot = SHARP_TO_FLAT[newRoot] || newRoot;
-  }
-
-  return newRoot + suffix;
-}
-
-function transposeTextChords(text, steps) {
-  const CHORD_REGEX =
-    /\[([A-G][#b]?(m|M|maj7|7|sus4|sus2|dim|aug|add9|6|9|11|13|°|°7)?(?:\/[A-G][#b]?)?)\]/g;
-
-  return text.replace(CHORD_REGEX, (match, chord) => {
-    let transposedChord;
-
-    if (chord.includes("/")) {
-      const [base, bass] = chord.split("/");
-      transposedChord = `${transposeChord(base, steps)}/${transposeChord(
-        bass,
-        steps
-      )}`;
-    } else {
-      transposedChord = transposeChord(chord, steps);
-    }
-
-    return `[${normalizeToFlats(transposedChord)}]`;
-  });
-}
+import { LuListEnd } from "react-icons/lu";
 
 export default function Praise() {
   const navigate = useNavigate();
@@ -100,6 +19,9 @@ export default function Praise() {
   const [displayFilesSVGFlag, setDisplayFilesSVGFlag] = useState(false);
   const [praiseKeyChord, setPraiseKeyChord] = useState(null);
   const [currentKey, setCurrentKey] = useState("");
+  const takeSentServiceListId = localStorage.getItem("sentServiceListId");
+  const navPath = window.location.pathname?.toString();
+  const isPathPraise = navPath.indexOf("/praise/") !== -1;
 
   useEffect(() => {
     async function fetchData() {
@@ -125,6 +47,101 @@ export default function Praise() {
     fetchData();
     // eslint-disable-next-line
   }, [file, id]);
+
+  const NOTES = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B",
+  ];
+
+  const FLAT_TO_SHARP = {
+    Db: "C#",
+    Eb: "D#",
+    Fb: "E",
+    Gb: "F#",
+    Ab: "G#",
+    Bb: "A#",
+    Cb: "B",
+  };
+
+  const SHARP_TO_FLAT = {
+    "C#": "Db",
+    "D#": "Eb",
+    E: "Fb",
+    "F#": "Gb",
+    "G#": "Ab",
+    "A#": "Bb",
+    B: "Cb",
+  };
+
+  function normalizeToFlats(chord) {
+    const SHARP_TO_FLAT = {
+      "A#": "Bb",
+      "D#": "Eb",
+    };
+
+    const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
+    if (!match) return chord;
+
+    let [, root, suffix] = match;
+
+    if (SHARP_TO_FLAT[root]) {
+      root = SHARP_TO_FLAT[root];
+    }
+
+    return root + suffix;
+  }
+
+  function transposeChord(chord, steps) {
+    const match = chord.match(/^([A-Ga-g#b]+)(.*)$/);
+    if (!match) return chord;
+
+    let [, root, suffix] = match;
+
+    root = FLAT_TO_SHARP[root] || root;
+
+    const rootIndex = NOTES.indexOf(root);
+    if (rootIndex === -1) return chord;
+
+    const newIndex = (rootIndex + steps + NOTES.length) % NOTES.length;
+    let newRoot = NOTES[newIndex];
+
+    if (Object.keys(FLAT_TO_SHARP).includes(root)) {
+      newRoot = SHARP_TO_FLAT[newRoot] || newRoot;
+    }
+
+    return newRoot + suffix;
+  }
+
+  function transposeTextChords(text, steps) {
+    const CHORD_REGEX =
+      /\[([A-G][#b]?(m|M|maj7|7|sus4|sus2|dim|aug|add9|6|9|11|13|°|°7)?(?:\/[A-G][#b]?)?)\]/g;
+
+    return text.replace(CHORD_REGEX, (match, chord) => {
+      let transposedChord;
+
+      if (chord.includes("/")) {
+        const [base, bass] = chord.split("/");
+        transposedChord = `${transposeChord(base, steps)}/${transposeChord(
+          bass,
+          steps
+        )}`;
+      } else {
+        transposedChord = transposeChord(chord, steps);
+      }
+
+      return `[${normalizeToFlats(transposedChord)}]`;
+    });
+  }
 
   function changeKey(steps) {
     const currentIndex = NOTES.indexOf(currentKey);
@@ -709,6 +726,17 @@ export default function Praise() {
                   </>
                 )}
               </div>
+            </div>
+          )}
+          {/* ----------------Return to Service List------------------ */}
+          {localStorage.getItem("sentServiceListId") && isPathPraise && (
+            <div
+              className="button-to-service-list"
+              onClick={() =>
+                navigate(`/shared-praises-list/${takeSentServiceListId}`)
+              }
+            >
+              <LuListEnd size={20} color="var(--color-black)" />
             </div>
           )}
         </div>

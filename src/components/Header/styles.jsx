@@ -101,7 +101,7 @@ export const Container = styled.div`
   @media (max-width: 767px) {
     padding: 10px;
     img {
-      margin-left: 10px;
+      margin-left: 8px;
     }
   }
 
@@ -109,6 +109,7 @@ export const Container = styled.div`
     padding: 10px 8px;
     img {
       margin-left: 5px;
+      width: 120px;
     }
 
     .praise-settings-title {
@@ -123,6 +124,12 @@ export const Container = styled.div`
     .list-button:hover,
     .share-button:hover {
       background: var(--color-background-white);
+    }
+  }
+
+  @media (max-width: 425px) {
+    img {
+      margin-left: 3px;
     }
   }
 

@@ -71,6 +71,24 @@ export const ContainerPraise = styled.div`
     border: 1px solid var(--color-light-gray);
     font-size: 1rem;
   }
+
+  .button-to-service-list {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-light-gray);
+    cursor: pointer;
+    background-color: var(--color-background-white);
+    padding: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+  }
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   .file-container {
@@ -81,6 +99,7 @@ export const ContainerPraise = styled.div`
     //height: 90%;
     overflow-x: auto;
     background: var(--color-light-gray);
+    padding-bottom: 0;
   }
 
   .file-content {
@@ -137,6 +156,7 @@ export const ContainerPraise = styled.div`
   @media (max-width: 670px) {
     .file-container {
       background: var(--color-white);
+      padding-bottom: 2rem;
     }
 
     .file {
