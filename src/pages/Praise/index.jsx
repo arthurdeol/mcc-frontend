@@ -436,7 +436,11 @@ export default function Praise() {
       // Mapeia tags especiais para estilos específicos
       const specialTags = {
         "[intro]": { label: "Intro:", color: "red", bold: true },
-        "[instrumental]": { label: "Instrumental:", color: "red", bold: true },
+        "[instrumental]": {
+          label: "Instrumental:",
+          color: "black",
+          bold: true,
+        },
         "[chorus]": {
           label: `Chorus: ${line.replace(/\[\/?chorus\]/g, "")}`,
           color: "black",
