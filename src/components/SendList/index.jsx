@@ -142,17 +142,22 @@ export default function SendList({
               {praise.containsInCiasSongBook && (
                 <div className="theme-tag-cia">CIA's</div>
               )}
-              <p>
-                {praise.englishSongBookNumber &&
-                  `${praise.englishSongBookNumber} - `}
-                {praise.englishTitle
-                  ? praise.englishTitle
-                  : praise.portugueseSongBookNumber
-                  ? praise.portugueseSongBookNumber +
-                    " - " +
-                    praise.portugueseTitle
-                  : praise.portugueseTitle}
-              </p>
+
+              {praise.englishTitle ? (
+                <p>
+                  {praise.englishSongBookNumber
+                    ? praise.englishSongBookNumber + " - "
+                    : ""}
+                  {praise.englishTitle}
+                </p>
+              ) : (
+                <p style={{ color: "gray" }}>
+                  {praise.portugueseSongBookNumber
+                    ? praise.portugueseSongBookNumber + " - "
+                    : ""}
+                  {praise.portugueseTitle}
+                </p>
+              )}
             </div>
           ))}
         </div>

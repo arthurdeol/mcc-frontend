@@ -41,12 +41,21 @@ export default function ShareListLinkModal({
         portugueseSongBookNumber,
         containsInCiasSongBook,
       }) => {
-        const title = englishTitle || portugueseTitle;
-        const number = englishSongBookNumber || portugueseSongBookNumber;
-
-        let message = number ? `${number} - ${title}` : title;
+        let message = "";
+        if (englishTitle) {
+          if (englishSongBookNumber) {
+            message = `${englishSongBookNumber + " - " + englishTitle}`;
+          } else {
+            message = englishTitle;
+          }
+        } else {
+          if (portugueseSongBookNumber) {
+            message = `${portugueseSongBookNumber + " - " + portugueseTitle}`;
+          } else {
+            message = portugueseTitle;
+          }
+        }
         if (containsInCiasSongBook) message = `(CIA's) ${message}`;
-
         return message;
       }
     );
