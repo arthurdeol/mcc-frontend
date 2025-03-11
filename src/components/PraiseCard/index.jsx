@@ -1,10 +1,11 @@
 import { Card, HeartButton, XClose } from "./styles";
 import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic } from "react-icons/lu";
+import { LuType, LuListMusic, LuMusic, LuFolderClosed } from "react-icons/lu";
 import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
 import { BiEditAlt } from "react-icons/bi";
 import { LuX } from "react-icons/lu";
+import { PiHandWaving } from "react-icons/pi";
 
 export default function PraiseCard({
   praise,
@@ -87,6 +88,42 @@ export default function PraiseCard({
 
         {praise.englishTitle && (
           <div className="icons-container">
+            {praise.linkDriveFolder &&
+              praise.linkDriveFolder !== "null" &&
+              (praise.linkDriveFolder?.includes("http://") ||
+                praise.linkDriveFolder?.includes("https://")) && (
+                <a
+                  href={praise.linkDriveFolder}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="icon-container">
+                    <LuFolderClosed color={"var(--color-black)"} size={17} />
+                  </div>
+                </a>
+              )}
+
+            {praise.containsInCiasSongBook && (
+              <Link
+                onClick={() => setLastClickedPraise(praise.songBookMapId)}
+                to={
+                  praise.linkGestures
+                    ? `/praise/${praise.songBookMapId}/gestures`
+                    : null
+                }
+                className="icon-container"
+              >
+                <PiHandWaving
+                  color={
+                    praise.linkGestures
+                      ? "var(--color-black)"
+                      : "var(--color-gray-2)"
+                  }
+                  size={17}
+                />
+              </Link>
+            )}
+
             <Link
               onClick={() => setLastClickedPraise(praise.songBookMapId)}
               to={
