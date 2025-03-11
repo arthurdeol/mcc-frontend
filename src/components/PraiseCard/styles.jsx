@@ -121,7 +121,7 @@ export const Card = styled.div`
   }
 
   @media (max-width: 480px) {
-    padding: 15px 0;
+    padding: 10px 0;
 
     .icons-container {
       margin-left: 0;
@@ -135,6 +135,7 @@ export const Card = styled.div`
   }
 
   @media (max-width: 425px) {
+    padding: 15px 0;
     .praise-title-en {
       font-size: 0.9rem;
     }

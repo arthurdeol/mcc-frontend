@@ -109,7 +109,7 @@ export const Container = styled.div`
     padding: 10px 8px;
     img {
       margin-left: 5px;
-      width: 120px;
+      width: 140px;
     }
 
     .praise-settings-title {
@@ -135,7 +135,8 @@ export const Container = styled.div`
 
   @media (max-width: 375px) {
     img {
-      width: 120px;
+      margin-left: 2px;
+      width: 110px;
     }
   }
 `;

@@ -69,18 +69,26 @@ const Header = ({
                 rel="noopener noreferrer"
               >
                 <div className="icon-container">
-                  <LuFolderClosed color={"var(--color-black)"} size={19} />
+                  <LuFolderClosed color={"var(--color-black)"} size={18} />
                 </div>
               </a>
             )}
 
-          {louvor.linkGestures && louvor.containsInCiasSongBook && (
-            <div
-              className="icon-container"
-              onClick={() => setActiveTab("gestures", louvor)}
-            >
-              <PiHandWaving color={"var(--color-black)"} size={19} />
-            </div>
+          {louvor.containsInCiasSongBook && (
+            <>
+              {louvor.linkGestures ? (
+                <div
+                  className="icon-container"
+                  onClick={() => setActiveTab("gestures", louvor)}
+                >
+                  <PiHandWaving color={"var(--color-black)"} size={19} />
+                </div>
+              ) : (
+                <div className="icon-container">
+                  <PiHandWaving color={"var(--color-gray-2)"} size={19} />
+                </div>
+              )}
+            </>
           )}
 
           {louvor.linkSheetMusic ? (
