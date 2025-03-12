@@ -570,7 +570,7 @@ export default function PraiseSettings() {
       const specialTags = {
         "[intro]": { label: "Intro:", color: "red", bold: true },
         "[instrumental]": {
-          label: "Instrumental:",
+          label: "Instrumental",
           color: "black",
           bold: true,
         },
