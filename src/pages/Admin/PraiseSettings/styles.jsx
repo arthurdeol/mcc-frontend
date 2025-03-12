@@ -206,6 +206,12 @@ export const Container = styled.div`
     color: black;
   }
 
+  @media (max-width: 1300px) {
+    .file-content {
+      width: 99%;
+    }
+  }
+
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;
@@ -224,6 +230,18 @@ export const Container = styled.div`
     .order-input,
     .type-input {
       margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 670px) {
+    .file-container {
+      background: var(--color-white);
+      padding-bottom: 2rem;
+    }
+
+    .file {
+      width: inherit;
+      border: 1px solid var(--color-light-gray-1);
     }
   }
 
