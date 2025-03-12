@@ -1005,7 +1005,8 @@ export default function PraiseSettings() {
 
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
-              Click to see already saved files SVG and folder link
+              Click to See Already Saved files SVG and Instruments Drive Folder
+              Link:
             </Typography>
             <div className="icons-container">
               {louvor.linkDriveFolder &&
