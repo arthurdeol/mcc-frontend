@@ -10,7 +10,20 @@ export const Container = styled.div`
     color: var(--color-dark-red);
     font-weight: 600;
     font-size: 1.6rem;
+    // text-align: center;
     margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: var(--color-black);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--color-dark-gray);
   }
 
   .text-error {
@@ -95,6 +108,45 @@ export const Container = styled.div`
     padding: 30px;
   }
 
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  .praise-container {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    background: var(--color-background-white);
+    width: 100%;
+    //display: none;
+  }
+
+  .praise-main {
+    width: fit-content;
+    padding: 7rem 0 4rem 0;
+  }
+
+  .praise-title {
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0;
+    color: var(--color-black);
+    font-size: 1.5rem;
+  }
+
+  .praise-lines {
+    margin-top: 1.5rem;
+    font-family: monospace;
+    font-weight: normal;
+  }
+
+  .praise-lines-lyrics {
+    margin-top: 2.5rem;
+  }
+
+  .repetitions-number {
+    position: absolute;
+    right: -30px;
+    color: black;
+  }
+
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;
@@ -133,6 +185,19 @@ export const Container = styled.div`
 
     .file-data-input > span {
       margin: 15px;
+    }
+
+    .praise-main {
+      // width: 85%;
+      font-size: 0.9rem;
+    }
+
+    .repetitions-number {
+      right: -22px;
+    }
+
+    .praise-title {
+      font-size: 1.2rem;
     }
   }
 

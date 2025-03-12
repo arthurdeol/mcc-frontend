@@ -820,10 +820,15 @@ export default function PraiseSettings() {
                 fullWidth
                 id="outlined-multiline-static"
                 multiline
-                rows={10}
+                // rows={10}
                 variant="outlined"
                 onChange={handleChangeLyricsContent}
                 value={lyricsContent}
+                inputProps={{
+                  style: {
+                    height: "fit-content",
+                  },
+                }}
               />
             </Box>
 
@@ -912,10 +917,15 @@ export default function PraiseSettings() {
                 fullWidth
                 id="outlined-multiline-static"
                 multiline
-                rows={10}
+                // rows={10}
                 variant="outlined"
                 onChange={handleChangeChordsContent}
                 value={chordsContent}
+                inputProps={{
+                  style: {
+                    height: "fit-content",
+                  },
+                }}
               />
             </Box>
 
@@ -971,7 +981,7 @@ export default function PraiseSettings() {
                   name="displayFilesSVGInsteadOfText"
                 />
               }
-              label="Display Files SVG instead of Text"
+              label="Display Files SVG instead of Text for Lyrics and Chords"
             />
           </div>
 
