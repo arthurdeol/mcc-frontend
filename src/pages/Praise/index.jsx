@@ -256,7 +256,7 @@ export default function Praise() {
         "[instrumental]": { label: "Instrumental:", color: "red", bold: true },
         "[chorus]": { label: "Chorus:", color: "black", bold: true },
         "[final]": { label: "Final:", color: "black", bold: true },
-        "[b]": { label: "", color: "black", bold: true },
+        // "[b]": { label: "", color: "black", bold: true },
       };
 
       for (const tag in specialTags) {
@@ -362,7 +362,15 @@ export default function Praise() {
           {originalLine.includes("[arrowR]") && (
             <HiArrowCircleRight color="red" style={{ marginRight: "2px" }} />
           )}
-          {plainTextLine.replace(/\[arrow[L|R]\]/g, "")}
+          {originalLine.includes("[b]") ? (
+            <b>
+              {plainTextLine
+                .replace(/\[arrow[L|R]\]/g, "")
+                .replace(/\[b\]/g, "")}
+            </b>
+          ) : (
+            plainTextLine.replace(/\[arrow[L|R]\]/g, "")
+          )}
           {originalLine.includes("[arrowL]") && (
             <HiArrowCircleLeft color="red" style={{ marginLeft: "2px" }} />
           )}
