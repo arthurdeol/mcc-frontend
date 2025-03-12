@@ -960,7 +960,7 @@ export default function AddPraise() {
 
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
-              Files:
+              Files SVG:
             </Typography>
             <div className="file-container">
               <div className="file-inputs-content">
