@@ -31,8 +31,28 @@ export const Container = styled.div`
     margin: 15px 0 0 5px;
   }
 
+  .icons-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    background: var(--color-background-white);
+    border: 1px solid var(--color-light-gray);
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
   .file-content {
     display: flex;
+    // flex-direction: row;
     width: 100%;
   }
 
@@ -42,6 +62,21 @@ export const Container = styled.div`
     border: 1px solid #c4c4c4;
     border-radius: 5px;
     padding: 15px;
+  }
+
+  .files-praiseData-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .file {
+    // width: 100%;
+    height: 600px;
+    background: var(--color-background-white);
+    border: 0;
   }
 
   .file-inputs-content {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SlCloudUpload } from "react-icons/sl";
 import { LuPlus } from "react-icons/lu";
@@ -21,6 +21,8 @@ import TableFiles from "../../../components/TableFiles";
 import TableSymbols from "../../../components/TablePraiseSymbols";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { LuType, LuListMusic, LuMusic, LuFolderClosed } from "react-icons/lu";
+import { PiHandWaving } from "react-icons/pi";
 import {
   Container,
   themeStyled,
@@ -41,6 +43,8 @@ export default function PraiseSettings() {
   const [praiseId] = useState(location.state.praiseId);
 
   const { praiseData } = location.state;
+
+  const [louvor, setLouvor] = useState("");
 
   const [open, setOpen] = useState(false);
   const [snackbarData, setSnackbarData] = useState({
@@ -83,7 +87,7 @@ export default function PraiseSettings() {
     displayFilesSVGInsteadOfText: praiseData.filesSVGFlag,
   });
 
-  console.log(praiseData.linkDriveFolder, "link drive");
+  const [fileArray, setFileArray] = useState([]);
 
   const [linkInstruments, setLinkInstruments] = useState(
     praiseData.linkDriveFolder !== "null" && praiseData.linkDriveFolder
@@ -115,6 +119,34 @@ export default function PraiseSettings() {
     containsInSuplementareBSongBook,
     displayFilesSVGInsteadOfText,
   } = checkeds;
+
+  useEffect(() => {
+    async function fetchData() {
+      const url = `https://mccapi.up.railway.app/SongBookMap/${praiseId}/Get`;
+      const response = await fetch(url);
+      const louvorData = await response.json();
+      setLouvor(louvorData);
+    }
+    fetchData();
+    // eslint-disable-next-line
+  }, [praiseId]);
+
+  function setActiveTab(file) {
+    const fileMap = {
+      lyrics: louvor.lyricsPdf,
+      chords: louvor.chordsPdf,
+      musicSheet: louvor.sheetMusicPdf,
+      gestures: louvor.gesturesFile,
+    };
+
+    if (fileMap[file]) {
+      setFileArray(fileMap[file].map(setUrl));
+    }
+  }
+
+  function setUrl(file) {
+    return `data:${file.document.contentType};base64,${file.document.file}`;
+  }
 
   const handleChangeCheckbox = (event) => {
     setCheckeds({
@@ -971,6 +1003,90 @@ export default function PraiseSettings() {
           </div>
           <br></br>
 
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Click to see already saved files SVG and folder link
+            </Typography>
+            <div className="icons-container">
+              {louvor.linkDriveFolder &&
+                louvor.linkDriveFolder !== "null" &&
+                (louvor.linkDriveFolder?.includes("http://") ||
+                  louvor.linkDriveFolder?.includes("https://")) && (
+                  <a
+                    href={louvor.linkDriveFolder}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="icon-container">
+                      <LuFolderClosed color={"var(--color-black)"} size={18} />
+                    </div>
+                  </a>
+                )}
+
+              {louvor.containsInCiasSongBook && (
+                <>
+                  {louvor.linkGestures ? (
+                    <div
+                      className="icon-container"
+                      onClick={() => setActiveTab("gestures")}
+                    >
+                      <PiHandWaving color={"var(--color-black)"} size={19} />
+                    </div>
+                  ) : (
+                    <div className="icon-container">
+                      <PiHandWaving color={"var(--color-gray-2)"} size={19} />
+                    </div>
+                  )}
+                </>
+              )}
+
+              {louvor.linkSheetMusic ? (
+                <div
+                  className="icon-container"
+                  onClick={() => setActiveTab("musicSheet")}
+                >
+                  <LuMusic color={"var(--color-black)"} size={17} />
+                </div>
+              ) : (
+                <div className="icon-container">
+                  <LuMusic color={"var(--color-gray-2)"} size={17} />
+                </div>
+              )}
+
+              {louvor.linkPdfLyrics ? (
+                <div
+                  className="icon-container"
+                  onClick={() => setActiveTab("lyrics")}
+                >
+                  <LuType color={"var(--color-black)"} size={17} />
+                </div>
+              ) : (
+                <div className="icon-container">
+                  <LuType color={"var(--color-gray-2)"} size={17} />
+                </div>
+              )}
+
+              {louvor.linkChords ? (
+                <div
+                  className="icon-container"
+                  onClick={() => setActiveTab("chords")}
+                >
+                  <LuListMusic color={"var(--color-black)"} size={19} />
+                </div>
+              ) : (
+                <div className="icon-container">
+                  <LuListMusic color={"var(--color-gray-2)"} size={19} />
+                </div>
+              )}
+            </div>
+            <div className="files-praiseData-container">
+              {fileArray.map((url, i) => (
+                <img key={i} src={url} alt="praiseImg" className="file" />
+              ))}
+            </div>
+          </div>
+          <br></br>
+
           <div>
             <FormControlLabel
               control={
@@ -987,7 +1103,7 @@ export default function PraiseSettings() {
 
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
-              Files:
+              Files SVG:
             </Typography>
             <div className="file-container">
               <div className="file-inputs-content">
