@@ -75,6 +75,7 @@ export default function PraiseCard({
 
         {hasEditButton && (
           <Link
+            onClick={() => setLastClickedPraise(praise.songBookMapId)}
             className="edit-button"
             to={"/praise-settings"}
             state={{

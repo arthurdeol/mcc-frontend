@@ -50,6 +50,7 @@ const PraisesList = () => {
   }
 
   useEffect(() => {
+    localStorage.setItem("home", "praisesHome");
     localStorage.setItem("sentServiceListId", "");
     if (!complexFilterApplied && !mainFilterApplied) {
       fetch(url)

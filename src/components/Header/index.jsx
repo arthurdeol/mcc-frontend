@@ -20,6 +20,7 @@ const Header = ({
   const navPath = window.location.pathname?.toString();
   const isPathPraise = navPath.indexOf("/praise/") !== -1;
   // const takeSentServiceListId = localStorage.getItem("sentServiceListId");
+  const home = localStorage.getItem("home");
 
   return (
     <Container>
@@ -28,11 +29,7 @@ const Header = ({
         src="/images/logomcc.jpeg"
         alt="mcc logo"
         onClick={() =>
-          navPath === "/praise-settings" ||
-          navPath === "/praises-admin" ||
-          navPath === "/add-praise"
-            ? navigate("/praises-admin")
-            : navigate("/")
+          home === "adminHome" ? navigate("/praises-admin") : navigate("/")
         }
       />
       {navPath === "/" && (

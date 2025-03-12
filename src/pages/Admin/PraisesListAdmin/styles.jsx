@@ -37,6 +37,29 @@ export const Container = styled.div`
     height: auto;
   }
 
+  .scroll-to-top {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-light-gray);
+    cursor: pointer;
+    background-color: var(--color-background-white);
+    padding: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+
+    &:hover {
+      border: 1px solid var(--color-dark-gray);
+      background: var(--color-light-gray-2);
+    }
+  }
+
   @media (max-width: 1300px) {
     .box {
       width: 98%;

@@ -7,6 +7,7 @@ import MainFilter from "../../../components/MainFilter";
 import PraiseNotFound from "../../../components/PraiseNotFound";
 import ErrorDisplay from "../../../components/ErrorDisplay";
 import PraiseCard from "../../../components/PraiseCard";
+import { IoArrowUp } from "react-icons/io5";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
@@ -48,6 +49,27 @@ const PraisesListAdmin = () => {
   }
 
   useEffect(() => {
+    localStorage.setItem("home", "adminHome");
+    const savedPraiseId = localStorage.getItem("praiseIdClicked");
+    if (savedPraiseId) {
+      const praiseElement = document.getElementById(savedPraiseId);
+      if (praiseElement) {
+        // Rolagem com margem considerando o cabeçalho e o filtro principal
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 0;
+        const mainFilterHeight =
+          document.querySelector(".search-container")?.offsetHeight || 0;
+
+        window.scrollTo({
+          top: praiseElement.offsetTop - headerHeight - (mainFilterHeight + 60),
+          behavior: "smooth",
+        });
+        localStorage.removeItem("praiseIdClicked");
+      }
+    }
+  }, [louvores]);
+
+  useEffect(() => {
     if (!complexFilterApplied && !mainFilterApplied) {
       fetch(url)
         .then((res) => res.json())
@@ -75,6 +97,18 @@ const PraisesListAdmin = () => {
 
     localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
   }, [complexFilterApplied, mainFilterApplied, servicePraises]);
+
+  function setLastClickedPraise(praiseId) {
+    localStorage.setItem("praiseIdClicked", praiseId);
+  }
+
+  function scrollToTopOfList() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setLastClickedPraise(filteredLouvores[0].songBookMapId);
+  }
 
   return (
     <Container>
@@ -111,11 +145,12 @@ const PraisesListAdmin = () => {
               ) : (
                 <div className="praises-container">
                   {filteredLouvores.map((louvor, i) => (
-                    <div key={i}>
+                    <div key={i} id={louvor.songBookMapId}>
                       <PraiseCard
                         praise={louvor}
                         servicePraises={servicePraises}
                         hasEditButton={true}
+                        setLastClickedPraise={setLastClickedPraise}
                       />
                       <hr />
                     </div>
@@ -126,6 +161,9 @@ const PraisesListAdmin = () => {
           )}
         </div>
       </div>
+      <button className="scroll-to-top" onClick={() => scrollToTopOfList()}>
+        <IoArrowUp color={"var(--color-dark-gray-2)"} size={22} />
+      </button>
     </Container>
   );
 };
