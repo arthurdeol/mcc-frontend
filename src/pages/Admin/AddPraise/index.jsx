@@ -67,7 +67,8 @@ export default function AddPraise() {
     containsInCiasSongBook: false,
     containsInSuplementareASongBook: false,
     containsInSuplementareBSongBook: false,
-    displayFilesSVGInsteadOfText: false,
+    displayTextLyricsInsteadOfSVG: false,
+    displayTextChordsInsteadOfSVG: false,
   });
 
   const {
@@ -75,7 +76,8 @@ export default function AddPraise() {
     containsInCiasSongBook,
     containsInSuplementareASongBook,
     containsInSuplementareBSongBook,
-    displayFilesSVGInsteadOfText,
+    displayTextLyricsInsteadOfSVG,
+    displayTextChordsInsteadOfSVG,
   } = checkeds;
 
   const [orderFile, setOrderFile] = useState(1);
@@ -186,12 +188,13 @@ export default function AddPraise() {
         "containsInSuplementareBSongBook",
         checkeds.containsInSuplementareBSongBook
       );
+      formData.append("flagLyrics", checkeds.displayTextLyricsInsteadOfSVG);
+      formData.append("flagChords", checkeds.displayTextChordsInsteadOfSVG);
       formData.append("theme", praiseTheme);
       formData.append("portugueseSongBookNumber", portugueseSongBookNumber);
       formData.append("portugueseTitle", portugueseTitle);
       formData.append("englishSongBookNumber", englishSongBookNumber);
       formData.append("englishTitle", englishTitle);
-      formData.append("filesSVGFlag", checkeds.displayFilesSVGInsteadOfText);
       formData.append("linkDriveFolder", linkInstruments);
       formData.append("chords", chordsContent);
       formData.append("lyrics", lyricsContent);
@@ -796,6 +799,17 @@ export default function AddPraise() {
             <Typography sx={title} id="modal-modal-title" component="h2">
               Lyrics:
             </Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  sx={checked}
+                  checked={displayTextLyricsInsteadOfSVG}
+                  onChange={handleChangeCheckbox}
+                  name="displayTextLyricsInsteadOfSVG"
+                />
+              }
+              label="Display This Text for Lyrics Instead of File SVG"
+            />
             <Box sx={fieldsContainer}>
               <TextField
                 fullWidth
@@ -893,6 +907,17 @@ export default function AddPraise() {
             <Typography sx={title} id="modal-modal-title" component="h2">
               Chords:
             </Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  sx={checked}
+                  checked={displayTextChordsInsteadOfSVG}
+                  onChange={handleChangeCheckbox}
+                  name="displayTextChordsInsteadOfSVG"
+                />
+              }
+              label="Display This Text for Chords Instead of File SVG"
+            />
             <Box sx={fieldsContainer}>
               <TextField
                 fullWidth
@@ -951,20 +976,6 @@ export default function AddPraise() {
             )}
           </div>
           <br></br>
-
-          <div>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  sx={checked}
-                  checked={displayFilesSVGInsteadOfText}
-                  onChange={handleChangeCheckbox}
-                  name="displayFilesSVGInsteadOfText"
-                />
-              }
-              label="Display Files SVG instead of Text for Lyrics and Chords"
-            />
-          </div>
 
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">

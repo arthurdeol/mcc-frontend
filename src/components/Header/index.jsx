@@ -101,8 +101,8 @@ const Header = ({
             </div>
           )}
 
-          {(louvor.filesSVGFlag && louvor.linkPdfLyrics) ||
-          (!louvor.filesSVGFlag && louvor.lyrics) ? (
+          {(louvor.flagLyrics && louvor.lyrics) ||
+          (!louvor.flagLyrics && louvor.linkPdfLyrics) ? (
             <div
               className="icon-container"
               onClick={() => setActiveTab("lyrics", louvor)}
@@ -115,8 +115,8 @@ const Header = ({
             </div>
           )}
 
-          {(louvor.filesSVGFlag && louvor.linkChords) ||
-          (!louvor.filesSVGFlag && louvor.chords) ? (
+          {(louvor.flagChords && louvor.chords) ||
+          (!louvor.flagChords && louvor.linkChords) ? (
             <div
               className="icon-container"
               onClick={() => setActiveTab("chords", louvor)}

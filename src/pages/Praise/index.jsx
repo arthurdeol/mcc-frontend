@@ -586,9 +586,31 @@ export default function Praise() {
 
     setDisplayLyrics(file === "lyrics");
     setDisplayChords(file === "chords");
-    setDisplayFilesSVGFlag(
-      file === "musicSheet" || file === "gestures" || louvor.filesSVGFlag
-    );
+
+    // if (file === "musicSheet" || file === "gestures") {
+    //   setDisplayFilesSVGFlag(true);
+    // }
+    // if (file === "lyrics" && louvor.flagLyrics) {
+    //   setDisplayFilesSVGFlag(false);
+    // }
+    // if (file === "lyrics" && !louvor.flagLyrics) {
+    //   setDisplayFilesSVGFlag(true);
+    // }
+    // if (file === "chords" && louvor.flagChords) {
+    //   setDisplayFilesSVGFlag(false);
+    // }
+    // if (file === "chords" && !louvor.flagChords) {
+    //   setDisplayFilesSVGFlag(true);
+    // }
+
+    const shouldDisplay = {
+      musicSheet: true,
+      gestures: true,
+      lyrics: !louvor.flagLyrics,
+      chords: !louvor.flagChords,
+    };
+
+    setDisplayFilesSVGFlag(shouldDisplay[file] ?? false);
 
     if (window.location.pathname !== `/praise/${id}/${file}`) {
       navigate(`/praise/${id}/${file}`);
