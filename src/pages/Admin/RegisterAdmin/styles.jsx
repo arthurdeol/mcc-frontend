@@ -18,12 +18,12 @@ export const Container = styled.div`
     background: var(--color-dark-red);
     display: flex;
     align-self: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-radius: 2px;
   }
 
-  .register-link {
-    font-size: 0.9rem;
+  .login-link {
+    font-size: 0.9rem !important;
     color: black;
   }
 `;
@@ -39,13 +39,6 @@ export const inputs = {
   borderRadius: "10px",
   color: "var(--color-black)",
   p: 4,
-};
-
-export const footer = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "flex-end",
-  marginTop: "40px",
 };
 
 export const ButtonStyledRed = styled.button`
@@ -71,3 +64,10 @@ export const ButtonStyledRed = styled.button`
     }
   }
 `;
+
+export const footer = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-end",
+  marginTop: "40px",
+};
