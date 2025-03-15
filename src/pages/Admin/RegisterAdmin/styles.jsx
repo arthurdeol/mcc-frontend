@@ -23,7 +23,7 @@ export const Container = styled.div`
   }
 
   .login-link {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem;
     color: black;
   }
 `;
