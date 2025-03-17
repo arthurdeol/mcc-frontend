@@ -507,6 +507,7 @@ export default function PraiseSettings() {
     if (group) {
       elements.push(
         <div
+          key={`special-${Math.random()}`}
           className={groupClass}
           style={{
             borderRight: "2px solid #3a3a3a",
@@ -671,6 +672,7 @@ export default function PraiseSettings() {
     if (group) {
       elements.push(
         <div
+          key={`special-${Math.random()}`}
           className={groupClass}
           style={{
             borderRight: "2px solid #3a3a3a",

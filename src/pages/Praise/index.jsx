@@ -228,7 +228,10 @@ export default function Praise() {
         line = line.replace(/^\[\.(\d+)\]/, "");
         if (showNumberOfRepetition) {
           group.push(
-            <span key={`repeat-${index}`} className="repetitions-number">
+            <span
+              key={`repeat-${index}-${Math.random()}`}
+              className="repetitions-number"
+            >
               {groupMatch[1]}x
             </span>
           );
@@ -236,7 +239,7 @@ export default function Praise() {
       } else if (group) {
         elements.push(
           <div
-            key={`group-${index}`}
+            key={`group-final-${index}-${Math.random()}`}
             className={groupClass}
             style={{
               borderRight: "2px solid #3a3a3a",
@@ -256,7 +259,6 @@ export default function Praise() {
         "[instrumental]": { label: "Instrumental:", color: "red", bold: true },
         "[chorus]": { label: "Chorus:", color: "black", bold: true },
         "[final]": { label: "Final:", color: "black", bold: true },
-        // "[b]": { label: "", color: "black", bold: true },
       };
 
       for (const tag in specialTags) {
@@ -278,7 +280,6 @@ export default function Praise() {
                   color: "black",
                   fontWeight: bold ? "bold" : "normal",
                   marginRight: "5px",
-
                   fontStyle: "italic",
                 }}
               >
@@ -287,7 +288,6 @@ export default function Praise() {
               <span
                 style={{
                   color: "red",
-
                   fontWeight: "normal",
                 }}
               >
@@ -337,7 +337,6 @@ export default function Praise() {
           style={{
             whiteSpace: "pre",
             color: "red",
-
             margin: 0,
             paddingBottom: "2px",
           }}
@@ -352,7 +351,6 @@ export default function Praise() {
           style={{
             whiteSpace: "pre",
             color: "black",
-
             margin: 0,
             paddingBottom: "5px",
             display: "flex",
@@ -387,6 +385,7 @@ export default function Praise() {
     if (group) {
       elements.push(
         <div
+          key={`special-${Math.random()}`}
           className={groupClass}
           style={{
             borderRight: "2px solid #3a3a3a",
@@ -551,6 +550,7 @@ export default function Praise() {
     if (group) {
       elements.push(
         <div
+          key={`special-${Math.random()}`}
           className={groupClass}
           style={{
             borderRight: "2px solid #3a3a3a",
