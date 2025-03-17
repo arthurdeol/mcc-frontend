@@ -225,8 +225,7 @@ export default function Praise() {
         }
         group = [];
         groupClass = `group-${groupMatch[1]}`;
-        line = line.replace(/^\[\.(\d+)\]/, "").replace(/\[@\]/g, "");
-
+        line = line.replace(/^\[\.(\d+)\]/, "");
         if (showNumberOfRepetition) {
           group.push(
             <span key={`repeat-${index}`} className="repetitions-number">
@@ -242,6 +241,7 @@ export default function Praise() {
             style={{
               borderRight: "2px solid #3a3a3a",
               paddingRight: "1rem",
+              position: "relative",
             }}
           >
             {group}
@@ -449,6 +449,7 @@ export default function Praise() {
             style={{
               borderRight: "2px solid #3a3a3a",
               paddingRight: "1rem",
+              position: "relative",
             }}
           >
             {group}
