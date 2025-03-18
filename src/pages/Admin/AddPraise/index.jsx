@@ -435,6 +435,16 @@ export default function AddPraise() {
                 .replace(/\[arrow[L|R]\]/g, "")
                 .replace(/\[b\]/g, "")}
             </b>
+          ) : originalLine.includes("[M]") ? (
+            <>
+              <b>M:</b>
+              {plainTextLine.replace(/\[M\]/g, "")}
+            </>
+          ) : originalLine.includes("[W]") ? (
+            <>
+              <b>W:</b>
+              {plainTextLine.replace(/\[W\]/g, "")}
+            </>
           ) : (
             plainTextLine.replace(/\[arrow[L|R]\]/g, "")
           )}
@@ -546,21 +556,44 @@ export default function AddPraise() {
           color: "black",
           bold: true,
         },
+        "[M]": {
+          label: `M:`,
+          color: "black",
+          bold: true,
+          italic: false,
+          content: line.replace(/\[M\]/g, ""),
+        },
+        "[W]": {
+          label: `W:`,
+          color: "black",
+          bold: true,
+          italic: false,
+          content: line.replace(/\[W\]/g, ""),
+        },
       };
 
       for (const tag in specialTags) {
         if (line.includes(tag)) {
-          const { label, color, bold } = specialTags[tag];
+          const { label, color, bold, italic, content } = specialTags[tag];
           const element = (
             <div key={index} style={{ color }}>
               <span
                 style={{
                   fontWeight: bold ? "bold" : "normal",
                   fontFamily: "arial",
-                  fontStyle: "italic",
+                  fontStyle: italic ? "italic" : "normal",
                 }}
               >
                 {label}
+              </span>
+              <span
+                style={{
+                  fontWeight: "normal",
+                  fontFamily: "arial",
+                  fontStyle: "normal",
+                }}
+              >
+                {content}
               </span>
             </div>
           );
