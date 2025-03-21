@@ -170,7 +170,7 @@ export const ContainerPraise = styled.div`
 
     .praise-main {
       // width: 85%;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       max-width: 90%;
     }
 
@@ -179,7 +179,7 @@ export const ContainerPraise = styled.div`
     }
 
     .praise-title {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     .button-change-key {
