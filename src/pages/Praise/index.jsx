@@ -324,7 +324,7 @@ export default function Praise() {
 
       if (originalLine.includes("[%%]")) {
         const element = (
-          <div key={index} style={{ width: "100%", height: "3rem" }}>
+          <div key={index} className="space-blanck-chords">
             &nbsp;
           </div>
         );

@@ -41,6 +41,11 @@ export const ContainerPraise = styled.div`
     margin-top: 2.5rem;
   }
 
+  .space-blanck-chords {
+    width: 100%;
+    height: 3rem;
+  }
+
   .repetitions-number {
     position: absolute;
     right: -30px;
@@ -180,6 +185,10 @@ export const ContainerPraise = styled.div`
       font-size: 0.8rem;
     }
 
+    .space-blanck-chords {
+      height: 2rem;
+    }
+
     .repetitions-number {
       right: -22px;
     }
@@ -197,6 +206,14 @@ export const ContainerPraise = styled.div`
   @media (max-width: 425px) {
     .progress-container {
       padding-top: 50%;
+    }
+  }
+  @media (max-width: 395px) {
+    .praise-title {
+      font-size: 1rem;
+    }
+    .praise-main.small-text {
+      font-size: 0.7rem;
     }
   }
 `;
