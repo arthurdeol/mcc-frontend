@@ -169,9 +169,15 @@ export const ContainerPraise = styled.div`
     }
 
     .praise-main {
-      // width: 85%;
-      // font-size: 0.8rem;
       max-width: 90%;
+    }
+
+    .praise-main.large-text {
+      font-size: 1rem;
+    }
+
+    .praise-main.small-text {
+      font-size: 0.8rem;
     }
 
     .repetitions-number {

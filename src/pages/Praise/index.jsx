@@ -686,8 +686,9 @@ export default function Praise() {
           {!displayFilesSVGFlag && (
             <div className="praise-container">
               <div
-                className="praise-main"
-                style={{ fontSize: displayLyrics ? "1rem" : "0.8rem" }}
+                className={`praise-main ${
+                  displayLyrics ? "large-text" : "small-text"
+                }`}
               >
                 {louvor.lyrics && displayLyrics && (
                   <>
