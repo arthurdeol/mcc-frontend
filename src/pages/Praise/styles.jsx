@@ -170,7 +170,7 @@ export const ContainerPraise = styled.div`
 
     .praise-main {
       // width: 85%;
-      font-size: 0.8rem;
+      // font-size: 0.8rem;
       max-width: 90%;
     }
 
