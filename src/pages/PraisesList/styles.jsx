@@ -15,9 +15,10 @@ export const ContainerPraisesList = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
     font-size: 1rem;
-    margin: 4.5rem 5% 3rem 5%;
+    margin: 0 5% 3rem 5%;
     width: 80%;
     overflow-x: hidden;
+    padding-top: 4.5rem;
   }
 
   hr {
@@ -94,9 +95,10 @@ export const ContainerPraisesList = styled.div`
   @media (max-width: 480px) {
     .box {
       width: 100%;
-      margin: 4rem 0 1rem;
+      margin: 0 0 1rem;
       border-radius: 0;
       box-shadow: none;
+      padding-top: 4.2rem;
     }
 
     .praises-container {

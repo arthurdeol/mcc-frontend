@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container, checked } from "./styles";
 import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
@@ -8,12 +8,38 @@ import PraiseNotFound from "../../../components/PraiseNotFound";
 import ErrorDisplay from "../../../components/ErrorDisplay";
 import PraiseCard from "../../../components/PraiseCard";
 import { IoArrowUp } from "react-icons/io5";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
   const [mainFilterApplied, setMainFilterApplied] = useState(false);
+
+  const defaultCheckboxValue = {
+    missingChords: false,
+    missingLyrics: false,
+    missingMusicSheet: false,
+    missingGestures: false,
+    orderPortuguese: false,
+    missingChordsLyricsMusicSheet: false,
+    orderCiasByPT: false,
+    missingDriveLink: false,
+  };
+
+  let [checkeds, setCheckeds] = useState(defaultCheckboxValue);
+
+  const {
+    missingChords,
+    missingLyrics,
+    missingMusicSheet,
+    missingGestures,
+    orderPortuguese,
+    missingChordsLyricsMusicSheet,
+    orderCiasByPT,
+    missingDriveLink,
+  } = checkeds;
 
   const [servicePraises] = useState(() => {
     const praisesSelected = localStorage.getItem("servicePraisesList");
@@ -70,11 +96,20 @@ const PraisesListAdmin = () => {
   }, [louvores]);
 
   useEffect(() => {
+    if (complexFilterApplied) {
+      setCheckeds(defaultCheckboxValue);
+    }
     if (!complexFilterApplied && !mainFilterApplied) {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
           data.sort((a, b) => {
+            if (orderPortuguese || orderCiasByPT) {
+              return naturalCompare(
+                a.portugueseSongBookNumber,
+                b.portugueseSongBookNumber
+              );
+            }
             return naturalCompare(
               a.englishSongBookNumber,
               b.englishSongBookNumber
@@ -87,16 +122,100 @@ const PraisesListAdmin = () => {
           let filteredEnSongWithoutNumber = data.filter(
             (praise) => praise.englishTitle && !praise.englishSongBookNumber
           );
-          setFilteredLouvores([
+          let sequenceEN = [
             ...filteredEnSongWithNumber,
             ...filteredEnSongWithoutNumber,
-          ]);
+          ];
+          let filteredPTSongWithNumber = data.filter(
+            (praise) =>
+              praise.portugueseTitle && praise.portugueseSongBookNumber
+          );
+          let filteredPTSongWithoutNumber = data.filter(
+            (praise) =>
+              praise.portugueseTitle && !praise.portugueseSongBookNumber
+          );
+          let sequencePT = [
+            ...filteredPTSongWithNumber,
+            ...filteredPTSongWithoutNumber,
+          ];
+          let filteredEnSongWithoutChords = sequenceEN.filter(
+            (praise) => !praise.chords && !praise.linkChords
+          );
+          let filteredEnSongWithoutLyrics = sequenceEN.filter(
+            (praise) => !praise.lyrics && !praise.linkPdfLyrics
+          );
+          let filteredEnSongWithoutMusicSheet = sequenceEN.filter(
+            (praise) => !praise.linkSheetMusic
+          );
+          let filteredMissingDriveLink = sequenceEN.filter(
+            (praise) => !praise.linkDriveFolder
+          );
+          let missingLyricsChordsAndMusicSheet = sequenceEN.filter(
+            (praise) =>
+              !praise.chords &&
+              !praise.linkChords &&
+              !praise.lyrics &&
+              !praise.linkPdfLyrics &&
+              !praise.linkSheetMusic
+          );
+          let filteredEnSongWithoutGestures = sequenceEN.filter(
+            (praise) => praise.containsInCiasSongBook && !praise.linkGestures
+          );
+          let ciasOrderedByPTSongbook = sequencePT.filter(
+            (praise) => praise.containsInCiasSongBook
+          );
+
+          if (missingChords) {
+            setFilteredLouvores([...filteredEnSongWithoutChords]);
+          } else if (missingLyrics) {
+            setFilteredLouvores([...filteredEnSongWithoutLyrics]);
+          } else if (missingMusicSheet) {
+            setFilteredLouvores([...filteredEnSongWithoutMusicSheet]);
+          } else if (missingGestures) {
+            setFilteredLouvores([...filteredEnSongWithoutGestures]);
+          } else if (missingChordsLyricsMusicSheet) {
+            setFilteredLouvores([...missingLyricsChordsAndMusicSheet]);
+          } else if (orderPortuguese) {
+            setFilteredLouvores([...sequencePT]);
+          } else if (orderCiasByPT) {
+            setFilteredLouvores([...ciasOrderedByPTSongbook]);
+          } else if (missingDriveLink) {
+            setFilteredLouvores([...filteredMissingDriveLink]);
+          } else {
+            setFilteredLouvores([...sequenceEN]);
+          }
         })
         .catch((err) => setDisplayError(true));
     }
-
     localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
-  }, [complexFilterApplied, mainFilterApplied, servicePraises]);
+    // eslint-disable-next-line
+  }, [
+    complexFilterApplied,
+    mainFilterApplied,
+    servicePraises,
+    missingChords,
+    missingLyrics,
+    missingMusicSheet,
+    missingGestures,
+    missingChordsLyricsMusicSheet,
+    orderPortuguese,
+    orderCiasByPT,
+    missingDriveLink,
+  ]);
+
+  const handleChangeCheckbox = (event) => {
+    setCheckeds({
+      missingChords: false,
+      missingLyrics: false,
+      missingMusicSheet: false,
+      missingGestures: false,
+      orderPortuguese: false,
+      missingChordsLyricsMusicSheet: false,
+      orderCiasByPT: false,
+      missingDriveLink: false,
+      [event.target.name]: event.target.checked,
+    });
+  };
 
   function setLastClickedPraise(praiseId) {
     localStorage.setItem("praiseIdClicked", praiseId);
@@ -143,19 +262,111 @@ const PraisesListAdmin = () => {
                   </Stack>
                 </div>
               ) : (
-                <div className="praises-container">
-                  {filteredLouvores.map((louvor, i) => (
-                    <div key={i} id={louvor.songBookMapId}>
-                      <PraiseCard
-                        praise={louvor}
-                        servicePraises={servicePraises}
-                        hasEditButton={true}
-                        setLastClickedPraise={setLastClickedPraise}
-                      />
-                      <hr />
-                    </div>
-                  ))}
-                </div>
+                <>
+                  <div className="checkbox-filters">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={missingChords}
+                          onChange={handleChangeCheckbox}
+                          name="missingChords"
+                        />
+                      }
+                      label="Missing Chords"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={missingLyrics}
+                          onChange={handleChangeCheckbox}
+                          name="missingLyrics"
+                        />
+                      }
+                      label="Missing Lyrics"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={missingMusicSheet}
+                          onChange={handleChangeCheckbox}
+                          name="missingMusicSheet"
+                        />
+                      }
+                      label="Missing Music Sheet"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={missingDriveLink}
+                          onChange={handleChangeCheckbox}
+                          name="missingDriveLink"
+                        />
+                      }
+                      label="Missing Drive Link"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={missingChordsLyricsMusicSheet}
+                          onChange={handleChangeCheckbox}
+                          name="missingChordsLyricsMusicSheet"
+                        />
+                      }
+                      label="Missing Chords, Lyrics and Music Sheet"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={orderPortuguese}
+                          onChange={handleChangeCheckbox}
+                          name="orderPortuguese"
+                        />
+                      }
+                      label="Order By PT Songbook"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={missingGestures}
+                          onChange={handleChangeCheckbox}
+                          name="missingGestures"
+                        />
+                      }
+                      label="CIA's - Missing Gestures"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={checked}
+                          checked={orderCiasByPT}
+                          onChange={handleChangeCheckbox}
+                          name="orderCiasByPT"
+                        />
+                      }
+                      label="CIA's - Order By PT Songbook"
+                    />
+                  </div>
+                  <div className="praises-container">
+                    {filteredLouvores.map((louvor, i) => (
+                      <div key={i} id={louvor.songBookMapId}>
+                        <PraiseCard
+                          praise={louvor}
+                          servicePraises={servicePraises}
+                          hasEditButton={true}
+                          setLastClickedPraise={setLastClickedPraise}
+                        />
+                        <hr />
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
             </>
           )}

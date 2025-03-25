@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   .praises-container {
     width: 92%;
-    margin-top: 8rem;
   }
 
   hr {
@@ -24,9 +23,10 @@ export const Container = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
     font-size: 1rem;
-    margin: 4.5rem 5% 1rem 5%;
+    margin: 0 5% 1rem 5%;
     width: 80%;
     overflow-x: hidden;
+    padding-top: 12.5rem;
   }
 
   .progress-container {
@@ -60,6 +60,16 @@ export const Container = styled.div`
     }
   }
 
+  .checkbox-filters {
+    width: 100%;
+    // margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-light-gray-2);
+    padding-bottom: 1rem;
+  }
+
   @media (max-width: 1300px) {
     .box {
       width: 98%;
@@ -82,7 +92,7 @@ export const Container = styled.div`
     }
 
     .praises-container {
-      margin-top: 6rem;
+      margin-top: 3rem;
     }
 
     .progress-container {
@@ -93,9 +103,17 @@ export const Container = styled.div`
   @media (max-width: 480px) {
     .box {
       width: 100%;
-      margin: 4rem 0 1rem;
+      margin: 0 0 1rem;
       border-radius: 0;
       box-shadow: none;
+      padding-top: 10rem;
     }
   }
 `;
+
+export const checked = {
+  color: "var(--color-dark-gray)",
+  "&.Mui-checked": {
+    color: "var(--color-dark-red)",
+  },
+};

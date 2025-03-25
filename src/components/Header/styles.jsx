@@ -105,15 +105,17 @@ export const Container = styled.div`
     }
   }
 
+  @media (max-width: 570px) {
+    .praise-settings-title {
+      text-align: right;
+    }
+  }
+
   @media (max-width: 480px) {
     padding: 10px 8px;
     img {
       margin-left: 5px;
       width: 140px;
-    }
-
-    .praise-settings-title {
-      text-align: right;
     }
 
     .list-button,
