@@ -218,6 +218,7 @@ export default function AddPraise() {
           message: "New praise added with Success!",
           time: 2000,
         });
+        sendHistory(formData);
       } catch (error) {
         handleClick();
         setSnackbarData({
@@ -229,6 +230,69 @@ export default function AddPraise() {
     } else {
       setDisplayFormError(true);
     }
+  }
+
+  async function sendHistory(formData) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    let changes = verifyChangings(formData);
+
+    const log = JSON.stringify({
+      title: englishTitle ? englishTitle : portugueseTitle,
+      praiseNumber: englishSongBookNumber
+        ? englishSongBookNumber
+        : portugueseSongBookNumber,
+      change: changes,
+    });
+
+    if (changes.length > 0) {
+      try {
+        await api.post("/log", {
+          name: user.userName,
+          email: user.email,
+          action: "Added",
+          log: log,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  function verifyChangings(formData) {
+    let changedValues = [];
+    if (formData.get("theme")) changedValues.push("theme");
+    if (formData.get("portugueseSongBookNumber"))
+      changedValues.push("portuguese songbook number");
+    if (formData.get("portugueseTitle")) changedValues.push("portuguese title");
+    if (formData.get("englishSongBookNumber"))
+      changedValues.push("english songbook number");
+    if (formData.get("englishTitle")) changedValues.push("english title");
+
+    if (formData.get("containsInPortugueseSongBook") === "true")
+      changedValues.push("praise contains in Portuguese songbook");
+
+    if (formData.get("containsInCiasSongBook") === "true")
+      changedValues.push("praise contains in CIA's songbook");
+
+    if (formData.get("containsInSuplementareASongBook") === "true")
+      changedValues.push("praise contains in suplementare-A songbook");
+
+    if (formData.get("containsInSuplementareBSongBook") === "true")
+      changedValues.push("praise contains in suplementare-B songbook");
+
+    if (formData.get("flagLyrics") === "true")
+      changedValues.push("display text Lyrics");
+
+    if (formData.get("flagChords") === "true")
+      changedValues.push("display text Chords");
+
+    if (formData.get("linkDriveFolder"))
+      changedValues.push("link of instruments Drive");
+    if (formData.get("chords")) changedValues.push("text Chords");
+    if (formData.get("lyrics")) changedValues.push("text Lyrics");
+    if (formData.get("chordsKey")) changedValues.push("chords key");
+    if (filesSelected.length > 0) changedValues.push("files SVG");
+    return changedValues;
   }
 
   const processChords = (text) => {

@@ -55,6 +55,7 @@ export default function DeleteModal({
         message: "Praise Deleted!",
         time: 1000,
       });
+      sendHistory();
     } catch (error) {
       handleClickSnackbar();
       setSnackbarData({
@@ -62,6 +63,31 @@ export default function DeleteModal({
         message: "Something went wrong! Please, try again later!",
         time: 3000,
       });
+    }
+  }
+
+  async function sendHistory() {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const log = JSON.stringify({
+      title: praiseData.englishTitle
+        ? praiseData.englishTitle
+        : praiseData.portugueseTitle,
+      praiseNumber: praiseData.englishSongBookNumber
+        ? praiseData.englishSongBookNumber
+        : praiseData.portugueseSongBookNumber,
+      change: ["Deleted"],
+    });
+
+    try {
+      await api.post("/log", {
+        name: user.userName,
+        email: user.email,
+        action: "Delete",
+        log: log,
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
   return (
