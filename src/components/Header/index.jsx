@@ -9,6 +9,7 @@ import {
 } from "react-icons/lu";
 // import { LuListEnd } from "react-icons/lu";
 import { PiListHeart, PiHandWaving } from "react-icons/pi";
+import { TbClockEdit } from "react-icons/tb";
 
 const Header = ({
   louvor = {},
@@ -52,6 +53,12 @@ const Header = ({
 
       {navPath === "/praises-admin" && (
         <h1 className="praise-settings-title">Admin - Praises</h1>
+      )}
+
+      {navPath === "/praises-admin" && (
+        <div className="history-button" onClick={() => navigate("/history")}>
+          <TbClockEdit size={25} color="var(--color-black)" />
+        </div>
       )}
 
       {isPathPraise && (

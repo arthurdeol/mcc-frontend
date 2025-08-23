@@ -52,7 +52,8 @@ export const Container = styled.div`
   }
 
   .list-button,
-  .share-button {
+  .share-button,
+  .history-button {
     position: relative;
     display: flex;
     justify-content: center;
@@ -66,7 +67,8 @@ export const Container = styled.div`
   }
 
   .list-button:hover,
-  .share-button:hover {
+  .share-button:hover,
+  .history-button:hover {
     background: var(--color-light-gray-2);
   }
 
@@ -119,12 +121,14 @@ export const Container = styled.div`
     }
 
     .list-button,
-    .share-button {
+    .share-button,
+    .history-button {
       margin-right: 6px;
     }
 
     .list-button:hover,
-    .share-button:hover {
+    .share-button:hover,
+    .history-button:hover {
       background: var(--color-background-white);
     }
   }

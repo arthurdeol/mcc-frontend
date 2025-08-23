@@ -128,11 +128,15 @@ const PraisesListAdmin = () => {
           ];
           let filteredPTSongWithNumber = data.filter(
             (praise) =>
-              praise.portugueseTitle && praise.portugueseSongBookNumber
+              praise.portugueseTitle &&
+              praise.portugueseSongBookNumber &&
+              !praise.containsInCiasSongBook
           );
           let filteredPTSongWithoutNumber = data.filter(
             (praise) =>
-              praise.portugueseTitle && !praise.portugueseSongBookNumber
+              praise.portugueseTitle &&
+              !praise.portugueseSongBookNumber &&
+              !praise.containsInCiasSongBook
           );
           let sequencePT = [
             ...filteredPTSongWithNumber,
@@ -161,7 +165,7 @@ const PraisesListAdmin = () => {
           let filteredEnSongWithoutGestures = sequenceEN.filter(
             (praise) => praise.containsInCiasSongBook && !praise.linkGestures
           );
-          let ciasOrderedByPTSongbook = sequencePT.filter(
+          let ciasOrderedByPTSongbook = data.filter(
             (praise) => praise.containsInCiasSongBook
           );
 

@@ -11,6 +11,7 @@ import PraiseSettings from "./pages/Admin/PraiseSettings";
 import MyPraisesList from "./pages/MyPraisesList";
 import DisplaySentServiceList from "./pages/DisplaySentServiceList";
 import AddPraise from "./pages/Admin/AddPraise";
+import HistoryPage from "./pages/Admin/HistoryPage";
 
 function RoutesApp() {
   return (
@@ -51,6 +52,15 @@ function RoutesApp() {
             element={
               <PrivateRoute>
                 <AddPraise />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/history"
+            element={
+              <PrivateRoute>
+                <HistoryPage />
               </PrivateRoute>
             }
           />

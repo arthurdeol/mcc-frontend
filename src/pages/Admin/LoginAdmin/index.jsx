@@ -76,6 +76,7 @@ export default function LoginAdmin() {
       if (response.status === 200) {
         login(email, password);
         navigate("/praises-admin");
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
     } catch (err) {
       if (err.response?.status === 403) {

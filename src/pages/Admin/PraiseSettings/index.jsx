@@ -228,7 +228,6 @@ export default function PraiseSettings() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(linkInstruments);
     const formData = new FormData();
     formData.append("songBookMapId", praiseId);
     formData.append(
@@ -274,6 +273,7 @@ export default function PraiseSettings() {
         message: "Settings applied with Success",
         time: 2000,
       });
+      sendHistory(formData);
     } catch (error) {
       handleClickSnackbar({});
       setSnackbarData({
@@ -282,6 +282,98 @@ export default function PraiseSettings() {
         time: 3000,
       });
     }
+  }
+
+  async function sendHistory(formData) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    let changes = verifyChangings(formData);
+
+    const log = JSON.stringify({
+      title: louvor.englishTitle ? louvor.englishTitle : louvor.portugueseTitle,
+      praiseNumber: louvor.englishSongBookNumber
+        ? louvor.englishSongBookNumber
+        : louvor.portugueseSongBookNumber,
+      change: changes,
+    });
+
+    if (changes.length > 0) {
+      try {
+        await api.post("/log", {
+          name: user.userName,
+          email: user.email,
+          action: "Update",
+          log: log,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  function verifyChangings(formData) {
+    let changedValues = [];
+    if (praiseData.theme !== formData.get("theme")) changedValues.push("theme");
+    if (
+      praiseData.portugueseSongBookNumber !==
+      formData.get("portugueseSongBookNumber")
+    )
+      changedValues.push("portuguese songbook number");
+    if (praiseData.portugueseTitle !== formData.get("portugueseTitle"))
+      changedValues.push("portuguese title");
+    if (
+      praiseData.englishSongBookNumber !== formData.get("englishSongBookNumber")
+    )
+      changedValues.push("english songbook number");
+    if (praiseData.englishTitle !== formData.get("englishTitle"))
+      changedValues.push("english title");
+    if (
+      praiseData.containsInPortugueseSongBook !==
+      (formData.get("containsInPortugueseSongBook") === "true")
+    )
+      changedValues.push("praise contains in Portuguese songbook");
+    if (
+      praiseData.containsInCiasSongBook !==
+      (formData.get("containsInCiasSongBook") === "true")
+    )
+      changedValues.push("praise contains in CIA's songbook");
+    if (
+      praiseData.containsInSuplementareASongBook !==
+      (formData.get("containsInSuplementareASongBook") === "true")
+    )
+      changedValues.push("praise contains in suplementare-A songbook");
+    if (
+      praiseData.containsInSuplementareBSongBook !==
+      (formData.get("containsInSuplementareBSongBook") === "true")
+    )
+      changedValues.push("praise contains in suplementare-B songbook");
+    if (praiseData.flagLyrics !== (formData.get("flagLyrics") === "true"))
+      changedValues.push("display text Lyrics");
+    if (praiseData.flagChords !== (formData.get("flagChords") === "true"))
+      changedValues.push("display text Chords");
+
+    if (
+      (formData.get("linkDriveFolder") === "" &&
+        praiseData.linkDriveFolder &&
+        praiseData.linkDriveFolder.length > 6) ||
+      (formData.get("linkDriveFolder") !== "" &&
+        formData.get("linkDriveFolder") !== praiseData.linkDriveFolder)
+    ) {
+      changedValues.push("link of instruments Drive");
+    }
+
+    if (praiseData.chords !== formData.get("chords"))
+      changedValues.push("text Chords");
+    if (praiseData.lyrics !== formData.get("lyrics"))
+      changedValues.push("text Lyrics");
+
+    if (
+      (formData.get("chordsKey") === "" && praiseData.chordsKey) ||
+      (formData.get("chordsKey") !== "" &&
+        praiseData.chordsKey !== formData.get("chordsKey"))
+    )
+      changedValues.push("chords key");
+    if (filesSelected.length > 0) changedValues.push("files SVG");
+    return changedValues;
   }
 
   const processChords = (text) => {
