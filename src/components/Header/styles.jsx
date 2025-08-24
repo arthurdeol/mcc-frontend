@@ -110,6 +110,7 @@ export const Container = styled.div`
   @media (max-width: 570px) {
     .praise-settings-title {
       text-align: right;
+      padding-right: 45px;
     }
   }
 
@@ -134,6 +135,10 @@ export const Container = styled.div`
   }
 
   @media (max-width: 425px) {
+    .praise-settings-title {
+      font-size: 1.2rem;
+      padding-right: 55px;
+    }
     img {
       margin-left: 3px;
     }
@@ -143,6 +148,13 @@ export const Container = styled.div`
     img {
       margin-left: 2px;
       width: 110px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .praise-settings-title {
+      font-size: 1rem;
+      padding-right: 43px;
     }
   }
 `;

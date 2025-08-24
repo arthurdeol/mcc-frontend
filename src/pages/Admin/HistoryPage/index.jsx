@@ -58,7 +58,7 @@ export default function HistoryPage() {
                   sx={{ fontWeight: "bold", fontSize: "1rem" }}
                   align="left"
                 >
-                  Log
+                  Fields Changed
                 </TableCell>
                 <TableCell
                   sx={{ fontWeight: "bold", fontSize: "1rem" }}
