@@ -359,6 +359,22 @@ export const ContainerPraise = styled.div`
       height: 25px;
     }
   }
+
+  @media (max-width: 500px) {
+    .chord-key-container {
+      padding: 1px;
+      top: 10%;
+      border-radius: 15px;
+    }
+
+    .button-to-split {
+      width: 39px;
+      height: 39px;
+      right: 4%;
+      top: 11%;
+      padding: 10px;
+    }
+  }
   @media (max-width: 430px) {
     .praise-title {
       font-size: 0.9rem;
