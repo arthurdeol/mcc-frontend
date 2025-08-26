@@ -738,7 +738,40 @@ export default function Praise() {
               <FiColumns size={20} color="var(--color-black)" />
             </div>
           )}
-          {/* --------------------------------------------------------------------*/}
+
+          {/* --------------------CHANGE CHORD KEY--------------------------------*/}
+          {displayChords && louvor.chordsKey && (
+            <div className="chord-key-container">
+              <button
+                className="button-change-key"
+                style={{ marginRight: "15px" }}
+                onClick={() => changeKey(-1)}
+              >
+                <FiMinus />
+              </button>
+              <p
+                style={{
+                  color: "red",
+                  textAlign: "center",
+                }}
+              >
+                <strong>
+                  {louvor.chordsKey.includes("m")
+                    ? currentKey + "m"
+                    : currentKey}
+                </strong>
+              </p>
+
+              <button
+                className="button-change-key"
+                style={{ marginLeft: "15px" }}
+                onClick={() => changeKey(1)}
+              >
+                <FiPlus />
+              </button>
+            </div>
+          )}
+
           {displayFilesSVGFlag && (
             <div className="file-content">
               {fileArray.map((url, i) => (
@@ -876,38 +909,6 @@ export default function Praise() {
                           : ""}
                         {louvor.portugueseTitle}
                       </h3>
-                    )}
-
-                    {displayChords && louvor.chordsKey && (
-                      <div className="chord-key-container">
-                        <button
-                          className="button-change-key"
-                          style={{ marginRight: "15px" }}
-                          onClick={() => changeKey(-1)}
-                        >
-                          <FiMinus />
-                        </button>
-                        <p
-                          style={{
-                            color: "red",
-                            textAlign: "center",
-                          }}
-                        >
-                          <strong>
-                            {louvor.chordsKey.includes("m")
-                              ? currentKey + "m"
-                              : currentKey}
-                          </strong>
-                        </p>
-
-                        <button
-                          className="button-change-key"
-                          style={{ marginLeft: "15px" }}
-                          onClick={() => changeKey(1)}
-                        >
-                          <FiPlus />
-                        </button>
-                      </div>
                     )}
 
                     <div className={splitText ? "praise-lines-container" : ""}>

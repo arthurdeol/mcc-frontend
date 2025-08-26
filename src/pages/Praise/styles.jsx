@@ -79,8 +79,9 @@ export const ContainerPraise = styled.div`
     width: fit-content;
     padding: 5px;
     border-radius: 10px;
-    // position: absolute;
-    // right: 40px;
+    left: 4%;
+    top: 9%;
+    position: absolute;
   }
 
   .chord-key-container > p {
@@ -380,8 +381,16 @@ export const ContainerPraise = styled.div`
       font-size: 0.9rem;
     }
 
+    .praise-title-not-splitted {
+      font-size: 1.1rem;
+    }
+
     .praise-title-portuguese {
       font-size: 0.7rem;
+    }
+
+    .praise-title-portuguese-not-splitted {
+      font-size: 0.9rem;
     }
 
     .praise-lines-1,
@@ -394,11 +403,13 @@ export const ContainerPraise = styled.div`
       height: 39px;
       right: 4%;
       padding: 10px;
+      top: 10%;
     }
 
     .chord-key-container {
       padding: 1px;
       border-radius: 15px;
+      top: 9%;
     }
 
     .repetitions-number {
@@ -453,7 +464,7 @@ export const ContainerPraise = styled.div`
     }
 
     .chord-key-container {
-      top: 9%;
+      top: 8%;
     }
 
     .chord-key-container > p {
