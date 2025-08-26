@@ -393,13 +393,11 @@ export const ContainerPraise = styled.div`
       width: 39px;
       height: 39px;
       right: 4%;
-      top: 9%;
       padding: 10px;
     }
 
     .chord-key-container {
       padding: 1px;
-      top: 8%;
       border-radius: 15px;
     }
 
@@ -452,6 +450,10 @@ export const ContainerPraise = styled.div`
 
     .praise-lines-container {
       gap: 1rem;
+    }
+
+    .chord-key-container {
+      top: 9%;
     }
 
     .chord-key-container > p {
