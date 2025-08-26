@@ -20,19 +20,33 @@ export const ContainerPraise = styled.div`
     padding: 7rem 0 4rem 0;
   }
 
-  .praise-title {
+  .praise-title,
+  .praise-title-not-splitted {
     color: var(--color-black);
     font-size: 1.5rem;
   }
 
-  .praise-title-portuguese {
+  .praise-title-portuguese,
+  .praise-title-portuguese-not-splitted {
     font-size: 1rem;
     font-weight: 200;
     color: var(--color-dark-gray);
   }
 
-  .praise-lines {
+  .praise-lines-container {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .praise-lines-1,
+  .praise-lines-not-splitted-1 {
     margin-top: 1.5rem;
+    font-family: monospace;
+    font-weight: normal;
+  }
+
+  .praise-lines-2,
+  .praise-lines-not-splitted-2 {
     font-family: monospace;
     font-weight: normal;
   }
@@ -46,10 +60,14 @@ export const ContainerPraise = styled.div`
     height: 3rem;
   }
 
-  .repetitions-number {
+  .repetitions-number,
+  .repetitions-number-not-splitted,
+  .repetitions-number-chords,
+  .repetitions-number-chords-not-splitted {
     position: absolute;
     right: -30px;
     color: black;
+    font-size: 1rem;
   }
 
   .chord-key-container {
@@ -63,6 +81,10 @@ export const ContainerPraise = styled.div`
     border-radius: 10px;
     // position: absolute;
     // right: 40px;
+  }
+
+  .chord-key-container > p {
+    width: 30px;
   }
 
   .button-change-key {
@@ -84,6 +106,29 @@ export const ContainerPraise = styled.div`
     position: absolute;
     right: 2%;
     bottom: 2%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-light-gray);
+    cursor: pointer;
+    background-color: var(--color-background-white);
+    padding: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+
+    &:hover {
+      border: 1px solid var(--color-dark-gray);
+      background: var(--color-light-gray-2);
+    }
+  }
+
+  .button-to-split {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 2%;
+    top: 10%;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -151,15 +196,105 @@ export const ContainerPraise = styled.div`
     .file-content {
       width: 99%;
     }
-  }
-
-  @media (max-width: 1300px) {
     .progress-container {
       padding-top: 40%;
     }
 
     .file-container {
       margin-top: 5px;
+    }
+
+    .praise-title {
+      font-size: 1.2rem;
+    }
+
+    .praise-main {
+      padding: 5rem 0 4rem 0;
+    }
+
+    .praise-title-portuguese {
+      font-size: 1rem;
+    }
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .chord-key-container {
+      position: absolute;
+      top: 7%;
+      padding: 1px;
+      border-radius: 20px;
+    }
+
+    .chord-key-container > p {
+      font-size: 1rem;
+    }
+
+    .praise-title {
+      font-size: 1.5rem;
+    }
+    .praise-title-portuguese {
+      font-size: 1.1rem;
+    }
+
+    .praise-main {
+      padding: 11rem 0 4rem 0;
+    }
+
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 1.1rem;
+      margin-top: 2rem;
+    }
+
+    .button-to-split {
+      width: 40px;
+      height: 40px;
+      right: 4%;
+      top: 8%;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .praise-main {
+      padding: 9rem 0 4rem 0;
+    }
+
+    .praise-title {
+      font-size: 1.2rem;
+    }
+    .praise-title-portuguese {
+      font-size: 1rem;
+    }
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.9rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .chord-key-container {
+      top: 8%;
+    }
+    .praise-main {
+      padding: 9rem 0 4rem 0;
+    }
+
+    .button-change-key {
+      width: 30px;
+      height: 30px;
+    }
+
+    .button-to-split {
+      top: 9%;
+    }
+
+    .repetitions-number-chords {
+      font-size: 0.9rem;
+      right: -22px;
     }
   }
 
@@ -185,21 +320,85 @@ export const ContainerPraise = styled.div`
       font-size: 0.8rem;
     }
 
+    .praise-lines-container {
+      gap: 1.8rem;
+    }
+
+    .praise-title-portuguese {
+      font-size: 1rem;
+    }
+    .praise-title {
+      font-size: 1.1rem;
+    }
+
+    .praise-title-not-splitted {
+      font-size: 1.4rem;
+    }
+
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.5rem;
+    }
+
     .space-blanck-chords {
       height: 2rem;
     }
 
-    .repetitions-number {
-      right: -22px;
+    .repetitions-number,
+    .repetitions-number-not-splitted {
+      right: -24px;
     }
 
-    .praise-title {
-      font-size: 1.1rem;
+    .repetitions-number-chords {
+      font-size: 0.7rem;
+      right: -18px;
     }
 
     .button-change-key {
       width: 25px;
       height: 25px;
+    }
+  }
+  @media (max-width: 430px) {
+    .praise-title {
+      font-size: 0.9rem;
+    }
+
+    .praise-title-portuguese {
+      font-size: 0.7rem;
+    }
+
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.52rem;
+    }
+
+    .button-to-split {
+      width: 39px;
+      height: 39px;
+      right: 4%;
+      top: 9%;
+      padding: 10px;
+    }
+
+    .chord-key-container {
+      padding: 1px;
+      top: 8%;
+      border-radius: 15px;
+    }
+
+    .repetitions-number {
+      right: -14px;
+    }
+
+    .repetitions-number-chords-not-splitted {
+      font-size: 0.8rem;
+      right: -22px;
+    }
+
+    .repetitions-number-chords {
+      font-size: 0.6rem;
+      right: -16px;
     }
   }
 
@@ -208,12 +407,123 @@ export const ContainerPraise = styled.div`
       padding-top: 50%;
     }
   }
-  @media (max-width: 395px) {
-    .praise-title {
-      font-size: 1rem;
+
+  @media (max-width: 412px) {
+    .praise-lines-container {
+      gap: 0.9rem;
     }
+  }
+
+  @media (max-width: 395px) {
+    .praise-title-not-splitted {
+      font-size: 1.2rem;
+    }
+    .praise-title-portuguese-not-splitted {
+      font-size: 0.9rem;
+    }
+
+    .praise-main {
+      padding: 7.5rem 0 4rem 0;
+    }
+
+    .repetitions-number {
+      right: -15px;
+    }
+
     .praise-main.small-text {
       font-size: 0.7rem;
+    }
+
+    .praise-lines-container {
+      gap: 1rem;
+    }
+
+    .chord-key-container > p {
+      width: 10px;
+      font-size: 0.7rem;
+    }
+
+    .button-to-split {
+      width: 38px;
+      height: 38px;
+      right: 4%;
+      top: 9%;
+      padding: 9px;
+    }
+
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.5rem;
+    }
+  }
+
+  @media (max-width: 280px) {
+    .praise-main {
+      padding: 7rem 0 4rem 0;
+    }
+
+    .praise-title {
+      font-size: 0.7rem;
+    }
+
+    .praise-title-portuguese {
+      font-size: 0.6rem;
+    }
+
+    .praise-title-not-splitted {
+      font-size: 1rem;
+    }
+    .praise-title-portuguese-not-splitted {
+      font-size: 0.7rem;
+    }
+
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.35rem;
+    }
+    .praise-lines-container {
+      gap: 0.8rem;
+    }
+
+    .praise-lines-not-splitted-1,
+    .praise-lines-not-splitted-2 {
+      font-size: 0.65rem;
+    }
+
+    .praise-lines-lyrics {
+      font-size: 0.9rem;
+    }
+
+    .repetitions-number {
+      right: -10px;
+    }
+
+    .repetitions-number-not-splitted {
+      right: -18px;
+      font-size: 0.7rem;
+    }
+
+    .repetitions-number-chords {
+      font-size: 0.5rem;
+      right: -13px;
+    }
+
+    .button-to-split {
+      width: 32px;
+      height: 32px;
+      right: 4%;
+      top: 12%;
+      padding: 9px;
+    }
+
+    .chord-key-container {
+      top: 11%;
+    }
+
+    .button-change-key {
+      width: 15px;
+      height: 15px;
+      font-size: 0.8rem;
     }
   }
 `;

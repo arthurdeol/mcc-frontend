@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate, useParams } from "react-router-dom";
 import { HiArrowCircleRight, HiArrowCircleLeft } from "react-icons/hi";
-import { FiPlus, FiMinus } from "react-icons/fi";
+import { FiPlus, FiMinus, FiColumns } from "react-icons/fi";
 import { LuListEnd } from "react-icons/lu";
 
 export default function Praise() {
@@ -22,6 +22,13 @@ export default function Praise() {
   const takeSentServiceListId = localStorage.getItem("sentServiceListId");
   const navPath = window.location.pathname?.toString();
   const isPathPraise = navPath.indexOf("/praise/") !== -1;
+  const [praiseChordsFirstPart, setPraiseChordsFirstPart] = useState("");
+  const [praiseChordsSecondPart, setPraiseChordsSecondPart] = useState("");
+  const [praiseLyricsFirstPart, setPraiseLyricsFirstPart] = useState("");
+  const [praiseLyricsSecondPart, setPraiseLyricsSecondPart] = useState("");
+  const [splitText, setSplitText] = useState(false);
+  const [constainsBreakLyrics, setContainsBreakLyrics] = useState(false);
+  const [constainsBreakChords, setContainsBreakChords] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,6 +38,34 @@ export default function Praise() {
       const keyWithouScale = louvorData.chordsKey;
 
       setLouvor(louvorData);
+
+      if (louvorData.chords) {
+        const textChords = louvorData.chords;
+        const textChordsDevided = textChords.split("[break]");
+
+        if (textChordsDevided.length > 1) {
+          setPraiseChordsFirstPart(textChordsDevided[0]);
+          setPraiseChordsSecondPart(textChordsDevided[1]);
+          setContainsBreakChords(true);
+        } else {
+          setPraiseChordsFirstPart(textChordsDevided[0]);
+          setPraiseChordsSecondPart("");
+        }
+      }
+
+      if (louvorData.lyrics) {
+        const textLyrics = louvorData.lyrics;
+        const textLyricsDevided = textLyrics.split("[break]");
+
+        if (textLyricsDevided.length > 1) {
+          setPraiseLyricsFirstPart(textLyricsDevided[0]);
+          setPraiseLyricsSecondPart(textLyricsDevided[1]);
+          setContainsBreakLyrics(true);
+        } else {
+          setPraiseLyricsFirstPart(textLyricsDevided[0]);
+          setPraiseLyricsSecondPart("");
+        }
+      }
 
       if (louvorData.chordsKey) {
         setCurrentKey(louvorData.chordsKey.replace(/m$/, ""));
@@ -158,11 +193,10 @@ export default function Praise() {
     return toIndex - fromIndex;
   }
 
-  const transposedChords = () => {
+  const transposedChords = (text) => {
+    if (!text) text = louvor.chords;
     const steps = getTransposeSteps(praiseKeyChord, currentKey);
-    return steps !== 0
-      ? transposeTextChords(louvor.chords, steps)
-      : louvor.chords;
+    return steps !== 0 ? transposeTextChords(text, steps) : text;
   };
 
   const processChords = (text) => {
@@ -214,7 +248,7 @@ export default function Praise() {
               key={`group-${index}`}
               className={groupClass}
               style={{
-                borderRight: "2px solid #3a3a3a",
+                borderRight: "1.5px solid #3a3a3a",
                 paddingRight: "1rem",
                 position: "relative",
               }}
@@ -230,7 +264,11 @@ export default function Praise() {
           group.push(
             <span
               key={`repeat-${index}-${Math.random()}`}
-              className="repetitions-number"
+              className={
+                splitText
+                  ? "repetitions-number-chords"
+                  : "repetitions-number-chords-not-splitted"
+              }
             >
               {groupMatch[1]}x
             </span>
@@ -242,7 +280,7 @@ export default function Praise() {
             key={`group-final-${index}-${Math.random()}`}
             className={groupClass}
             style={{
-              borderRight: "2px solid #3a3a3a",
+              borderRight: "1.5px solid #3a3a3a",
               paddingRight: "1rem",
               position: "relative",
             }}
@@ -402,7 +440,7 @@ export default function Praise() {
           key={`special-${Math.random()}`}
           className={groupClass}
           style={{
-            borderRight: "2px solid #3a3a3a",
+            borderRight: "1.5px solid #3a3a3a",
             paddingRight: "1rem",
             position: "relative",
           }}
@@ -433,7 +471,7 @@ export default function Praise() {
               key={`group-${index}`}
               className={groupClass}
               style={{
-                borderRight: "2px solid #3a3a3a",
+                borderRight: "1.5px solid #3a3a3a",
                 paddingRight: "1rem",
                 position: "relative",
               }}
@@ -449,7 +487,14 @@ export default function Praise() {
 
         if (showNumberOfRepetition) {
           group.push(
-            <span key={`repeat-${index}`} className="repetitions-number">
+            <span
+              key={`repeat-${index}`}
+              className={
+                splitText
+                  ? "repetitions-number"
+                  : "repetitions-number-not-splitted"
+              }
+            >
               {groupMatch[1]}x
             </span>
           );
@@ -460,7 +505,7 @@ export default function Praise() {
             key={`group-${index}`}
             className={groupClass}
             style={{
-              borderRight: "2px solid #3a3a3a",
+              borderRight: "1.5px solid #3a3a3a",
               paddingRight: "1rem",
               position: "relative",
             }}
@@ -590,7 +635,7 @@ export default function Praise() {
           key={`special-${Math.random()}`}
           className={groupClass}
           style={{
-            borderRight: "2px solid #3a3a3a",
+            borderRight: "1.5px solid #3a3a3a",
             paddingRight: "1rem",
             position: "relative",
           }}
@@ -676,6 +721,24 @@ export default function Praise() {
         </div>
       ) : (
         <div className="file-container">
+          {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
+          {displayLyrics && constainsBreakLyrics && (
+            <div
+              className="button-to-split"
+              onClick={() => setSplitText(!splitText)}
+            >
+              <FiColumns size={20} color="var(--color-black)" />
+            </div>
+          )}
+          {displayChords && constainsBreakChords && (
+            <div
+              className="button-to-split"
+              onClick={() => setSplitText(!splitText)}
+            >
+              <FiColumns size={20} color="var(--color-black)" />
+            </div>
+          )}
+          {/* --------------------------------------------------------------------*/}
           {displayFilesSVGFlag && (
             <div className="file-content">
               {fileArray.map((url, i) => (
@@ -694,18 +757,36 @@ export default function Praise() {
                   <>
                     {louvor.englishTitle.includes("(") ? (
                       <>
-                        <h1 className="praise-title">
+                        <h1
+                          className={
+                            splitText
+                              ? "praise-title"
+                              : "praise-title-not-splitted"
+                          }
+                        >
                           {louvor.englishSongBookNumber
                             ? louvor.englishSongBookNumber + " - "
                             : ""}
                           {louvor.englishTitle.split("(")[0].trim()}
                         </h1>
-                        <h2 className="praise-title">
+                        <h2
+                          className={
+                            splitText
+                              ? "praise-title"
+                              : "praise-title-not-splitted"
+                          }
+                        >
                           {"(" + louvor.englishTitle.split("(")[1].trim()}
                         </h2>
                       </>
                     ) : (
-                      <h1 className="praise-title">
+                      <h1
+                        className={
+                          splitText
+                            ? "praise-title"
+                            : "praise-title-not-splitted"
+                        }
+                      >
                         {louvor.englishSongBookNumber
                           ? louvor.englishSongBookNumber + " - "
                           : ""}
@@ -713,15 +794,29 @@ export default function Praise() {
                       </h1>
                     )}
                     {louvor.portugueseTitle && (
-                      <h3 className="praise-title-portuguese">
+                      <h3
+                        className={
+                          splitText
+                            ? "praise-title-portuguese"
+                            : "praise-title-portuguese-not-splitted"
+                        }
+                      >
                         {louvor.portugueseSongBookNumber
                           ? louvor.portugueseSongBookNumber + " - "
                           : ""}
                         {louvor.portugueseTitle}
                       </h3>
                     )}
-                    <div className="praise-lines-lyrics">
-                      {processLyrics(louvor.lyrics)}
+
+                    <div className={splitText ? "praise-lines-container" : ""}>
+                      <div className="praise-lines-lyrics">
+                        {processLyrics(praiseLyricsFirstPart)}
+                      </div>
+                      {constainsBreakLyrics && (
+                        <div className="praise-lines-lyrics">
+                          {processLyrics(praiseLyricsSecondPart)}
+                        </div>
+                      )}
                     </div>
                   </>
                 )}
@@ -730,19 +825,37 @@ export default function Praise() {
                   <>
                     {louvor.englishTitle.includes("(") ? (
                       <>
-                        <h1 className="praise-title">
+                        <h1
+                          className={
+                            splitText
+                              ? "praise-title"
+                              : "praise-title-not-splitted"
+                          }
+                        >
                           {louvor.englishSongBookNumber
                             ? louvor.englishSongBookNumber + " - "
                             : ""}
                           {louvor.englishTitle.split("(")[0].trim()}
                         </h1>
-                        <h2 className="praise-title">
+                        <h2
+                          className={
+                            splitText
+                              ? "praise-title"
+                              : "praise-title-not-splitted"
+                          }
+                        >
                           {"(" + louvor.englishTitle.split("(")[1].trim()}
                         </h2>
                       </>
                     ) : (
                       <>
-                        <h1 className="praise-title">
+                        <h1
+                          className={
+                            splitText
+                              ? "praise-title"
+                              : "praise-title-not-splitted"
+                          }
+                        >
                           {louvor.englishSongBookNumber
                             ? louvor.englishSongBookNumber + " - "
                             : ""}
@@ -751,7 +864,13 @@ export default function Praise() {
                       </>
                     )}
                     {louvor.portugueseTitle && (
-                      <h3 className="praise-title-portuguese">
+                      <h3
+                        className={
+                          splitText
+                            ? "praise-title-portuguese"
+                            : "praise-title-portuguese-not-splitted"
+                        }
+                      >
                         {louvor.portugueseSongBookNumber
                           ? louvor.portugueseSongBookNumber + " - "
                           : ""}
@@ -771,7 +890,6 @@ export default function Praise() {
                         <p
                           style={{
                             color: "red",
-                            width: "40px",
                             textAlign: "center",
                           }}
                         >
@@ -792,8 +910,29 @@ export default function Praise() {
                       </div>
                     )}
 
-                    <div className="praise-lines">
-                      {processChords(transposedChords())}
+                    <div className={splitText ? "praise-lines-container" : ""}>
+                      <div
+                        className={
+                          splitText
+                            ? "praise-lines-1"
+                            : "praise-lines-not-splitted-1"
+                        }
+                      >
+                        {processChords(transposedChords(praiseChordsFirstPart))}
+                      </div>
+                      {constainsBreakChords && (
+                        <div
+                          className={
+                            splitText
+                              ? "praise-lines-2"
+                              : "praise-lines-not-splitted-2"
+                          }
+                        >
+                          {processChords(
+                            transposedChords(praiseChordsSecondPart)
+                          )}
+                        </div>
+                      )}
                     </div>
                   </>
                 )}
