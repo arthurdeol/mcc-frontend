@@ -7,15 +7,18 @@ import {
   LuShare2,
   LuFolderClosed,
 } from "react-icons/lu";
+import { RiDeleteBin5Line } from "react-icons/ri";
 // import { LuListEnd } from "react-icons/lu";
 import { PiListHeart, PiHandWaving } from "react-icons/pi";
 import { TbClockEdit } from "react-icons/tb";
 
 const Header = ({
   louvor = {},
+  openModalDeletePraisesList = () => {},
   setActiveTab = "",
   servicePraises = [],
   setShowShareList = false,
+  showShareList,
 }) => {
   const navigate = useNavigate();
   const navPath = window.location.pathname?.toString();
@@ -45,11 +48,25 @@ const Header = ({
         </div>
       )}
 
-      {navPath === "/my-praises-list" && servicePraises.length > 0 && (
-        <div className="share-button" onClick={() => setShowShareList(true)}>
-          <LuShare2 size={20} color="var(--color-black)" />
-        </div>
-      )}
+      {navPath === "/my-praises-list" &&
+        servicePraises.length > 0 &&
+        showShareList === false && (
+          <div className="share-delete-container">
+            <div
+              className="delete-list-button"
+              onClick={openModalDeletePraisesList}
+            >
+              <RiDeleteBin5Line size={20} color="var(--color-black)" />
+            </div>
+
+            <div
+              className="share-button"
+              onClick={() => setShowShareList(true)}
+            >
+              <LuShare2 size={20} color="var(--color-black)" />
+            </div>
+          </div>
+        )}
 
       {navPath === "/praises-admin" && (
         <h1 className="praise-settings-title">Admin - Praises</h1>

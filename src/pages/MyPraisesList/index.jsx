@@ -5,6 +5,9 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { IoHeartSharp } from "react-icons/io5";
 import PraiseCard from "../../components/PraiseCard";
 import SendList from "../../components/SendList";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import { style, ButtonStyledRed, ButtonStyled, FooterFilter } from "./styles";
 
 export default function MyPraisesList() {
   const [showShareList, setShowShareList] = useState(false);
@@ -47,11 +50,24 @@ export default function MyPraisesList() {
     }
   };
 
+  const [openModalDeletePraisesList, setOpenModalDeletePraisesList] =
+    useState(false);
+  const handleOpen = () => setOpenModalDeletePraisesList(true);
+  const handleClose = () => setOpenModalDeletePraisesList(false);
+
+  const cleanList = () => {
+    setServicePraises([]);
+    handleClose();
+  };
+
   return (
     <ContainerServicePraiseList>
       <Header
         servicePraises={servicePraises}
         setShowShareList={setShowShareList}
+        showShareList={showShareList}
+        setServicePraises={setServicePraises}
+        openModalDeletePraisesList={handleOpen}
       />
 
       <DragDropContext onDragEnd={handleDragDrop}>
@@ -120,6 +136,19 @@ export default function MyPraisesList() {
           </Droppable>
         </div>
       </DragDropContext>
+      <Modal open={openModalDeletePraisesList} onClose={handleClose}>
+        <Box sx={{ ...style }}>
+          <h2 style={{ fontSize: "1.1rem" }}>
+            Do you want to delete this list?
+          </h2>
+          <FooterFilter>
+            <ButtonStyled onClick={handleClose}>Cancel</ButtonStyled>
+            <ButtonStyledRed type="submit" onClick={() => cleanList()}>
+              Yes, I want to delete
+            </ButtonStyledRed>
+          </FooterFilter>
+        </Box>
+      </Modal>
     </ContainerServicePraiseList>
   );
 }
