@@ -390,14 +390,14 @@ export const ContainerPraise = styled.div`
     }
 
     .lyrics-praise-title-not-splitted {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     .praise-title-portuguese-not-splitted {
       font-size: 0.8rem;
     }
 
     .lyrics-praise-title-portuguese-not-splitted {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     .praise-lines-1,
