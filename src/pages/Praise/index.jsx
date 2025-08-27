@@ -793,8 +793,8 @@ export default function Praise() {
                         <h1
                           className={
                             splitText
-                              ? "praise-title"
-                              : "praise-title-not-splitted"
+                              ? "lyrics-praise-title"
+                              : "lyrics-praise-title-not-splitted"
                           }
                         >
                           {louvor.englishSongBookNumber
@@ -805,8 +805,8 @@ export default function Praise() {
                         <h2
                           className={
                             splitText
-                              ? "praise-title"
-                              : "praise-title-not-splitted"
+                              ? "lyrics-praise-title"
+                              : "lyrics-praise-title-not-splitted"
                           }
                         >
                           {"(" + louvor.englishTitle.split("(")[1].trim()}
@@ -816,8 +816,8 @@ export default function Praise() {
                       <h1
                         className={
                           splitText
-                            ? "praise-title"
-                            : "praise-title-not-splitted"
+                            ? "lyrics-praise-title"
+                            : "lyrics-praise-title-not-splitted"
                         }
                       >
                         {louvor.englishSongBookNumber
@@ -830,8 +830,8 @@ export default function Praise() {
                       <h3
                         className={
                           splitText
-                            ? "praise-title-portuguese"
-                            : "praise-title-portuguese-not-splitted"
+                            ? "lyrics-praise-title-portuguese"
+                            : "lyrics-praise-title-portuguese-not-splitted"
                         }
                       >
                         {louvor.portugueseSongBookNumber

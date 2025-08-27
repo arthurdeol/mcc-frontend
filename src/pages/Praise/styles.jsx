@@ -21,13 +21,18 @@ export const ContainerPraise = styled.div`
   }
 
   .praise-title,
-  .praise-title-not-splitted {
+  .praise-title-not-splitted,
+  .lyrics-praise-title,
+  .lyrics-praise-title-not-splitted {
+    font-weight: 500;
     color: var(--color-black);
     font-size: 1.5rem;
   }
 
   .praise-title-portuguese,
-  .praise-title-portuguese-not-splitted {
+  .praise-title-portuguese-not-splitted,
+  .lyrics-praise-title-portuguese,
+  .lyrics-praise-title-portuguese-not-splitted {
     font-size: 1rem;
     font-weight: 200;
     color: var(--color-dark-gray);
@@ -320,14 +325,16 @@ export const ContainerPraise = styled.div`
       gap: 1.8rem;
     }
 
-    .praise-title-portuguese {
+    .praise-title-portuguese,
+    .praise-title-portuguese-not-splitted {
       font-size: 1rem;
     }
     .praise-title {
       font-size: 1.1rem;
     }
 
-    .praise-title-not-splitted {
+    .praise-title-not-splitted,
+    .lyrics-praise-title-not-splitted {
       font-size: 1.4rem;
     }
 
@@ -381,8 +388,16 @@ export const ContainerPraise = styled.div`
     .praise-title-not-splitted {
       font-size: 1rem;
     }
+
+    .lyrics-praise-title-not-splitted {
+      font-size: 1.2rem;
+    }
     .praise-title-portuguese-not-splitted {
       font-size: 0.8rem;
+    }
+
+    .lyrics-praise-title-portuguese-not-splitted {
+      font-size: 0.85rem;
     }
 
     .praise-lines-1,
@@ -485,6 +500,14 @@ export const ContainerPraise = styled.div`
     }
 
     .praise-title-not-splitted {
+      font-size: 0.8rem;
+    }
+
+    .lyrics-praise-title-not-splitted {
+      font-size: 1rem;
+    }
+
+    .lyrics-praise-title-portuguese-not-splitted {
       font-size: 0.8rem;
     }
     .praise-title-portuguese-not-splitted {
