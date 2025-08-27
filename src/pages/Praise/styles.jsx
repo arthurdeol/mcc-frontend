@@ -93,6 +93,14 @@ export const ContainerPraise = styled.div`
     width: 30px;
   }
 
+  .top-right-buttons {
+    display: flex;
+    position: absolute;
+    position: fixed;
+    margin-top: 5.5rem;
+    right: 4%;
+  }
+
   .button-change-key {
     border-radius: 50%;
     display: flex;
@@ -109,10 +117,8 @@ export const ContainerPraise = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    position: absolute;
     right: 2%;
-    bottom: 2%;
-    position: fixed;
+    top: 10rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,6 +127,7 @@ export const ContainerPraise = styled.div`
     background-color: var(--color-background-white);
     padding: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+    margin-left: 10px;
 
     &:hover {
       border: 1px solid var(--color-dark-gray);
@@ -132,10 +139,7 @@ export const ContainerPraise = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    position: absolute;
     right: 2%;
-    margin-top: 5.5rem;
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -169,7 +173,6 @@ export const ContainerPraise = styled.div`
     width: 70%;
     margin: 0 0 15px;
     margin-top: 4.2rem;
-    //display: none;
   }
 
   .file {
@@ -185,18 +188,6 @@ export const ContainerPraise = styled.div`
     width: 100%;
     background: var(--color-background-white);
   }
-
-  // .file-fullscreen {
-  //   overflow-x: auto;
-  //   background: #fff;
-  //   width: 100%;
-  //   height: auto;
-  //   text-align: center;
-
-  //   img {
-  //     width: 100%;
-  //   }
-  // }
 
   @media (max-width: 1300px) {
     .file-content {
@@ -255,10 +246,14 @@ export const ContainerPraise = styled.div`
       margin-top: 2rem;
     }
 
-    .button-to-split {
+    .top-right-buttons {
+      margin-top: 0.2rem;
+    }
+
+    .button-to-split,
+    .button-to-service-list {
       width: 40px;
       height: 40px;
-      right: 4%;
       margin-top: 5.2rem;
       padding: 10px;
     }
@@ -294,10 +289,6 @@ export const ContainerPraise = styled.div`
     .button-change-key {
       width: 30px;
       height: 30px;
-    }
-
-    .button-to-split {
-      margin-top: 5rem;
     }
 
     .repetitions-number-chords {
@@ -377,7 +368,8 @@ export const ContainerPraise = styled.div`
       border-radius: 15px;
     }
 
-    .button-to-split {
+    .button-to-split,
+    .button-to-service-list {
       width: 39px;
       height: 39px;
       right: 4%;
@@ -413,7 +405,12 @@ export const ContainerPraise = styled.div`
       font-size: 0.52rem;
     }
 
-    .button-to-split {
+    .top-right-buttons {
+      margin-top: -5px;
+    }
+
+    .button-to-split,
+    .button-to-service-list {
       width: 39px;
       height: 39px;
       right: 4%;
@@ -481,7 +478,8 @@ export const ContainerPraise = styled.div`
       font-size: 0.7rem;
     }
 
-    .button-to-split {
+    .button-to-split,
+    .button-to-service-list {
       width: 38px;
       height: 38px;
       right: 4%;
@@ -553,7 +551,12 @@ export const ContainerPraise = styled.div`
       right: -13px;
     }
 
-    .button-to-split {
+    .top-right-buttons {
+      margin-top: 0px;
+    }
+
+    .button-to-split,
+    .button-to-service-list {
       width: 32px;
       height: 32px;
       right: 4%;

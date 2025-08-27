@@ -721,24 +721,37 @@ export default function Praise() {
         </div>
       ) : (
         <div className="file-container">
-          {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
-          {displayLyrics && constainsBreakLyrics && (
-            <div
-              className="button-to-split"
-              onClick={() => setSplitText(!splitText)}
-            >
-              <FiColumns size={20} color="var(--color-black)" />
-            </div>
-          )}
-          {displayChords && constainsBreakChords && (
-            <div
-              className="button-to-split"
-              onClick={() => setSplitText(!splitText)}
-            >
-              <FiColumns size={20} color="var(--color-black)" />
-            </div>
-          )}
+          <div className="top-right-buttons">
+            {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
+            {displayLyrics && constainsBreakLyrics && (
+              <div
+                className="button-to-split"
+                onClick={() => setSplitText(!splitText)}
+              >
+                <FiColumns size={20} color="var(--color-black)" />
+              </div>
+            )}
+            {displayChords && constainsBreakChords && (
+              <div
+                className="button-to-split"
+                onClick={() => setSplitText(!splitText)}
+              >
+                <FiColumns size={20} color="var(--color-black)" />
+              </div>
+            )}
 
+            {/* ----------------Return to Service List------------------ */}
+            {localStorage.getItem("sentServiceListId") && isPathPraise && (
+              <div
+                className="button-to-service-list"
+                onClick={() =>
+                  navigate(`/shared-praises-list/${takeSentServiceListId}`)
+                }
+              >
+                <LuListEnd size={20} color="var(--color-black)" />
+              </div>
+            )}
+          </div>
           {/* --------------------CHANGE CHORD KEY--------------------------------*/}
           {displayChords && louvor.chordsKey && (
             <div className="chord-key-container">
@@ -938,17 +951,6 @@ export default function Praise() {
                   </>
                 )}
               </div>
-            </div>
-          )}
-          {/* ----------------Return to Service List------------------ */}
-          {localStorage.getItem("sentServiceListId") && isPathPraise && (
-            <div
-              className="button-to-service-list"
-              onClick={() =>
-                navigate(`/shared-praises-list/${takeSentServiceListId}`)
-              }
-            >
-              <LuListEnd size={20} color="var(--color-black)" />
             </div>
           )}
         </div>
