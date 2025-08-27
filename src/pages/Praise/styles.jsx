@@ -245,6 +245,10 @@ export const ContainerPraise = styled.div`
       padding: 11rem 0 4rem 0;
     }
 
+    .praise-main.large-text {
+      padding: 6.5rem 0 4rem 0;
+    }
+
     .praise-lines-1,
     .praise-lines-2 {
       font-size: 1.1rem;
@@ -263,6 +267,9 @@ export const ContainerPraise = styled.div`
   @media (max-width: 820px) {
     .praise-main {
       padding: 9rem 0 4rem 0;
+    }
+    .praise-main.large-text {
+      padding: 6rem 0 4rem 0;
     }
 
     .praise-title {
@@ -315,6 +322,7 @@ export const ContainerPraise = styled.div`
 
     .praise-main.large-text {
       font-size: 1rem;
+      padding: 5.2rem 0 4rem 0;
     }
 
     .praise-main.small-text {
