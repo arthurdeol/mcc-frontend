@@ -80,7 +80,7 @@ export const ContainerPraise = styled.div`
     padding: 5px;
     border-radius: 10px;
     left: 4%;
-    top: 9%;
+    margin-top: 6rem;
     position: absolute;
   }
 
@@ -129,7 +129,7 @@ export const ContainerPraise = styled.div`
     border-radius: 50%;
     position: absolute;
     right: 2%;
-    top: 10%;
+    margin-top: 5.5rem;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -208,11 +208,6 @@ export const ContainerPraise = styled.div`
     .praise-title {
       font-size: 1.2rem;
     }
-
-    .praise-main {
-      padding: 5rem 0 4rem 0;
-    }
-
     .praise-title-portuguese {
       font-size: 1rem;
     }
@@ -225,7 +220,7 @@ export const ContainerPraise = styled.div`
   @media (max-width: 1024px) {
     .chord-key-container {
       position: absolute;
-      top: 7%;
+      margin-top: 5.5rem;
       padding: 1px;
       border-radius: 20px;
     }
@@ -255,7 +250,7 @@ export const ContainerPraise = styled.div`
       width: 40px;
       height: 40px;
       right: 4%;
-      top: 8%;
+      margin-top: 5.2rem;
       padding: 10px;
     }
   }
@@ -278,7 +273,7 @@ export const ContainerPraise = styled.div`
   }
   @media (max-width: 768px) {
     .chord-key-container {
-      top: 8%;
+      margin-top: 5.2rem;
     }
     .praise-main {
       padding: 9rem 0 4rem 0;
@@ -290,7 +285,7 @@ export const ContainerPraise = styled.div`
     }
 
     .button-to-split {
-      top: 9%;
+      margin-top: 5rem;
     }
 
     .repetitions-number-chords {
@@ -364,7 +359,6 @@ export const ContainerPraise = styled.div`
   @media (max-width: 500px) {
     .chord-key-container {
       padding: 1px;
-      top: 10%;
       border-radius: 15px;
     }
 
@@ -372,7 +366,6 @@ export const ContainerPraise = styled.div`
       width: 39px;
       height: 39px;
       right: 4%;
-      top: 11%;
       padding: 10px;
     }
   }
@@ -381,16 +374,15 @@ export const ContainerPraise = styled.div`
       font-size: 0.9rem;
     }
 
-    .praise-title-not-splitted {
-      font-size: 1.1rem;
-    }
-
     .praise-title-portuguese {
       font-size: 0.7rem;
     }
 
+    .praise-title-not-splitted {
+      font-size: 1rem;
+    }
     .praise-title-portuguese-not-splitted {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .praise-lines-1,
@@ -403,13 +395,11 @@ export const ContainerPraise = styled.div`
       height: 39px;
       right: 4%;
       padding: 10px;
-      top: 10%;
     }
 
     .chord-key-container {
       padding: 1px;
       border-radius: 15px;
-      top: 9%;
     }
 
     .repetitions-number {
@@ -441,14 +431,14 @@ export const ContainerPraise = styled.div`
 
   @media (max-width: 395px) {
     .praise-title-not-splitted {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     .praise-title-portuguese-not-splitted {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .praise-main {
-      padding: 7.5rem 0 4rem 0;
+      padding: 8rem 0 4rem 0;
     }
 
     .repetitions-number {
@@ -463,10 +453,6 @@ export const ContainerPraise = styled.div`
       gap: 1rem;
     }
 
-    .chord-key-container {
-      top: 8%;
-    }
-
     .chord-key-container > p {
       width: 10px;
       font-size: 0.7rem;
@@ -476,7 +462,6 @@ export const ContainerPraise = styled.div`
       width: 38px;
       height: 38px;
       right: 4%;
-      top: 9%;
       padding: 9px;
     }
 
@@ -500,10 +485,10 @@ export const ContainerPraise = styled.div`
     }
 
     .praise-title-not-splitted {
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
     .praise-title-portuguese-not-splitted {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
     }
 
     .praise-lines-1,
@@ -541,12 +526,12 @@ export const ContainerPraise = styled.div`
       width: 32px;
       height: 32px;
       right: 4%;
-      top: 12%;
       padding: 9px;
+      margin-top: 4.5rem;
     }
 
     .chord-key-container {
-      top: 11%;
+      margin-top: 4.8rem;
     }
 
     .button-change-key {
