@@ -785,6 +785,7 @@ export default function Praise() {
             </div>
           )}
 
+          {/* -------------------------- File SVG ------------------------------ */}
           {displayFilesSVGFlag && (
             <div className="file-content">
               {fileArray.map((url, i) => (
@@ -792,6 +793,8 @@ export default function Praise() {
               ))}
             </div>
           )}
+
+          {/* -------------------------- Praise in Text ------------------------------ */}
           {!displayFilesSVGFlag && (
             <div className="praise-container">
               <div

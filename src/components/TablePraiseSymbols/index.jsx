@@ -13,7 +13,7 @@ export default function TableSymbols() {
     createData(
       "Title",
       " ",
-      "You don't need to put any simbol. The title will be added automatically. Start with the introduction.",
+      "You don't need to put any simbol. The title will be added automatically. Start with the introduction if the text is chords or with the first line if the text is lyrics.",
       " ",
       {
         url: "../../images/tablePraiseSettings/title.png",
@@ -76,6 +76,17 @@ export default function TableSymbols() {
         width: 60,
       }
     ),
+    createData(
+      "Break columns",
+      "[break]",
+      "In a new line and alone. Yoiu can use it to separate the text in two columns.",
+      "[break]",
+      {
+        url: "../../images/tablePraiseSettings/columns.jpeg",
+        height: 130,
+        width: 210,
+      }
+    ),
 
     createData(
       "Repetitions",
@@ -89,7 +100,7 @@ export default function TableSymbols() {
       }
     ),
     createData(
-      "Display repeticion number",
+      "Display repetition number",
       "[@]",
       "Place it on the line to display the number of repetitions.",
       "[.2][@]To for[C/E]give me and to set me [Gm] free",
@@ -143,9 +154,9 @@ export default function TableSymbols() {
       "Place the chord on the line where you want it to appear. It will be displayed at the top of the line.",
       "Hal[C/E]lelu[Gm]jah, a - [Bb6] men. [C7] [F] [C] [Gm] [Bb] [Dm]",
       {
-        url: "../../images/tablePraiseSettings/chords.png",
-        height: 110,
-        width: 200,
+        url: "../../images/tablePraiseSettings/chords.jpeg",
+        height: 30,
+        width: 180,
       }
     ),
   ];
