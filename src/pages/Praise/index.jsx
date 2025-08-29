@@ -753,7 +753,7 @@ export default function Praise() {
             )}
           </div>
           {/* --------------------CHANGE CHORD KEY--------------------------------*/}
-          {displayChords && louvor.chordsKey && (
+          {displayChords && louvor.chordsKey && !displayFilesSVGFlag && (
             <div className="chord-key-container">
               <button
                 className="button-change-key"
