@@ -167,6 +167,27 @@ export const Container = styled.div`
     }
   }
 
+  .button-to-split {
+    margin-top: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    right: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-light-gray);
+    cursor: pointer;
+    background-color: var(--color-background-white);
+    padding: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+
+    &:hover {
+      border: 1px solid var(--color-dark-gray);
+      background: var(--color-light-gray-2);
+    }
+  }
+
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   .praise-container {
     display: flex;
@@ -179,7 +200,7 @@ export const Container = styled.div`
 
   .praise-main {
     width: fit-content;
-    padding: 7rem 0 4rem 0;
+    padding: 1rem 0 4rem 0;
   }
 
   .praise-title {
@@ -188,6 +209,24 @@ export const Container = styled.div`
     margin-bottom: 0;
     color: var(--color-black);
     font-size: 1.5rem;
+  }
+
+  .praise-lines-container {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .praise-lines-1,
+  .praise-lines-not-splitted-1 {
+    margin-top: 1.5rem;
+    font-family: monospace;
+    font-weight: normal;
+  }
+
+  .praise-lines-2,
+  .praise-lines-not-splitted-2 {
+    font-family: monospace;
+    font-weight: normal;
   }
 
   .praise-lines {

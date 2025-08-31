@@ -60,7 +60,8 @@ export const ContainerPraise = styled.div`
     margin-top: 2.5rem;
   }
 
-  .space-blanck-chords {
+  .space-blanck-chords,
+  .space-blanck-chords-splitted {
     width: 100%;
     height: 3rem;
   }
@@ -277,6 +278,9 @@ export const ContainerPraise = styled.div`
     .praise-lines-2 {
       font-size: 0.9rem;
     }
+    .space-blanck-chords-splitted {
+      height: 2.5rem;
+    }
   }
   @media (max-width: 768px) {
     .chord-key-container {
@@ -346,6 +350,10 @@ export const ContainerPraise = styled.div`
       height: 2rem;
     }
 
+    .space-blanck-chords-splitted {
+      height: 1.3rem;
+    }
+
     .repetitions-number,
     .repetitions-number-not-splitted {
       right: -24px;
@@ -375,6 +383,10 @@ export const ContainerPraise = styled.div`
       right: 4%;
       padding: 10px;
     }
+
+    .praise-lines-container {
+      gap: 0.8rem;
+    }
   }
   @media (max-width: 430px) {
     .praise-title {
@@ -398,6 +410,11 @@ export const ContainerPraise = styled.div`
 
     .lyrics-praise-title-portuguese-not-splitted {
       font-size: 0.8rem;
+    }
+
+    .praise-lines-1 {
+      border-right: 1px solid var(--color-light-gray);
+      padding-right: 10px;
     }
 
     .praise-lines-1,
@@ -432,7 +449,7 @@ export const ContainerPraise = styled.div`
     }
 
     .repetitions-number-chords {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       right: -16px;
     }
   }
@@ -446,6 +463,11 @@ export const ContainerPraise = styled.div`
   @media (max-width: 412px) {
     .praise-lines-container {
       gap: 0.9rem;
+    }
+
+    .repetitions-number-chords {
+      font-size: 0.5rem;
+      right: -13px;
     }
   }
 
@@ -470,7 +492,7 @@ export const ContainerPraise = styled.div`
     }
 
     .praise-lines-container {
-      gap: 1rem;
+      gap: 0.6rem;
     }
 
     .chord-key-container > p {
@@ -522,10 +544,10 @@ export const ContainerPraise = styled.div`
 
     .praise-lines-1,
     .praise-lines-2 {
-      font-size: 0.35rem;
+      font-size: 0.33rem;
     }
     .praise-lines-container {
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
 
     .praise-lines-not-splitted-1,
@@ -547,8 +569,8 @@ export const ContainerPraise = styled.div`
     }
 
     .repetitions-number-chords {
-      font-size: 0.5rem;
-      right: -13px;
+      font-size: 0.4rem;
+      right: -11px;
     }
 
     .top-right-buttons {

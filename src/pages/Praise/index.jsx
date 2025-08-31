@@ -362,7 +362,12 @@ export default function Praise() {
 
       if (originalLine.includes("[%%]")) {
         const element = (
-          <div key={index} className="space-blanck-chords">
+          <div
+            key={index}
+            className={
+              splitText ? "space-blanck-chords-splitted" : "space-blanck-chords"
+            }
+          >
             &nbsp;
           </div>
         );

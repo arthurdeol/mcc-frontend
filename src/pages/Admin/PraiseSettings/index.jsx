@@ -23,6 +23,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { LuType, LuListMusic, LuMusic, LuFolderClosed } from "react-icons/lu";
 import { PiHandWaving } from "react-icons/pi";
+import { FiColumns } from "react-icons/fi";
 import {
   Container,
   themeStyled,
@@ -122,12 +123,34 @@ export default function PraiseSettings() {
     displayTextChordsInsteadOfSVG,
   } = checkeds;
 
+  const [praiseChordsFirstPart, setPraiseChordsFirstPart] = useState("");
+  const [praiseChordsSecondPart, setPraiseChordsSecondPart] = useState("");
+  // const [praiseLyricsFirstPart, setPraiseLyricsFirstPart] = useState("");
+  // const [praiseLyricsSecondPart, setPraiseLyricsSecondPart] = useState("");
+  const [splitText, setSplitText] = useState(false);
+  // const [constainsBreakLyrics, setContainsBreakLyrics] = useState(false);
+  const [constainsBreakChords, setContainsBreakChords] = useState(false);
+
   useEffect(() => {
     async function fetchData() {
       const url = `https://mccapi.up.railway.app/SongBookMap/${praiseId}/Get`;
       const response = await fetch(url);
       const louvorData = await response.json();
       setLouvor(louvorData);
+
+      if (louvorData.chords) {
+        const textChords = louvorData.chords;
+        const textChordsDevided = textChords.split("[break]");
+
+        if (textChordsDevided.length > 1) {
+          setPraiseChordsFirstPart(textChordsDevided[0]);
+          setPraiseChordsSecondPart(textChordsDevided[1]);
+          setContainsBreakChords(true);
+        } else {
+          setPraiseChordsFirstPart(textChordsDevided[0]);
+          setPraiseChordsSecondPart("");
+        }
+      }
     }
     fetchData();
     // eslint-disable-next-line
@@ -985,6 +1008,7 @@ export default function PraiseSettings() {
           <TableSymbols />
           <br></br>
 
+          {/* --------------------- LYRICS: text input ----------------------------------- */}
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
               Lyrics:
@@ -1016,7 +1040,7 @@ export default function PraiseSettings() {
                 }}
               />
             </Box>
-
+            {/* --------------------- LYRICS: display example ----------------------------------- */}
             {lyricsContent && (
               <div className="praise-container">
                 <div className="praise-main">
@@ -1057,6 +1081,7 @@ export default function PraiseSettings() {
           </div>
           <br></br>
 
+          {/* --------------------- Chord Key ----------------------------------- */}
           <FormControl style={{ width: "120px", marginBottom: "5px" }}>
             <InputLabel id="simple-select-label">Key / Tone</InputLabel>
             <Select
@@ -1093,6 +1118,7 @@ export default function PraiseSettings() {
             </Select>
           </FormControl>
 
+          {/* --------------------- CHORDS: text input ----------------------------------- */}
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
               Chords:
@@ -1124,7 +1150,18 @@ export default function PraiseSettings() {
                 }}
               />
             </Box>
-
+            {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
+            <div className="top-right-buttons">
+              {constainsBreakChords && (
+                <div
+                  className="button-to-split"
+                  onClick={() => setSplitText(!splitText)}
+                >
+                  <FiColumns size={20} color="var(--color-black)" />
+                </div>
+              )}
+            </div>
+            {/* --------------------- CHORDS: display example ----------------------------------- */}
             {chordsContent && (
               <div className="praise-container">
                 <div className="praise-main">
@@ -1158,8 +1195,28 @@ export default function PraiseSettings() {
                       {portugueseTitle}
                     </h3>
                   )}
-                  <div className="praise-lines">
-                    {processChords(chordsContent)}
+
+                  <div className={splitText ? "praise-lines-container" : ""}>
+                    <div
+                      className={
+                        splitText
+                          ? "praise-lines-1"
+                          : "praise-lines-not-splitted-1"
+                      }
+                    >
+                      {processChords(praiseChordsFirstPart)}
+                    </div>
+                    {constainsBreakChords && (
+                      <div
+                        className={
+                          splitText
+                            ? "praise-lines-2"
+                            : "praise-lines-not-splitted-2"
+                        }
+                      >
+                        {processChords(praiseChordsSecondPart)}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1167,6 +1224,7 @@ export default function PraiseSettings() {
           </div>
           <br></br>
 
+          {/* --------------------- Already saved SVGs ----------------------------------- */}
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
               Click to See Already Saved files SVG and Instruments Drive Folder
@@ -1252,9 +1310,10 @@ export default function PraiseSettings() {
           </div>
           <br></br>
 
+          {/* --------------------- UPLOAD FILES SVGs ----------------------------------- */}
           <div className="data-container">
             <Typography sx={title} id="modal-modal-title" component="h2">
-              Files SVG:
+              Upload Files SVG:
             </Typography>
             <div className="file-container">
               <div className="file-inputs-content">
@@ -1321,11 +1380,13 @@ export default function PraiseSettings() {
           </div>
           <br></br>
 
+          {/* ---------------------Display: UPLOAD FILES SVGs ----------------------------------- */}
           <TableFiles
             filesSelected={filesSelected}
             setFilesSelected={setFilesSelected}
           />
 
+          {/* ---------------------BUTTONS return and save ----------------------------------- */}
           <FooterFilter>
             <ButtonStyled onClick={() => navigate("/praises-admin")}>
               Return to Admin Home
