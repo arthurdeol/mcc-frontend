@@ -452,6 +452,14 @@ export const ContainerPraise = styled.div`
       font-size: 0.55rem;
       right: -16px;
     }
+
+    .praise-main {
+      max-width: 95%;
+    }
+
+    .praise-lines-container {
+      gap: 0.6rem;
+    }
   }
 
   @media (max-width: 425px) {
