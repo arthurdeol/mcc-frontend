@@ -414,7 +414,7 @@ export const ContainerPraise = styled.div`
 
     .praise-lines-1 {
       border-right: 1px solid var(--color-light-gray);
-      padding-right: 10px;
+      padding-right: 9px;
     }
 
     .praise-lines-1,
@@ -454,11 +454,11 @@ export const ContainerPraise = styled.div`
     }
 
     .praise-main {
-      max-width: 95%;
+      max-width: 91%;
     }
 
     .praise-lines-container {
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
   }
 
