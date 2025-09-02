@@ -477,6 +477,10 @@ export const ContainerPraise = styled.div`
       font-size: 0.5rem;
       right: -13px;
     }
+    .praise-lines-1,
+    .praise-lines-2 {
+      font-size: 0.45rem;
+    }
   }
 
   @media (max-width: 395px) {
@@ -518,7 +522,7 @@ export const ContainerPraise = styled.div`
 
     .praise-lines-1,
     .praise-lines-2 {
-      font-size: 0.5rem;
+      font-size: 0.45rem;
     }
   }
 
