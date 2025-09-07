@@ -125,10 +125,10 @@ export default function PraiseSettings() {
 
   const [praiseChordsFirstPart, setPraiseChordsFirstPart] = useState("");
   const [praiseChordsSecondPart, setPraiseChordsSecondPart] = useState("");
-  // const [praiseLyricsFirstPart, setPraiseLyricsFirstPart] = useState("");
-  // const [praiseLyricsSecondPart, setPraiseLyricsSecondPart] = useState("");
+  const [praiseLyricsFirstPart, setPraiseLyricsFirstPart] = useState("");
+  const [praiseLyricsSecondPart, setPraiseLyricsSecondPart] = useState("");
   const [splitText, setSplitText] = useState(false);
-  // const [constainsBreakLyrics, setContainsBreakLyrics] = useState(false);
+  const [constainsBreakLyrics, setContainsBreakLyrics] = useState(false);
   const [constainsBreakChords, setContainsBreakChords] = useState(false);
 
   useEffect(() => {
@@ -137,24 +137,40 @@ export default function PraiseSettings() {
       const response = await fetch(url);
       const louvorData = await response.json();
       setLouvor(louvorData);
-
-      if (louvorData.chords) {
-        const textChords = louvorData.chords;
-        const textChordsDevided = textChords.split("[break]");
-
-        if (textChordsDevided.length > 1) {
-          setPraiseChordsFirstPart(textChordsDevided[0]);
-          setPraiseChordsSecondPart(textChordsDevided[1]);
-          setContainsBreakChords(true);
-        } else {
-          setPraiseChordsFirstPart(textChordsDevided[0]);
-          setPraiseChordsSecondPart("");
-        }
-      }
     }
     fetchData();
     // eslint-disable-next-line
   }, [praiseId]);
+
+  useEffect(() => {
+    const textChords = chordsContent;
+    const textChordsDevided = textChords.split("[break]");
+
+    if (textChordsDevided.length > 1) {
+      setPraiseChordsFirstPart(textChordsDevided[0]);
+      setPraiseChordsSecondPart(textChordsDevided[1]);
+      setContainsBreakChords(true);
+    } else {
+      setPraiseChordsFirstPart(textChordsDevided[0]);
+      setPraiseChordsSecondPart("");
+      setContainsBreakChords(false);
+    }
+  }, [chordsContent]);
+
+  useEffect(() => {
+    const textLyrics = lyricsContent;
+    const textLyricsDevided = textLyrics.split("[break]");
+
+    if (textLyricsDevided.length > 1) {
+      setPraiseLyricsFirstPart(textLyricsDevided[0]);
+      setPraiseLyricsSecondPart(textLyricsDevided[1]);
+      setContainsBreakLyrics(true);
+    } else {
+      setPraiseLyricsFirstPart(textLyricsDevided[0]);
+      setPraiseLyricsSecondPart("");
+      setContainsBreakLyrics(false);
+    }
+  }, [lyricsContent]);
 
   function setActiveTab(file) {
     const fileMap = {
@@ -1040,6 +1056,15 @@ export default function PraiseSettings() {
                 }}
               />
             </Box>
+            {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
+            {constainsBreakLyrics && (
+              <div
+                className="button-to-split"
+                onClick={() => setSplitText(!splitText)}
+              >
+                <FiColumns size={20} color="var(--color-black)" />
+              </div>
+            )}
             {/* --------------------- LYRICS: display example ----------------------------------- */}
             {lyricsContent && (
               <div className="praise-container">
@@ -1072,8 +1097,15 @@ export default function PraiseSettings() {
                       {portugueseTitle}
                     </h3>
                   )}
-                  <div className="praise-lines-lyrics">
-                    {processLyrics(lyricsContent)}
+                  <div className={splitText ? "praise-lines-container" : ""}>
+                    <div className="praise-lines-lyrics">
+                      {processLyrics(praiseLyricsFirstPart)}
+                    </div>
+                    {constainsBreakLyrics && (
+                      <div className="praise-lines-lyrics">
+                        {processLyrics(praiseLyricsSecondPart)}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
