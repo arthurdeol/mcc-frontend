@@ -504,7 +504,7 @@ export default function PraiseSettings() {
 
       const specialTags = {
         "[intro]": { label: "Intro:", color: "red", bold: true },
-        "[instrumental]": { label: "Instrumental:", color: "red", bold: true },
+        "[instrumental]": { label: "Instr:", color: "red", bold: true },
         "[chorus]": {
           label: `Chorus: ${line.replace(/\[\/?chorus\]/g, "")}`,
           color: "black",
@@ -727,7 +727,7 @@ export default function PraiseSettings() {
       const specialTags = {
         "[intro]": { label: "Intro:", color: "red", bold: true },
         "[instrumental]": {
-          label: "Instrumental",
+          label: "Instr",
           color: "black",
           bold: true,
         },

@@ -44,6 +44,11 @@ export const ContainerPraise = styled.div`
   }
 
   .praise-lines-1,
+  .praise-lines-2 {
+    max-width: min-content;
+  }
+
+  .praise-lines-1,
   .praise-lines-not-splitted-1 {
     margin-top: 1.5rem;
     font-family: monospace;
