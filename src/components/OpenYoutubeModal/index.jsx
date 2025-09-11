@@ -9,13 +9,15 @@ export default function OpenYoutubeModal({
 }) {
   return (
     <Modal open={openModalYoutube} onClose={handleCloseModalYoutube}>
-      <Box sx={{ ...style }}>
-        <h2 style={{ fontSize: "1.1rem" }}>Play the Youtube video?</h2>
+      <Box sx={style}>
+        <h2 style={{ fontSize: "1.1rem" }}>Play Youtube video?</h2>
         <FooterFilter>
           <ButtonStyled onClick={handleCloseModalYoutube}>Cancel</ButtonStyled>
           <ButtonStyledRed
-            type="submit"
-            onClick={() => window.window.open(louvor.linkYoutube, "_blank")}
+            onClick={() => {
+              window.open(louvor.linkYoutube, "_blank");
+              handleCloseModalYoutube();
+            }}
           >
             Yes, play it!
           </ButtonStyledRed>
