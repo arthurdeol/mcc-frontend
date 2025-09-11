@@ -97,6 +97,12 @@ export default function PraiseSettings() {
       : ""
   );
 
+  const [linkYoutube, setLinkYoutube] = useState(
+    praiseData.linkYoutube !== "null" && praiseData.linkYoutube
+      ? praiseData.linkYoutube
+      : ""
+  );
+
   const [praiseKeyChord, setPraiseKeyChord] = useState(
     praiseData.chordsKey !== null ? praiseData.chordsKey : ""
   );
@@ -252,6 +258,10 @@ export default function PraiseSettings() {
     setLinkInstruments(event.target.value);
   };
 
+  const handleChangeLinkYoutube = (event) => {
+    setLinkYoutube(event.target.value);
+  };
+
   const handleChangeChordsContent = (event) => {
     setChordsContent(event.target.value);
   };
@@ -290,6 +300,7 @@ export default function PraiseSettings() {
     formData.append("englishSongBookNumber", englishSongBookNumber);
     formData.append("englishTitle", englishTitle);
     formData.append("linkDriveFolder", linkInstruments);
+    formData.append("linkYoutube", linkYoutube);
     formData.append("chords", chordsContent);
     formData.append("lyrics", lyricsContent);
     formData.append("chordsKey", praiseKeyChord);
@@ -398,6 +409,16 @@ export default function PraiseSettings() {
         formData.get("linkDriveFolder") !== praiseData.linkDriveFolder)
     ) {
       changedValues.push("link of instruments Drive");
+    }
+
+    if (
+      (formData.get("linkYoutube") === "" &&
+        praiseData.linkYoutube &&
+        praiseData.linkYoutube.length > 6) ||
+      (formData.get("linkYoutube") !== "" &&
+        formData.get("linkYoutube") !== praiseData.linkYoutube)
+    ) {
+      changedValues.push("link Youtube");
     }
 
     if (praiseData.chords !== formData.get("chords"))
@@ -1016,6 +1037,23 @@ export default function PraiseSettings() {
                 id="outlined-basic"
                 variant="outlined"
                 onChange={handleChangeLinkInstruments}
+              />
+            </Box>
+          </div>
+          <br></br>
+
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Youtube Video Link:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={linkYoutube}
+                id="outlined-basic"
+                variant="outlined"
+                onChange={handleChangeLinkYoutube}
               />
             </Box>
           </div>

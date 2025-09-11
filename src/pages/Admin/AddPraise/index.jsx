@@ -87,6 +87,7 @@ export default function AddPraise() {
   const [errorMessageFile, setErrorMessageFile] = useState("");
   const [displayFormError, setDisplayFormError] = useState(false);
   const [linkInstruments, setLinkInstruments] = useState("");
+  const [linkYoutube, setLinkYoutube] = useState("");
   const [lyricsContent, setLyricsContent] = useState("");
   const [chordsContent, setChordsContent] = useState("");
   const [praiseKeyChord, setPraiseKeyChord] = useState("");
@@ -146,6 +147,10 @@ export default function AddPraise() {
     setLinkInstruments(event.target.value);
   };
 
+  const handleChangeLinkYoutube = (event) => {
+    setLinkYoutube(event.target.value);
+  };
+
   const handleChangePraiseTheme = (event) => {
     setPraiseTheme(event.target.value);
   };
@@ -196,6 +201,7 @@ export default function AddPraise() {
       formData.append("englishSongBookNumber", englishSongBookNumber);
       formData.append("englishTitle", englishTitle);
       formData.append("linkDriveFolder", linkInstruments);
+      formData.append("linkYoutube", linkYoutube);
       formData.append("chords", chordsContent);
       formData.append("lyrics", lyricsContent);
       formData.append("chordsKey", praiseKeyChord);
@@ -288,6 +294,7 @@ export default function AddPraise() {
 
     if (formData.get("linkDriveFolder"))
       changedValues.push("link of instruments Drive");
+    if (formData.get("linkYoutube")) changedValues.push("link Youtube");
     if (formData.get("chords")) changedValues.push("text Chords");
     if (formData.get("lyrics")) changedValues.push("text Lyrics");
     if (formData.get("chordsKey")) changedValues.push("chords key");
@@ -892,6 +899,23 @@ export default function AddPraise() {
                 id="outlined-basic"
                 variant="outlined"
                 onChange={handleChangeLinkInstruments}
+              />
+            </Box>
+          </div>
+          <br></br>
+
+          <div className="data-container">
+            <Typography sx={title} id="modal-modal-title" component="h2">
+              Youtube Video Link:
+            </Typography>
+            <Box sx={fieldsContainer}>
+              <TextField
+                sx={nameField}
+                fullWidth
+                value={linkYoutube}
+                id="outlined-basic"
+                variant="outlined"
+                onChange={handleChangeLinkYoutube}
               />
             </Box>
           </div>

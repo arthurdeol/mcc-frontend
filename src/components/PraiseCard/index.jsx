@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, HeartButton, XClose } from "./styles";
 import { Link } from "react-router-dom";
 import { LuType, LuListMusic, LuMusic, LuFolderClosed } from "react-icons/lu";
@@ -6,6 +7,8 @@ import { IoHeartSharp } from "react-icons/io5";
 import { BiEditAlt } from "react-icons/bi";
 import { LuX } from "react-icons/lu";
 import { PiHandWaving } from "react-icons/pi";
+import { FiYoutube } from "react-icons/fi";
+import OpenYoutubeModal from "../OpenYoutubeModal";
 
 export default function PraiseCard({
   praise,
@@ -18,6 +21,10 @@ export default function PraiseCard({
   deletePraiseFromServiceList = null,
   setLastClickedPraise,
 }) {
+  const [openModalYoutube, setOpenModalYoutube] = useState(false);
+  const handleOpenModalYoutube = () => setOpenModalYoutube(true);
+  const handleCloseModalYoutube = () => setOpenModalYoutube(false);
+
   return (
     <Card>
       <div className="text-container">
@@ -89,6 +96,18 @@ export default function PraiseCard({
 
         {praise.englishTitle && (
           <div className="icons-container">
+            {praise.linkYoutube &&
+              praise.linkYoutube !== "null" &&
+              (praise.linkYoutube?.includes("http://") ||
+                praise.linkYoutube?.includes("https://")) && (
+                <div
+                  className="icon-container"
+                  onClick={handleOpenModalYoutube}
+                >
+                  <FiYoutube color={"var(--color-black)"} size={17} />
+                </div>
+              )}
+
             {praise.linkDriveFolder &&
               praise.linkDriveFolder !== "null" &&
               (praise.linkDriveFolder?.includes("http://") ||
@@ -185,6 +204,11 @@ export default function PraiseCard({
             </Link>
           </div>
         )}
+        <OpenYoutubeModal
+          openModalYoutube={openModalYoutube}
+          handleCloseModalYoutube={handleCloseModalYoutube}
+          louvor={praise}
+        />
       </div>
     </Card>
   );
