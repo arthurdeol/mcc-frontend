@@ -616,7 +616,7 @@ export default function AddPraise() {
       const specialTags = {
         "[intro]": { label: "Intro:", color: "red", bold: true },
         "[instrumental]": {
-          label: "Instr",
+          label: "Instrumental",
           color: "black",
           bold: true,
         },
