@@ -81,12 +81,25 @@ export default function MyPraisesList() {
               >
                 {servicePraises.length === 0 && (
                   <div className="praises-not-selected">
+                    <IoHeartSharp color={"var(--color-dark-red)"} size={37} />
                     <div>
-                      <IoHeartSharp color={"var(--color-dark-red)"} size={37} />
+                      <h3>Your praises list is empty:</h3>
+                      <p>You haven't selected any praises yet! </p>
                       <p>
-                        You have no praises songs selected yet! <br /> You can
-                        add praises songs clicking in the little hearts...
+                        You can add praises to your list by clicking on the
+                        little hearts.
                       </p>
+                      <p> After that, you'll be able to share your list too.</p>
+                      {/* <p
+                        style={{
+                          marginTop: "1rem",
+                          color: "var(--color-dark-gray)",
+                          fontSize: "0.7rem",
+                        }}
+                      >
+                        Obs.: if you want to open your list in other device,
+                        click on the button to share it and save the link!
+                      </p> */}
                     </div>
                   </div>
                 )}

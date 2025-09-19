@@ -59,17 +59,22 @@ export const ContainerServicePraiseList = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    // height: 80%;
     width: 100%;
     color: var(--color-black);
     padding: 7% 0 4%;
 
     div {
       display: flex;
+      flex-direction: column;
     }
 
+    h3,
     p {
       margin-left: 20px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
     }
   }
 
@@ -140,6 +145,23 @@ export const ContainerServicePraiseList = styled.div`
       p {
         margin-top: 10px;
         text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 280px) {
+    .praises-not-selected {
+      flex-direction: column;
+      text-align: center;
+      padding: 30% 8% 15%;
+
+      div {
+        margin-top: 20px;
+      }
+
+      h3,
+      p {
+        margin-left: 0;
       }
     }
   }
