@@ -138,7 +138,7 @@ export const Card = styled.div`
     }
     .theme-tag,
     .theme-tag-cia {
-      font-size: 0.4rem;
+      font-size: 0.43rem;
     }
   }
 
