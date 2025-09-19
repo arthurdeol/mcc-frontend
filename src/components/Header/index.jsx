@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  LuType,
-  LuListMusic,
-  LuMusic,
-  LuShare2,
-  LuFolderClosed,
-} from "react-icons/lu";
+import { LuType, LuMusic, LuShare2, LuFolderClosed } from "react-icons/lu";
+import { LiaGuitarSolid } from "react-icons/lia";
 import { FiYoutube } from "react-icons/fi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiListHeart, PiHandWaving } from "react-icons/pi";
@@ -159,11 +154,11 @@ const Header = ({
               className="icon-container"
               onClick={() => setActiveTab("chords", louvor)}
             >
-              <LuListMusic color={"var(--color-black)"} size={19} />
+              <LiaGuitarSolid color={"var(--color-black)"} size={22} />
             </div>
           ) : (
             <div className="icon-container">
-              <LuListMusic color={"var(--color-gray-2)"} size={19} />
+              <LiaGuitarSolid color={"var(--color-gray-2)"} size={22} />
             </div>
           )}
         </div>

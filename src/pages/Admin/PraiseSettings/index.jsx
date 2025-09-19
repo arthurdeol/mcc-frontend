@@ -21,7 +21,8 @@ import TableFiles from "../../../components/TableFiles";
 import TableSymbols from "../../../components/TablePraiseSymbols";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { LuType, LuListMusic, LuMusic, LuFolderClosed } from "react-icons/lu";
+import { LuType, LuMusic, LuFolderClosed } from "react-icons/lu";
+import { LiaGuitarSolid } from "react-icons/lia";
 import { PiHandWaving } from "react-icons/pi";
 import { FiColumns } from "react-icons/fi";
 import {
@@ -1365,11 +1366,11 @@ export default function PraiseSettings() {
                   className="icon-container"
                   onClick={() => setActiveTab("chords")}
                 >
-                  <LuListMusic color={"var(--color-black)"} size={19} />
+                  <LiaGuitarSolid color={"var(--color-black)"} size={22} />
                 </div>
               ) : (
                 <div className="icon-container">
-                  <LuListMusic color={"var(--color-gray-2)"} size={19} />
+                  <LiaGuitarSolid color={"var(--color-gray-2)"} size={22} />
                 </div>
               )}
             </div>

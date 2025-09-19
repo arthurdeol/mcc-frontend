@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Card, HeartButton, XClose } from "./styles";
 import { Link } from "react-router-dom";
-import { LuType, LuListMusic, LuMusic, LuFolderClosed } from "react-icons/lu";
+import { LuType, LuMusic, LuFolderClosed } from "react-icons/lu";
+import { LiaGuitarSolid } from "react-icons/lia";
 import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
 import { BiEditAlt } from "react-icons/bi";
@@ -192,14 +193,14 @@ export default function PraiseCard({
               }
               className="icon-container"
             >
-              <LuListMusic
+              <LiaGuitarSolid
                 color={
                   (praise.flagChords && praise.chords) ||
                   (!praise.flagChords && praise.linkChords)
                     ? "var(--color-black)"
                     : "var(--color-gray-2)"
                 }
-                size={19}
+                size={22}
               />
             </Link>
           </div>
