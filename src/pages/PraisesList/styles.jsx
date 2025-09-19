@@ -19,6 +19,7 @@ export const ContainerPraisesList = styled.div`
     width: 80%;
     overflow-x: hidden;
     padding-top: 4.5rem;
+    padding-bottom: 0rem;
   }
 
   hr {
@@ -99,6 +100,7 @@ export const ContainerPraisesList = styled.div`
       border-radius: 0;
       box-shadow: none;
       padding-top: 4.2rem;
+      padding-bottom: 4rem;
     }
 
     .praises-container {
