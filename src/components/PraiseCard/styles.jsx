@@ -132,6 +132,14 @@ export const Card = styled.div`
     .edit-button {
       right: 5px;
     }
+
+    .theme-tag-container {
+      margin-top: 7px;
+    }
+    .theme-tag,
+    .theme-tag-cia {
+      font-size: 0.4rem;
+    }
   }
 
   @media (max-width: 425px) {
@@ -142,10 +150,6 @@ export const Card = styled.div`
 
     .praise-title-pt {
       font-size: 0.8rem;
-    }
-
-    .theme-tag {
-      font-size: 0.45rem;
     }
 
     .icon-container {
