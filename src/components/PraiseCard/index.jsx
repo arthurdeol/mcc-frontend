@@ -97,72 +97,61 @@ export default function PraiseCard({
 
         {praise.englishTitle && (
           <div className="icons-container">
-            {praise.linkYoutube &&
-              praise.linkYoutube !== "null" &&
-              (praise.linkYoutube?.includes("http://") ||
-                praise.linkYoutube?.includes("https://")) && (
-                <div
-                  className="icon-container"
-                  onClick={handleOpenModalYoutube}
-                >
-                  <FiYoutube color={"var(--color-black)"} size={17} />
-                </div>
-              )}
-
-            {praise.linkDriveFolder &&
-              praise.linkDriveFolder !== "null" &&
-              (praise.linkDriveFolder?.includes("http://") ||
-                praise.linkDriveFolder?.includes("https://")) && (
-                <a
-                  href={praise.linkDriveFolder}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="icon-container">
-                    <LuFolderClosed color={"var(--color-black)"} size={17} />
-                  </div>
-                </a>
-              )}
-
-            {praise.containsInCiasSongBook && (
-              <Link
-                onClick={() => setLastClickedPraise(praise.songBookMapId)}
-                to={
-                  praise.linkGestures
-                    ? `/praise/${praise.songBookMapId}/gestures`
-                    : null
-                }
-                className="icon-container"
-              >
-                <PiHandWaving
-                  color={
-                    praise.linkGestures
-                      ? "var(--color-black)"
-                      : "var(--color-gray-2)"
-                  }
-                  size={17}
-                />
-              </Link>
-            )}
-
-            <Link
-              onClick={() => setLastClickedPraise(praise.songBookMapId)}
-              to={
-                praise.linkSheetMusic
-                  ? `/praise/${praise.songBookMapId}/musicSheet`
-                  : null
-              }
-              className="icon-container"
+            <div
+              style={{
+                borderRight: "1px solid var(--color-light-gray)",
+                marginRight: "7px",
+                paddingRight: "4px",
+                display: "flex",
+              }}
             >
-              <LuMusic
-                color={
-                  praise.linkSheetMusic
-                    ? "var(--color-black)"
-                    : "var(--color-gray-2)"
-                }
-                size={17}
-              />
-            </Link>
+              {praise.linkYoutube &&
+                praise.linkYoutube !== "null" &&
+                (praise.linkYoutube?.includes("http://") ||
+                  praise.linkYoutube?.includes("https://")) && (
+                  <div
+                    className="icon-container"
+                    onClick={handleOpenModalYoutube}
+                  >
+                    <FiYoutube color={"var(--color-black)"} size={17} />
+                  </div>
+                )}
+
+              {praise.linkDriveFolder &&
+                praise.linkDriveFolder !== "null" &&
+                (praise.linkDriveFolder?.includes("http://") ||
+                  praise.linkDriveFolder?.includes("https://")) && (
+                  <a
+                    href={praise.linkDriveFolder}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="icon-container">
+                      <LuFolderClosed color={"var(--color-black)"} size={17} />
+                    </div>
+                  </a>
+                )}
+
+              {praise.containsInCiasSongBook && praise.linkGestures && (
+                <Link
+                  onClick={() => setLastClickedPraise(praise.songBookMapId)}
+                  to={`/praise/${praise.songBookMapId}/gestures`}
+                  className="icon-container"
+                >
+                  <PiHandWaving color={"var(--color-black)"} size={17} />
+                </Link>
+              )}
+
+              {praise.linkSheetMusic && (
+                <Link
+                  onClick={() => setLastClickedPraise(praise.songBookMapId)}
+                  to={`/praise/${praise.songBookMapId}/musicSheet`}
+                  className="icon-container"
+                >
+                  <LuMusic color={"var(--color-black)"} size={17} />
+                </Link>
+              )}
+            </div>
 
             <Link
               onClick={() => setLastClickedPraise(praise.songBookMapId)}

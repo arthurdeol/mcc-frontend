@@ -80,59 +80,59 @@ const Header = ({
 
       {isPathPraise && (
         <div className="icons-container">
-          {louvor.linkYoutube &&
-            louvor.linkYoutube !== "null" &&
-            (louvor.linkYoutube?.includes("http://") ||
-              louvor.linkYoutube?.includes("https://")) && (
-              <div className="icon-container" onClick={handleOpenModalYoutube}>
-                <FiYoutube color={"var(--color-black)"} size={20} />
+          <div
+            style={{
+              borderRight: "1px solid var(--color-light-gray)",
+              marginRight: "7px",
+              paddingRight: "4px",
+              display: "flex",
+            }}
+          >
+            {louvor.linkYoutube &&
+              louvor.linkYoutube !== "null" &&
+              (louvor.linkYoutube?.includes("http://") ||
+                louvor.linkYoutube?.includes("https://")) && (
+                <div
+                  className="icon-container"
+                  onClick={handleOpenModalYoutube}
+                >
+                  <FiYoutube color={"var(--color-black)"} size={20} />
+                </div>
+              )}
+
+            {louvor.linkDriveFolder &&
+              louvor.linkDriveFolder !== "null" &&
+              (louvor.linkDriveFolder?.includes("http://") ||
+                louvor.linkDriveFolder?.includes("https://")) && (
+                <a
+                  href={louvor.linkDriveFolder}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="icon-container">
+                    <LuFolderClosed color={"var(--color-black)"} size={18} />
+                  </div>
+                </a>
+              )}
+
+            {louvor.containsInCiasSongBook && louvor.linkGestures && (
+              <div
+                className="icon-container"
+                onClick={() => setActiveTab("gestures", louvor)}
+              >
+                <PiHandWaving color={"var(--color-black)"} size={19} />
               </div>
             )}
 
-          {louvor.linkDriveFolder &&
-            louvor.linkDriveFolder !== "null" &&
-            (louvor.linkDriveFolder?.includes("http://") ||
-              louvor.linkDriveFolder?.includes("https://")) && (
-              <a
-                href={louvor.linkDriveFolder}
-                target="_blank"
-                rel="noopener noreferrer"
+            {louvor.linkSheetMusic && (
+              <div
+                className="icon-container"
+                onClick={() => setActiveTab("musicSheet", louvor)}
               >
-                <div className="icon-container">
-                  <LuFolderClosed color={"var(--color-black)"} size={18} />
-                </div>
-              </a>
+                <LuMusic color={"var(--color-black)"} size={17} />
+              </div>
             )}
-
-          {louvor.containsInCiasSongBook && (
-            <>
-              {louvor.linkGestures ? (
-                <div
-                  className="icon-container"
-                  onClick={() => setActiveTab("gestures", louvor)}
-                >
-                  <PiHandWaving color={"var(--color-black)"} size={19} />
-                </div>
-              ) : (
-                <div className="icon-container">
-                  <PiHandWaving color={"var(--color-gray-2)"} size={19} />
-                </div>
-              )}
-            </>
-          )}
-
-          {louvor.linkSheetMusic ? (
-            <div
-              className="icon-container"
-              onClick={() => setActiveTab("musicSheet", louvor)}
-            >
-              <LuMusic color={"var(--color-black)"} size={17} />
-            </div>
-          ) : (
-            <div className="icon-container">
-              <LuMusic color={"var(--color-gray-2)"} size={17} />
-            </div>
-          )}
+          </div>
 
           {(louvor.flagLyrics && louvor.lyrics) ||
           (!louvor.flagLyrics && louvor.linkPdfLyrics) ? (
