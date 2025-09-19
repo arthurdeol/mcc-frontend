@@ -39,7 +39,7 @@ export const Card = styled.div`
   }
 
   .theme-tag {
-    background: var(--color-light-gray-1);
+    background: var(--color-light-gray-0);
     border: 1px solid var(--color-light-gray);
     color: var(--color-dark-gray);
     padding: 1px 7px;
