@@ -117,7 +117,8 @@ export const Container = styled.div`
   @media (max-width: 570px) {
     .praise-settings-title {
       text-align: right;
-      padding-right: 45px;
+      padding-right: 80px;
+      font-size: 1.1rem;
     }
   }
 
@@ -145,7 +146,6 @@ export const Container = styled.div`
 
   @media (max-width: 425px) {
     .praise-settings-title {
-      font-size: 1.2rem;
       padding-right: 55px;
     }
     img {
