@@ -134,7 +134,8 @@ export default function PraiseSettings() {
   const [praiseChordsSecondPart, setPraiseChordsSecondPart] = useState("");
   const [praiseLyricsFirstPart, setPraiseLyricsFirstPart] = useState("");
   const [praiseLyricsSecondPart, setPraiseLyricsSecondPart] = useState("");
-  const [splitText, setSplitText] = useState(false);
+  const [splitTextLyrics, setSplitTextLyrics] = useState(false);
+  const [splitTextChords, setSplitTextChords] = useState(false);
   const [constainsBreakLyrics, setContainsBreakLyrics] = useState(false);
   const [constainsBreakChords, setContainsBreakChords] = useState(false);
 
@@ -1100,7 +1101,7 @@ export default function PraiseSettings() {
             {constainsBreakLyrics && (
               <div
                 className="button-to-split"
-                onClick={() => setSplitText(!splitText)}
+                onClick={() => setSplitTextLyrics(!splitTextLyrics)}
               >
                 <FiColumns size={20} color="var(--color-black)" />
               </div>
@@ -1137,7 +1138,9 @@ export default function PraiseSettings() {
                       {portugueseTitle}
                     </h3>
                   )}
-                  <div className={splitText ? "praise-lines-container" : ""}>
+                  <div
+                    className={splitTextLyrics ? "praise-lines-container" : ""}
+                  >
                     <div className="praise-lines-lyrics">
                       {processLyrics(praiseLyricsFirstPart)}
                     </div>
@@ -1227,7 +1230,7 @@ export default function PraiseSettings() {
               {constainsBreakChords && (
                 <div
                   className="button-to-split"
-                  onClick={() => setSplitText(!splitText)}
+                  onClick={() => setSplitTextChords(!splitTextChords)}
                 >
                   <FiColumns size={20} color="var(--color-black)" />
                 </div>
@@ -1268,10 +1271,12 @@ export default function PraiseSettings() {
                     </h3>
                   )}
 
-                  <div className={splitText ? "praise-lines-container" : ""}>
+                  <div
+                    className={splitTextChords ? "praise-lines-container" : ""}
+                  >
                     <div
                       className={
-                        splitText
+                        splitTextChords
                           ? "praise-lines-1"
                           : "praise-lines-not-splitted-1"
                       }
@@ -1281,7 +1286,7 @@ export default function PraiseSettings() {
                     {constainsBreakChords && (
                       <div
                         className={
-                          splitText
+                          splitTextChords
                             ? "praise-lines-2"
                             : "praise-lines-not-splitted-2"
                         }
