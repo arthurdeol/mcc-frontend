@@ -53,6 +53,7 @@ export const ContainerPraise = styled.div`
     margin-top: 1.5rem;
     font-family: monospace;
     font-weight: normal;
+    width: 550px;
   }
 
   .praise-lines-2,
@@ -372,6 +373,11 @@ export const ContainerPraise = styled.div`
     .button-change-key {
       width: 25px;
       height: 25px;
+    }
+
+    .praise-lines-1,
+    .praise-lines-not-splitted-1 {
+      width: fit-content;
     }
   }
 
