@@ -27,6 +27,7 @@ export default function FilterModal({
 }) {
   const [formValue, setFormValue] = useState({
     containsInCiasSongBook: false,
+    containsVideo: false,
     pleadingTheme: false,
     chorusesTheme: false,
     comfortAndEncouragementTheme: false,
@@ -41,6 +42,7 @@ export default function FilterModal({
 
   const {
     containsInCiasSongBook,
+    containsVideo,
     pleadingTheme,
     chorusesTheme,
     comfortAndEncouragementTheme,
@@ -107,6 +109,7 @@ export default function FilterModal({
   function cleanFilter() {
     setFormValue({
       containsInCiasSongBook: false,
+      containsVideo: false,
       pleadingTheme: false,
       chorusesTheme: false,
       comfortAndEncouragementTheme: false,
@@ -148,6 +151,18 @@ export default function FilterModal({
                 />
               }
               label="CIA's"
+            />
+
+            <FormControlLabel
+              control={
+                <Checkbox
+                  sx={checked}
+                  checked={containsVideo}
+                  onChange={handleChange}
+                  name="containsVideo"
+                />
+              }
+              label="With Video"
             />
 
             <Typography sx={themeTitle}>Theme:</Typography>

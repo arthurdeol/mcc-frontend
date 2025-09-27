@@ -137,48 +137,42 @@ export default function MainFilter({
     let order1 = [];
     let order2 = [];
 
-    if (formValue.containsInCiasSongBook) {
-      if (formValue.containsInCiasSongBook && themesApplied.length > 0) {
-        for (let i = 0; i < louvores.length; i++) {
-          for (let j = 0; j < themesApplied.length; j++) {
-            if (
-              louvores[i].theme === themesApplied[j] &&
-              louvores[i].containsInCiasSongBook &&
-              louvores[i].englishTitle
-            ) {
-              louvores[i].englishSongBookNumber
-                ? order1.push(louvores[i])
-                : order2.push(louvores[i]);
-            }
-          }
-        }
-        filteredPraises = [...order1, ...order2];
-      } else {
-        for (let i = 0; i < louvores.length; i++) {
-          if (louvores[i].containsInCiasSongBook && louvores[i].englishTitle) {
-            louvores[i].englishSongBookNumber
-              ? order1.push(louvores[i])
-              : order2.push(louvores[i]);
-          }
-        }
-        filteredPraises = [...order1, ...order2];
+    for (let i = 0; i < louvores.length; i++) {
+      let match = true;
+
+      // --- FILTRO CONTAINS IN CIAS ---
+      if (
+        formValue.containsInCiasSongBook &&
+        !louvores[i].containsInCiasSongBook
+      ) {
+        match = false;
       }
-    } else {
-      for (let i = 0; i < louvores.length; i++) {
-        for (let j = 0; j < themesApplied.length; j++) {
-          if (
-            louvores[i].theme === themesApplied[j] &&
-            !louvores[i].containsInCiasSongBook &&
-            louvores[i].englishTitle
-          ) {
-            louvores[i].englishSongBookNumber
-              ? order1.push(louvores[i])
-              : order2.push(louvores[i]);
-          }
+
+      // --- FILTRO CONTAINS VIDEO ---
+      if (formValue.containsVideo && !louvores[i].linkYoutube) {
+        match = false;
+      }
+
+      // --- FILTRO THEMES ---
+      if (
+        themesApplied.length > 0 &&
+        !themesApplied.includes(louvores[i].theme)
+      ) {
+        match = false;
+      }
+
+      // --- SE PASSOU NOS FILTROS ---
+      if (match && louvores[i].englishTitle) {
+        if (louvores[i].englishSongBookNumber) {
+          order1.push(louvores[i]);
+        } else {
+          order2.push(louvores[i]);
         }
       }
-      filteredPraises = [...order1, ...order2];
     }
+
+    filteredPraises = [...order1, ...order2];
+
     if (filteredPraises.length > 0) {
       setComplexFilterApplied(true);
       setFilteredLouvores(filteredPraises);
