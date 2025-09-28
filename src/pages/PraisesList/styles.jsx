@@ -39,7 +39,8 @@ export const ContainerPraisesList = styled.div`
     margin-top: 8rem;
   }
 
-  .scroll-to-top {
+  .scroll-to-top,
+  .scroll-to-bottom {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -52,13 +53,13 @@ export const ContainerPraisesList = styled.div`
     align-items: center;
     border: 1px solid var(--color-light-gray);
     cursor: pointer;
-    background-color: var(--color-background-white);
+    background-color: var(--color-dark-red);
     padding: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
 
     &:hover {
       border: 1px solid var(--color-dark-gray);
-      background: var(--color-light-gray-2);
+      background: var(--color-dark-gray);
     }
   }
 
@@ -87,7 +88,8 @@ export const ContainerPraisesList = styled.div`
       padding: 35% 0;
     }
 
-    .scroll-to-top {
+    .scroll-to-top,
+    .scroll-to-bottom {
       right: 1%;
       bottom: 1%;
     }

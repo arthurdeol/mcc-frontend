@@ -7,9 +7,13 @@ import MainFilter from "../../components/MainFilter";
 import PraiseNotFound from "../../components/PraiseNotFound";
 import ErrorDisplay from "../../components/ErrorDisplay";
 import PraiseCard from "../../components/PraiseCard";
-import { IoArrowUp } from "react-icons/io5";
+import { IoArrowUp, IoArrowDown } from "react-icons/io5";
 
 const PraisesList = () => {
+  const [showUpButton, setShowUpButton] = useState(false);
+  const [showDownButton, setShowDownButton] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const [newSelection, setNewSelection] = useState(false);
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
@@ -100,6 +104,31 @@ const PraisesList = () => {
     }
   }, [louvores, newSelection]);
 
+  useEffect(() => {
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+
+      // Mostrar botão de subir (⬆️) quando rolar para baixo
+      if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        setShowUpButton(true);
+        setShowDownButton(false);
+      }
+      // Mostrar botão de descer (⬇️) quando rolar para cima
+      else if (currentScrollY < lastScrollY && currentScrollY > 200) {
+        setShowDownButton(true);
+        setShowUpButton(false);
+      } else {
+        setShowUpButton(false);
+        setShowDownButton(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   function selectPraise(praise) {
     setServicePraises([...servicePraises, praise]);
     setLastClickedPraise(praise.songBookMapId);
@@ -124,6 +153,13 @@ const PraisesList = () => {
       behavior: "smooth",
     });
     setLastClickedPraise(filteredLouvores[0].songBookMapId);
+  }
+
+  function scrollToBottomOfList() {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
   }
 
   return (
@@ -180,9 +216,17 @@ const PraisesList = () => {
         </div>
       </div>
 
-      <button className="scroll-to-top" onClick={() => scrollToTopOfList()}>
-        <IoArrowUp color={"var(--color-dark-gray-2)"} size={22} />
-      </button>
+      {showUpButton && (
+        <button className="scroll-to-top" onClick={scrollToTopOfList}>
+          <IoArrowUp color={"var(--color-white)"} size={22} />
+        </button>
+      )}
+
+      {showDownButton && (
+        <button className="scroll-to-bottom" onClick={scrollToBottomOfList}>
+          <IoArrowDown color={"var(--color-white)"} size={22} />
+        </button>
+      )}
     </ContainerPraisesList>
   );
 };
