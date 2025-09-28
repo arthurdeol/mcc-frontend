@@ -195,7 +195,14 @@ export const Container = styled.div`
     overflow-x: auto;
     background: var(--color-background-white);
     width: 100%;
-    //display: none;
+  }
+
+  .praise-container-chords-not-splitted {
+    display: flex;
+    justify-self: center;
+    overflow-x: auto;
+    background: var(--color-background-white);
+    max-width: 500px;
   }
 
   .praise-main {

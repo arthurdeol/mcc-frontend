@@ -1238,7 +1238,11 @@ export default function PraiseSettings() {
             </div>
             {/* --------------------- CHORDS: display example ----------------------------------- */}
             {chordsContent && (
-              <div className="praise-container">
+              <div
+                className={
+                  splitTextChords ? "" : "praise-container-chords-not-splitted"
+                }
+              >
                 <div className="praise-main">
                   {englishTitle.includes("(") ? (
                     <>
