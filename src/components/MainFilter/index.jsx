@@ -26,23 +26,23 @@ export default function MainFilter({
     return especialChar.normalize("NFD").replace(/[^a-zA-Z0-9\s]/g, "");
   }
 
-  // Restaurar filtros quando voltar para tela
   useEffect(() => {
-    const savedFilters = localStorage.getItem("activeFilters");
-    if (savedFilters) {
-      const parsed = JSON.parse(savedFilters);
-      if (parsed.length > 0) {
-        let formValue = {
-          containsInCiasSongBook: parsed.includes("Cias Songbook"),
-          containsVideo: parsed.includes("Video"),
-        };
-        let themesApplied = parsed.filter(
-          (f) => f !== "Cias Songbook" && f !== "Video"
-        );
+    const savedState = localStorage.getItem("complexFilterState");
+    if (savedState) {
+      try {
+        const { formValue, themesApplied, applied } = JSON.parse(savedState);
+
+        // aplica de fato os filtros
         setComplexFilter(formValue, themesApplied);
+
+        // restaura as tags visuais
+        if (applied && applied.length > 0) {
+          setActiveFilters(applied);
+        }
+      } catch (e) {
+        console.error("Erro ao restaurar filtros:", e);
       }
     }
-    // eslint-disable-next-line
   }, []);
 
   // Sempre que activeFilters mudar, salva no localStorage

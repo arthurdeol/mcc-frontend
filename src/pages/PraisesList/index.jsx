@@ -92,10 +92,17 @@ const PraisesList = () => {
             let match = true;
 
             if (
+              !formValue.containsInCiasSongBook &&
+              data[i].containsInCiasSongBook
+            ) {
+              match = false;
+            }
+            if (
               formValue.containsInCiasSongBook &&
               !data[i].containsInCiasSongBook
-            )
+            ) {
               match = false;
+            }
             if (formValue.containsVideo && !data[i].linkYoutube) match = false;
 
             if (
