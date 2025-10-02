@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "./styles";
 import { LuSettings2 } from "react-icons/lu";
 import { PiPlusBold } from "react-icons/pi";
+import { IoClose } from "react-icons/io5";
 import FilterModal from "../../components/FilterModal";
 import { useNavigate } from "react-router-dom";
 
@@ -11,11 +12,12 @@ export default function MainFilter({
   setFilteredLouvores,
   complexFilterApplied,
   setComplexFilterApplied,
-  setMainFilterApplied,
 }) {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [eventValue, setEventValue] = useState("");
+  const [activeFilters, setActiveFilters] = useState([]); // filtros ativos do modal
+
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
   const navPath = window.location.pathname?.toString();
@@ -23,6 +25,30 @@ export default function MainFilter({
   function especialCharMask(especialChar) {
     return especialChar.normalize("NFD").replace(/[^a-zA-Z0-9\s]/g, "");
   }
+
+  // Restaurar filtros quando voltar para tela
+  useEffect(() => {
+    const savedFilters = localStorage.getItem("activeFilters");
+    if (savedFilters) {
+      const parsed = JSON.parse(savedFilters);
+      if (parsed.length > 0) {
+        let formValue = {
+          containsInCiasSongBook: parsed.includes("Cias Songbook"),
+          containsVideo: parsed.includes("Video"),
+        };
+        let themesApplied = parsed.filter(
+          (f) => f !== "Cias Songbook" && f !== "Video"
+        );
+        setComplexFilter(formValue, themesApplied);
+      }
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  // Sempre que activeFilters mudar, salva no localStorage
+  useEffect(() => {
+    localStorage.setItem("activeFilters", JSON.stringify(activeFilters));
+  }, [activeFilters]);
 
   useEffect(() => {
     if (!complexFilterApplied || eventValue !== "") {
@@ -49,10 +75,11 @@ export default function MainFilter({
       const valueSubstring = eventValue
         .toString()
         .toLowerCase()
-        .substring(2, 0);
+        .substring(0, 2);
       const valueMaskSubstring = especialCharMask(
-        value.toString().toLowerCase().substring(2, 0)
+        value.toString().toLowerCase().substring(0, 2)
       );
+
       if (valueSubstring === "a-" || valueSubstring === "b-") {
         filtered = louvores.filter((louvor) =>
           louvor.englishSongBookNumber
@@ -60,24 +87,26 @@ export default function MainFilter({
             .includes(eventValue.toString().toLowerCase())
         );
       } else if (
-        valueMaskSubstring === "a1" ||
-        valueMaskSubstring === "a2" ||
-        valueMaskSubstring === "a3" ||
-        valueMaskSubstring === "a4" ||
-        valueMaskSubstring === "a5" ||
-        valueMaskSubstring === "a6" ||
-        valueMaskSubstring === "a7" ||
-        valueMaskSubstring === "a8" ||
-        valueMaskSubstring === "a9" ||
-        valueMaskSubstring === "b1" ||
-        valueMaskSubstring === "b2" ||
-        valueMaskSubstring === "b3" ||
-        valueMaskSubstring === "b4" ||
-        valueMaskSubstring === "b5" ||
-        valueMaskSubstring === "b6" ||
-        valueMaskSubstring === "b7" ||
-        valueMaskSubstring === "b8" ||
-        valueMaskSubstring === "b9"
+        [
+          "a1",
+          "a2",
+          "a3",
+          "a4",
+          "a5",
+          "a6",
+          "a7",
+          "a8",
+          "a9",
+          "b1",
+          "b2",
+          "b3",
+          "b4",
+          "b5",
+          "b6",
+          "b7",
+          "b8",
+          "b9",
+        ].includes(valueMaskSubstring)
       ) {
         filtered = louvores.filter(
           (louvor) =>
@@ -127,59 +156,76 @@ export default function MainFilter({
         ...filteredEnSongWithoutNumber,
         ...filteredPtPraises,
       ]);
-      setMainFilterApplied(true);
     }
   }
 
+  // Função que aplica filtros do modal
   function setComplexFilter(formValue, themesApplied) {
-    setEventValue("");
-    let filteredPraises = [];
+    setEventValue(""); // limpa search
     let order1 = [];
     let order2 = [];
+    let applied = [];
 
     for (let i = 0; i < louvores.length; i++) {
+      const louvor = louvores[i];
       let match = true;
 
-      // --- FILTRO CONTAINS IN CIAS ---
-      if (
-        formValue.containsInCiasSongBook &&
-        !louvores[i].containsInCiasSongBook
-      ) {
+      if (formValue.containsVideo && !louvor.linkYoutube) match = false;
+      if (themesApplied.length > 0 && !themesApplied.includes(louvor.theme)) {
         match = false;
       }
 
-      // --- FILTRO CONTAINS VIDEO ---
-      if (formValue.containsVideo && !louvores[i].linkYoutube) {
+      // Regra CIA’s
+      if (!formValue.containsInCiasSongBook && louvor.containsInCiasSongBook) {
+        match = false;
+      }
+      if (formValue.containsInCiasSongBook && !louvor.containsInCiasSongBook) {
         match = false;
       }
 
-      // --- FILTRO THEMES ---
-      if (
-        themesApplied.length > 0 &&
-        !themesApplied.includes(louvores[i].theme)
-      ) {
-        match = false;
-      }
-
-      // --- SE PASSOU NOS FILTROS ---
-      if (match && louvores[i].englishTitle) {
-        if (louvores[i].englishSongBookNumber) {
-          order1.push(louvores[i]);
-        } else {
-          order2.push(louvores[i]);
-        }
+      // Se passou em todos os filtros
+      if (match && louvor.englishTitle) {
+        console.log(louvor);
+        if (louvor.englishSongBookNumber) order1.push(louvor);
+        else order2.push(louvor);
       }
     }
 
-    filteredPraises = [...order1, ...order2];
+    const filteredPraises = [...order1, ...order2];
 
-    if (filteredPraises.length > 0) {
-      setComplexFilterApplied(true);
-      setFilteredLouvores(filteredPraises);
-    } else {
-      setComplexFilterApplied(false);
-    }
-    setPraiseNotFound(false);
+    // cria tags apenas para filtros do modal
+    if (formValue.containsInCiasSongBook) applied.push("Cias Songbook");
+    if (formValue.containsVideo) applied.push("Video");
+    if (themesApplied.length > 0) applied.push(...themesApplied);
+
+    setActiveFilters(applied);
+
+    // salva filtros no localStorage **sempre**, mesmo se não houver resultado**
+    localStorage.setItem("activeFilters", JSON.stringify(applied));
+    localStorage.setItem(
+      "complexFilterState",
+      JSON.stringify({ formValue, themesApplied, applied })
+    );
+
+    setFilteredLouvores(filteredPraises);
+    setComplexFilterApplied(filteredPraises.length > 0);
+    setPraiseNotFound(filteredPraises.length === 0);
+  }
+
+  // Recalcula os filtros ativos ao remover uma tag
+  function removeFilterTag(tag) {
+    const updated = activeFilters.filter((f) => f !== tag);
+    setActiveFilters(updated);
+
+    let formValue = {
+      containsInCiasSongBook: updated.includes("Cias Songbook"),
+      containsVideo: updated.includes("Video"),
+    };
+    let themesApplied = updated.filter(
+      (f) => f !== "Cias Songbook" && f !== "Video"
+    );
+
+    setComplexFilter(formValue, themesApplied);
   }
 
   return (
@@ -190,9 +236,11 @@ export default function MainFilter({
           id="filter"
           value={eventValue}
           onChange={(e) => setEventValue(e.target.value)}
-          className="filter"
+          className={`filter ${activeFilters.length > 0 ? "disabled" : ""}`}
           placeholder="Which praise song are you looking for?"
+          disabled={activeFilters.length > 0}
         />
+
         <div className="filter-button" onClick={handleOpen}>
           <LuSettings2 color={"var(--color-black)"} size={17} />
         </div>
@@ -206,11 +254,37 @@ export default function MainFilter({
         )}
       </div>
 
+      {/* TAGS DE FILTROS DO MODAL */}
+      <div className="active-filters-container">
+        <div className="active-filters">
+          {activeFilters.map((filter, index) => (
+            <div
+              key={index}
+              className={`filter-tag ${
+                filter === "Cias Songbook"
+                  ? "cias-tag"
+                  : filter === "Video"
+                  ? "video-tag"
+                  : ""
+              }`}
+            >
+              {filter}
+              <IoClose
+                size={16}
+                style={{ marginLeft: 6, cursor: "pointer" }}
+                onClick={() => removeFilterTag(filter)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
       <FilterModal
         openModal={openModal}
         onCloseModal={handleClose}
         setComplexFilter={setComplexFilter}
         complexFilterApplied={complexFilterApplied}
+        activeFilters={activeFilters}
       />
     </Container>
   );

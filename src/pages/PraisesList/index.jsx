@@ -18,7 +18,6 @@ const PraisesList = () => {
   const [louvores, setLouvores] = useState([]);
   const [filteredLouvores, setFilteredLouvores] = useState([]);
   const [complexFilterApplied, setComplexFilterApplied] = useState(false);
-  const [mainFilterApplied, setMainFilterApplied] = useState(false);
 
   const [servicePraises, setServicePraises] = useState(() => {
     const praisesSelected = localStorage.getItem("servicePraisesList");
@@ -54,35 +53,121 @@ const PraisesList = () => {
   }
 
   useEffect(() => {
+    localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
+  }, [servicePraises]);
+
+  useEffect(() => {
     localStorage.setItem("home", "praisesHome");
     localStorage.setItem("sentServiceListId", "");
-    if (!complexFilterApplied && !mainFilterApplied) {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          data.sort((a, b) => {
-            return naturalCompare(
-              a.englishSongBookNumber,
-              b.englishSongBookNumber
-            );
-          });
-          setLouvores(data);
-          let filteredEnSongWithNumber = data.filter(
-            (praise) => praise.englishTitle && praise.englishSongBookNumber
-          );
-          let filteredEnSongWithoutNumber = data.filter(
-            (praise) => praise.englishTitle && !praise.englishSongBookNumber
-          );
-          setFilteredLouvores([
-            ...filteredEnSongWithNumber,
-            ...filteredEnSongWithoutNumber,
-          ]);
-        })
-        .catch((err) => setDisplayError(true));
-    }
 
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        // Ordena todos os louvores
+        data.sort((a, b) =>
+          naturalCompare(a.englishSongBookNumber, b.englishSongBookNumber)
+        );
+        setLouvores(data);
+
+        let restored = false;
+
+        // Função para aplicar filtros salvos (video, cias e temas)
+        function applyFilters(savedActive) {
+          const formValue = {
+            containsInCiasSongBook: savedActive.includes("Cias Songbook"),
+            containsVideo: savedActive.includes("Video"),
+          };
+          // todos os demais filtros são considerados temas
+          const themesApplied = savedActive.filter(
+            (f) => f !== "Cias Songbook" && f !== "Video"
+          );
+
+          let order1 = [];
+          let order2 = [];
+
+          for (let i = 0; i < data.length; i++) {
+            let match = true;
+
+            if (
+              formValue.containsInCiasSongBook &&
+              !data[i].containsInCiasSongBook
+            )
+              match = false;
+            if (formValue.containsVideo && !data[i].linkYoutube) match = false;
+
+            if (
+              themesApplied.length > 0 &&
+              !themesApplied.includes(data[i].theme)
+            )
+              match = false;
+
+            if (match && data[i].englishTitle) {
+              if (data[i].englishSongBookNumber) order1.push(data[i]);
+              else order2.push(data[i]);
+            }
+          }
+
+          const filtered = [...order1, ...order2];
+          if (filtered.length > 0) {
+            setFilteredLouvores(filtered);
+            setComplexFilterApplied(true);
+            restored = true;
+          }
+
+          // Atualiza estado e localStorage
+          // setActiveFilters(savedActive);
+          localStorage.setItem("activeFilters", JSON.stringify(savedActive));
+        }
+
+        // 🔹 Restaurar filtros
+        const savedComplex = localStorage.getItem("complexFilterState");
+        const savedActive = localStorage.getItem("activeFilters");
+
+        if (savedComplex) {
+          try {
+            const parsed = JSON.parse(savedComplex);
+            const activeFromComplex = [
+              ...(parsed.formValue?.containsInCiasSongBook
+                ? ["Cias Songbook"]
+                : []),
+              ...(parsed.formValue?.containsVideo ? ["Video"] : []),
+              ...(parsed.themesApplied || []),
+            ];
+            applyFilters(activeFromComplex);
+          } catch (e) {
+            console.error("Erro ao parse complexFilterState:", e);
+          }
+        } else if (savedActive) {
+          try {
+            const parsedActive = JSON.parse(savedActive);
+            applyFilters(parsedActive);
+          } catch (e) {
+            console.error("Erro ao parse activeFilters:", e);
+          }
+        }
+
+        // 🔹 Caso nenhum filtro restaurado, lista completa
+        if (!restored) {
+          const withNumber = data.filter(
+            (p) => p.englishTitle && p.englishSongBookNumber
+          );
+          const withoutNumber = data.filter(
+            (p) => p.englishTitle && !p.englishSongBookNumber
+          );
+          setFilteredLouvores([...withNumber, ...withoutNumber]);
+        }
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar louvores:", err);
+        setDisplayError(true);
+      });
+
+    // Persistir servicePraises
     localStorage.setItem("servicePraisesList", JSON.stringify(servicePraises));
-  }, [complexFilterApplied, mainFilterApplied, servicePraises]);
+  }, [servicePraises]);
 
   useEffect(() => {
     const savedPraiseId = localStorage.getItem("praiseIdClicked");
@@ -94,9 +179,16 @@ const PraisesList = () => {
           document.querySelector("header")?.offsetHeight || 0;
         const mainFilterHeight =
           document.querySelector(".search-container")?.offsetHeight || 0;
+        const activeFiltersHeight =
+          document.querySelector(".active-filters-container")?.offsetHeight ||
+          0;
 
         window.scrollTo({
-          top: praiseElement.offsetTop - headerHeight - (mainFilterHeight + 60),
+          top:
+            praiseElement.offsetTop -
+            headerHeight -
+            (mainFilterHeight + 60) -
+            (activeFiltersHeight + 5),
           behavior: "smooth",
         });
         localStorage.removeItem("praiseIdClicked");
@@ -172,7 +264,6 @@ const PraisesList = () => {
           setFilteredLouvores={setFilteredLouvores}
           complexFilterApplied={complexFilterApplied}
           setComplexFilterApplied={setComplexFilterApplied}
-          setMainFilterApplied={setMainFilterApplied}
         />
         <div className="box">
           {displayError && <ErrorDisplay />}

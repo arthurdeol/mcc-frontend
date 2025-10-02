@@ -397,6 +397,8 @@ export const ContainerPraise = styled.div`
 
     .praise-lines-container {
       gap: 0.8rem;
+      display: flex;
+      justify-content: center;
     }
   }
   @media (max-width: 430px) {

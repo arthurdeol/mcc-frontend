@@ -79,6 +79,12 @@ export const ContainerPraisesList = styled.div`
     }
   }
 
+  @media (max-width: 820px) {
+    .praises-container {
+      margin-top: 7rem;
+    }
+  }
+
   @media (max-width: 768px) {
     .box {
       width: 90%;
@@ -106,7 +112,7 @@ export const ContainerPraisesList = styled.div`
     }
 
     .praises-container {
-      margin-top: 5rem;
+      margin-top: 5.2rem;
     }
   }
 `;

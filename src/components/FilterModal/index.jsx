@@ -23,7 +23,7 @@ export default function FilterModal({
   openModal,
   onCloseModal,
   setComplexFilter,
-  complexFilterApplied,
+  activeFilters,
 }) {
   const [formValue, setFormValue] = useState({
     containsInCiasSongBook: false,
@@ -55,11 +55,35 @@ export default function FilterModal({
     praiseTheme,
   } = formValue;
 
+  // 🔹 Atualiza checkboxes ao abrir modal com filtros ativos
   useEffect(() => {
-    if (!complexFilterApplied) {
-      cleanFilter();
+    if (openModal && activeFilters) {
+      setFormValue({
+        containsInCiasSongBook: activeFilters.includes("Cias Songbook"),
+        containsVideo: activeFilters.includes("Video"),
+        pleadingTheme: activeFilters.includes("PLEADING"),
+        chorusesTheme: activeFilters.includes("CHORUSES"),
+        comfortAndEncouragementTheme: activeFilters.includes(
+          "COMFORT AND ENCOURAGEMENT"
+        ),
+        dedicationTheme: activeFilters.includes("DEDICATION"),
+        deathResurrectionAndSalvationTheme: activeFilters.includes(
+          "DEATH, RESURRECTION AND SALVATION"
+        ),
+        eternityAndTheReturnOfJesusTheme: activeFilters.includes(
+          "ETERNITY AND THE RETURN OF JESUS"
+        ),
+        invocationFellowshipTheme: activeFilters.includes(
+          "INVOCATION FELLOWSHIP"
+        ),
+        santificationOutpouringHSTheme: activeFilters.includes(
+          "SANTIFICATION AND OUTPOURING OF THE HOLY SPIRIT"
+        ),
+        praiseGroupTheme: activeFilters.includes("PRAISE GROUP"),
+        praiseTheme: activeFilters.includes("PRAISE"),
+      });
     }
-  }, [complexFilterApplied]);
+  }, [openModal, activeFilters]);
 
   const handleChange = (event) => {
     setFormValue({
@@ -71,36 +95,21 @@ export default function FilterModal({
   function applyFilter() {
     let themesApplied = [];
     if (formValue) {
-      if (formValue.pleadingTheme) {
-        themesApplied.push("PLEADING");
-      }
-      if (formValue.chorusesTheme) {
-        themesApplied.push("CHORUSES");
-      }
-      if (formValue.comfortAndEncouragementTheme) {
+      if (formValue.pleadingTheme) themesApplied.push("PLEADING");
+      if (formValue.chorusesTheme) themesApplied.push("CHORUSES");
+      if (formValue.comfortAndEncouragementTheme)
         themesApplied.push("COMFORT AND ENCOURAGEMENT");
-      }
-      if (formValue.dedicationTheme) {
-        themesApplied.push("DEDICATION");
-      }
-      if (formValue.deathResurrectionAndSalvationTheme) {
+      if (formValue.dedicationTheme) themesApplied.push("DEDICATION");
+      if (formValue.deathResurrectionAndSalvationTheme)
         themesApplied.push("DEATH, RESURRECTION AND SALVATION");
-      }
-      if (formValue.eternityAndTheReturnOfJesusTheme) {
+      if (formValue.eternityAndTheReturnOfJesusTheme)
         themesApplied.push("ETERNITY AND THE RETURN OF JESUS");
-      }
-      if (formValue.invocationFellowshipTheme) {
+      if (formValue.invocationFellowshipTheme)
         themesApplied.push("INVOCATION FELLOWSHIP");
-      }
-      if (formValue.santificationOutpouringHSTheme) {
+      if (formValue.santificationOutpouringHSTheme)
         themesApplied.push("SANTIFICATION AND OUTPOURING OF THE HOLY SPIRIT");
-      }
-      if (formValue.praiseGroupTheme) {
-        themesApplied.push("PRAISE GROUP");
-      }
-      if (formValue.praiseTheme) {
-        themesApplied.push("PRAISE");
-      }
+      if (formValue.praiseGroupTheme) themesApplied.push("PRAISE GROUP");
+      if (formValue.praiseTheme) themesApplied.push("PRAISE");
     }
     onCloseModal();
     setComplexFilter(formValue, themesApplied);
@@ -211,7 +220,6 @@ export default function FilterModal({
               }
               label="Invocation and Fellowship"
             />
-
             <FormControlLabel
               control={
                 <Checkbox
@@ -223,7 +231,6 @@ export default function FilterModal({
               }
               label="Death, Resurrection and Salvation"
             />
-
             <FormControlLabel
               control={
                 <Checkbox
