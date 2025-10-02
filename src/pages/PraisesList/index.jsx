@@ -179,16 +179,9 @@ const PraisesList = () => {
           document.querySelector("header")?.offsetHeight || 0;
         const mainFilterHeight =
           document.querySelector(".search-container")?.offsetHeight || 0;
-        const activeFiltersHeight =
-          document.querySelector(".active-filters-container")?.offsetHeight ||
-          0;
 
         window.scrollTo({
-          top:
-            praiseElement.offsetTop -
-            headerHeight -
-            (mainFilterHeight + 60) -
-            (activeFiltersHeight + 5),
+          top: praiseElement.offsetTop - headerHeight - (mainFilterHeight + 60),
           behavior: "smooth",
         });
         localStorage.removeItem("praiseIdClicked");

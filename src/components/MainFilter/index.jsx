@@ -231,15 +231,43 @@ export default function MainFilter({
   return (
     <Container>
       <div className="search-container">
-        <input
-          type="text"
-          id="filter"
-          value={eventValue}
-          onChange={(e) => setEventValue(e.target.value)}
-          className={`filter ${activeFilters.length > 0 ? "disabled" : ""}`}
-          placeholder="Which praise song are you looking for?"
-          disabled={activeFilters.length > 0}
-        />
+        {/* TAGS DE FILTROS DO MODAL */}
+        {activeFilters.length > 0 && (
+          <div className="active-filters-container">
+            <div className="active-filters">
+              {activeFilters.map((filter, index) => (
+                <div
+                  key={index}
+                  className={`filter-tag ${
+                    filter === "Cias Songbook"
+                      ? "cias-tag"
+                      : filter === "Video"
+                      ? "video-tag"
+                      : ""
+                  }`}
+                >
+                  {filter}
+                  <IoClose
+                    size={16}
+                    style={{ marginLeft: 6, cursor: "pointer" }}
+                    onClick={() => removeFilterTag(filter)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeFilters.length === 0 && (
+          <input
+            type="text"
+            id="filter"
+            value={eventValue}
+            onChange={(e) => setEventValue(e.target.value)}
+            className="filter"
+            placeholder="Which praise song are you looking for?"
+          />
+        )}
 
         <div className="filter-button" onClick={handleOpen}>
           <LuSettings2 color={"var(--color-black)"} size={17} />
@@ -252,31 +280,6 @@ export default function MainFilter({
             <PiPlusBold size={17} />
           </div>
         )}
-      </div>
-
-      {/* TAGS DE FILTROS DO MODAL */}
-      <div className="active-filters-container">
-        <div className="active-filters">
-          {activeFilters.map((filter, index) => (
-            <div
-              key={index}
-              className={`filter-tag ${
-                filter === "Cias Songbook"
-                  ? "cias-tag"
-                  : filter === "Video"
-                  ? "video-tag"
-                  : ""
-              }`}
-            >
-              {filter}
-              <IoClose
-                size={16}
-                style={{ marginLeft: 6, cursor: "pointer" }}
-                onClick={() => removeFilterTag(filter)}
-              />
-            </div>
-          ))}
-        </div>
       </div>
 
       <FilterModal

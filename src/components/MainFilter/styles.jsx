@@ -15,7 +15,7 @@ export const Container = styled.div`
     align-items: center;
     align-self: center;
     width: 94%;
-    padding: 3rem 20px 0;
+    padding: 3rem 20px 2rem;
     font-size: 1rem;
   }
 
@@ -27,16 +27,6 @@ export const Container = styled.div`
     background: #f8f8f8;
     font-size: 1rem;
    );
-  }
-
-  .filter.disabled {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
-    border-color: #eeeeeeff;
-  }
-
-  .filter.disabled::placeholder {
-    color:  #e5e5e5ff;
   }
 
   .filter-button,
@@ -74,11 +64,16 @@ export const Container = styled.div`
   }
 
   .active-filters-container {
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 0.5rem 3rem 1rem;
+    padding: 0 0.5rem;
     overflow-x: auto;
     overflow-y: hidden;
-    height: 44px;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid var(--color-light-gray);
+    background: #f8f8f8;
   }
 
   .active-filters {
@@ -95,6 +90,7 @@ export const Container = styled.div`
     border-radius: 20px;
     padding: 5px 10px;
     font-size: 0.6rem;
+    width: max-content;
   }
 
   .filter-tag.cias-tag {
@@ -111,19 +107,10 @@ export const Container = styled.div`
     width: 90%;
   }
 
-  @media (max-width: 1024px) {
-    .active-filters-container {
-      padding: 0.5rem 2rem 1rem;
-    }
-    .search-container {
-      padding: 3rem 0 0;
-    }
-  }
-
   @media (max-width: 933px) {
     .search-container {
       width: 92%;
-      padding: 2rem 0 0;
+      padding: 2rem 0;
     }
   }
 
@@ -131,30 +118,13 @@ export const Container = styled.div`
     width: 90%;
   }
 
-  @media (max-width: 430px) {
-    .active-filters-container {
-      padding: 0.5rem 0.8rem 1rem;
-    }
-
-    .filter-tag {
-      border-radius: 20px;
-      padding: 0 5px;
-      font-size: 0.5rem;
-    }
-  }
-
   @media (max-width: 480px) {
     width: 100%;
     border-radius: 0;
     margin-top: 4rem;
 
-    .active-filters-container {
-      padding: 0.2rem 0.8rem;
-      height: 1.8rem;
-    }
-
     .search-container {
-      padding: 1.2rem 10px 0;
+      padding: 1.2rem 10px;
       width: 100%;
     }
   }

@@ -81,7 +81,7 @@ export const ContainerPraisesList = styled.div`
 
   @media (max-width: 820px) {
     .praises-container {
-      margin-top: 7rem;
+      margin-top: 6.5rem;
     }
   }
 
@@ -99,6 +99,10 @@ export const ContainerPraisesList = styled.div`
       right: 1%;
       bottom: 1%;
     }
+
+    .praises-container {
+      margin-top: 6.2rem;
+    }
   }
 
   @media (max-width: 480px) {
@@ -112,7 +116,7 @@ export const ContainerPraisesList = styled.div`
     }
 
     .praises-container {
-      margin-top: 5.2rem;
+      margin-top: 5rem;
     }
   }
 `;
