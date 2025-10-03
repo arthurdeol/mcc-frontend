@@ -1,4 +1,4 @@
-import { Container, checked } from "./styles";
+import { Container } from "./styles";
 import Header from "../../../components/Header";
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
@@ -8,8 +8,7 @@ import PraiseNotFound from "../../../components/PraiseNotFound";
 import ErrorDisplay from "../../../components/ErrorDisplay";
 import PraiseCard from "../../../components/PraiseCard";
 import { IoArrowUp } from "react-icons/io5";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import FilterAdmin from "../../../components/FilterAdmin";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
@@ -52,6 +51,10 @@ const PraisesListAdmin = () => {
   const [displayError, setDisplayError] = useState(false);
   const [praiseNotFound, setPraiseNotFound] = useState(false);
   const url = "https://mccapi.up.railway.app/SongBookMap";
+
+  const [openFilterAdmin, setOpenFilterAdmin] = useState(false);
+  const handleOpenFilterAdmin = () => setOpenFilterAdmin(true);
+  const handleCloseFilterAdmin = () => setOpenFilterAdmin(false);
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -267,96 +270,15 @@ const PraisesListAdmin = () => {
                 </div>
               ) : (
                 <>
-                  <div className="checkbox-filters">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={missingChords}
-                          onChange={handleChangeCheckbox}
-                          name="missingChords"
-                        />
-                      }
-                      label="Missing Chords"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={missingLyrics}
-                          onChange={handleChangeCheckbox}
-                          name="missingLyrics"
-                        />
-                      }
-                      label="Missing Lyrics"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={missingMusicSheet}
-                          onChange={handleChangeCheckbox}
-                          name="missingMusicSheet"
-                        />
-                      }
-                      label="Missing Music Sheet"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={missingDriveLink}
-                          onChange={handleChangeCheckbox}
-                          name="missingDriveLink"
-                        />
-                      }
-                      label="Missing Drive Link"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={missingChordsLyricsMusicSheet}
-                          onChange={handleChangeCheckbox}
-                          name="missingChordsLyricsMusicSheet"
-                        />
-                      }
-                      label="Missing Chords, Lyrics and Music Sheet"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={orderPortuguese}
-                          onChange={handleChangeCheckbox}
-                          name="orderPortuguese"
-                        />
-                      }
-                      label="Order By PT Songbook"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={missingGestures}
-                          onChange={handleChangeCheckbox}
-                          name="missingGestures"
-                        />
-                      }
-                      label="CIA's - Missing Gestures"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={checked}
-                          checked={orderCiasByPT}
-                          onChange={handleChangeCheckbox}
-                          name="orderCiasByPT"
-                        />
-                      }
-                      label="CIA's - Order By PT Songbook"
-                    />
+                  <div className="filter-admin-button-container">
+                    <button
+                      onClick={handleOpenFilterAdmin}
+                      className="filter-admin-button"
+                    >
+                      Extra Admin Filters
+                    </button>
                   </div>
+
                   <div className="praises-container">
                     {filteredLouvores.map((louvor, i) => (
                       <div key={i} id={louvor.songBookMapId}>
@@ -379,6 +301,13 @@ const PraisesListAdmin = () => {
       <button className="scroll-to-top" onClick={() => scrollToTopOfList()}>
         <IoArrowUp color={"var(--color-dark-gray-2)"} size={22} />
       </button>
+
+      <FilterAdmin
+        open={openFilterAdmin}
+        handleClose={handleCloseFilterAdmin}
+        checkeds={checkeds}
+        handleChangeCheckbox={handleChangeCheckbox}
+      />
     </Container>
   );
 };

@@ -161,7 +161,7 @@ export default function Praise() {
   function transposeTextChords(text, steps) {
     // const CHORD_REGEX =
     //   /\[([A-G][#b]?(?:m|M|maj7|7|9|11|13|sus4|sus2|dim|aug|add9|6|°|°7|m7|m9|m11|m13|7#9|7b9|7#5|7b5|9#11|13b9|13#11|6\/9)?(?:\(\d+\))?(?:\/[A-G][#b]?)?)\]/g;
-    const CHORD_REGEX = /\[([A-G][#b]?[a-zA-Z0-9#\/°()+]*)\]/g;
+    const CHORD_REGEX = /\[([A-G][#b]?[a-zA-Z0-9#/°()+]*)\]/g;
 
     return text.replace(CHORD_REGEX, (match, chord) => {
       let transposedChord;
@@ -218,7 +218,7 @@ export default function Praise() {
 
       // const regex =
       //   /\[([A-G][#b]?(?:m|M|maj7|7|9|11|13|sus2|sus4|dim|aug|add9|6|°|°7|m7|m9|m11|m13|7#9|7b9|7#5|7b5|9#11|13b9|13#11|6\/9)?(?:\(\d+\))?(?:\/[A-G][#b]?)?)\]/g;
-      const regex = /\[([A-G][#b]?[a-zA-Z0-9#\/°()+]*)\]/g;
+      const regex = /\[([A-G][#b]?[a-zA-Z0-9#/°()+]*)\]/g;
 
       // Extrai acordes da linha e gera a linha de texto sem acordes
       const chordPositions = [];

@@ -43,6 +43,7 @@ export default function MainFilter({
         console.error("Erro ao restaurar filtros:", e);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Sempre que activeFilters mudar, salva no localStorage

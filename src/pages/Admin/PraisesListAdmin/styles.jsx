@@ -60,14 +60,31 @@ export const Container = styled.div`
     }
   }
 
-  .checkbox-filters {
+  .filter-admin-button-container {
+    display: flex;
+    justify-content: flex-end;
     width: 100%;
-    // margin-bottom: 1rem;
+    padding: 0 3.4rem;
+  }
+
+  .filter-admin-button {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--color-light-gray-2);
-    padding-bottom: 1rem;
+    align-items: center;
+    border-radius: 10px;
+    width: fit-content;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: var(--color-white);
+    background: var(--color-dark-gray););
+    border: 1px solid var(--color-light-gray);
+    font-size: 0.9rem;
+
+    &:hover {
+      background: var(--color-light-gray-2);
+      color: var(--color-black);
+      border: 1px solid var(--color-dark-gray);
+    }
   }
 
   @media (max-width: 1300px) {
@@ -77,6 +94,10 @@ export const Container = styled.div`
 
     .praises-container {
       width: 95%;
+    }
+
+    .filter-admin-button-container {
+      padding: 0 2rem;
     }
   }
 
@@ -107,6 +128,10 @@ export const Container = styled.div`
       border-radius: 0;
       box-shadow: none;
       padding-top: 10rem;
+    }
+
+    .filter-admin-button-container {
+      padding: 0 1rem;
     }
   }
 `;
