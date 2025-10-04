@@ -80,6 +80,11 @@ export const Container = styled.div`
     border-radius: 4px 0 0 4px;
   }
 
+  .top-inputs {
+    width: 100%;
+    display: flex;
+  }
+
   @media (max-width: 1024px) {
     width: 100%;
   }
@@ -110,6 +115,12 @@ export const Container = styled.div`
     }
     .list-content {
       width: 88%;
+    }
+
+    .top-inputs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
     }
   }
 `;
@@ -168,33 +179,26 @@ export const XClose = styled.div`
 
 export const inputsContainer = {
   display: "flex",
-  flexDirection: { xs: "column", sm: "row", md: "row", lg: "row" },
+  flexDirection: { xs: "column", sm: "row", md: "column", lg: "column" },
   flexWrap: { xs: "wrap", sm: "wrap", md: "nowrap", lg: "nowrap" },
   width: "100%",
   marginBottom: { xs: "15px", sm: "10px", md: "20px", lg: "20px" },
   padding: "40px 25px 0",
 };
 
-export const churchesSelect = {
-  minWidth: { xs: "40%", sm: "50%", md: "20%", lg: "20%" },
-  marginTop: "8px",
-  marginRight: { xs: "0", sm: "10px", md: "10px", lg: "10px" },
-};
-
 export const dateInput = {
-  width: { xs: "100%", sm: "48%", md: "40%", lg: "40%" },
+  width: { xs: "100%", sm: "48%", md: "40%", lg: "250px" },
 };
 
 export const commentInput = {
   width: "100%",
   marginTop: "8px",
-  marginLeft: { xs: "0", sm: "0", md: "10px", lg: "10px" },
 };
 
 export const userNameInput = {
   width: "100%",
   marginTop: "8px",
-  marginLeft: { xs: "0", sm: "0", md: "10px", lg: "10px" },
+  marginLeft: { xs: "0", sm: "10px", md: "10px", lg: "10px" },
 };
 
 export const title = {

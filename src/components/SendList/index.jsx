@@ -57,17 +57,12 @@ export default function SendList({
 
   const [fillError, setFillError] = useState(false);
   const [comment, setComment] = useState("");
-  const [church, setChurch] = useState("");
   const [userName, setUserName] = useState("");
   const [date, setDate] = useState(dayjs(new Date()));
   const [listIdToShare, setListIdToShare] = useState("");
 
   const handleChangeComment = (event) => {
     setComment(event.target.value);
-  };
-
-  const handleChangeChurch = (event) => {
-    setChurch(event.target.value);
   };
 
   const handleChangeUserName = (event) => {
@@ -81,7 +76,7 @@ export default function SendList({
     const formData = new FormData();
     formData.append("comment", comment);
     formData.append("listDate", date.toJSON());
-    formData.append("church", church);
+    formData.append("church", "");
     formData.append("userName", userName);
 
     if (servicePraises.length > 0) {
@@ -163,65 +158,44 @@ export default function SendList({
         </div>
 
         <Box sx={inputsContainer}>
-          <Box sx={churchesSelect}>
-            <FormControl fullWidth>
-              <InputLabel id="simple-select-label">Church</InputLabel>
-              <Select
-                labelId="simple-select-label"
-                id="simple-select"
-                value={church}
-                label="Church"
-                onChange={handleChangeChurch}
-              >
-                <MenuItem value={"TORONTO"}>Toronto</MenuItem>
-                <MenuItem value={"CALGARY"}>Calgary</MenuItem>
-                <MenuItem value={"VANCOUVER"}>Vancouver</MenuItem>
-                <MenuItem value={"WINNIPEG"}>Winnipeg</MenuItem>
-                <MenuItem value={"FREDERICTON"}>Fredericton</MenuItem>
-                <MenuItem value={"OTTAWA"}>Ottawa</MenuItem>
-                <MenuItem value={"AJAX"}>Ajax</MenuItem>
-                <MenuItem value={"WATERLOO"}>Waterloo</MenuItem>
-                <MenuItem value={"SARNIA"}>Sarnia</MenuItem>
-                <MenuItem value={"QUEBEC"}>Quebec</MenuItem>
-                <MenuItem value={"MONTREAL"}>Montreal</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          <div className="top-inputs">
+            <Box sx={dateInput}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                    slotProps={{
+                      popper: {
+                        sx: dateCalendar,
+                      },
+                    }}
+                    views={["year", "month", "day"]}
+                    label="Date"
+                    value={date}
+                    format={"YYYY/MM/DD"}
+                    onChange={(newDate) => setDate(newDate)}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </Box>
 
-          <Box sx={dateInput}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  slotProps={{
-                    popper: {
-                      sx: dateCalendar,
-                    },
-                  }}
-                  views={["year", "month", "day"]}
-                  label="Date"
-                  value={date}
-                  format={"YYYY/MM/DD"}
-                  onChange={(newDate) => setDate(newDate)}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
-          </Box>
-
-          <Box sx={userNameInput}>
-            <TextField
-              error={fillError}
-              sx={{ width: "100%" }}
-              value={userName}
-              label="Your Name"
-              variant="outlined"
-              required
-              onChange={handleChangeUserName}
-            />
-          </Box>
+            <Box sx={userNameInput}>
+              <TextField
+                error={fillError}
+                sx={{ width: "100%" }}
+                value={userName}
+                label="Your Name"
+                variant="outlined"
+                required
+                onChange={handleChangeUserName}
+              />
+            </Box>
+          </div>
 
           <Box sx={commentInput}>
             <TextField
               sx={{ width: "100%" }}
+              multiline
+              minRows={3}
               value={comment}
               label="Comment"
               variant="outlined"
