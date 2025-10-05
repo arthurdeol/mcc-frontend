@@ -717,7 +717,7 @@ export default function Praise() {
         <div className="file-container">
           <div className="top-right-buttons">
             {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
-            {displayLyrics && constainsBreakLyrics && (
+            {displayLyrics && constainsBreakLyrics && !displayFilesSVGFlag && (
               <div
                 className="button-to-split"
                 onClick={() => setSplitTextLyrics(!splitTextLyrics)}
@@ -725,7 +725,7 @@ export default function Praise() {
                 <FiColumns size={20} color="var(--color-black)" />
               </div>
             )}
-            {displayChords && constainsBreakChords && (
+            {displayChords && constainsBreakChords && !displayFilesSVGFlag && (
               <div
                 className="button-to-split"
                 onClick={() => setSplitTextChords(!splitTextChords)}
