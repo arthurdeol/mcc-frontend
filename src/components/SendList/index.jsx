@@ -194,8 +194,7 @@ export default function SendList({
           <Box sx={commentInput}>
             <TextField
               sx={{ width: "100%" }}
-              multiline
-              minRows={3}
+              maxRows={1}
               value={comment}
               label="Comment"
               variant="outlined"
