@@ -31,6 +31,7 @@ export const style = {
   color: "var(--color-black)",
   p: 4,
   width: { xs: "90%", sm: "70%", md: "50%", lg: "auto" },
+  minWidth: "300px",
 };
 
 export const theme = createTheme({
