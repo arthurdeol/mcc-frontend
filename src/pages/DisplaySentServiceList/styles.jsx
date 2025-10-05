@@ -29,6 +29,10 @@ export const ContainerSentList = styled.div`
   .comment {
     font-size: 1.2rem;
     font-weight: 200;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
   }
 
   .sent-by {

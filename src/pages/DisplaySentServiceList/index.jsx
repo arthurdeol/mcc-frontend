@@ -4,12 +4,17 @@ import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import PraiseCard from "../../components/PraiseCard";
+import CommentModal from "../../components/CommentModal";
 
 export default function DisplaySentServiceList() {
   const url = "/SongBookMapList";
   const { id } = useParams();
   const [list, setList] = useState({});
   const [praises, setPraises] = useState([]);
+
+  const [openCommentModal, setOpenCommentModal] = useState(false);
+  const handleOpenComment = () => setOpenCommentModal(true);
+  const handleCloseComment = () => setOpenCommentModal(false);
 
   useEffect(() => {
     api.get(url + "/" + id).then((res) => {
@@ -34,7 +39,11 @@ export default function DisplaySentServiceList() {
               {list.church && <h1>{list.church + " -"}&nbsp;</h1>}
               <h1>{newListDate}</h1>
             </div>
-            {list.comment && <p className="comment">"{list.comment}"</p>}
+            {list.comment && (
+              <p onClick={handleOpenComment} className="comment">
+                "{list.comment}"
+              </p>
+            )}
             {list.userName && (
               <p className="sent-by">Sent by: {list.userName}</p>
             )}
@@ -49,6 +58,11 @@ export default function DisplaySentServiceList() {
           </div>
         </div>
       </div>
+      <CommentModal
+        openModal={openCommentModal}
+        onCloseModal={handleCloseComment}
+        comment={list.comment}
+      />
     </ContainerSentList>
   );
 }

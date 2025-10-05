@@ -1,10 +1,6 @@
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { LuX } from "react-icons/lu";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
@@ -20,7 +16,6 @@ import {
   ButtonStyledSendList,
   inputsContainer,
   XClose,
-  churchesSelect,
   commentInput,
   dateInput,
   footerSendList,
@@ -194,7 +189,7 @@ export default function SendList({
           <Box sx={commentInput}>
             <TextField
               sx={{ width: "100%" }}
-              maxRows={1}
+              multiline
               value={comment}
               label="Comment"
               variant="outlined"
