@@ -135,10 +135,16 @@ export default function MainFilter({
 
     if (value === "") {
       let filteredEnSongWithNumber = louvores.filter(
-        (praise) => praise.englishTitle && praise.englishSongBookNumber
+        (praise) =>
+          praise.englishTitle &&
+          praise.englishSongBookNumber &&
+          !praise.containsInCiasSongBook
       );
       let filteredEnSongWithoutNumber = louvores.filter(
-        (praise) => praise.englishTitle && !praise.englishSongBookNumber
+        (praise) =>
+          praise.englishTitle &&
+          !praise.englishSongBookNumber &&
+          !praise.containsInCiasSongBook
       );
       setFilteredLouvores([
         ...filteredEnSongWithNumber,
