@@ -25,6 +25,8 @@ const PraisesListAdmin = () => {
     missingChordsLyricsMusicSheet: false,
     orderCiasByPT: false,
     missingDriveLink: false,
+    lyricsAsText: false,
+    chordsAsText: false,
   };
 
   let [checkeds, setCheckeds] = useState(defaultCheckboxValue);
@@ -38,6 +40,8 @@ const PraisesListAdmin = () => {
     missingChordsLyricsMusicSheet,
     orderCiasByPT,
     missingDriveLink,
+    lyricsAsText,
+    chordsAsText,
   } = checkeds;
 
   const [servicePraises] = useState(() => {
@@ -171,6 +175,12 @@ const PraisesListAdmin = () => {
           let ciasOrderedByPTSongbook = data.filter(
             (praise) => praise.containsInCiasSongBook
           );
+          let filteredEnSongWithLyricsAsText = sequenceEN.filter(
+            (praise) => praise.lyrics
+          );
+          let filteredEnSongWithChordsAsText = sequenceEN.filter(
+            (praise) => praise.chords
+          );
 
           if (missingChords) {
             setFilteredLouvores([...filteredEnSongWithoutChords]);
@@ -188,6 +198,10 @@ const PraisesListAdmin = () => {
             setFilteredLouvores([...ciasOrderedByPTSongbook]);
           } else if (missingDriveLink) {
             setFilteredLouvores([...filteredMissingDriveLink]);
+          } else if (lyricsAsText) {
+            setFilteredLouvores([...filteredEnSongWithLyricsAsText]);
+          } else if (chordsAsText) {
+            setFilteredLouvores([...filteredEnSongWithChordsAsText]);
           } else {
             setFilteredLouvores([...sequenceEN]);
           }
@@ -208,6 +222,8 @@ const PraisesListAdmin = () => {
     orderPortuguese,
     orderCiasByPT,
     missingDriveLink,
+    lyricsAsText,
+    chordsAsText,
   ]);
 
   const handleChangeCheckbox = (event) => {
@@ -220,6 +236,8 @@ const PraisesListAdmin = () => {
       missingChordsLyricsMusicSheet: false,
       orderCiasByPT: false,
       missingDriveLink: false,
+      lyricsAsText: false,
+      chordsAsText: false,
       [event.target.name]: event.target.checked,
     });
   };

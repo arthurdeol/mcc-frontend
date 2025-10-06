@@ -110,6 +110,28 @@ const FilterAdmin = ({ open, handleClose, checkeds, handleChangeCheckbox }) => {
                 control={
                   <Checkbox
                     sx={checked}
+                    checked={checkeds?.chordsAsText || false}
+                    onChange={handleChangeCheckbox}
+                    name="chordsAsText"
+                  />
+                }
+                label="Chords as text"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    sx={checked}
+                    checked={checkeds?.lyricsAsText || false}
+                    onChange={handleChangeCheckbox}
+                    name="lyricsAsText"
+                  />
+                }
+                label="Lyrics as text"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    sx={checked}
                     checked={checkeds?.missingGestures || false}
                     onChange={handleChangeCheckbox}
                     name="missingGestures"
