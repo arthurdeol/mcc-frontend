@@ -68,7 +68,6 @@ export const Container = styled.div`
     width: 100%;
     height: fit-content;
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow-y: auto;
   }
