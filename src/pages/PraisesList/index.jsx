@@ -66,6 +66,9 @@ const PraisesList = () => {
         return res.json();
       })
       .then((data) => {
+        // Considera apenas os louvores ativos
+        data = data.filter((song) => song.active);
+
         // Ordena todos os louvores
         data.sort((a, b) =>
           naturalCompare(a.englishSongBookNumber, b.englishSongBookNumber)
