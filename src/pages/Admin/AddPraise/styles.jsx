@@ -108,19 +108,46 @@ export const Container = styled.div`
     padding: 30px;
   }
 
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  .praise-container {
+  .editor-preview-columns {
     display: flex;
-    justify-content: center;
-    overflow-x: auto;
-    background: var(--color-background-white);
-    width: 100%;
-    //display: none;
+    align-items: flex-start;
+    gap: 30px;
   }
 
+  .editor-column,
+  .preview-column {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .preview-box {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    padding: 16.5px 14px;
+    overflow-x: auto;
+    background: var(--color-background-white);
+    font-size: 0.85rem;
+  }
+
+  .preview-box .praise-title {
+    font-size: 1.1rem;
+  }
+
+  .preview-box h3 {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 900px) {
+    .editor-preview-columns {
+      flex-direction: column;
+    }
+  }
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   .praise-main {
     width: fit-content;
-    padding: 7rem 0 4rem 0;
+    padding: 1rem 0 4rem 0;
   }
 
   .praise-title {
@@ -273,9 +300,9 @@ export const style = {
   bgcolor: "background.paper",
   borderRadius: "10px",
   color: "var(--color-black)",
-  p: { xs: 2, sm: 1, lg: 4 },
+  p: { xs: 2, sm: 1, lg: 3 },
   marginTop: "5rem",
-  width: { xs: "100%", sm: "90%", lg: "70%" },
+  width: { xs: "100%", sm: "95%", md: "92%", lg: "88%" },
 };
 
 export const fieldsContainer = {

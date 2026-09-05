@@ -143,6 +143,58 @@ export const Container = styled.div`
     padding: 30px;
   }
 
+  .editor-preview-columns {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .editor-column,
+  .preview-column {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .preview-column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .preview-box {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    padding: 16.5px 14px;
+    overflow-x: auto;
+    background: var(--color-background-white);
+    font-size: 0.85rem;
+  }
+
+  .preview-box .praise-title {
+    font-size: 1.1rem;
+  }
+
+  .preview-box h3 {
+    font-size: 0.8rem;
+  }
+
+  /* When the "break" split is active, the preview keeps sitting side by
+     side with the editor, so it gets the same tighter, mobile-like type
+     scale used to fit the two split columns comfortably. */
+  .preview-box-split {
+    font-size: 0.68rem;
+  }
+
+  .preview-box-split .praise-title {
+    font-size: 0.95rem;
+  }
+
+  .preview-box-split .praise-lines-container {
+    gap: 1.25rem;
+  }
+
   .initial-container {
     width: 100%;
     display: flex;
@@ -175,18 +227,16 @@ export const Container = styled.div`
   }
 
   .button-to-split {
-    margin-top: 15px;
-    width: 50px;
-    height: 50px;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    right: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--color-light-gray);
     cursor: pointer;
     background-color: var(--color-background-white);
-    padding: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
 
     &:hover {
@@ -268,6 +318,12 @@ export const Container = styled.div`
   @media (max-width: 1024px) {
     .image-file {
       width: 48%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .editor-preview-columns {
+      flex-direction: column;
     }
   }
 
@@ -427,9 +483,9 @@ export const style = {
   bgcolor: "background.paper",
   borderRadius: "10px",
   color: "var(--color-black)",
-  p: { xs: 2, sm: 1, lg: 4 },
+  p: { xs: 2, sm: 1, lg: 3 },
   marginTop: "5rem",
-  width: { xs: "100%", sm: "90%", lg: "70%" },
+  width: { xs: "100%", sm: "95%", md: "92%", lg: "88%" },
 };
 
 export const fieldsContainer = {

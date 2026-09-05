@@ -926,74 +926,83 @@ export default function AddPraise() {
           <br></br>
 
           <div className="data-container">
-            <Typography sx={title} id="modal-modal-title" component="h2">
-              Lyrics:
-            </Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  sx={checked}
-                  checked={displayTextLyricsInsteadOfSVG}
-                  onChange={handleChangeCheckbox}
-                  name="displayTextLyricsInsteadOfSVG"
+            <div className="editor-preview-columns">
+              <div className="editor-column">
+                <Typography sx={title} id="modal-modal-title" component="h2">
+                  Lyrics:
+                </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={checked}
+                      checked={displayTextLyricsInsteadOfSVG}
+                      onChange={handleChangeCheckbox}
+                      name="displayTextLyricsInsteadOfSVG"
+                    />
+                  }
+                  label="Display This Text for Lyrics Instead of File SVG"
                 />
-              }
-              label="Display This Text for Lyrics Instead of File SVG"
-            />
-            <Box sx={fieldsContainer}>
-              <TextField
-                fullWidth
-                id="outlined-multiline-static"
-                multiline
-                // rows={10}
-                variant="outlined"
-                onChange={handleChangeLyricsContent}
-                value={lyricsContent}
-                inputProps={{
-                  style: {
-                    height: "fit-content",
-                  },
-                }}
-              />
-            </Box>
+                <Box sx={fieldsContainer}>
+                  <TextField
+                    fullWidth
+                    id="outlined-multiline-static"
+                    multiline
+                    // rows={10}
+                    variant="outlined"
+                    onChange={handleChangeLyricsContent}
+                    value={lyricsContent}
+                    inputProps={{
+                      style: {
+                        height: "fit-content",
+                      },
+                    }}
+                  />
+                </Box>
+              </div>
 
-            {lyricsContent && (
-              <div className="praise-container">
-                <div className="praise-main">
-                  {englishTitle.includes("(") ? (
-                    <>
-                      <h1 className="praise-title">
-                        {englishSongBookNumber
-                          ? englishSongBookNumber + " - "
-                          : ""}
-                        {englishTitle.split("(")[0].trim()}
-                      </h1>
-                      <h2 className="praise-title">
-                        {"(" + englishTitle.split("(")[1].trim()}
-                      </h2>
-                    </>
-                  ) : (
-                    <h1 className="praise-title">
-                      {englishSongBookNumber
-                        ? englishSongBookNumber + " - "
-                        : ""}
-                      {englishTitle}
-                    </h1>
-                  )}
-                  {portugueseTitle && (
-                    <h3>
-                      {portugueseSongBookNumber
-                        ? portugueseSongBookNumber + " - "
-                        : ""}
-                      {portugueseTitle}
-                    </h3>
-                  )}
-                  <div className="praise-lines-lyrics">
-                    {processLyrics(lyricsContent)}
+              {lyricsContent && (
+                <div className="preview-column">
+                  <Typography sx={title} component="h2">
+                    How it will be displayed
+                  </Typography>
+                  <div className="preview-box">
+                    <div className="praise-main">
+                      {englishTitle.includes("(") ? (
+                        <>
+                          <h1 className="praise-title">
+                            {englishSongBookNumber
+                              ? englishSongBookNumber + " - "
+                              : ""}
+                            {englishTitle.split("(")[0].trim()}
+                          </h1>
+                          <h2 className="praise-title">
+                            {"(" + englishTitle.split("(")[1].trim()}
+                          </h2>
+                        </>
+                      ) : (
+                        <h1 className="praise-title">
+                          {englishSongBookNumber
+                            ? englishSongBookNumber + " - "
+                            : ""}
+                          {englishTitle}
+                        </h1>
+                      )}
+                      {portugueseTitle && (
+                        <h3>
+                          {portugueseSongBookNumber
+                            ? portugueseSongBookNumber + " - "
+                            : ""}
+                          {portugueseTitle}
+                        </h3>
+                      )}
+                      <div className="praise-lines-lyrics">
+                        {processLyrics(lyricsContent)}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <br></br>
 
@@ -1034,76 +1043,85 @@ export default function AddPraise() {
           </FormControl>
 
           <div className="data-container">
-            <Typography sx={title} id="modal-modal-title" component="h2">
-              Chords:
-            </Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  sx={checked}
-                  checked={displayTextChordsInsteadOfSVG}
-                  onChange={handleChangeCheckbox}
-                  name="displayTextChordsInsteadOfSVG"
+            <div className="editor-preview-columns">
+              <div className="editor-column">
+                <Typography sx={title} id="modal-modal-title" component="h2">
+                  Chords:
+                </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={checked}
+                      checked={displayTextChordsInsteadOfSVG}
+                      onChange={handleChangeCheckbox}
+                      name="displayTextChordsInsteadOfSVG"
+                    />
+                  }
+                  label="Display This Text for Chords Instead of File SVG"
                 />
-              }
-              label="Display This Text for Chords Instead of File SVG"
-            />
-            <Box sx={fieldsContainer}>
-              <TextField
-                fullWidth
-                id="outlined-multiline-static"
-                multiline
-                // rows={10}
-                variant="outlined"
-                onChange={handleChangeChordsContent}
-                value={chordsContent}
-                inputProps={{
-                  style: {
-                    height: "fit-content",
-                  },
-                }}
-              />
-            </Box>
+                <Box sx={fieldsContainer}>
+                  <TextField
+                    fullWidth
+                    id="outlined-multiline-static"
+                    multiline
+                    // rows={10}
+                    variant="outlined"
+                    onChange={handleChangeChordsContent}
+                    value={chordsContent}
+                    inputProps={{
+                      style: {
+                        height: "fit-content",
+                      },
+                    }}
+                  />
+                </Box>
+              </div>
 
-            {chordsContent && (
-              <div className="praise-container">
-                <div className="praise-main">
-                  {englishTitle.includes("(") ? (
-                    <>
-                      <h1 className="praise-title">
-                        {englishSongBookNumber
-                          ? englishSongBookNumber + " - "
-                          : ""}
-                        {englishTitle.split("(")[0].trim()}
-                      </h1>
-                      <h2 className="praise-title">
-                        {"(" + englishTitle.split("(")[1].trim()}
-                      </h2>
-                    </>
-                  ) : (
-                    <>
-                      <h1 className="praise-title">
-                        {englishSongBookNumber
-                          ? englishSongBookNumber + " - "
-                          : ""}
-                        {englishTitle}
-                      </h1>
-                    </>
-                  )}
-                  {portugueseTitle && (
-                    <h3>
-                      {portugueseSongBookNumber
-                        ? portugueseSongBookNumber + " - "
-                        : ""}
-                      {portugueseTitle}
-                    </h3>
-                  )}
-                  <div className="praise-lines">
-                    {processChords(chordsContent)}
+              {chordsContent && (
+                <div className="preview-column">
+                  <Typography sx={title} component="h2">
+                    How it will be displayed
+                  </Typography>
+                  <div className="preview-box">
+                    <div className="praise-main">
+                      {englishTitle.includes("(") ? (
+                        <>
+                          <h1 className="praise-title">
+                            {englishSongBookNumber
+                              ? englishSongBookNumber + " - "
+                              : ""}
+                            {englishTitle.split("(")[0].trim()}
+                          </h1>
+                          <h2 className="praise-title">
+                            {"(" + englishTitle.split("(")[1].trim()}
+                          </h2>
+                        </>
+                      ) : (
+                        <>
+                          <h1 className="praise-title">
+                            {englishSongBookNumber
+                              ? englishSongBookNumber + " - "
+                              : ""}
+                            {englishTitle}
+                          </h1>
+                        </>
+                      )}
+                      {portugueseTitle && (
+                        <h3>
+                          {portugueseSongBookNumber
+                            ? portugueseSongBookNumber + " - "
+                            : ""}
+                          {portugueseTitle}
+                        </h3>
+                      )}
+                      <div className="praise-lines">
+                        {processChords(chordsContent)}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <br></br>
 
