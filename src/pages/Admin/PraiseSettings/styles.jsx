@@ -147,6 +147,13 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .delete-button {
@@ -438,6 +445,16 @@ export const checked = {
   color: "var(--color-dark-gray)",
   "&.Mui-checked": {
     color: "var(--color-dark-red)",
+  },
+};
+
+export const switchStyled = {
+  color: "var(--color-dark-gray)",
+  "& .MuiSwitch-switchBase.Mui-checked": {
+    color: "var(--color-dark-red)",
+  },
+  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+    backgroundColor: "var(--color-dark-red)",
   },
 };
 
