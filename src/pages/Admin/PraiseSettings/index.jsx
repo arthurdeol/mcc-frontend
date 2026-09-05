@@ -17,6 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Switch from "@mui/material/Switch";
 import TableFiles from "../../../components/TableFiles";
 import TableSymbols from "../../../components/TablePraiseSymbols";
 import Snackbar from "@mui/material/Snackbar";
@@ -33,6 +34,7 @@ import {
   title,
   nameField,
   checked,
+  switchStyled,
   ButtonStyledRed,
   PlusButton,
   FooterFilter,
@@ -70,6 +72,11 @@ export default function PraiseSettings() {
   const handleOpen = () => setOpenDeleteModal(true);
   const handleClose = () => setOpenDeleteModal(false);
 
+  const [active, setActive] = useState(
+    praiseData.active !== undefined && praiseData.active !== null
+      ? praiseData.active
+      : true
+  );
   const [praiseTheme, setPraiseTheme] = useState(praiseData.theme.trim());
   const [portugueseSongBookNumber, setPortugueseSongBookNumber] = useState(
     praiseData.portugueseSongBookNumber
@@ -204,6 +211,10 @@ export default function PraiseSettings() {
     });
   };
 
+  const handleChangeActive = (event) => {
+    setActive(event.target.checked);
+  };
+
   const handleChangeOrderFileNumber = (event) => {
     setOrderFile(event.target.value);
   };
@@ -281,6 +292,7 @@ export default function PraiseSettings() {
 
     const formData = new FormData();
     formData.append("songBookMapId", praiseId);
+    formData.append("active", active);
     formData.append(
       "containsInPortugueseSongBook",
       checkeds.containsInPortugueseSongBook
@@ -364,6 +376,12 @@ export default function PraiseSettings() {
 
   function verifyChangings(formData) {
     let changedValues = [];
+    const praiseDataActive =
+      praiseData.active !== undefined && praiseData.active !== null
+        ? praiseData.active
+        : true;
+    if (praiseDataActive !== (formData.get("active") === "true"))
+      changedValues.push("active status");
     if (praiseData.theme !== formData.get("theme")) changedValues.push("theme");
     if (
       praiseData.portugueseSongBookNumber !==
@@ -886,8 +904,22 @@ export default function PraiseSettings() {
           <div className="initial-container">
             <h1>Praise Settings</h1>
 
-            <div className="delete-button" onClick={handleOpen}>
-              <RiDeleteBin5Line size={20} />
+            <div className="header-actions">
+              <FormControlLabel
+                sx={switchStyled}
+                control={
+                  <Switch
+                    checked={active}
+                    onChange={handleChangeActive}
+                    name="active"
+                  />
+                }
+                label={active ? "Active" : "Inactive"}
+              />
+
+              <div className="delete-button" onClick={handleOpen}>
+                <RiDeleteBin5Line size={20} />
+              </div>
             </div>
           </div>
 
