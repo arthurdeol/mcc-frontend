@@ -1099,92 +1099,110 @@ export default function PraiseSettings() {
 
           {/* --------------------- LYRICS: text input ----------------------------------- */}
           <div className="data-container">
-            <Typography sx={title} id="modal-modal-title" component="h2">
-              Lyrics:
-            </Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  sx={checked}
-                  checked={displayTextLyricsInsteadOfSVG}
-                  onChange={handleChangeCheckbox}
-                  name="displayTextLyricsInsteadOfSVG"
+            <div className="editor-preview-columns">
+              <div className="editor-column">
+                <Typography sx={title} id="modal-modal-title" component="h2">
+                  Lyrics:
+                </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={checked}
+                      checked={displayTextLyricsInsteadOfSVG}
+                      onChange={handleChangeCheckbox}
+                      name="displayTextLyricsInsteadOfSVG"
+                    />
+                  }
+                  label="Display This Text for Lyrics Instead of File SVG"
                 />
-              }
-              label="Display This Text for Lyrics Instead of File SVG"
-            />
-            <Box sx={fieldsContainer}>
-              <TextField
-                fullWidth
-                id="outlined-multiline-static"
-                multiline
-                // rows={10}
-                variant="outlined"
-                onChange={handleChangeLyricsContent}
-                value={lyricsContent}
-                inputProps={{
-                  style: {
-                    height: "fit-content",
-                  },
-                }}
-              />
-            </Box>
-            {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
-            {constainsBreakLyrics && (
-              <div
-                className="button-to-split"
-                onClick={() => setSplitTextLyrics(!splitTextLyrics)}
-              >
-                <FiColumns size={20} color="var(--color-black)" />
+                <Box sx={fieldsContainer}>
+                  <TextField
+                    fullWidth
+                    id="outlined-multiline-static"
+                    multiline
+                    // rows={10}
+                    variant="outlined"
+                    onChange={handleChangeLyricsContent}
+                    value={lyricsContent}
+                    inputProps={{
+                      style: {
+                        height: "fit-content",
+                      },
+                    }}
+                  />
+                </Box>
               </div>
-            )}
-            {/* --------------------- LYRICS: display example ----------------------------------- */}
-            {lyricsContent && (
-              <div className="praise-container">
-                <div className="praise-main">
-                  {englishTitle.includes("(") ? (
-                    <>
-                      <h1 className="praise-title">
-                        {englishSongBookNumber
-                          ? englishSongBookNumber + " - "
-                          : ""}
-                        {englishTitle.split("(")[0].trim()}
-                      </h1>
-                      <h2 className="praise-title">
-                        {"(" + englishTitle.split("(")[1].trim()}
-                      </h2>
-                    </>
-                  ) : (
-                    <h1 className="praise-title">
-                      {englishSongBookNumber
-                        ? englishSongBookNumber + " - "
-                        : ""}
-                      {englishTitle}
-                    </h1>
-                  )}
-                  {portugueseTitle && (
-                    <h3>
-                      {portugueseSongBookNumber
-                        ? portugueseSongBookNumber + " - "
-                        : ""}
-                      {portugueseTitle}
-                    </h3>
-                  )}
-                  <div
-                    className={splitTextLyrics ? "praise-lines-container" : ""}
-                  >
-                    <div className="praise-lines-lyrics">
-                      {processLyrics(praiseLyricsFirstPart)}
-                    </div>
+
+              {/* --------------------- LYRICS: display example ----------------------------------- */}
+              {lyricsContent && (
+                <div className="preview-column">
+                  <div className="preview-column-header">
+                    <Typography sx={{ ...title, margin: 0 }} component="h2">
+                      How it will be displayed
+                    </Typography>
+                    {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
                     {constainsBreakLyrics && (
-                      <div className="praise-lines-lyrics">
-                        {processLyrics(praiseLyricsSecondPart)}
+                      <div
+                        className="button-to-split"
+                        onClick={() => setSplitTextLyrics(!splitTextLyrics)}
+                      >
+                        <FiColumns size={18} color="var(--color-black)" />
                       </div>
                     )}
                   </div>
+                  <div
+                    className={`preview-box ${
+                      splitTextLyrics ? "preview-box-split" : ""
+                    }`}
+                  >
+                    <div className="praise-main">
+                      {englishTitle.includes("(") ? (
+                        <>
+                          <h1 className="praise-title">
+                            {englishSongBookNumber
+                              ? englishSongBookNumber + " - "
+                              : ""}
+                            {englishTitle.split("(")[0].trim()}
+                          </h1>
+                          <h2 className="praise-title">
+                            {"(" + englishTitle.split("(")[1].trim()}
+                          </h2>
+                        </>
+                      ) : (
+                        <h1 className="praise-title">
+                          {englishSongBookNumber
+                            ? englishSongBookNumber + " - "
+                            : ""}
+                          {englishTitle}
+                        </h1>
+                      )}
+                      {portugueseTitle && (
+                        <h3>
+                          {portugueseSongBookNumber
+                            ? portugueseSongBookNumber + " - "
+                            : ""}
+                          {portugueseTitle}
+                        </h3>
+                      )}
+                      <div
+                        className={
+                          splitTextLyrics ? "praise-lines-container" : ""
+                        }
+                      >
+                        <div className="praise-lines-lyrics">
+                          {processLyrics(praiseLyricsFirstPart)}
+                        </div>
+                        {constainsBreakLyrics && (
+                          <div className="praise-lines-lyrics">
+                            {processLyrics(praiseLyricsSecondPart)}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <br></br>
 
@@ -1227,113 +1245,125 @@ export default function PraiseSettings() {
 
           {/* --------------------- CHORDS: text input ----------------------------------- */}
           <div className="data-container">
-            <Typography sx={title} id="modal-modal-title" component="h2">
-              Chords:
-            </Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  sx={checked}
-                  checked={displayTextChordsInsteadOfSVG}
-                  onChange={handleChangeCheckbox}
-                  name="displayTextChordsInsteadOfSVG"
+            <div className="editor-preview-columns">
+              <div className="editor-column">
+                <Typography sx={title} id="modal-modal-title" component="h2">
+                  Chords:
+                </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={checked}
+                      checked={displayTextChordsInsteadOfSVG}
+                      onChange={handleChangeCheckbox}
+                      name="displayTextChordsInsteadOfSVG"
+                    />
+                  }
+                  label="Display This Text for Chords Instead of File SVG"
                 />
-              }
-              label="Display This Text for Chords Instead of File SVG"
-            />
-            <Box sx={fieldsContainer}>
-              <TextField
-                fullWidth
-                id="outlined-multiline-static"
-                multiline
-                // rows={10}
-                variant="outlined"
-                onChange={handleChangeChordsContent}
-                value={chordsContent}
-                inputProps={{
-                  style: {
-                    height: "fit-content",
-                  },
-                }}
-              />
-            </Box>
-            {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
-            <div className="top-right-buttons">
-              {constainsBreakChords && (
-                <div
-                  className="button-to-split"
-                  onClick={() => setSplitTextChords(!splitTextChords)}
-                >
-                  <FiColumns size={20} color="var(--color-black)" />
-                </div>
-              )}
-            </div>
-            {/* --------------------- CHORDS: display example ----------------------------------- */}
-            {chordsContent && (
-              <div
-                className={
-                  splitTextChords ? "" : "praise-container-chords-not-splitted"
-                }
-              >
-                <div className="praise-main">
-                  {englishTitle.includes("(") ? (
-                    <>
-                      <h1 className="praise-title">
-                        {englishSongBookNumber
-                          ? englishSongBookNumber + " - "
-                          : ""}
-                        {englishTitle.split("(")[0].trim()}
-                      </h1>
-                      <h2 className="praise-title">
-                        {"(" + englishTitle.split("(")[1].trim()}
-                      </h2>
-                    </>
-                  ) : (
-                    <>
-                      <h1 className="praise-title">
-                        {englishSongBookNumber
-                          ? englishSongBookNumber + " - "
-                          : ""}
-                        {englishTitle}
-                      </h1>
-                    </>
-                  )}
-                  {portugueseTitle && (
-                    <h3>
-                      {portugueseSongBookNumber
-                        ? portugueseSongBookNumber + " - "
-                        : ""}
-                      {portugueseTitle}
-                    </h3>
-                  )}
+                <Box sx={fieldsContainer}>
+                  <TextField
+                    fullWidth
+                    id="outlined-multiline-static"
+                    multiline
+                    // rows={10}
+                    variant="outlined"
+                    onChange={handleChangeChordsContent}
+                    value={chordsContent}
+                    inputProps={{
+                      style: {
+                        height: "fit-content",
+                      },
+                    }}
+                  />
+                </Box>
+              </div>
 
-                  <div
-                    className={splitTextChords ? "praise-lines-container" : ""}
-                  >
-                    <div
-                      className={
-                        splitTextChords
-                          ? "praise-lines-1"
-                          : "praise-lines-not-splitted-1"
-                      }
-                    >
-                      {processChords(praiseChordsFirstPart)}
-                    </div>
+              {/* --------------------- CHORDS: display example ----------------------------------- */}
+              {chordsContent && (
+                <div className="preview-column">
+                  <div className="preview-column-header">
+                    <Typography sx={{ ...title, margin: 0 }} component="h2">
+                      How it will be displayed
+                    </Typography>
+                    {/* -------------- BUTTON TO SPLIT THE PRAISE ------------------------*/}
                     {constainsBreakChords && (
                       <div
-                        className={
-                          splitTextChords
-                            ? "praise-lines-2"
-                            : "praise-lines-not-splitted-2"
-                        }
+                        className="button-to-split"
+                        onClick={() => setSplitTextChords(!splitTextChords)}
                       >
-                        {processChords(praiseChordsSecondPart)}
+                        <FiColumns size={18} color="var(--color-black)" />
                       </div>
                     )}
                   </div>
+                  <div
+                    className={`preview-box ${
+                      splitTextChords ? "preview-box-split" : ""
+                    }`}
+                  >
+                    <div className="praise-main">
+                      {englishTitle.includes("(") ? (
+                        <>
+                          <h1 className="praise-title">
+                            {englishSongBookNumber
+                              ? englishSongBookNumber + " - "
+                              : ""}
+                            {englishTitle.split("(")[0].trim()}
+                          </h1>
+                          <h2 className="praise-title">
+                            {"(" + englishTitle.split("(")[1].trim()}
+                          </h2>
+                        </>
+                      ) : (
+                        <>
+                          <h1 className="praise-title">
+                            {englishSongBookNumber
+                              ? englishSongBookNumber + " - "
+                              : ""}
+                            {englishTitle}
+                          </h1>
+                        </>
+                      )}
+                      {portugueseTitle && (
+                        <h3>
+                          {portugueseSongBookNumber
+                            ? portugueseSongBookNumber + " - "
+                            : ""}
+                          {portugueseTitle}
+                        </h3>
+                      )}
+
+                      <div
+                        className={
+                          splitTextChords ? "praise-lines-container" : ""
+                        }
+                      >
+                        <div
+                          className={
+                            splitTextChords
+                              ? "praise-lines-1"
+                              : "praise-lines-not-splitted-1"
+                          }
+                        >
+                          {processChords(praiseChordsFirstPart)}
+                        </div>
+                        {constainsBreakChords && (
+                          <div
+                            className={
+                              splitTextChords
+                                ? "praise-lines-2"
+                                : "praise-lines-not-splitted-2"
+                            }
+                          >
+                            {processChords(praiseChordsSecondPart)}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <br></br>
 
