@@ -121,6 +121,13 @@ export const Container = styled.div`
     width: 100%;
   }
 
+  .preview-column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
   .preview-box {
     border: 1px solid rgba(0, 0, 0, 0.23);
     border-radius: 4px;
@@ -136,6 +143,40 @@ export const Container = styled.div`
 
   .preview-box h3 {
     font-size: 0.8rem;
+  }
+
+  /* When the "break" split is active, the preview keeps sitting side by
+     side with the editor, so it gets the same tighter, mobile-like type
+     scale used to fit the two split columns comfortably. */
+  .preview-box-split {
+    font-size: 0.68rem;
+  }
+
+  .preview-box-split .praise-title {
+    font-size: 0.95rem;
+  }
+
+  .preview-box-split .praise-lines-container {
+    gap: 1.25rem;
+  }
+
+  .button-to-split {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-light-gray);
+    cursor: pointer;
+    background-color: var(--color-background-white);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 10px;
+
+    &:hover {
+      border: 1px solid var(--color-dark-gray);
+      background: var(--color-light-gray-2);
+    }
   }
 
   @media (max-width: 900px) {
@@ -156,6 +197,22 @@ export const Container = styled.div`
     margin-bottom: 0;
     color: var(--color-black);
     font-size: 1.5rem;
+  }
+
+  .praise-lines-container {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .praise-lines-1 {
+    margin-top: 1.5rem;
+    font-family: monospace;
+    font-weight: normal;
+  }
+
+  .praise-lines-2 {
+    font-family: monospace;
+    font-weight: normal;
   }
 
   .praise-lines {
