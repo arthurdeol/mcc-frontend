@@ -46,6 +46,9 @@ export default function PraiseCard({
           </p>
         )}
         <div className="theme-tag-container">
+          {praise.active === false && (
+            <div className="theme-tag-inactive">INACTIVE</div>
+          )}
           {praise.containsInCiasSongBook && (
             <div className="theme-tag-cia">CIA's</div>
           )}
