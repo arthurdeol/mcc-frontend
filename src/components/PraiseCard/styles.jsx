@@ -31,7 +31,8 @@ export const Card = styled.div`
   }
 
   .theme-tag,
-  .theme-tag-cia {
+  .theme-tag-cia,
+  .theme-tag-inactive {
     display: flex;
     border-radius: 10px;
     font-size: 0.5rem;
@@ -51,6 +52,14 @@ export const Card = styled.div`
     border: 1px solid var(--color-dark-red-1);
     padding: 1px 6px;
     margin-right: 4px;
+  }
+
+  .theme-tag-inactive {
+    background: var(--color-dark-red);
+    color: var(--color-white);
+    padding: 1px 15px;
+    margin-right: 4px;
+    font-weight: bold;
   }
 
   .buttons-container {
@@ -137,7 +146,8 @@ export const Card = styled.div`
       margin-top: 7px;
     }
     .theme-tag,
-    .theme-tag-cia {
+    .theme-tag-cia,
+    .theme-tag-inactive {
       font-size: 0.43rem;
     }
   }
