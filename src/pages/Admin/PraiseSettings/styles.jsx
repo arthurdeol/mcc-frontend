@@ -493,6 +493,22 @@ export const fieldsContainer = {
   justifyContent: "space-between",
 };
 
+export const confirmModalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "var(--color-white)",
+  border: "1px solid var(--color-light-gray)",
+  borderRadius: "10px",
+  boxShadow: 24,
+  pt: 4,
+  px: 4,
+  pb: 3,
+  fontSize: "0.9rem",
+  width: { xs: "90%", sm: "70%", md: "50%", lg: "auto" },
+};
+
 export const nameField = {
   marginRight: "10px",
 };
