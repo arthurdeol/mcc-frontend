@@ -72,6 +72,10 @@ const Header = ({
         <h1 className="praise-settings-title">Admin - Praises</h1>
       )}
 
+      {navPath === "/history" && (
+        <h1 className="praise-settings-title">History</h1>
+      )}
+
       {navPath === "/praises-admin" && (
         <div className="history-button" onClick={() => navigate("/history")}>
           <TbClockEdit size={25} color="var(--color-black)" />
