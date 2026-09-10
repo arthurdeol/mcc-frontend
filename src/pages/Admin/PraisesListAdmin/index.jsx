@@ -59,6 +59,7 @@ const PraisesListAdmin = () => {
   const [openFilterAdmin, setOpenFilterAdmin] = useState(false);
   const handleOpenFilterAdmin = () => setOpenFilterAdmin(true);
   const handleCloseFilterAdmin = () => setOpenFilterAdmin(false);
+  const [clearSearchSignal, setClearSearchSignal] = useState(0);
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -227,6 +228,10 @@ const PraisesListAdmin = () => {
   ]);
 
   const handleChangeCheckbox = (event) => {
+    // limpa o campo de busca do MainFilter antes de aplicar o filtro
+    // selecionado, evitando que um texto de busca antigo entre em conflito
+    // com o filtro escolhido
+    setClearSearchSignal((prev) => prev + 1);
     setCheckeds({
       missingChords: false,
       missingLyrics: false,
@@ -266,6 +271,7 @@ const PraisesListAdmin = () => {
           setFilteredLouvores={setFilteredLouvores}
           setComplexFilterApplied={setComplexFilterApplied}
           setMainFilterApplied={setMainFilterApplied}
+          clearSearchSignal={clearSearchSignal}
         />
 
         <div className="box">

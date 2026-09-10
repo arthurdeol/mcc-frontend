@@ -12,6 +12,7 @@ export default function MainFilter({
   setFilteredLouvores,
   complexFilterApplied,
   setComplexFilterApplied,
+  clearSearchSignal,
 }) {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
@@ -57,6 +58,22 @@ export default function MainFilter({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventValue]);
+
+  // Limpa o campo de busca e o filtro do modal (gear icon) quando um filtro
+  // extra do admin é selecionado, evitando que um filtro antigo entre em
+  // conflito com o filtro escolhido
+  useEffect(() => {
+    if (clearSearchSignal) {
+      setEventValue("");
+      if (activeFilters.length > 0) {
+        setActiveFilters([]);
+        localStorage.removeItem("complexFilterState");
+        localStorage.setItem("activeFilters", JSON.stringify([]));
+        setComplexFilterApplied(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clearSearchSignal]);
 
   function handleFilter(eventValue) {
     setComplexFilterApplied(false);
