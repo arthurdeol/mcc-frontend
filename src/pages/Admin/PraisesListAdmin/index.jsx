@@ -240,6 +240,7 @@ const PraisesListAdmin = () => {
       chordsAsText: false,
       [event.target.name]: event.target.checked,
     });
+    handleCloseFilterAdmin();
   };
 
   function setLastClickedPraise(praiseId) {
