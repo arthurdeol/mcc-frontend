@@ -7,6 +7,7 @@ import api from "../../../services/api";
 import Header from "../../../components/Header";
 import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import DeleteModal from "../../../components/DeleteModal";
 import LyricsField from "../../../components/LyricsField";
 import ChordsField from "../../../components/ChordsField";
@@ -39,6 +40,7 @@ import {
   PlusButton,
   FooterFilter,
   ButtonStyled,
+  confirmModalStyle,
 } from "./styles";
 
 export default function PraiseSettings() {
@@ -172,8 +174,29 @@ export default function PraiseSettings() {
     });
   };
 
+  const [openInactiveModal, setOpenInactiveModal] = useState(false);
+  const [openActiveModal, setOpenActiveModal] = useState(false);
+
   const handleChangeActive = (event) => {
-    setActive(event.target.checked);
+    if (event.target.checked) {
+      setOpenActiveModal(true);
+    } else {
+      setOpenInactiveModal(true);
+    }
+  };
+
+  const handleCancelInactive = () => setOpenInactiveModal(false);
+
+  const handleConfirmInactive = () => {
+    setActive(false);
+    setOpenInactiveModal(false);
+  };
+
+  const handleCancelActive = () => setOpenActiveModal(false);
+
+  const handleConfirmActive = () => {
+    setActive(true);
+    setOpenActiveModal(false);
   };
 
   const handleChangeOrderFileNumber = (event) => {
@@ -864,6 +887,40 @@ export default function PraiseSettings() {
           praiseId={praiseId}
           praiseData={praiseData}
         />
+
+        <Modal open={openInactiveModal} onClose={handleCancelInactive}>
+          <Box sx={confirmModalStyle}>
+            <h2>Are you sure you want to deactivate this praise?</h2>
+            <p style={{ marginTop: "10px" }}>
+              By selecting this option, this praise will no longer appear in
+              the main list.
+            </p>
+            <FooterFilter>
+              <ButtonStyled onClick={handleCancelInactive}>
+                Cancel
+              </ButtonStyled>
+              <ButtonStyledRed onClick={handleConfirmInactive}>
+                Proceed
+              </ButtonStyledRed>
+            </FooterFilter>
+          </Box>
+        </Modal>
+
+        <Modal open={openActiveModal} onClose={handleCancelActive}>
+          <Box sx={confirmModalStyle}>
+            <h2>Are you sure you want to activate this praise?</h2>
+            <p style={{ marginTop: "10px" }}>
+              By selecting this option, this praise will appear again in the
+              main list.
+            </p>
+            <FooterFilter>
+              <ButtonStyled onClick={handleCancelActive}>Cancel</ButtonStyled>
+              <ButtonStyledRed onClick={handleConfirmActive}>
+                Proceed
+              </ButtonStyledRed>
+            </FooterFilter>
+          </Box>
+        </Modal>
       </ThemeProvider>
 
       <Snackbar
