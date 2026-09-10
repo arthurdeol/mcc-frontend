@@ -19,7 +19,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/title.png",
         height: 45,
         width: 210,
-      }
+      },
     ),
     createData(
       "Introduction",
@@ -30,7 +30,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/intro.png",
         height: 40,
         width: 200,
-      }
+      },
     ),
     createData(
       "Introduction with arrows",
@@ -41,7 +41,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/intro-arrows.png",
         height: 100,
         width: 200,
-      }
+      },
     ),
     createData(
       "Who sings?",
@@ -52,7 +52,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/who-sings.png",
         height: 42,
         width: 200,
-      }
+      },
     ),
     createData(
       "Empty row, space between blocks",
@@ -60,10 +60,10 @@ export default function TableSymbols() {
       "In a new line and alone. Obs.: in the picture you can notice the space before Final",
       "[%%]",
       {
-        url: "../../images/tablePraiseSettings/chords.png",
+        url: "../../images/tablePraiseSettings/space.png",
         height: 110,
         width: 200,
-      }
+      },
     ),
     createData(
       "Chorus",
@@ -74,7 +74,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/chorus.png",
         height: 20,
         width: 60,
-      }
+      },
     ),
     createData(
       "Break columns",
@@ -85,7 +85,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/columns.jpeg",
         height: 130,
         width: 210,
-      }
+      },
     ),
 
     createData(
@@ -97,7 +97,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/repeat-group.png",
         height: 130,
         width: 210,
-      }
+      },
     ),
     createData(
       "Display repetition number",
@@ -108,7 +108,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/2x.png",
         height: 40,
         width: 45,
-      }
+      },
     ),
     createData("Final", "[final]", "In a new line and alone.", "[final]", {
       url: "../../images/tablePraiseSettings/final.png",
@@ -124,7 +124,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/repeat2x.png",
         height: 32,
         width: 90,
-      }
+      },
     ),
     createData(
       "Instrumental",
@@ -135,7 +135,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/instr.png",
         height: 20,
         width: 120,
-      }
+      },
     ),
     createData(
       "Black line",
@@ -146,7 +146,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/return-to.png",
         height: 18,
         width: 200,
-      }
+      },
     ),
     createData(
       "Chords",
@@ -157,7 +157,7 @@ export default function TableSymbols() {
         url: "../../images/tablePraiseSettings/chords.jpeg",
         height: 30,
         width: 180,
-      }
+      },
     ),
   ];
 
