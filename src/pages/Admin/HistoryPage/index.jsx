@@ -13,6 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
 export default function HistoryPage() {
   const [rows, setRows] = useState([]);
@@ -21,6 +22,7 @@ export default function HistoryPage() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedAction, setSelectedAction] = useState("");
   const [order, setOrder] = useState("desc"); // newest first by default
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -36,22 +38,34 @@ export default function HistoryPage() {
   const uniqueNames = [...new Set(rows.map((row) => row.name))];
   const uniqueTitles = [
     ...new Set(rows.map((row) => JSON.parse(row.log).title)),
-  ];
+  ].sort((a, b) => a.localeCompare(b));
   const uniqueDates = [
     ...new Set(rows.map((row) => row.registerDate.substring(0, 10))),
   ];
   const uniqueActions = [...new Set(rows.map((row) => row.action))];
 
   // Apply filters
+  const normalizedSearch = searchTerm.trim().toLowerCase();
   const filteredRows = rows
     .filter((row) => {
-      const title = JSON.parse(row.log).title;
+      const { title, praiseNumber, portugueseSongBookNumber, englishSongBookNumber } =
+        JSON.parse(row.log);
       const date = row.registerDate.substring(0, 10);
+      const matchesSearch = normalizedSearch
+        ? title?.toLowerCase().includes(normalizedSearch) ||
+          [praiseNumber, portugueseSongBookNumber, englishSongBookNumber].some(
+            (number) =>
+              String(number ?? "")
+                .toLowerCase()
+                .includes(normalizedSearch)
+          )
+        : true;
       return (
         (selectedName ? row.name === selectedName : true) &&
         (selectedTitle ? title === selectedTitle : true) &&
         (selectedDate ? date === selectedDate : true) &&
-        (selectedAction ? row.action === selectedAction : true)
+        (selectedAction ? row.action === selectedAction : true) &&
+        matchesSearch
       );
     })
     .sort(
@@ -65,6 +79,19 @@ export default function HistoryPage() {
     <Container>
       <Header />
       <div className="data-container">
+        {/* Search */}
+        <Grid container sx={{ marginBottom: 2 }}>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Search by title or number"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </Grid>
+        </Grid>
+
         {/* Filters */}
         <Grid container spacing={2} sx={{ marginBottom: 2 }}>
           <Grid item xs={12} sm={6} md={3}>
@@ -158,22 +185,68 @@ export default function HistoryPage() {
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="history table">
             <TableHead>
-              <TableRow>
-                <TableCell sx={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Name
-                </TableCell>
-                <TableCell sx={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Action
+              <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    borderTop: "1px solid #d0d0d0",
+                    borderBottom: "1px solid #d0d0d0",
+                    borderLeft: "1px solid #d0d0d0",
+                  }}
+                >
+                  Number
                 </TableCell>
                 <TableCell
-                  sx={{ fontWeight: "bold", fontSize: "1rem", width: 500 }}
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    width: 500,
+                    borderTop: "1px solid #d0d0d0",
+                    borderBottom: "1px solid #d0d0d0",
+                  }}
                 >
                   Praise
                 </TableCell>
-                <TableCell sx={{ fontWeight: "bold", fontSize: "1rem" }}>
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    borderTop: "1px solid #d0d0d0",
+                    borderBottom: "1px solid #d0d0d0",
+                  }}
+                >
+                  Action
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    borderTop: "1px solid #d0d0d0",
+                    borderBottom: "1px solid #d0d0d0",
+                  }}
+                >
+                  Name
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    borderTop: "1px solid #d0d0d0",
+                    borderBottom: "1px solid #d0d0d0",
+                  }}
+                >
                   Fields Changed
                 </TableCell>
-                <TableCell sx={{ fontWeight: "bold", fontSize: "1rem" }}>
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    borderTop: "1px solid #d0d0d0",
+                    borderBottom: "1px solid #d0d0d0",
+                    borderRight: "1px solid #d0d0d0",
+                  }}
+                >
                   Date
                 </TableCell>
               </TableRow>
@@ -181,6 +254,9 @@ export default function HistoryPage() {
             <TableBody>
               {filteredRows.map((row, i) => (
                 <TableRow key={i}>
+                  <TableCell>{JSON.parse(row.log).praiseNumber || "-"}</TableCell>
+                  <TableCell>{JSON.parse(row.log).title}</TableCell>
+                  <TableCell>{row.action}</TableCell>
                   <TableCell>
                     <div>{row.name}</div>
                     <div
@@ -189,8 +265,6 @@ export default function HistoryPage() {
                       {row.email}
                     </div>
                   </TableCell>
-                  <TableCell>{row.action}</TableCell>
-                  <TableCell>{JSON.parse(row.log).title}</TableCell>
                   <TableCell>{JSON.parse(row.log).change.join(", ")}</TableCell>
                   <TableCell>
                     {row.registerDate.substring(0, 10).replaceAll("-", "/")}
@@ -200,7 +274,7 @@ export default function HistoryPage() {
 
               {filteredRows.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6} align="center">
+                  <TableCell colSpan={7} align="center">
                     No results found
                   </TableCell>
                 </TableRow>

@@ -7,6 +7,10 @@ export const Container = styled.div`
   width: 100%;
   padding: 0 2rem;
 
+  .data-container {
+    padding-bottom: 2rem;
+  }
+
   @media (max-width: 425px) {
     padding: 0 0.5rem;
   }

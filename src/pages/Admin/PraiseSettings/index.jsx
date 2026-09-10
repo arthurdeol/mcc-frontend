@@ -318,6 +318,8 @@ export default function PraiseSettings() {
       praiseNumber: louvor.englishSongBookNumber
         ? louvor.englishSongBookNumber
         : louvor.portugueseSongBookNumber,
+      portugueseSongBookNumber: louvor.portugueseSongBookNumber,
+      englishSongBookNumber: louvor.englishSongBookNumber,
       change: changes,
     });
 
@@ -342,7 +344,9 @@ export default function PraiseSettings() {
         ? praiseData.active
         : true;
     if (praiseDataActive !== (formData.get("active") === "true"))
-      changedValues.push("active status");
+      changedValues.push(
+        formData.get("active") === "true" ? "active status" : "inactive status"
+      );
     if (praiseData.theme !== formData.get("theme")) changedValues.push("theme");
     if (
       praiseData.portugueseSongBookNumber !==
