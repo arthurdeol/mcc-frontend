@@ -248,6 +248,8 @@ export default function AddPraise() {
       praiseNumber: englishSongBookNumber
         ? englishSongBookNumber
         : portugueseSongBookNumber,
+      portugueseSongBookNumber: portugueseSongBookNumber,
+      englishSongBookNumber: englishSongBookNumber,
       change: changes,
     });
 
