@@ -9,6 +9,8 @@ import ErrorDisplay from "../../../components/ErrorDisplay";
 import PraiseCard from "../../../components/PraiseCard";
 import { IoArrowUp } from "react-icons/io5";
 import FilterAdmin from "../../../components/FilterAdmin";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const PraisesListAdmin = () => {
   const [louvores, setLouvores] = useState([]);
@@ -60,6 +62,12 @@ const PraisesListAdmin = () => {
   const handleOpenFilterAdmin = () => setOpenFilterAdmin(true);
   const handleCloseFilterAdmin = () => setOpenFilterAdmin(false);
   const [clearSearchSignal, setClearSearchSignal] = useState(0);
+
+  const [openFilterSnackbar, setOpenFilterSnackbar] = useState(false);
+  const handleCloseFilterSnackbar = (event, reason) => {
+    if (reason === "clickaway") return;
+    setOpenFilterSnackbar(false);
+  };
 
   function naturalCompare(a, b) {
     let ax = [],
@@ -115,20 +123,20 @@ const PraisesListAdmin = () => {
             if (orderPortuguese || orderCiasByPT) {
               return naturalCompare(
                 a.portugueseSongBookNumber,
-                b.portugueseSongBookNumber
+                b.portugueseSongBookNumber,
               );
             }
             return naturalCompare(
               a.englishSongBookNumber,
-              b.englishSongBookNumber
+              b.englishSongBookNumber,
             );
           });
           setLouvores(data);
           let filteredEnSongWithNumber = data.filter(
-            (praise) => praise.englishTitle && praise.englishSongBookNumber
+            (praise) => praise.englishTitle && praise.englishSongBookNumber,
           );
           let filteredEnSongWithoutNumber = data.filter(
-            (praise) => praise.englishTitle && !praise.englishSongBookNumber
+            (praise) => praise.englishTitle && !praise.englishSongBookNumber,
           );
           let sequenceEN = [
             ...filteredEnSongWithNumber,
@@ -138,29 +146,29 @@ const PraisesListAdmin = () => {
             (praise) =>
               praise.portugueseTitle &&
               praise.portugueseSongBookNumber &&
-              !praise.containsInCiasSongBook
+              !praise.containsInCiasSongBook,
           );
           let filteredPTSongWithoutNumber = data.filter(
             (praise) =>
               praise.portugueseTitle &&
               !praise.portugueseSongBookNumber &&
-              !praise.containsInCiasSongBook
+              !praise.containsInCiasSongBook,
           );
           let sequencePT = [
             ...filteredPTSongWithNumber,
             ...filteredPTSongWithoutNumber,
           ];
           let filteredEnSongWithoutChords = sequenceEN.filter(
-            (praise) => !praise.chords && !praise.linkChords
+            (praise) => !praise.chords && !praise.linkChords,
           );
           let filteredEnSongWithoutLyrics = sequenceEN.filter(
-            (praise) => !praise.lyrics && !praise.linkPdfLyrics
+            (praise) => !praise.lyrics && !praise.linkPdfLyrics,
           );
           let filteredEnSongWithoutMusicSheet = sequenceEN.filter(
-            (praise) => !praise.linkSheetMusic
+            (praise) => !praise.linkSheetMusic,
           );
           let filteredMissingDriveLink = sequenceEN.filter(
-            (praise) => !praise.linkDriveFolder
+            (praise) => !praise.linkDriveFolder,
           );
           let missingLyricsChordsAndMusicSheet = sequenceEN.filter(
             (praise) =>
@@ -168,19 +176,19 @@ const PraisesListAdmin = () => {
               !praise.linkChords &&
               !praise.lyrics &&
               !praise.linkPdfLyrics &&
-              !praise.linkSheetMusic
+              !praise.linkSheetMusic,
           );
           let filteredEnSongWithoutGestures = sequenceEN.filter(
-            (praise) => praise.containsInCiasSongBook && !praise.linkGestures
+            (praise) => praise.containsInCiasSongBook && !praise.linkGestures,
           );
           let ciasOrderedByPTSongbook = data.filter(
-            (praise) => praise.containsInCiasSongBook
+            (praise) => praise.containsInCiasSongBook,
           );
           let filteredEnSongWithLyricsAsText = sequenceEN.filter(
-            (praise) => praise.lyrics
+            (praise) => praise.lyrics,
           );
           let filteredEnSongWithChordsAsText = sequenceEN.filter(
-            (praise) => praise.chords
+            (praise) => praise.chords,
           );
 
           if (missingChords) {
@@ -246,6 +254,9 @@ const PraisesListAdmin = () => {
       [event.target.name]: event.target.checked,
     });
     handleCloseFilterAdmin();
+    if (event.target.checked) {
+      setOpenFilterSnackbar(true);
+    }
   };
 
   function setLastClickedPraise(praiseId) {
@@ -333,6 +344,21 @@ const PraisesListAdmin = () => {
         checkeds={checkeds}
         handleChangeCheckbox={handleChangeCheckbox}
       />
+
+      <Snackbar
+        open={openFilterSnackbar}
+        autoHideDuration={2000}
+        onClose={handleCloseFilterSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseFilterSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Extra Admin Filter applied!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
