@@ -5,19 +5,6 @@
   outline: none;
 }
 
-html {
-  /* Reserva o espaço da barra de rolagem sempre, para que abrir um modal
-     (que trava o scroll do body/html) não altere a largura útil da página e
-     desloque elementos fixos/centralizados, como o campo de busca */
-  overflow-y: scroll;
-}
-
-@supports (scrollbar-gutter: stable) {
-  html {
-    scrollbar-gutter: stable;
-  }
-}
-
 :root {
   --color-black: #000;
   --color-white: #fff;
